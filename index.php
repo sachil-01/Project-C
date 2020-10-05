@@ -10,6 +10,19 @@ include('header.php');
 </head>
 <body>
     <div class="container">
+        <?php 
+
+        // Bericht zodat je kan zien of het werkt, later weghalen want is lelijk
+            if (isset($_SESSION['userId'])) {
+                echo '<p>You are logged in !</p>';
+            }
+            else {
+                echo '<p>You are logged out !</p>';
+            }
+
+        ?>
+
+        <!-- Planten homepage -->
         <div class="plant">
             <img src="images/plant1.jpg" alt="">
         </div>

@@ -4,6 +4,8 @@
     box-sizing: border-box;
 }
 
+
+/* Paar standaard waardes die je later makkelijk weer opnieuw kunt gebruiken */
 :root {
     --clr-groen: #4A7C00;
     --clr-wit: #FFFFFF;
@@ -26,6 +28,7 @@ html {
 }
 
 body {
+    height: 100%;
     background: var(--clr-wit);
     color: var(--clr-groen);
     margin: 0;
@@ -180,7 +183,7 @@ nav {
 .container {
     background-color: var(--clr-wit);
     position: relative;
-    min-height: 100vh;
+    min-height: 100%;
     overflow: hidden;
 }
 
@@ -201,4 +204,5 @@ nav {
 .footer {
     height: 100px;
     background-color: var(--clr-groen);
+    color: var(--clr-wit);
 }

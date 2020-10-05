@@ -1,3 +1,6 @@
+<?php 
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,8 +19,20 @@
 
             <ul class="nav-links">
                     <li><a href="adpagina.php">Advertenties</a></li>
-                    <li><input type="search" class="searchbar" value="Zoeken..."></li>
-                    <li><a href="#">Login/Register</a></li>
+                    <li><input type="search" class="searchbar" onfocus="this.value=''" value="Zoeken..."></li>
+                    <li><a href="#">Help Pagina</a></li>
+                    <?php
+                        if (isset($_SESSION['userId'])) {
+                            echo '<form action="includes/logout.inc.php" method="post">
+                                    <button type="submit" name="logout-submit">Logout</button>
+                                </form>';
+                        }
+                        else {
+                            echo '<li><a href="loginpagina.php">Login/Register</a></li>';
+                        }
+                    ?>
+                    
+                    
             </ul>
 
             <div class="burger">
