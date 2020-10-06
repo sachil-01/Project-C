@@ -2,7 +2,10 @@
     include('header.php')
 ?>
 
-    <h1>Signup</h1>
+<head>
+    <title>Login Form Design</title>
+    <link rel="stylesheet" type="text/css" href="css\RegisterStyle.css">
+</head>
     <!-- Error berichten // later vervangen voor html ingebouwde messages -->
     <?php 
         if (isset($_GET['error'])) {
@@ -29,15 +32,25 @@
             echo '<p>Registratie is gelukt !</p>';
         }
     ?>
+    <div class="registerbox" style="text-align:center">
     <form action="includes/register.inc.php" method="post">
-        <input type="text" name="uid" placeholder="Username">
+        <h1>Signup</h1>
+        <p style="text-align:left">Gebruikersnaam</p>
+        <input type="text" name="uid" placeholder="Gebruikersnaam">
+        <br>
+        <p style="text-align:left">E-mail</p>
         <input type="text" name="mail" placeholder="E-mail">
+        <br>
+        <p style="text-align:left">Wachtwoord</p>
         <input type="password" name="pwd" placeholder="Wachtwoord">
+        <br>
+        <p style="text-align:left">Herhaal wachtwoord</p>
         <input type="password" name="pwdrepeat" placeholder="Herhaal wachtwoord">
+        <br>
         <button type="submit" name="signup-submit">Registreren</button>
 
     </form>
-
+    </div>
 <?php
     include('footer.php')
 ?>
