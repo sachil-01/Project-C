@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700|Montserrat:300" rel="stylesheet">
     <title>Stekjeruilen</title>
 </head>
 <body>
@@ -19,8 +20,8 @@
 
             <ul class="nav-links">
                     <li><a href="adpagina.php">Advertenties</a></li>
-                    <li><input type="search" class="searchbar" onfocus="this.value=''" value="Zoeken..."></li>
                     <li><a href="#">Help Pagina</a></li>
+                    <li><input type="search" class="searchbar" onfocus="this.value=''" placeholder="Zoeken..."></i></li>
                     <?php
                         if (isset($_SESSION['userId'])) {
                             echo '<form action="includes/logout.inc.php" method="post">

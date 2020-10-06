@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css\LoginStyle.css">
 </head>
 <body>
-    <div class="loginbox" style="text-align:center"> 
+    <div class="loginbox" style="text-align:center">
         <!-- Formulier om in te loggen -->
         <form action="includes/login.inc.php" method="post">
             <br>
