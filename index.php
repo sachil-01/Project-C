@@ -3,11 +3,11 @@ include('header.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-</head>
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <link rel="stylesheet" href="css/style.css">-->
+<!--</head>-->
 <body>
     <div class="container">
         <?php 
@@ -21,7 +21,15 @@ include('header.php');
             }
 
         ?>
-
+        <div class="searchbar-div">
+            <div class="searchbar-margin">
+                <div class="searchbar-main">
+                    <div class="searchbar-main-content">
+                        <input type="search" class="searchbar-input" onfocus="this.value=''" placeholder="Zoeken...">
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Planten homepage -->
         <div class="plant">
             <img src="images/plant1.jpg" alt="">
