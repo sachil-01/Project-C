@@ -15,7 +15,8 @@
         <nav>
        
             <a class="logo" href="index.php">
-                <h2>Naam/Logo</h2>
+                <img src="images/Logo.png" alt="">
+                <h2>Naam website</h2>
             </a>
 
             <ul class="nav-links">

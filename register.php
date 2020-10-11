@@ -36,19 +36,20 @@
     <form action="includes/register.inc.php" method="post">
         <h1>Signup</h1>
         <p style="text-align:left">Gebruikersnaam</p>
-        <input type="text" name="uid" placeholder="Gebruikersnaam">
+        <input type="text" name="uid" placeholder="Gebruikersnaam" required>
         <br>
         <p style="text-align:left">E-mail</p>
-        <input type="text" name="mail" placeholder="E-mail">
+        <input type="text" name="mail" placeholder="E-mail" required>
         <br>
         <p style="text-align:left">Wachtwoord</p>
-        <input type="password" name="pwd" placeholder="Wachtwoord">
+        <input type="password" name="pwd" placeholder="Wachtwoord" required>
         <br>
         <p style="text-align:left">Herhaal wachtwoord</p>
-        <input type="password" name="pwdrepeat" placeholder="Herhaal wachtwoord">
+        <input type="password" name="pwdrepeat" placeholder="Herhaal wachtwoord" required>
         <br>
         <button type="submit" name="signup-submit">Registreren</button>
-
+        <br><br>
+        <a href="loginpagina.php">Inloggen</a>
     </form>
     </div>
 <?php

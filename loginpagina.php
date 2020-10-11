@@ -13,11 +13,11 @@
             <br>
             <h1>Inloggen</h1>
             <p style="text-align:left">E-mail</p>
-            <input type="text" name="mailId" placeholder="E-mailadres...">
+            <input type="text" name="mailId" placeholder="E-mailadres..." required>
             <!-- <br> zorgt dat de input velden onder elkaar staan-->
             <br>
             <p style="text-align:left">Wachtwoord</p>
-            <input type="password" name="wachtwoord" placeholder="Wachtwoord...">
+            <input type="password" name="wachtwoord" placeholder="Wachtwoord..." required>
             <br>
             <button type="submit" name="login-submit">Login</button>
             <br><br>

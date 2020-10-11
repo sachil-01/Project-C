@@ -7,14 +7,12 @@ html {
 /* Grey background of login form */
 .loginbox{
 	width: 350px;
-	height: 500px;
+	height: 450px;
 	background-color: rgb(240, 240, 240);
-	top: 50%;
-	left: 50%;
-	position: absolute;
-	transform: translate(-50%,-50%);
 	box-sizing: border-box;
 	border-radius: 5px;
+	position: relative;
+	margin: 6% auto;
 }
 
 /* Login form header */
@@ -87,10 +85,10 @@ html {
 }
 
 .footer {
-    	height: 100px;
+    height: 100px;
    	background-color: var(--clr-groen);
  	color: var(--clr-wit);
-	position: absolute;
-  	bottom: 0;
+	position: fixed;
+	bottom: 0;
   	width: 100%;
 }

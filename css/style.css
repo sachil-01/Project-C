@@ -95,9 +95,6 @@ nav {
     font-family: 'Montserrat', serif;
     font-weight: 300;
     text-transform: uppercase;
-    margin: 10px;
-    position:relative; 
-    
 }
 
 .nav-links a:hover{
@@ -115,7 +112,22 @@ nav {
     text-decoration: none;
 }
 
+.logo img{
+    display: inline-block;
+    width: 55px;
+    -webkit-transition: -webkit-transform 2s;
+}
 
+.logo img:hover{
+    -webkit-transform: rotate(360deg);
+}
+
+.logo h2{
+    text-align: center;
+    vertical-align: 30%;
+    padding-left: 5px;
+    display: inline-block;
+}
 
 .searchbar-div {
     width: 100%;
@@ -140,7 +152,6 @@ nav {
     border-radius: 2px;
     box-shadow: 0 2px 7px 0 hsla(0,0%,82.4%,.25);
     border: 1px solid #f1f4f3;
-
 }
 
 .searchbar-input {
@@ -151,6 +162,11 @@ nav {
     margin: 0;
     border: 1px solid #fff;
     width: 100%;
+}
+
+::-webkit-search-cancel-button{
+    position:relative;
+    right:20px;    
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -251,6 +267,34 @@ nav {
     position: relative;
     min-height: 100%;
     overflow: hidden;
+}
+
+.welcome-div{
+    margin: 100px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.welcome-div h1{
+    text-align: center;
+    color: var(--clr-groen);
+    padding-bottom: 20px;
+}
+
+.welcome-div a{
+    text-align: center;
+}
+
+.welcome-div img{
+    width: 75px;
+    /* padding-top: 50px; */
+    position: relative;
+    margin: 6% auto;
+    -webkit-transition: -webkit-transform 2s;
+}
+
+.welcome-div img:hover{
+    -webkit-transform: rotate(360deg);
 }
 
 .plant {
