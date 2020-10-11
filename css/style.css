@@ -103,6 +103,10 @@ nav {
     outline: none;
 }
 
+.nav-title {
+    display: block;
+}
+
 .menu {
     background-color: var(--clr-groen);
 }
@@ -315,4 +319,10 @@ nav {
     height: 100px;
     background-color: var(--clr-groen);
     color: var(--clr-wit);
+}
+
+@media screen and (max-width: 768px){
+    .nav-title {
+        display: none;
+    }
 }
