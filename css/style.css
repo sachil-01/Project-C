@@ -325,4 +325,8 @@ nav {
     .nav-title {
         display: none;
     }
+    
+    .logo h2 {
+        display: none;
+    }
 }
