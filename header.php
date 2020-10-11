@@ -16,7 +16,7 @@
        
             <a class="logo" href="index.php">
                 <img src="images/Logo.png" alt="">
-                <h2 class="nav-title">Naam website</h2>
+                <h2 class="nav-title">Stekjes ruilen</h2>
             </a>
 
             <ul class="nav-links">
