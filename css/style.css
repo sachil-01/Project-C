@@ -103,6 +103,25 @@ nav {
     outline: none;
 }
 
+.nav-links button{
+    width: 120px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    color: var(--clr-groen);
+    background-color: var(--clr-wit);
+    letter-spacing: 2px;
+    font-size: 14px;
+    font-family: 'Montserrat', serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    outline: none;
+}
+
+.nav-links button:hover{
+    background-color: whitesmoke;
+}
+
 .nav-title {
     display: block;
 }
@@ -164,8 +183,10 @@ nav {
     height: 100%;
     padding-left: 30px;
     margin: 0;
-    border: 1px solid #fff;
+    border: 2px solid var(--clr-groen);
+    border-radius: 5px;
     width: 100%;
+    outline: none;
 }
 
 ::-webkit-search-cancel-button{
