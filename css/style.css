@@ -322,13 +322,45 @@ nav {
     -webkit-transform: rotate(360deg);
 }
 
+.img-area{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
 .plant {
     margin: 4em;
     display: inline-block;
     position: relative;
     border: 2px solid var(--clr-groen);
     max-width: 500px;
+    border-radius: 12px;
 }
+
+.plant img{
+    padding-bottom: 10px;
+    border-radius: 10px;
+}
+
+.description h2{
+    /* Vergroot de size van advertentie wanneer naam te lang wordt */
+    word-wrap: break-word;
+
+    text-align: center;
+}
+
+.description h3{
+    padding-left: 10%;  
+    display: inline-block;
+}
+
+.description p{
+    padding-left: 5%;
+    display: inline-block;
+}
+
 
 .fa-search {
     color: var(--clr-wit);
