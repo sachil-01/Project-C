@@ -27,7 +27,7 @@
 <!--                    <li><input type="search" class="searchbar" onfocus="this.value=''" placeholder="Zoeken..."></i></li>-->
                <?php
                    if (isset($_SESSION['userId'])) {
-                       echo '<li><a href="#">Mijn profiel</a><li>';
+                       echo '<li><a href="#"><i class="fas fa-user"></i></a><li>';
                        echo '<form action="includes/logout.inc.php" method="post">
                                <button class="logout_button" type="submit" name="logout-submit">Logout</button>
                            </form>';
