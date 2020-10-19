@@ -103,7 +103,7 @@ nav {
     outline: none;
 }
 
-.nav-links button{
+.logout_button {
     width: 120px;
     height: 25px;
     border-radius: 5px;
@@ -118,7 +118,7 @@ nav {
     outline: none;
 }
 
-.nav-links button:hover{
+.logout_button:hover{
     background-color: whitesmoke;
 }
 
