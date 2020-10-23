@@ -26,7 +26,7 @@ if (isset($_SESSION['userId'])) {
     </div>';
 } else {
     echo '<div class="notloggedin">
-            <h4>Om een advertentie te kunnen plaatsen moet u eerst ingelogd zijn. Klik <a href="loginpagina.php">HIER</a> om in te loggen.</h4>
+            <h4>Om een advertentie te kunnen plaatsen moet u eerst ingelogd zijn. Klik <a href="loginpagina">HIER</a> om in te loggen.</h4>
           </div>';
 }
 ?>
