@@ -4,10 +4,10 @@ include 'header.php';
 <body>
 <?php
 if (isset($_SESSION['userId'])) {
-    echo
-    '<div class="adform">
+    echo '
+    <div class="adform">
         <h2>Nieuwe advertentie</h2><br>
-        <form>
+        <form action="upload.php" method="post" enctype="multipart/form-data">
             <label for="pname">Plantnaam:</label><br>
             <input type="text" id="pname" name="pname"><br><br>
             <label>Type advertentie:</label><br>
@@ -21,9 +21,14 @@ if (isset($_SESSION['userId'])) {
             <label for="none">Weet ik niet</label><br><br>
             <label for="desc">Beschrijving</label><br>
             <textarea id="desc" name="desc" rows="5" cols="50"></textarea><br>
-            <input type="submit" value="Submit">
+            Selecteer een foto (max 1MB):
+            <input type="file" name="fileToUpload" id="fileToUpload"><br>
+            <input type="submit" value="Plaatsen!">
         </form>
-    </div>';
+
+
+    </div>
+    ';
 } else {
     echo '<div class="notloggedin">
             <h4>Om een advertentie te kunnen plaatsen moet u eerst ingelogd zijn. Klik <a href="loginpagina.php">HIER</a> om in te loggen.</h4>
