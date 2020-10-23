@@ -43,5 +43,8 @@
 
     $mail->send();
 
-    header('location: thankyou.php');
+    // header('location: https://www.roy-van-der-lee.nl/fleurtop/thankyou');
+
+    echo "<script type='text/javascript'> document.location = 'thankyou.php'; </script>";
+    exit();
 ?>

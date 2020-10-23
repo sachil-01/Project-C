@@ -29,7 +29,6 @@
             }
         }
         else if ($_GET['signup'] == "success") {
-            echo '<p>Registratie is gelukt !</p>';
             include('PHPMailer/sendmail.php');
         }
     ?>

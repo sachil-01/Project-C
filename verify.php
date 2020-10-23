@@ -16,8 +16,9 @@
                 if(isset($_GET['verificationcode'])){
                     //proces verification
                     $verificationcode = $_GET['verificationcode'];
-
-                    $mysqli = mysqli_connect('localhost', 'root', 'root', 'royvan1q_websitedekas');
+                    
+                    //change 2nd and 3rd parameter to 'root' when working local!
+                    $mysqli = mysqli_connect('localhost', 'royvan1q_user_dekas', 'Bossex123!', 'royvan1q_websitedekas');
                 
                     $resultSet = $mysqli->query("SELECT verified,verificationCode FROM users WHERE verified = 0 AND verificationCode = '$verificationcode' LIMIT 1");
 
