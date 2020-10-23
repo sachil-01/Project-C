@@ -7,7 +7,7 @@ if (isset($_SESSION['userId'])) {
     echo '
     <div class="adform">
         <h2>Nieuwe advertentie</h2><br>
-        <form action="upload.php" method="post" enctype="multipart/form-data">
+        <form action="upload.php" method="post" enctype="multipart/form-data" target="adpagina">
             <label for="pname">Plantnaam:</label><br>
             <input type="text" id="pname" name="pname"><br><br>
             <label>Type advertentie:</label><br>
