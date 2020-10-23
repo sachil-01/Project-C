@@ -13,7 +13,10 @@
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                 Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</a>
             <br>
-            <img src="images/Logo green.png" alt="">    
+            <img src="images/Logo green.png" alt="">
+        </div>
+        <div class="welcome-bg">
+                <img src="images/RotterdamSkyline.jpg" alt="">   
         </div>
 
         <?php 
@@ -38,10 +41,12 @@
         </div>
         <!-- Planten homepage -->
         <div class="gallery">
-
+            <h1>Nieuwste aanbiedingen</h1>
             <div class="img-area">
                 <div class="plant">
-                    <img src="images/plant1.jpg" alt="">
+                    <div class="adImage">
+                        <img src="images/plant1.jpg" alt="">
+                    </div>
                     <div class="description">
                         <h2>plantennaam</h2>
                         <br>
@@ -52,7 +57,9 @@
                 </div>
 
                 <div class="plant">
-                    <img src="images/plant2.jpg" alt="">
+                    <div class="adImage">
+                        <img src="images/plant2.jpg" alt="">
+                    </div>
                     <div class="description">
                         <h2>Plantennaam</h2>
                         <br>
@@ -63,7 +70,9 @@
                 </div>
                 
                 <div class="plant">
-                    <img src="images/plant4.jpg" alt="">
+                    <div class="adImage">
+                        <img src="images/plant3.jpg" alt="">
+                    </div>
                     <div class="description">
                         <h2>Plantennaam</h2>
                         <br>
@@ -74,7 +83,9 @@
                 </div>
 
                 <div class="plant">
-                    <img src="images/plant4.jpg" alt="">
+                    <div class="adImage">
+                        <img src="images/plant4.jpg" alt="">
+                    </div>  
                     <div class="description">
                         <h2>Plantennaam</h2>
                         <br>
@@ -85,7 +96,9 @@
                 </div>
 
                 <div class="plant">
-                    <img src="images/plant4.jpg" alt="">
+                    <div class="adImage">
+                        <img src="images/plant2.jpg" alt="">
+                    </div>
                     <div class="description">
                         <h2>Plantennaam</h2>
                         <br>
@@ -96,7 +109,9 @@
                 </div>
 
                 <div class="plant">
-                    <img src="images/plant4.jpg" alt="">
+                    <div class="adImage">
+                        <img src="images/plant1.jpg" alt="">
+                    </div>
                     <div class="description">
                         <h2>Plantennaam</h2>
                         <br>

@@ -3,33 +3,34 @@
 ?>
 
 <head>
-    <title>Login Form Design</title>
+    <title>Register Form</title>
     <link rel="stylesheet" type="text/css" href="css\RegisterStyle.css">
 </head>
     <!-- Error berichten // later vervangen voor html ingebouwde messages -->
-    <?php 
+    <?php
         if (isset($_GET['error'])) {
             if ($_GET['error'] == "emptyfields") {
-                echo '<p>Vul alle velden in!</p>';
+                echo '<div class="registererror"><p>Vul alle velden in!</p></div>';
             }
-            else if ($_GET['error'] == "invaliduidmail") {
-                echo '<p>Foutieve email en gebruikersnaam</p>';
+            else if ($_GET['error'] == "invalidmailuid") {
+                echo '<div class="registererror"><p>Foutieve email en gebruikersnaam</p></div>';
             }
             else if ($_GET['error'] == "invaliduid") {
-                echo 'Foutieve gebruikersnaam';
+                echo '<div class="registererror"><p>Foutieve gebruikersnaam</p></div>';
             }
             else if ($_GET['error'] == "invalidmail") {
-                echo '<p>Foutieve email</p>';
+                echo '<div class="registererror"><p>Foutieve email</p></div>';
             }
             else if ($_GET['error'] == "passwordcheck") {
-                echo '<p>Uw wachtwoorden komen niet overeen</p>';
+                echo '<div class="registererror"><p>Uw wachtwoorden komen niet overeen</p></div>';
             }
             else if ($_GET['error'] == "usertaken") {
-                echo '<p>Gebruikersnaam is al in gebruik</p>';
+                echo '<div class="registererror"><p>Gebruikersnaam is al in gebruik</p></div>';
             }
         }
         else if ($_GET['signup'] == "success") {
             echo '<p>Registratie is gelukt !</p>';
+            include('PHPMailer/sendmail.php');
         }
     ?>
     <div class="registerbox" style="text-align:center">

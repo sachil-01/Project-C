@@ -1,15 +1,12 @@
 <?php
-
+    session_start();
 if (isset($_POST['signup-submit'])) {
-    
-
     require 'dbh.inc.php';
 
     $username = $_POST['uid'];
     $email = $_POST['mail'];
     $password = $_POST['pwd'];
     $passwordrepeat = $_POST['pwdrepeat'];
-
 
     // error berichten in header
 
@@ -50,17 +47,21 @@ if (isset($_POST['signup-submit'])) {
                 exit();
             }
             else {
-                $sql = "INSERT INTO users (usernameUsers, emailUsers, passUsers) VALUES (?, ?, ?)";
+                $sql = "INSERT INTO users (usernameUsers, emailUsers, passUsers, verificationCode) VALUES (?, ?, ?, ?)";
                 $statement = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($statement, $sql)) {
                     header("Location: ../register.php?error=sqlerror");
                     exit();
                 }
                 else {
-
+                    $verificationcode = substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 10)), 0, 10);  //str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 10) -> makes sure you can have double chars in the verification code/
+                                                                                                                             //str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 10)), 0, 10 -> shuffles the 10 random chosen chars
+                    $_SESSION['code'] = $verificationcode;
+                    $_SESSION['mail'] = $_POST['mail'];
+                    $_SESSION['username'] = $_POST['uid'];
                     $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
 
-                    mysqli_stmt_bind_param($statement, "sss", $username, $email, $hashedPwd);
+                    mysqli_stmt_bind_param($statement, "ssss", $username, $email, $hashedPwd, $verificationcode);
                     mysqli_stmt_execute($statement); 
                     header("Location: ../register.php?signup=success");
                     exit();
