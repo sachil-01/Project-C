@@ -1,0 +1,47 @@
+.adform {
+    margin: 5% 20%;
+    background-color: rgba(49, 122, 18, 0.16);
+    padding: 2% 10%;
+    border-radius: 20px;
+    line-height: 2;
+    font-size: large;
+    font-family: 'Montserrat', serif;
+    font-weight: bold;
+}
+.adform form {
+    margin-left: 20%;
+}
+.adform h2 {
+    text-align: center;
+}
+input[type="text"] {
+     padding: 12px 20px;
+     border: 2px solid white;
+     border-radius: 4px;
+ }
+
+textarea {
+    padding: 12px 20px;
+    border: 2px solid white;
+    border-radius: 4px;
+    resize: none;
+}
+
+.notloggedin {
+    margin: 5% 20%;
+    background-color: rgba(49, 122, 18, 0.16);
+    padding: 2% 10%;
+    border-radius: 20px;
+    line-height: 2;
+    font-size: large;
+    font-family: 'Montserrat', serif;
+    font-weight: bold;
+}
+
+.notloggedin a {
+    color: rgba(49, 149, 15, 0.67);
+}
+
+.notloggedin a:hover {
+    color: rgba(49, 149, 15, 0.28);
+}
