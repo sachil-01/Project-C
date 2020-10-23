@@ -22,7 +22,11 @@
     ?>
     <div class="loginbox" style="text-align:center">
         <!-- Formulier om in te loggen -->
-        <form action="includes/login.inc.php" method="post">
+        <?php
+        if (isset($_SESSION['userId'])) {
+            echo '<h4>U bent al ingelogd!</h4>';
+        } else {
+            echo '<form action="includes/login.inc.php" method="post">
             <br>
             <h1>Inloggen</h1>
             <p style="text-align:left">E-mail of Gebruikersnaam</p>
@@ -35,7 +39,10 @@
             <button type="submit" name="login-submit">Login</button>
             <br><br>
             <a href="register.php">Registreren</a>
-        </form>
+        </form>';
+        }
+        ?>
+
     </div>
 </body>
 
