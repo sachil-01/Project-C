@@ -11,6 +11,8 @@
         <!-- Formulier om in te loggen -->
         <?php
         if (isset($_SESSION['userId'])) {
+            echo '<h4>U bent al ingelogd!</h4>';
+        } else {
             echo '<form action="includes/login.inc.php" method="post">
             <br>
             <h1>Inloggen</h1>
@@ -25,8 +27,6 @@
             <br><br>
             <a href="register.php">Registreren</a>
         </form>';
-        } else {
-            echo '<h4>U bent al ingelogd!</h4>';
         }
         ?>
 
