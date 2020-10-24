@@ -24,6 +24,11 @@ html {
 	font-weight: bold;
 }
 
+.loginbox h4 {
+	padding: 10%;
+	font-weight: bold;
+}
+
 /* Login form paragraph */
 .loginbox p{
 	margin: 0;
