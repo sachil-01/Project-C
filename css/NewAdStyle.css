@@ -14,7 +14,7 @@
 .adform h2 {
     text-align: center;
 }
-input[type="text"] {
+.adform input[type="text"] {
      padding: 12px 20px;
      border: 2px solid white;
      border-radius: 4px;

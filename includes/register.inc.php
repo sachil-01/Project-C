@@ -1,8 +1,6 @@
 <?php
-
+    session_start();
 if (isset($_POST['signup-submit'])) {
-    
-
     require 'dbh.inc.php';
 
     $username = $_POST['uid'];
@@ -58,7 +56,10 @@ if (isset($_POST['signup-submit'])) {
                     exit();
                 }
                 else {
-
+                    $verificationcode = md5(uniqid(rand(), true)); //You would have to hash about 18,000,000,000,000,000,000 items before you had a 50% likelyhood of getting two of the same hash. That's one hash every millisecond for 584 million years.                                                                                                 //str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 10)), 0, 10 -> shuffles the 10 random chosen chars
+                    $_SESSION['code'] = $verificationcode;
+                    $_SESSION['mail'] = $_POST['mail'];
+                    $_SESSION['username'] = $_POST['uid'];
                     $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
 
                     mysqli_stmt_bind_param($statement, "sssss", $username, $email, $hashedPwd, $firstname, $lastname);
