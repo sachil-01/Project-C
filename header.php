@@ -15,18 +15,21 @@
         <nav>
        
             <a class="logo" href="index.php">
+                <h2 class="nav-title">Fleurt </h2>
+                &nbsp;
                 <img src="images/Logo.png" alt="">
-                <h2 class="nav-title">Stekjes ruilen</h2>
+                <h2 class="nav-title">p</h2>
             </a>
 
             <ul class="nav-links">
-                    <li><a href="adpagina.php">Advertenties</a></li>
-                    <li><a href="#">Help Pagina</a></li>
+                    <li><a href="adpagina.php">Aanbod</a></li>
+                    <li><a href="#">Hoe werkt het?</a></li>
 <!--                    <li><input type="search" class="searchbar" onfocus="this.value=''" placeholder="Zoeken..."></i></li>-->
                     <?php
                         if (isset($_SESSION['userId'])) {
+                            echo '<li><a href="profilepage.php"><i class="fas fa-user"></i>Mijn profiel</a><li>';
                             echo '<form action="includes/logout.inc.php" method="post">
-                                    <button type="submit" name="logout-submit">Logout</button>
+                                    <button class="logout_button" type="submit" name="logout-submit">Logout</button>
                                 </form>';
                         }
                         else {
@@ -43,11 +46,7 @@
                         <div class="line3"></div>
             </div>
         </nav>
-        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<!--        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-        <script src="main.js"></script>
+
 </body>
 
 

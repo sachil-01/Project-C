@@ -9,7 +9,8 @@ if (isset($_POST['signup-submit'])) {
     $email = $_POST['mail'];
     $password = $_POST['pwd'];
     $passwordrepeat = $_POST['pwdrepeat'];
-
+    $firstname = $_POST['firstName'];
+    $lastname = $_POST['lastName'];
 
     // error berichten in header
 
@@ -50,7 +51,7 @@ if (isset($_POST['signup-submit'])) {
                 exit();
             }
             else {
-                $sql = "INSERT INTO users (usernameUsers, emailUsers, passUsers) VALUES (?, ?, ?)";
+                $sql = "INSERT INTO users (usernameUsers, emailUsers, passUsers, firstName, lastName) VALUES (?, ?, ?, ?, ?)";
                 $statement = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($statement, $sql)) {
                     header("Location: ../register.php?error=sqlerror");
@@ -60,7 +61,7 @@ if (isset($_POST['signup-submit'])) {
 
                     $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
 
-                    mysqli_stmt_bind_param($statement, "sss", $username, $email, $hashedPwd);
+                    mysqli_stmt_bind_param($statement, "sssss", $username, $email, $hashedPwd, $firstname, $lastname);
                     mysqli_stmt_execute($statement); 
                     header("Location: ../register.php?signup=success");
                     exit();
