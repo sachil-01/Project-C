@@ -54,8 +54,7 @@ if (isset($_POST['signup-submit'])) {
                     exit();
                 }
                 else {
-                    $verificationcode = substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 10)), 0, 10);  //str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 10) -> makes sure you can have double chars in the verification code/
-                                                                                                                             //str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 10)), 0, 10 -> shuffles the 10 random chosen chars
+                    $verificationcode = md5(uniqid(rand(), true)); //You would have to hash about 18,000,000,000,000,000,000 items before you had a 50% likelyhood of getting two of the same hash. That's one hash every millisecond for 584 million years.                                                                                                 //str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 10)), 0, 10 -> shuffles the 10 random chosen chars
                     $_SESSION['code'] = $verificationcode;
                     $_SESSION['mail'] = $_POST['mail'];
                     $_SESSION['username'] = $_POST['uid'];
