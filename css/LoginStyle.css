@@ -31,8 +31,8 @@ html {
 
 /* Login form paragraph */
 .loginbox p{
-	margin: 0;
-	padding: 0;
+	margin: 0px;
+	padding: 0px;
 	font-weight: bold;
 	text-indent: 2.95em;
 }
