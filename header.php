@@ -20,7 +20,7 @@
 
             <ul class="nav-links">
                     <li><a href="adpagina.php">Advertenties</a></li>
-                    <li><a href="#">Help Pagina</a></li>
+                    <li><a href="helppagina.php">Help Pagina</a></li>
 <!--                    <li><input type="search" class="searchbar" onfocus="this.value=''" placeholder="Zoeken..."></i></li>-->
                     <?php
                         if (isset($_SESSION['userId'])) {
