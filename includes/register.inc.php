@@ -49,7 +49,7 @@ if (isset($_POST['signup-submit'])) {
                 exit();
             }
             else {
-                $sql = "INSERT INTO users (usernameUsers, emailUsers, passUsers, firstName, lastName) VALUES (?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO users (usernameUsers, emailUsers, passUsers, verificationCode, firstName, lastName) VALUES (?, ?, ?, ?, ?, ?)";
                 $statement = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($statement, $sql)) {
                     header("Location: ../register.php?error=sqlerror");
@@ -62,7 +62,7 @@ if (isset($_POST['signup-submit'])) {
                     $_SESSION['username'] = $_POST['uid'];
                     $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
 
-                    mysqli_stmt_bind_param($statement, "sssss", $username, $email, $hashedPwd, $firstname, $lastname);
+                    mysqli_stmt_bind_param($statement, "ssssss", $username, $email, $hashedPwd, $verificationcode, $firstname, $lastname);
                     mysqli_stmt_execute($statement); 
                     header("Location: ../register.php?signup=success");
                     exit();
