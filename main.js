@@ -1,4 +1,4 @@
-const navSlide = () => {
+var navSlide = () => {
 	const burger = document.querySelector('.burger');
 	const nav = document.querySelector('.nav-links');
 	const navLinks = document.querySelectorAll('.nav-links li');
@@ -22,7 +22,7 @@ const navSlide = () => {
 	});
 }
 
-const app = () => {
+var app = () => {
 	navSlide();
 }
 

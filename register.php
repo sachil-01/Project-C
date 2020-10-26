@@ -3,48 +3,54 @@
 ?>
 
 <head>
-    <title>Login Form Design</title>
+    <title>Register Form</title>
     <link rel="stylesheet" type="text/css" href="css\RegisterStyle.css">
 </head>
     <!-- Error berichten // later vervangen voor html ingebouwde messages -->
-    <?php 
+    <?php
         if (isset($_GET['error'])) {
             if ($_GET['error'] == "emptyfields") {
-                echo '<p>Vul alle velden in!</p>';
+                echo '<div class="registererror"><p>Vul alle velden in!</p></div>';
             }
-            else if ($_GET['error'] == "invaliduidmail") {
-                echo '<p>Foutieve email en gebruikersnaam</p>';
+            else if ($_GET['error'] == "invalidmailuid") {
+                echo '<div class="registererror"><p>Foutieve email en gebruikersnaam</p></div>';
             }
             else if ($_GET['error'] == "invaliduid") {
-                echo 'Foutieve gebruikersnaam';
+                echo '<div class="registererror"><p>Foutieve gebruikersnaam</p></div>';
             }
             else if ($_GET['error'] == "invalidmail") {
-                echo '<p>Foutieve email</p>';
+                echo '<div class="registererror"><p>Foutieve email</p></div>';
             }
             else if ($_GET['error'] == "passwordcheck") {
-                echo '<p>Uw wachtwoorden komen niet overeen</p>';
+                echo '<div class="registererror"><p>Uw wachtwoorden komen niet overeen</p></div>';
             }
             else if ($_GET['error'] == "usertaken") {
-                echo '<p>Gebruikersnaam is al in gebruik</p>';
+                echo '<div class="registererror"><p>Gebruikersnaam is al in gebruik</p></div>';
             }
         }
         else if ($_GET['signup'] == "success") {
-            echo '<p>Registratie is gelukt !</p>';
+            include('PHPMailer/sendmail.php');
         }
     ?>
-    <div class="registerbox" style="text-align:center">
+    <div class="registerbox">
     <form action="includes/register.inc.php" method="post">
         <h1>Signup</h1>
-        <p style="text-align:left">Gebruikersnaam</p>
+        <p>Gebruikersnaam</p>
         <input type="text" name="uid" placeholder="Gebruikersnaam" required>
         <br>
-        <p style="text-align:left">E-mail</p>
+        <p>E-mail</p>
         <input type="text" name="mail" placeholder="E-mail" required>
         <br>
-        <p style="text-align:left">Wachtwoord</p>
+        <p>Voornaam</p>
+        <input type="text" name="firstName" placeholder="Voornaam" required>
+        <br>
+        <p>Achternaam</p>
+        <input type="text" name="lastName" placeholder="Achternaam" required>
+        <br>
+        <p>Wachtwoord</p>
         <input type="password" name="pwd" placeholder="Wachtwoord" required>
         <br>
-        <p style="text-align:left">Herhaal wachtwoord</p>
+        <p>Herhaal wachtwoord</p>
         <input type="password" name="pwdrepeat" placeholder="Herhaal wachtwoord" required>
         <br>
         <button type="submit" name="signup-submit">Registreren</button>

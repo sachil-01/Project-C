@@ -103,7 +103,7 @@ nav {
     outline: none;
 }
 
-.nav-links button{
+.logout_button {
     width: 120px;
     height: 25px;
     border-radius: 5px;
@@ -118,7 +118,7 @@ nav {
     outline: none;
 }
 
-.nav-links button:hover{
+.logout_button:hover{
     background-color: whitesmoke;
 }
 
@@ -296,6 +296,7 @@ nav {
 
 .welcome-div{
     margin: 100px;
+    margin-bottom: -5%;
     padding-left: 100px;
     padding-right: 100px;
 }
@@ -312,9 +313,8 @@ nav {
 
 .welcome-div img{
     width: 75px;
-    /* padding-top: 50px; */
     position: relative;
-    margin: 6% auto;
+    margin: 3% auto;
     -webkit-transition: -webkit-transform 2s;
 }
 
@@ -322,12 +322,85 @@ nav {
     -webkit-transform: rotate(360deg);
 }
 
+.welcome-bg img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 85%;
+}
+
+/* Recent advertisements */
+
+/* All advertisements */
+.img-area{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/* One advertisement */
 .plant {
-    margin: 4em;
-    display: inline-block;
+    margin: 3em;
     position: relative;
-    border: 2px solid var(--clr-groen);
+    border-bottom: 3px solid var(--clr-groen);
     max-width: 500px;
+    overflow: hidden;
+    box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.3)
+}
+
+.plant:hover{
+    transition: transform .2s ease-in;
+    transform: translateY(-20px);
+}
+
+/* Advertisement image container */
+.adImage{
+    overflow: hidden;
+}
+
+/* Advertisement image */
+.adImage img{
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1);
+    transition: 0.3s ease-in-out;
+}
+
+/* Advertisement image hover effect */
+.adImage img:hover{
+    transform: scale(1.2);
+}
+
+/* Recent advertisements header */
+.gallery h1{
+    text-align: center;
+    margin-top: 10%;
+    margin-bottom: 5%;
+}
+
+/* Advertisement plant name */
+.description h2{
+    margin-top: 10px;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+/* Advertisement description headers */
+.description h3{
+    padding-left: 10%;  
+    display: inline-block;
+}
+
+/* Advertisement discription */
+.description p{
+    padding-left: 5%;
+    display: inline-block;
+}
+
+/* Advertisement discription container*/
+.description{
+    padding-bottom: 3%;
 }
 
 .fa-search {
