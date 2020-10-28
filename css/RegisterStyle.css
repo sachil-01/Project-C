@@ -120,12 +120,7 @@ html {
 
 .oops img{
 	width: 35px;
-	-webkit-transition: -webkit-transform 2s;
 	float: left;
-}
-
-.oops img:hover{
-    -webkit-transform: rotate(360deg);
 }
 
 .registererror{

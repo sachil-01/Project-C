@@ -295,31 +295,15 @@ nav {
 }
 
 .welcome-div{
-    margin: 100px;
-    margin-bottom: -5%;
+    margin: 50px;
+    margin-bottom: 0px;
     padding-left: 100px;
     padding-right: 100px;
 }
 
-.welcome-div h1{
+.welcome-div h1, .welcome-div h2, .welcome-div p{
     text-align: center;
     color: var(--clr-groen);
-    padding-bottom: 20px;
-}
-
-.welcome-div a{
-    text-align: center;
-}
-
-.welcome-div img{
-    width: 75px;
-    position: relative;
-    margin: 3% auto;
-    -webkit-transition: -webkit-transform 2s;
-}
-
-.welcome-div img:hover{
-    -webkit-transform: rotate(360deg);
 }
 
 .welcome-bg img{
@@ -375,7 +359,7 @@ nav {
 /* Recent advertisements header */
 .gallery h1{
     text-align: center;
-    margin-top: 10%;
+    margin-top: 5%;
     margin-bottom: 5%;
 }
 
@@ -422,5 +406,35 @@ nav {
     
     .logo h2 {
         display: none;
+    }
+}
+
+/* Changes the position of the advertisement description */
+
+@media screen and (max-width: 600px){
+    /* Advertisement discription */
+    .description p{
+        padding-right: 150px;
+    }
+}
+
+@media screen and (max-width: 500px){
+    /* Advertisement discription */
+    .description p{
+        padding-right: 0px;
+    }
+}
+
+@media screen and (max-width: 450px){
+    /* Advertisement discription */
+    .description p{
+        padding-right: 30px;
+    }
+}
+
+@media screen and (max-width: 350px){
+    /* Advertisement discription */
+    .description p{
+        padding-right: 0px;
     }
 }
