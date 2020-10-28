@@ -370,16 +370,14 @@ nav {
     text-align: center;
 }
 
-/* Advertisement description headers */
+/* Advertisement description headers and description details */
 .description h3{
     padding-left: 10%;  
     display: inline-block;
 }
 
-/* Advertisement discription */
-.description p{
-    padding-left: 5%;
-    display: inline-block;
+.description h3 span{
+    font-weight: normal;
 }
 
 /* Advertisement discription container*/
@@ -413,28 +411,5 @@ nav {
 
 @media screen and (max-width: 600px){
     /* Advertisement discription */
-    .description p{
-        padding-right: 150px;
-    }
-}
 
-@media screen and (max-width: 500px){
-    /* Advertisement discription */
-    .description p{
-        padding-right: 0px;
-    }
-}
-
-@media screen and (max-width: 450px){
-    /* Advertisement discription */
-    .description p{
-        padding-right: 30px;
-    }
-}
-
-@media screen and (max-width: 350px){
-    /* Advertisement discription */
-    .description p{
-        padding-right: 0px;
-    }
 }
