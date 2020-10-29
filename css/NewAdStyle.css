@@ -45,3 +45,24 @@ textarea {
 .notloggedin a:hover {
     color: rgba(49, 149, 15, 0.28);
 }
+
+.newAdButtons {
+    background-color: transparent;
+    border-radius:12px;
+    border:2px solid #4A7C00;
+    display:inline-block;
+    cursor:pointer;
+    color: #4A7C00;
+    font-family: 'Montserrat', serif;
+    font-size:17px;
+    font-weight:bold;
+    padding:10px 20px;
+    text-decoration:none;
+}
+.newAdButtons:hover {
+    background-color:transparent;
+}
+.newAdButtons:active {
+    position:relative;
+    top:1px;
+}
