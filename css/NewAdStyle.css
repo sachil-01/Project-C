@@ -61,6 +61,8 @@ textarea {
 }
 .newAdButtons:hover {
     background-color:transparent;
+    border:2px solid #31950f;
+    color: #31950f;
 }
 .newAdButtons:active {
     position:relative;
