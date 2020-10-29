@@ -7,17 +7,18 @@ html {
 /* Grey background of login form */
 .registerbox{
 	width: 350px;
-	height: 600px;
+	max-height: 100vh;
 	background-color: rgb(240, 240, 240);
 	box-sizing: border-box;
 	border-radius: 5px;
 	position: relative;
-	margin: 6% auto;
+	margin: 3% auto;
+	text-align:center;
 }
 
 /* Login form header */
 .registerbox h1{
-	margin: 0;
+	margin: 0px;
 	padding: 50px;
 	text-align: center;
 	font-size: 30px;
@@ -26,15 +27,16 @@ html {
 
 /* Login form paragraph */
 .registerbox p{
-	margin: 0;
-	padding: 0;
+	text-align: left;
+	margin: 0px;
+	padding: 0px;
 	font-weight: bold;
 	text-indent: 2.95em;
 }
 
 /* Field input */
 .registerbox input{
-	width: 1000;
+	width: 1000px;
 	margin-bottom: 20px;
 }
 
@@ -82,6 +84,70 @@ html {
 {
 	cursor: pointer;
 	color: #228B22;
+}
+
+/* Thank you page after registering */
+.thankyou{
+	text-align: center;
+	margin: 8% auto;
+}
+
+.thankyou h1{
+	font-size: 30px;
+}
+
+.thankyou img{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 40%;
+}
+
+.verified{
+	text-align: center;
+	margin: 8% auto;
+}
+
+.oops{
+	display: inline-block;
+	text-align: center;
+}
+
+.oops h1{
+	font-size: 30px;
+	float: right;
+}
+
+.oops img{
+	width: 35px;
+	-webkit-transition: -webkit-transform 2s;
+	float: left;
+}
+
+.oops img:hover{
+    -webkit-transform: rotate(360deg);
+}
+
+.registererror{
+	width: 350px;
+	border: 3px solid #4A7C00;
+	border-radius: 10px;
+	display: block;
+    margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+}
+
+.registererror p{
+	text-align: center;
+	font-weight: bold;
+}
+
+.verified img{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 40%;
 }
 
 .footer {

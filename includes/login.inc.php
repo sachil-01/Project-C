@@ -30,14 +30,21 @@ if (isset($_POST['login-submit'])) {
                     exit();
                 }
                 else if ($passwordCheck == true) {
+                    $verified = $row['verified'];
 
-                    // Als je emailadres wilt gebruiken kan je die hier toevoegen
-                    session_start();
-                    $_SESSION['userId'] = $row['idUsers'];
-                    $_SESSION['userUid'] = $row['usernameUsers'];
+                    if($verified == 1){
+                        // Als je emailadres wilt gebruiken kan je die hier toevoegen
+                        session_start();
+                        $_SESSION['userId'] = $row['idUsers'];
+                        $_SESSION['userUid'] = $row['usernameUsers'];
 
-                    header("Location: ../index.php?login=succes");
-                    exit();
+                        header("Location: ../index.php?login=succes");
+                        exit();
+                    }
+                    else{
+                        header("Location: ../loginpagina.php?error=unverifiedaccount");
+                        exit();
+                    }
                 }
                 else {
                     header("Location: ../loginpagina.php?error=wrongpass");
