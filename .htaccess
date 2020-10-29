@@ -1,7 +1,0 @@
-DirectoryIndex "index.php"
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([^\.]+)$ $1.php [NC,L]
-RewriteEngine On
-RewriteCond %{SERVER_PORT} 80
-RewriteRule ^(.*)$ https://www.roy-van-der-lee.nl/fleurtop [R,L]
