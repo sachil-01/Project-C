@@ -2,9 +2,9 @@
 include 'header.php';
 ?>
 <body>
-
-//if (isset($_SESSION['userId'])) {
-//    echo '
+<?php
+if (isset($_SESSION['userId'])) {
+    echo '
     <div class="adform">
         <h2>Nieuwe advertentie</h2><br>
         <form action="upload.php" method="post" enctype="multipart/form-data" target="adpagina">
@@ -39,12 +39,12 @@ include 'header.php';
 
 
     </div>
-<!--    ';-->
-<!--} else {-->
+    ';
+} else {
     echo '<div class="notloggedin">
             <h4>Om een advertentie te kunnen plaatsen moet u eerst ingelogd zijn. Klik <a href="loginpagina">HIER</a> om in te loggen.</h4>
           </div>';
-<!--}-->
-<!--?>-->
+}
+?>
 
 </body>
