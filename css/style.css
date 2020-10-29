@@ -389,10 +389,17 @@ nav {
     color: var(--clr-wit);
 }
 
+/* Profile page */
+
+.registerbox .ppbutton {
+    margin-bottom: 1.5em;
+}
+
 /* Footer */
 
 .footer {
     height: 100px;
+    margin-top: 70px;
     background-color: var(--clr-groen);
     color: var(--clr-wit);
 }

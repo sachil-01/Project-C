@@ -7,7 +7,6 @@ html {
 /* Grey background of login form */
 .registerbox{
 	width: 350px;
-	max-height: 100vh;
 	background-color: rgb(240, 240, 240);
 	box-sizing: border-box;
 	border-radius: 5px;
@@ -144,7 +143,7 @@ html {
 	margin-right: auto;
 	max-width: 40%;
 }
-
+/* 
 .footer {
     height: 100px;
    	background-color: var(--clr-groen);
@@ -152,4 +151,4 @@ html {
 	position: fixed;
   	bottom: 0;
   	width: 100%;
-}
+} */
