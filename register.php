@@ -33,7 +33,7 @@
         }
     ?>
     <div class="registerbox">
-    <form action="includes/register.inc.php" method="post">
+    <form class="registerform" action="includes/register.inc.php" method="post">
         <h1>Signup</h1>
         <p>Gebruikersnaam</p>
         <input type="text" name="uid" placeholder="Gebruikersnaam" required>
@@ -47,6 +47,18 @@
         <p>Achternaam</p>
         <input type="text" name="lastName" placeholder="Achternaam" required>
         <br>
+        <!-- <p>Straatnaam</p>
+        <input type="text" name="straatName" placeholder="Straatnaam" required>
+        <br>
+        <p>Nummer</p>
+        <input type="text" name="nummer" placeholder="Nummer" required>
+        <br>
+        <p>Toevoeging</p>
+        <input type="text" name="toevoeging" placeholder="Toevoeging" required>
+        <br>
+        <p>Postcode</p>
+        <input type="text" name="postcode" placeholder="Postcode" required>
+        <br> -->
         <p>Wachtwoord</p>
         <input type="password" name="pwd" placeholder="Wachtwoord" required>
         <br>

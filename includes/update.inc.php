@@ -28,13 +28,45 @@ if (isset($_POST['update-submit'])) {
         header("Location: ../profilepage.php?error=invaliduid&mail=".$email);
         exit();
     }
+
+    $sql = "SELECT usernameUsers FROM users WHERE usernameUsers=? AND idUsers!=$id";
+        $statement = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($statement, $sql)) {
+            header("Location: ../profilepage.php?error=sqlerror");
+            exit();
+        }
+        else {
+            mysqli_stmt_bind_param($statement, "s", $username);
+            mysqli_stmt_execute($statement);
+            mysqli_stmt_store_result($statement);
+            $resultCheck = mysqli_stmt_num_rows($statement);
+            if ($resultCheck > 0) {
+                header("Location: ../profilepage.php?error=usertaken&mail=".$email);
+                exit();
+            }
+            else {
+                $sql = "SELECT emailUsers FROM users WHERE emailUsers=? AND idUsers!=$id";
+                $statement = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($statement, $sql)) {
+                    header("Location: ../profilepage.php?error=sqlerror");
+                    exit();
+                }
+                else {
+                    mysqli_stmt_bind_param($statement, "s", $email);
+                    mysqli_stmt_execute($statement);
+                    mysqli_stmt_store_result($statement);
+                    $resultCheck = mysqli_stmt_num_rows($statement);
+                    if ($resultCheck > 0) {
+                        header("Location: ../profilepage.php?error=emailtaken&mail=".$email);
+                        exit();
+                    }
             else {
                 $sql = "UPDATE users SET usernameUsers=?, emailUsers=?, firstName=?, lastName=? WHERE idUsers='$id'";
                 $statement = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($statement, $sql)) {
                     header("Location: ../profilepage.php?error=sqlerror");
                     exit();
-                }
+                }                       
                 else {
 
                     mysqli_stmt_bind_param($statement, "ssss", $username, $email, $firstname, $lastname);
@@ -43,6 +75,9 @@ if (isset($_POST['update-submit'])) {
                     exit();
                 }
             }
+    }
+}
+        }
     mysqli_stmt_close($statement);
     mysqli_close($conn);
 }
