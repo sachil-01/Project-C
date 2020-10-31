@@ -9,6 +9,10 @@ if (isset($_POST['signup-submit'])) {
     $passwordrepeat = $_POST['pwdrepeat'];
     $firstname = $_POST['firstName'];
     $lastname = $_POST['lastName'];
+    $straat = $_POST['straatNaam'];
+    $huisnummer = $_POST['huisNummer'];
+    $toevoeging = $_POST['toevoeging'];
+    $postcode = $_POST['postcode'];
 
     // error berichten in header
 
@@ -49,7 +53,7 @@ if (isset($_POST['signup-submit'])) {
                 exit();
             }
             else {
-                $sql = "INSERT INTO users (usernameUsers, emailUsers, passUsers, verificationCode, firstName, lastName) VALUES (?, ?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO users (usernameUsers, emailUsers, passUsers, verificationCode, firstName, lastName, straatNaam, huisNummer, toevoeging, postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 $statement = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($statement, $sql)) {
                     header("Location: ../register.php?error=sqlerror");
@@ -62,7 +66,7 @@ if (isset($_POST['signup-submit'])) {
                     $_SESSION['username'] = $_POST['uid'];
                     $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
 
-                    mysqli_stmt_bind_param($statement, "ssssss", $username, $email, $hashedPwd, $verificationcode, $firstname, $lastname);
+                    mysqli_stmt_bind_param($statement, "sssssssiss", $username, $email, $hashedPwd, $verificationcode, $firstname, $lastname, $straat, $huisnummer, $toevoeging, $postcode);
                     mysqli_stmt_execute($statement); 
                     header("Location: ../register.php?signup=success");
                     exit();

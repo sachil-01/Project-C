@@ -40,7 +40,7 @@ html {
 }
 
 /* Field boxes */
-.registerbox input[type="password"], input[type="text"]{
+.registerbox input[type="password"], input[type="text"], input[type="number"]{
 	border: none;
 	border-bottom: 1px solid #000;
 	background: transparent;
@@ -144,11 +144,11 @@ html {
 	max-width: 40%;
 }
 
-.footer {
+/* .footer {
     height: 100px;
    	background-color: var(--clr-groen);
  	color: var(--clr-wit);
 	position: fixed;
   	bottom: 0;
   	width: 100%;
-}
+} */

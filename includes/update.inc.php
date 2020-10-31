@@ -10,6 +10,11 @@ if (isset($_POST['update-submit'])) {
     $email = $_POST['mail'];
     $firstname = $_POST['firstName'];
     $lastname = $_POST['lastName'];
+    $straat = $_POST['straatNaam'];
+    $huisnummer = $_POST['huisNummer'];
+    $toevoeging = $_POST['toevoeging'];
+    $postcode = $_POST['postcode'];
+
 
     // error berichten in header
 
@@ -61,7 +66,7 @@ if (isset($_POST['update-submit'])) {
                         exit();
                     }
             else {
-                $sql = "UPDATE users SET usernameUsers=?, emailUsers=?, firstName=?, lastName=? WHERE idUsers='$id'";
+                $sql = "UPDATE users SET usernameUsers=?, emailUsers=?, firstName=?, lastName=?, straatNaam=?, huisNummer=?, toevoeging=?, postcode=?  WHERE idUsers='$id'";
                 $statement = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($statement, $sql)) {
                     header("Location: ../profilepage.php?error=sqlerror");
@@ -69,7 +74,7 @@ if (isset($_POST['update-submit'])) {
                 }                       
                 else {
 
-                    mysqli_stmt_bind_param($statement, "ssss", $username, $email, $firstname, $lastname);
+                    mysqli_stmt_bind_param($statement, "sssssiss", $username, $email, $firstname, $lastname, $straat, $huisnummer, $toevoeging, $postcode);
                     mysqli_stmt_execute($statement); 
                     header("Location: ../profilepage.php?update=success");
                     exit();
