@@ -53,20 +53,18 @@ if (isset($_POST['signup-submit'])) {
                 exit();
             }
             else {
-                $sql = "INSERT INTO users (usernameUsers, emailUsers, passUsers, verificationCode, firstName, lastName, straatNaam, huisNummer, toevoeging, postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO users (usernameUsers, emailUsers, passUsers, firstName, lastName, straatNaam, huisNummer, toevoeging, postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 $statement = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($statement, $sql)) {
                     header("Location: ../register.php?error=sqlerror");
                     exit();
                 }
                 else {
-                    $verificationcode = md5(uniqid(rand(), true)); //You would have to hash about 18,000,000,000,000,000,000 items before you had a 50% likelyhood of getting two of the same hash. That's one hash every millisecond for 584 million years.                                                                                                 //str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 10)), 0, 10 -> shuffles the 10 random chosen chars
-                    $_SESSION['code'] = $verificationcode;
                     $_SESSION['mail'] = $_POST['mail'];
                     $_SESSION['username'] = $_POST['uid'];
                     $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
 
-                    mysqli_stmt_bind_param($statement, "sssssssiss", $username, $email, $hashedPwd, $verificationcode, $firstname, $lastname, $straat, $huisnummer, $toevoeging, $postcode);
+                    mysqli_stmt_bind_param($statement, "ssssssiss", $username, $email, $hashedPwd, $firstname, $lastname, $straat, $huisnummer, $toevoeging, $postcode);
                     mysqli_stmt_execute($statement); 
                     header("Location: ../register.php?signup=success");
                     exit();

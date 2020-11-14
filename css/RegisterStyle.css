@@ -6,13 +6,45 @@ html {
 
 /* Grey background of login form */
 .registerbox{
-	width: 350px;
+	width: 700px;
+	height: 700px;
 	background-color: rgb(240, 240, 240);
 	box-sizing: border-box;
 	border-radius: 5px;
-	position: relative;
 	margin: 3% auto;
 	text-align:center;
+}
+
+.registerpart1{
+	display: inline-block;
+	padding-right: 50px;
+	border-right: 2px solid #4A7C00;
+}
+
+.registerpart2{
+	display: inline-block;
+	padding-left: 50px;
+}
+
+@media screen and (max-width: 768px){
+	.registerbox{
+		width: 350px;
+		height: 1150px;
+	}
+	.registerpart1{
+		display: block;
+		padding-right: 0px;
+		border-right: none;
+	}
+	
+	.registerpart2{
+		display: block;
+		padding-left: 0px;
+	}
+
+	.registerbox p{
+		text-indent: 2.95em;
+	}
 }
 
 /* Login form header */
@@ -30,7 +62,6 @@ html {
 	margin: 0px;
 	padding: 0px;
 	font-weight: bold;
-	text-indent: 2.95em;
 }
 
 /* Field input */
@@ -61,6 +92,7 @@ html {
 	color: #fff;
 	font-size: 18px;
 	border-radius: 10px;
+	margin-top: 20px;
 }
 
 /* Button effect */
@@ -143,12 +175,3 @@ html {
 	margin-right: auto;
 	max-width: 40%;
 }
-
-/* .footer {
-    height: 100px;
-   	background-color: var(--clr-groen);
- 	color: var(--clr-wit);
-	position: fixed;
-  	bottom: 0;
-  	width: 100%;
-} */

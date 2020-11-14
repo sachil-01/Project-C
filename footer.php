@@ -2,8 +2,9 @@
 <html lang="en">
 <body>
     <div class="footer">
-
+        <img src="images/footer.jpg" alt="">   
     </div>
+    
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <!--        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>

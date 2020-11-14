@@ -4,6 +4,11 @@ html {
     scroll-behavior: smooth;
 }
 
+/* !!!!Temporary fix for footer overlapping!!!! */
+.loginwrapper{
+	height:667px;
+}
+
 /* Grey background of login form */
 .loginbox{
 	width: 350px;
@@ -11,8 +16,8 @@ html {
 	background-color: rgb(240, 240, 240);
 	box-sizing: border-box;
 	border-radius: 5px;
-	position: relative;
 	margin: 3% auto;
+	text-align: center;
 }
 
 /* Login form header */
@@ -94,7 +99,7 @@ html {
 	border: 3px solid #4A7C00;
 	border-radius: 10px;
 	display: block;
-    	margin-left: auto;
+    margin-left: auto;
 	margin-right: auto;
 	margin-top: 10px;
 }
@@ -102,13 +107,4 @@ html {
 .loginerror p{
 	text-align: center;
 	font-weight: bold;
-}
-
-.footer {
-    height: 100px;
-   	background-color: var(--clr-groen);
- 	color: var(--clr-wit);
-	position: fixed;
-	bottom: 0;
-  	width: 100%;
 }

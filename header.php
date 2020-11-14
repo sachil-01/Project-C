@@ -18,7 +18,7 @@
             <a class="logo" href="index.php">
                 <h2 class="nav-title">Fleurt </h2>
                 &nbsp;
-                <img src="images/Logo.png" alt="">
+                <img src="images/Logo green2.png" alt="">
                 <h2 class="nav-title">p</h2>
             </a>
 
