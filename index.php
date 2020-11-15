@@ -58,7 +58,6 @@
                 </div>
                 <div class="description">
                     <h2>plantennaam</h2>
-                    <br>
                     <h3> Afstand: <span>0km</span></h3>
                     <h3> Datum: <span>ddmmyy</span></h3>
                 </div>
@@ -70,7 +69,6 @@
                 </div>
                 <div class="description">
                     <h2>Plantennaam</h2>
-                    <br>
                     <h3> Afstand: <span>0km</span></h3>
                     <h3> Datum: <span>ddmmyy</span></h3>
                 </div>
@@ -82,7 +80,6 @@
                 </div>
                 <div class="description">
                     <h2>Plantennaam</h2>
-                    <br>
                     <h3> Afstand: <span>0km</span></h3>
                     <h3> Datum: <span>ddmmyy</span></h3>
                 </div>
@@ -94,7 +91,6 @@
                 </div>  
                 <div class="description">
                     <h2>Plantennaam</h2>
-                    <br>
                     <h3> Afstand: <span>0km</span></h3>
                     <h3> Datum: <span>ddmmyy</span></h3>
                 </div>
@@ -106,7 +102,6 @@
                 </div>
                 <div class="description">
                     <h2>Plantennaam</h2>
-                    <br>
                     <h3> Afstand: <span>0km</span></h3>
                     <h3> Datum: <span>ddmmyy</span></h3>
                 </div>
@@ -118,7 +113,6 @@
                 </div>
                 <div class="description">
                     <h2>Plantennaam</h2>
-                    <br>
                     <h3> Afstand: <span>0km</span></h3>
                     <h3> Datum: <span>ddmmyy</span></h3>
                 </div>

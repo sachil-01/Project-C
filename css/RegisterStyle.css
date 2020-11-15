@@ -175,3 +175,13 @@ html {
 	margin-right: auto;
 	max-width: 40%;
 }
+
+.footer img{
+    margin-left: auto;
+    margin-right: auto;
+	width: 100%;
+	
+	/* place footer at the bottom */
+	position: fixed;
+	bottom: 0px;
+}
