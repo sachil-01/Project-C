@@ -26,26 +26,26 @@ if (isset($_SESSION['userId'])) {
             
             <label>Hoeveelheid water nodig:</label><br>
             <label>
-                <input type="radio" id="weinig" name="water" value="weinig">
+                <input type="radio" id="weinig" name="water" value="1">
                 <img src="images/weinigwater.png">
             </label>
             
             <label>
-                <input type="radio" id="gemiddeld" name="water" value="gemiddeld">
+                <input type="radio" id="gemiddeld" name="water" value="2">
                 <img src="images/gemiddeldwater.png">
             </label>   
                      
             <label>
-                <input type="radio" id="veel" name="water" value="veel">
+                <input type="radio" id="veel" name="water" value="3">
                 <img src="images/veelwater.png">
             </label>
             
             <label>
-                <input type="radio" id="none" name="water" value="none">
+                <input type="radio" id="none" name="water" value="0">
                 <img src="images/weetniet.png">
             </label>
             
-            <label for="desc">Beschrijving</label><br>
+            <br><label for="desc">Beschrijving</label><br>
             <textarea id="desc" name="desc" rows="5" cols="50"></textarea><br>
             Selecteer een foto (max 1MB):
             <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
