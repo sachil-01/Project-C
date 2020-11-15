@@ -73,7 +73,7 @@ nav {
     justify-content: space-around;
     align-items: center;
     min-height: 8vh;
-    background-color: var(--clr-groen);
+    background-color: var(--clr-wit);
     transition: transform 0.3s ease, opacity 0.1s ease 0.1s;
 }
 
@@ -88,18 +88,18 @@ nav {
 }
 
 .nav-links a{
-    color: var(--clr-wit);
+    color: var(--clr-groen);
     text-decoration: none;
     letter-spacing: 2px;
-    font-size: 14px;
+    font-size: 0.8vw;
     font-family: 'Montserrat', serif;
-    font-weight: 300;
+    font-weight: bold;
     text-transform: uppercase;
 }
 
 .nav-links a:hover{
     border: none;
-    border-bottom: 2px solid #FFFFFF;
+    border-bottom: 2px solid var(--clr-groen);
     outline: none;
 }
 
@@ -108,10 +108,10 @@ nav {
     height: 25px;
     border-radius: 5px;
     border: none;
-    color: var(--clr-groen);
-    background-color: var(--clr-wit);
+    color: var(--clr-wit);
+    background-color: var(--clr-groen);
     letter-spacing: 2px;
-    font-size: 14px;
+    font-size: 1vw;
     font-family: 'Montserrat', serif;
     font-weight: 900;
     text-transform: uppercase;
@@ -119,7 +119,7 @@ nav {
 }
 
 .logout_button:hover{
-    background-color: whitesmoke;
+    background-color: #1b701b;
 }
 
 .nav-title {
@@ -131,13 +131,13 @@ nav {
 }
 
 .logo {
-    color:var(--clr-wit);
+    color:var(--clr-groen);
     text-decoration: none;
 }
 
 .logo img{
     display: inline-block;
-    width: 55px;
+    width: 2.5vw;
     -webkit-transition: -webkit-transform 2s;
 }
 
@@ -150,6 +150,7 @@ nav {
     vertical-align: 30%;
     padding-left: 5px;
     display: inline-block;
+    font-size: 2.0vw;
 }
 
 .searchbar-div {
@@ -178,7 +179,7 @@ nav {
 }
 
 .searchbar-input {
-    font-size: 18px;
+    font-size: 1vw;
     color: #707c75;
     height: 100%;
     padding-left: 30px;
@@ -216,7 +217,7 @@ nav {
 .burger div {
     width: 25px;
     height: 3px;
-    background-color: var(--clr-wit);
+    background-color: var(--clr-groen);
     margin: 5px;
     transition: all 0.3s ease;
 }
@@ -232,15 +233,25 @@ nav {
     body{
         overflow-x: hidden;
     }
+
+    .logo h2 {
+        display: none;
+    }
+
+    .logo img{
+        width: 5vw;
+    }
+
+    /* burger menu background */
     .nav-links{
         position: absolute;
         right: 0px;
         height: 60vh;
         top: 6vh;
-        background-color: var(--clr-groen); opacity: 0.95;
+        background-color: var(--clr-groen); opacity: 0.90;
         display: none;
         flex-direction: column;
-        align-items: center;
+        text-align: center;
         z-index: 9999;
         width: 50%;
 
@@ -250,8 +261,51 @@ nav {
     .nav-links li{
         opacity: 0;
     }
+
+    .nav-links a{
+        color: var(--clr-wit);
+        font-size: 1.5vw;
+    }
+
+    .nav-links a:hover{
+        border-bottom: 0.2vw solid var(--clr-wit);
+    }
+
     .burger{
         display: block;
+    }
+
+    .welcome-div h1, .welcome-div h2{
+        font-size: 3.5vw;
+    }
+    
+    .welcome-div p{
+        font-size: 2vw;
+    }
+
+    .welcome-div button{
+        font-size: 2vw;
+        border: 2vw solid  #4b9600;
+        border-radius: 2vw;
+    }
+
+    .Explore-btn:hover{
+        background-color: #1b701b;
+        border: 2vw solid  #1b701b;
+    }
+
+    .slider{
+        display: none;
+    }
+
+    /* Advertisement plant name */
+    .description h2{
+        font-size: 4vw;
+    }
+
+    /* Advertisement description headers and description details */
+    .description h3, .description h3 span{
+        font-size: 3vw;
     }
 }
 
@@ -286,7 +340,6 @@ nav {
 }
 
 /* Advertenties home pagina */
-
 .container {
     background-color: var(--clr-wit);
     position: relative;
@@ -295,22 +348,76 @@ nav {
 }
 
 .welcome-div{
-    margin: 50px;
-    margin-bottom: 0px;
-    padding-left: 100px;
-    padding-right: 100px;
+    border-spacing: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.welcome-div td{
+    word-wrap: break-word;
+    max-width: 600px;
+    text-align: center;
 }
 
 .welcome-div h1, .welcome-div h2, .welcome-div p{
     text-align: center;
+    padding-left: 50px;
+    padding-right: 50px;
     color: var(--clr-groen);
 }
+@media screen and (min-width:1100px){
+    .welcome-div h1, .welcome-div h2{
+        font-size: 1.5vw;
+    }
 
-.welcome-bg img{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 85%;
+    .welcome-div p{
+        font-size: 1vw;
+    }
+
+    .welcome-bg img{
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    .welcome-div button{
+        font-size: 1vw;
+        border: 1vw solid #4b9600;
+        border-radius: 1vw;
+    }
+
+    .Explore-btn:hover{
+        background-color: #1b701b;
+        border: 1vw solid  #1b701b;
+    }
+
+    /* Advertisement plant name */
+    .description h2{
+        font-size: 2vw;
+    }
+
+    /* Advertisement description headers and description details */
+    .description h3, .description h3 span{
+        font-size: 1vw;
+    }
+}
+
+.welcome-div button{
+    outline: none;
+    background-color: #4b9600;
+    color: var(--clr-wit);
+    letter-spacing: 2px;
+    font-family: 'Lora', serif;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.slider{
+    border: 0.5vw solid var(--clr-groen);
+    border-radius: 10px;
+    max-width: 50vw;
+    margin: auto;
 }
 
 /* Recent advertisements */
@@ -327,8 +434,9 @@ nav {
 .plant {
     margin: 3em;
     position: relative;
-    border-bottom: 3px solid var(--clr-groen);
-    max-width: 500px;
+    border-bottom: 0.25vw solid var(--clr-groen);
+    width: 50vh;
+    min-width: 20vh;
     overflow: hidden;
     box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.3)
 }
@@ -358,6 +466,7 @@ nav {
 
 /* Recent advertisements header */
 .gallery h1{
+    font-size: 3vw;
     text-align: center;
     margin-top: 5%;
     margin-bottom: 5%;
@@ -372,51 +481,45 @@ nav {
 
 /* Advertisement description headers and description details */
 .description h3{
-    padding-left: 10%;  
     display: inline-block;
+    margin-top: 10px;
 }
 
 .description h3 span{
     font-weight: normal;
+    margin-top: 10px;
 }
 
 /* Advertisement discription container*/
 .description{
     padding-bottom: 3%;
+    background-color: var(--clr-wit);
+    text-align: center;
 }
 
 .fa-search {
     color: var(--clr-wit);
 }
 
+@media screen and (max-width: 768px){    
+    .welcome-div td{
+        float: left;
+    }
+
+    /* space between advertisement posts */
+    .plant {
+        margin: 1em;
+    }
+}
+
+.footer img{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
 /* Profile page */
 
 .registerbox .ppbutton {
     margin-bottom: 1.5em;
-}
-
-/* Footer */
-
-.footer {
-    height: 100px;
-    margin-top: 70px;
-    background-color: var(--clr-groen);
-    color: var(--clr-wit);
-}
-
-@media screen and (max-width: 768px){
-    .nav-title {
-        display: none;
-    }
-    
-    .logo h2 {
-        display: none;
-    }
-}
-
-/* Changes the position of the advertisement description */
-
-@media screen and (max-width: 600px){
-    /* Advertisement discription */
-
 }

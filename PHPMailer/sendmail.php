@@ -10,7 +10,6 @@
     // Load Composer's autoloader
     require 'vendor/autoload.php';
 
-    $verificationcode = $_SESSION['code'];
     $username = $_SESSION['username'];
     $email = $_SESSION['mail'];
 
@@ -34,10 +33,9 @@
     $mail->isHTML(true);                                                  // Set email format to HTML
     $mail->Subject = 'Email verificatie';
 
-    //Change verification link when website is live!
     $mail->Body = "Beste $username,<br><br>
                    Om uw registratie te voltooien kunt u op de onderstaande link klikken.<br>
-                   Bevestig je account: <a href='https://www.roy-van-der-lee.nl/fleurtop/verify.php?verificationcode=$verificationcode'>Registreer account</a><br><br>
+                   Bevestig je account: <a href='https://www.roy-van-der-lee.nl/fleurtop/verify.php?accountverification=$username'>Registreer account</a><br><br>
                    Met vriendelijk groet,<br>
                    Fleurt Op";
 

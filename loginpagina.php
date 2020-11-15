@@ -20,7 +20,7 @@
             }
         }
     ?>
-    <div class="loginbox" style="text-align:center">
+    <div class="loginbox">
         <!-- Formulier om in te loggen -->
         <?php
         if (isset($_SESSION['userId'])) {
@@ -42,7 +42,6 @@
         </form>';
         }
         ?>
-
     </div>
 </body>
 

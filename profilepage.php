@@ -23,6 +23,10 @@
             $achternaam = $row["lastName"];
             $emailadres = $row["emailUsers"];
             $gebruikersnaam = $row["usernameUsers"];
+            $straat = $row['straatNaam'];
+            $huisnummer = $row['huisNummer'];
+            $toevoeging = $row['toevoeging'];
+            $postcode = $row['postcode'];
         }
         if (isset($_GET['error'])) {
             if ($_GET['error'] == "emptyfields") {
@@ -65,6 +69,15 @@
             <input type="text" name="firstName" value="<?php echo $voornaam; ?>" required>
             <p>Achternaam</p>
             <input type="text" name="lastName" value="<?php echo $achternaam; ?>" required>
+            <p>Straatnaam</p>
+            <input type="text" name="straatNaam" value="<?php echo $straat; ?>" required>
+            <p>Nummer</p>
+            <input type="number" name="huisNummer" value="<?php echo $huisnummer; ?>" required>
+            <p>Toevoeging</p>
+            <input type="text" name="toevoeging" value="<?php echo $toevoeging; ?>">
+            <p>Postcode</p>
+            <input type="text" name="postcode" value="<?php echo $postcode; ?>" required>
+        <br>
             <button class="ppbutton" type="submit" name="update-submit">Update</button>
         </form>
     </div>    
