@@ -523,3 +523,30 @@ nav {
 .registerbox .ppbutton {
     margin-bottom: 1.5em;
 }
+
+/* Slider home page */
+.tns-outer {
+  position: relative;
+}
+[data-controls] {
+  border: 0;
+  padding: 0;
+  font-size: 30px;
+  position: absolute;
+  top: 50%;
+  margin-top: -18px;
+  z-index: 1;
+  background: transparent;
+}
+[data-controls="prev"] {
+  left: 20px;
+}
+[data-controls="next"] {
+  right: 20px;
+}
+
+
+.my-container > div {
+  padding: 100px 0;
+  text-align: center;
+}
