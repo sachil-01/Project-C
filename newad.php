@@ -7,11 +7,13 @@ if (isset($_SESSION['userId'])) {
     echo '
     <div class="adform">
         <h2>Nieuwe advertentie</h2><br>
-        <form action="upload.php" method="post" enctype="multipart/form-data" target="adpagina">
+        <form action="newad.inc.php" method="post" enctype="multipart/form-data" target="adpagina">
             <label for="pname">Plantnaam:</label><br>
             <input type="text" id="pname" name="pname"><br><br>
-            <label for="pname">Plantensoort:</label><br>
+            
+            <label for="psoort">Plantensoort:</label><br>
             <input type="text" id="psoort" name="psoort"><br><br>
+            
             <label>Type advertentie:</label><br>
             <input type="radio" id="stekje" name="type" value="stekje">
             <label for="stekje">Stekje</label><br>
@@ -21,15 +23,28 @@ if (isset($_SESSION['userId'])) {
             <label for="kiemplant">Kiemplant</label><br>
             <input type="radio" id="none" name="type" value="none">
             <label for="none">Weet ik niet</label><br><br>
+            
             <label>Hoeveelheid water nodig:</label><br>
-            <input type="radio" id="weinig" name="water" value="weinig">
-            <label for="stekje">Weinig</label><br>
-            <input type="radio" id="gemiddeld" name="water" value="gemiddeld">
-            <label for="zaad">Gemiddeld</label><br>
-            <input type="radio" id="veel" name="water" value="veel">
-            <label for="kiemplant">Veel</label><br>
-            <input type="radio" id="none" name="water" value="none">
-            <label for="none">Weet ik niet</label><br><br>
+            <label>
+                <input type="radio" id="weinig" name="water" value="weinig">
+                <img src="images/weinigwater.png">
+            </label>
+            
+            <label>
+                <input type="radio" id="gemiddeld" name="water" value="gemiddeld">
+                <img src="images/gemiddeldwater.png">
+            </label>   
+                     
+            <label>
+                <input type="radio" id="veel" name="water" value="veel">
+                <img src="images/veelwater.png">
+            </label>
+            
+            <label>
+                <input type="radio" id="none" name="water" value="none">
+                <img src="images/weetniet.png">
+            </label>
+            
             <label for="desc">Beschrijving</label><br>
             <textarea id="desc" name="desc" rows="5" cols="50"></textarea><br>
             Selecteer een foto (max 1MB):
