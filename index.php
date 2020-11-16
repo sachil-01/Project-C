@@ -15,14 +15,52 @@
                     <button class="Explore-btn">Ontdek meer</button>
                 </td>
                 <td>
-                <div class="my-slider">
-                    <div><img src="images/plant1.jpg" alt=""></div>
-                    <div><img src="images/plant2.jpg" alt=""></div>
-                    <div><img src="images/plant3.jpg" alt=""></div>
-                        <div><img src="images/plant4.jpg" alt=""></div>
-                        <div><img src="images/plant3.jpg" alt=""></div>
-                        <div><img src="images/plant1.jpg" alt=""></div>
-                        <div><img src="images/plant2.jpg" alt=""></div>
+                <div class="gallery">
+                    <div class="img-area">
+                        <div>
+                            <div class="adImage">
+                                <img src="images/plant1.jpg" alt="">
+                            </div>
+                            <div class="description">
+                                <h2>plantennaam</h2>
+                                <h3> Afstand: <span>0km</span></h3>
+                                <h3> Datum: <span>ddmmyy</span></h3>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="adImage">
+                                <img src="images/plant2.jpg" alt="">
+                            </div>
+                            <div class="description">
+                                <h2>plantennaam</h2>
+                                <h3> Afstand: <span>0km</span></h3>
+                                <h3> Datum: <span>ddmmyy</span></h3>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="adImage">
+                                <img src="images/plant3.jpg" alt="">
+                            </div>
+                            <div class="description">
+                                <h2>plantennaam</h2>
+                                <h3> Afstand: <span>0km</span></h3>
+                                <h3> Datum: <span>ddmmyy</span></h3>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="adImage">
+                                <img src="images/plant4.jpg" alt="">
+                            </div>
+                            <div class="description">
+                                <h2>plantennaam</h2>
+                                <h3> Afstand: <span>0km</span></h3>
+                                <h3> Datum: <span>ddmmyy</span></h3>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 </td>
             </tr>

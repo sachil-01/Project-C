@@ -8,9 +8,11 @@ var navSlide = () => {
 
 	window.onload = function() {
 		var slider = tns({
-				container: '.my-slider',
+				container: '.img-area',
 				autoplay: true,
-				controlsText: ['<span class="fas fa-chevron-circle-left"></span>', '<span class="fas fa-chevron-circle-right"></span>'],
+				autoplayButtonOutput: false,
+				// autoplayText: ['<span class="fas fa-play"></span>', '<span class="fas fa-pause"></span>'],
+				controlsText: ['<span class="fas fa-arrow-left"></span>', '<span class="fas fa-arrow-right"></span>'],
 				items: 1,
 				slideBy: 'page',
 				nav: false,
