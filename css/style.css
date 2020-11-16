@@ -290,7 +290,7 @@ nav {
 
     .Explore-btn:hover{
         background-color: #1b701b;
-        border: 2vw solid  #1b701b;
+        border-color: #1b701b;
     }
 
     .slider{
