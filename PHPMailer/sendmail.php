@@ -15,9 +15,10 @@
 
     $username = $_SESSION['username'];
     $email = $_SESSION['mail'];
+    $key = strlen($username);
 
     // Encrypt username with length of username as key
-    $encrypted_txt = encrypt_decrypt('encrypt', $username, strlen($username));
+    $encrypted_txt = encrypt_decrypt('encrypt', $username, $key);
 
     $mail = new PHPMailer();
 
@@ -41,7 +42,7 @@
 
     $mail->Body = "Beste $username,<br><br>
                    Om uw registratie te voltooien kunt u op de onderstaande link klikken.<br>
-                   Bevestig je account: <a href='https://www.roy-van-der-lee.nl/fleurtop/verify.php?accountverification=$encrypted_txt'>Registreer account</a><br><br>
+                   Bevestig je account: <a href='https://www.roy-van-der-lee.nl/fleurtop/verify.php?accountverification=$encrypted_txt&key=$key'>Registreer account</a><br><br>
                    Met vriendelijk groet,<br>
                    Fleurt Op";
 
