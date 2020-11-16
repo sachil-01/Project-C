@@ -16,15 +16,21 @@
                 if(isset($_GET['verificationcode'])){
                     //proces verification
                     $accountverification = $_GET['accountverification'];
+
+                    // Include decryption function
+                    include('encrypt_decrypt.php');
+
+                    // Decrypt username with length of username as key
+                    $decrypted_txt = encrypt_decrypt('decrypt', $accountverification, strlen($accountverification));
                     
                     //change 2nd and 3rd parameter to 'root' when working local!
                     $mysqli = mysqli_connect('localhost', 'royvan1q_user_dekas', 'Bossex123!', 'royvan1q_websitedekas');
                 
-                    $resultSet = $mysqli->query("SELECT verified, usernameUsers FROM users WHERE verified = 0 AND usernameUsers = '$accountverification' LIMIT 1");
+                    $resultSet = $mysqli->query("SELECT verified, usernameUsers FROM users WHERE verified = 0 AND usernameUsers = '$decrypted_txt' LIMIT 1");
 
                     if($resultSet->num_rows == 1){
                         //validate the email
-                        $update = $mysqli->query("UPDATE users SET verified = 1 WHERE usernameUsers = '$accountverification' LIMIT 1");
+                        $update = $mysqli->query("UPDATE users SET verified = 1 WHERE usernameUsers = '$decrypted_txt' LIMIT 1");
 
                         if($update){
                             echo '<div class="oops">

@@ -2,7 +2,7 @@
 <html lang="en">
 <body>
     <div class="footer">
-        <img src="images/footer.jpg" alt="">   
+        <img src="images/footer.png" alt="">   
     </div>
     
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
