@@ -16,7 +16,7 @@
                 </td>
                 <td>
                 <div class="gallery">
-                    <div class="img-area">
+                    <div class="img-area slidertns">
                         <div>
                             <div class="adImage">
                                 <img src="images/plant1.jpg" alt="">

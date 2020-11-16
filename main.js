@@ -8,7 +8,7 @@ var navSlide = () => {
 
 	window.onload = function() {
 		var slider = tns({
-				container: '.img-area',
+				container: '.slidertns',
 				autoplay: true,
 				autoplayButtonOutput: false,
 				// autoplayText: ['<span class="fas fa-play"></span>', '<span class="fas fa-pause"></span>'],
