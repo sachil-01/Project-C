@@ -15,9 +15,15 @@
                     <button class="Explore-btn">Ontdek meer</button>
                 </td>
                 <td>
-                    <div class = "slider">
-                        <img src="images/Background.png" alt="">
-                    </div>
+                <div class="my-slider">
+                    <div><img src="images/plant1.jpg" alt=""></div>
+                    <div><img src="images/plant2.jpg" alt=""></div>
+                    <div><img src="images/plant3.jpg" alt=""></div>
+                        <div><img src="images/plant4.jpg" alt=""></div>
+                        <div><img src="images/plant3.jpg" alt=""></div>
+                        <div><img src="images/plant1.jpg" alt=""></div>
+                        <div><img src="images/plant2.jpg" alt=""></div>
+                </div>
                 </td>
             </tr>
         </table>

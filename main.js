@@ -3,6 +3,21 @@ var navSlide = () => {
 	const nav = document.querySelector('.nav-links');
 	const navLinks = document.querySelectorAll('.nav-links li');
 	let menuOpen = false;
+
+	
+
+	window.onload = function() {
+		var slider = tns({
+				container: '.my-slider',
+				autoplay: true,
+				controlsText: ['<span class="fas fa-chevron-circle-left"></span>', '<span class="fas fa-chevron-circle-right"></span>'],
+				items: 1,
+				slideBy: 'page',
+				nav: false,
+				mouseDrag: true
+		});
+	}
+
 	burger.addEventListener('click', ()=> {
 
 		// Animate links

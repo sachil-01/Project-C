@@ -5,7 +5,7 @@
 <head>
     <title>Register Form</title>
     <link rel="stylesheet" type="text/css" href="css\RegisterStyle.css">
-    <link rel="stylesheet" type="text/css" href="css\LoginStyle.css"
+    <link rel="stylesheet" type="text/css" href="css\LoginStyle.css">
 </head>
     <!-- Error berichten // later vervangen voor html ingebouwde messages -->
     <div class="wrapper">

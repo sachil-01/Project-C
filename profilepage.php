@@ -14,19 +14,19 @@
 
     $id = $_SESSION['userId'];
             
-    $sql = $conn->query("SELECT * FROM users WHERE idUsers='$id'") or die($conn->error);
+    $sql = $conn->query("SELECT * FROM User WHERE idUser='$id'") or die($conn->error);
 
     
         /* fetch associative array */
         while ($row = $sql->fetch_assoc()) {
             $voornaam = $row["firstName"];
             $achternaam = $row["lastName"];
-            $emailadres = $row["emailUsers"];
-            $gebruikersnaam = $row["usernameUsers"];
-            $straat = $row['straatNaam'];
-            $huisnummer = $row['huisNummer'];
-            $toevoeging = $row['toevoeging'];
-            $postcode = $row['postcode'];
+            $emailadres = $row["emailUser"];
+            $gebruikersnaam = $row["usernameUser"];
+            $straat = $row["streetName"];
+            $huisnummer = $row["houseNumber"];
+            $toevoeging = $row["houseNumberExtra"];
+            $postcode = $row["postalCode"];
         }
         if (isset($_GET['error'])) {
             if ($_GET['error'] == "emptyfields") {

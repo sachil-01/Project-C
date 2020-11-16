@@ -34,7 +34,7 @@ if (isset($_POST['update-submit'])) {
         exit();
     }
 
-    $sql = "SELECT usernameUsers FROM users WHERE usernameUsers=? AND idUsers!=$id";
+    $sql = "SELECT usernameUser FROM User WHERE usernameUser=? AND idUser!=$id";
         $statement = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($statement, $sql)) {
             header("Location: ../profilepage.php?error=sqlerror");
@@ -50,7 +50,7 @@ if (isset($_POST['update-submit'])) {
                 exit();
             }
             else {
-                $sql = "SELECT emailUsers FROM users WHERE emailUsers=? AND idUsers!=$id";
+                $sql = "SELECT emailUser FROM User WHERE emailUser=? AND idUser!=$id";
                 $statement = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($statement, $sql)) {
                     header("Location: ../profilepage.php?error=sqlerror");
@@ -66,7 +66,7 @@ if (isset($_POST['update-submit'])) {
                         exit();
                     }
             else {
-                $sql = "UPDATE users SET usernameUsers=?, emailUsers=?, firstName=?, lastName=?, straatNaam=?, huisNummer=?, toevoeging=?, postcode=?  WHERE idUsers='$id'";
+                $sql = "UPDATE User SET usernameUser=?, emailUser=?, firstName=?, lastName=?, streetName=?, houseNumber=?, houseNumberExtra=?, postalCode=?  WHERE idUser='$id'";
                 $statement = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($statement, $sql)) {
                     header("Location: ../profilepage.php?error=sqlerror");
