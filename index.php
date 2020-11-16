@@ -68,19 +68,19 @@
     </div>
 
     <div class="welcome-bg">
-        <img src="images/Background2.jpg" alt="">   
+        <img src="images/Background.png" alt="">   
     </div>
 
     <?php 
         // Bericht zodat je kan zien of het werkt, later weghalen want is lelijk
-            if (isset($_SESSION['userId'])) {
-                // echo "<p>Hoi " . $_SESSION['userId'] . "</p>" ;
-            }
-            else {
+        if (isset($_SESSION['userId'])) {
+            // echo "<p>Hoi " . $_SESSION['userId'] . "</p>" ;
+        }
+        else {
 
-            }
+        }
 
-        ?>
+    ?>
 
     <!-- <div class="searchbar-div">
         <div class="searchbar-margin">

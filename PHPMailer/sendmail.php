@@ -10,13 +10,19 @@
     // Load Composer's autoloader
     require 'vendor/autoload.php';
 
+    // Include encryption function
+    include('encrypt_decrypt.php');
+
     $username = $_SESSION['username'];
     $email = $_SESSION['mail'];
+
+    // Encrypt username with length of username as key
+    $encrypted_txt = encrypt_decrypt('encrypt', $username, strlen($username));
 
     $mail = new PHPMailer();
 
     //Server settings
-    $mail->SMTPDebug = false;                           // Enable verbose debug output
+    $mail->SMTPDebug = false;                                           // Enable verbose debug output
     $mail->isSMTP();                                                    // Send using SMTP
     $mail->Host       = 'smtp.gmail.com';                               // Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                            // Enable SMTP authentication
@@ -35,7 +41,7 @@
 
     $mail->Body = "Beste $username,<br><br>
                    Om uw registratie te voltooien kunt u op de onderstaande link klikken.<br>
-                   Bevestig je account: <a href='https://www.roy-van-der-lee.nl/fleurtop/verify.php?accountverification=$username'>Registreer account</a><br><br>
+                   Bevestig je account: <a href='https://www.roy-van-der-lee.nl/fleurtop/verify.php?accountverification=$encrypted_txt'>Registreer account</a><br><br>
                    Met vriendelijk groet,<br>
                    Fleurt Op";
 
