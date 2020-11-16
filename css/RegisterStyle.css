@@ -4,7 +4,7 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Grey background of login form */
+/* Grey background of register form */
 .registerbox{
 	width: 700px;
 	height: 700px;
@@ -175,4 +175,3 @@ html {
 	margin-right: auto;
 	max-width: 40%;
 }
-

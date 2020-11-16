@@ -61,22 +61,26 @@
     <div class="ppform">
         <form action="includes/update.inc.php" method="post">
             <h1>Profiel pagina</h1>
-            <p>Gebruikersnaam</p>
-            <input type="text" name="uid" value="<?php echo $gebruikersnaam; ?>" required>
-            <p>E-mail</p>
-            <input type="text" name="mail" value="<?php echo $emailadres; ?>" required>
-            <p>Voornaam</p>
-            <input type="text" name="firstName" value="<?php echo $voornaam; ?>" required>
-            <p>Achternaam</p>
-            <input type="text" name="lastName" value="<?php echo $achternaam; ?>" required>
-            <p>Straatnaam</p>
-            <input type="text" name="straatNaam" value="<?php echo $straat; ?>" required>
-            <p>Nummer</p>
-            <input type="number" name="huisNummer" value="<?php echo $huisnummer; ?>" required>
-            <p>Toevoeging</p>
-            <input type="text" name="toevoeging" value="<?php echo $toevoeging; ?>">
-            <p>Postcode</p>
-            <input type="text" name="postcode" value="<?php echo $postcode; ?>" required>
+            <div class="registerpart1">
+                <p>Gebruikersnaam</p>
+                <input type="text" name="uid" value="<?php echo $gebruikersnaam; ?>" required>
+                <p>E-mail</p>
+                <input type="text" name="mail" value="<?php echo $emailadres; ?>" required>
+                <p>Voornaam</p>
+                <input type="text" name="firstName" value="<?php echo $voornaam; ?>" required>
+                <p>Achternaam</p>
+                <input type="text" name="lastName" value="<?php echo $achternaam; ?>" required>
+            </div>
+            <div class="registerpart2">
+                <p>Straatnaam</p>
+                <input type="text" name="straatNaam" value="<?php echo $straat; ?>" required>
+                <p>Nummer</p>
+                <input type="number" name="huisNummer" value="<?php echo $huisnummer; ?>" required>
+                <p>Toevoeging</p>
+                <input type="text" name="toevoeging" value="<?php echo $toevoeging; ?>">
+                <p>Postcode</p>
+                <input type="text" name="postcode" value="<?php echo $postcode; ?>" required>
+            </div>
         <br>
             <button class="ppbutton" type="submit" name="update-submit">Update</button>
         </form>

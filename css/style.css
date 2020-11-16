@@ -104,9 +104,8 @@ nav {
 }
 
 .logout_button {
-    width: 120px;
-    height: 25px;
-    border-radius: 5px;
+    height: 3vh;
+    border-radius: 2vw;
     border: none;
     color: var(--clr-wit);
     background-color: var(--clr-groen);
@@ -400,6 +399,10 @@ nav {
     /* Advertisement description headers and description details */
     .description h3, .description h3 span{
         font-size: 1vw;
+    }
+
+    .logout_button {
+        width: 6vw;
     }
 }
 
