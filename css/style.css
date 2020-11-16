@@ -527,6 +527,8 @@ nav {
 /* Slider home page */
 .tns-outer {
   position: relative;
+  border: 5px solid var(--clr-groen);
+  border-radius: 10px;
 }
 [data-controls] {
   border: 0;
