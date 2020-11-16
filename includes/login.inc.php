@@ -13,7 +13,7 @@ if (isset($_POST['login-submit'])) {
         exit();
     }
     else {
-        $sql = "SELECT * FROM users WHERE usernameUsers=? OR emailUsers=?;";
+        $sql = "SELECT * FROM User WHERE usernameUser=? OR emailUser=?;";
         $statement = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($statement, $sql)) {
             header("Location: ../loginpagina.php?error=sqlerror");
@@ -24,7 +24,7 @@ if (isset($_POST['login-submit'])) {
             mysqli_stmt_execute($statement);
             $result = mysqli_stmt_get_result($statement);
             if ($row = mysqli_fetch_assoc($result)) {
-                $passwordCheck = password_verify($password, $row['passUsers']);
+                $passwordCheck = password_verify($password, $row['passUser']);
                 if ($passwordCheck == false) {
                     header("Location: ../loginpagina.php?error=wrongpass");
                     exit();
@@ -35,8 +35,8 @@ if (isset($_POST['login-submit'])) {
                     if($verified == 1){
                         // Als je emailadres wilt gebruiken kan je die hier toevoegen
                         session_start();
-                        $_SESSION['userId'] = $row['idUsers'];
-                        $_SESSION['userUid'] = $row['usernameUsers'];
+                        $_SESSION['userId'] = $row['idUser'];
+                        $_SESSION['userUid'] = $row['usernameUser'];
 
                         header("Location: ../index.php?login=succes");
                         exit();

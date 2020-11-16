@@ -37,7 +37,7 @@ if (isset($_POST['signup-submit'])) {
     }
     else {
 
-        $sql = "SELECT usernameUsers FROM users WHERE usernameUsers=?";
+        $sql = "SELECT usernameUser FROM User WHERE usernameUser=?";
         $statement = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($statement, $sql)) {
             header("Location: ../register.php?error=sqlerror");
@@ -53,7 +53,7 @@ if (isset($_POST['signup-submit'])) {
                 exit();
             }
             else {
-                $sql = "INSERT INTO users (usernameUsers, emailUsers, passUsers, firstName, lastName, straatNaam, huisNummer, toevoeging, postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO User (usernameUser, emailUser, passUser, firstName, lastName, streetName, houseNumber, houseNumberExtra, postalCode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 $statement = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($statement, $sql)) {
                     header("Location: ../register.php?error=sqlerror");
