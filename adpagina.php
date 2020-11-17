@@ -10,6 +10,17 @@
 <body>
     <div class="gallery">
         <h1>Alle aanbiedingen</h1>
+
+        <div class="searchbar-div">
+            <div class="searchbar-margin">
+                <div class="searchbar-main">
+                    <div class="searchbar-main-content">
+                        <input type="search" class="searchbar-input" onfocus="this.value=''" placeholder="Zoeken...">
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="img-area">
             <div class="plant">
                 <div class="adImage">

@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css\LoginStyle.css">
 </head>
     <!-- Error berichten // later vervangen voor html ingebouwde messages -->
-   <div class="wrapper">
+    <div class="wrapper">
         <?php
             if (isset($_GET['error'])) {
                 if ($_GET['error'] == "emptyfields") {
@@ -67,7 +67,7 @@
             </form>
         </div>
         <div class="push"></div>
-   </div>
+    </div>
 <?php
     include('footer.php')
 ?>

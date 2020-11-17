@@ -83,7 +83,7 @@ html {
 }
 
 /* Login button */
-.registerbox button{
+.registerbox button, .thankyou button{
 	border: none;
 	outline: none;
 	width: 260px;
@@ -96,7 +96,7 @@ html {
 }
 
 /* Button effect */
-.registerbox button:hover
+.registerbox button:hover, .thankyou button:hover
 {
 	cursor: pointer;
 	background: #228B22;
