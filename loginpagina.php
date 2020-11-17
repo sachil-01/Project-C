@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css\LoginStyle.css">
 </head>
 <body>
-<!--    <div class="wrapper">-->
+   <div class="wrapper">
         <?php
             if (isset($_GET['error'])) {
                 if ($_GET['error'] == "unverifiedaccount") {
@@ -44,7 +44,7 @@
             }
             ?>
         </div>
-<!--    </div>-->
+   </div>
 </body>
 
 <?php
