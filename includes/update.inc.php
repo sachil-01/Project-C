@@ -10,6 +10,11 @@ if (isset($_POST['update-submit'])) {
     $email = $_POST['mail'];
     $firstname = $_POST['firstName'];
     $lastname = $_POST['lastName'];
+    $straat = $_POST['straatNaam'];
+    $huisnummer = $_POST['huisNummer'];
+    $toevoeging = $_POST['toevoeging'];
+    $postcode = $_POST['postcode'];
+
 
     // error berichten in header
 
@@ -28,21 +33,56 @@ if (isset($_POST['update-submit'])) {
         header("Location: ../profilepage.php?error=invaliduid&mail=".$email);
         exit();
     }
+
+    $sql = "SELECT usernameUser FROM User WHERE usernameUser=? AND idUser!=$id";
+        $statement = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($statement, $sql)) {
+            header("Location: ../profilepage.php?error=sqlerror");
+            exit();
+        }
+        else {
+            mysqli_stmt_bind_param($statement, "s", $username);
+            mysqli_stmt_execute($statement);
+            mysqli_stmt_store_result($statement);
+            $resultCheck = mysqli_stmt_num_rows($statement);
+            if ($resultCheck > 0) {
+                header("Location: ../profilepage.php?error=usertaken&mail=".$email);
+                exit();
+            }
             else {
-                $sql = "UPDATE users SET usernameUsers=?, emailUsers=?, firstName=?, lastName=? WHERE idUsers='$id'";
+                $sql = "SELECT emailUser FROM User WHERE emailUser=? AND idUser!=$id";
                 $statement = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($statement, $sql)) {
                     header("Location: ../profilepage.php?error=sqlerror");
                     exit();
                 }
                 else {
+                    mysqli_stmt_bind_param($statement, "s", $email);
+                    mysqli_stmt_execute($statement);
+                    mysqli_stmt_store_result($statement);
+                    $resultCheck = mysqli_stmt_num_rows($statement);
+                    if ($resultCheck > 0) {
+                        header("Location: ../profilepage.php?error=emailtaken&mail=".$email);
+                        exit();
+                    }
+            else {
+                $sql = "UPDATE User SET usernameUser=?, emailUser=?, firstName=?, lastName=?, streetName=?, houseNumber=?, houseNumberExtra=?, postalCode=?  WHERE idUser='$id'";
+                $statement = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($statement, $sql)) {
+                    header("Location: ../profilepage.php?error=sqlerror");
+                    exit();
+                }                       
+                else {
 
-                    mysqli_stmt_bind_param($statement, "ssss", $username, $email, $firstname, $lastname);
+                    mysqli_stmt_bind_param($statement, "sssssiss", $username, $email, $firstname, $lastname, $straat, $huisnummer, $toevoeging, $postcode);
                     mysqli_stmt_execute($statement); 
                     header("Location: ../profilepage.php?update=success");
                     exit();
                 }
             }
+    }
+}
+        }
     mysqli_stmt_close($statement);
     mysqli_close($conn);
 }

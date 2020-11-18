@@ -10,14 +10,20 @@
     // Load Composer's autoloader
     require 'vendor/autoload.php';
 
-    $verificationcode = $_SESSION['code'];
+    // Include encryption function
+    include('encrypt_decrypt.php');
+
     $username = $_SESSION['username'];
     $email = $_SESSION['mail'];
+    $key = strlen($username);
+
+    // Encrypt username with length of username as key
+    $encrypted_txt = encrypt_decrypt('encrypt', $username, $key);
 
     $mail = new PHPMailer();
 
     //Server settings
-    $mail->SMTPDebug = false;                           // Enable verbose debug output
+    $mail->SMTPDebug = false;                                           // Enable verbose debug output
     $mail->isSMTP();                                                    // Send using SMTP
     $mail->Host       = 'smtp.gmail.com';                               // Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                            // Enable SMTP authentication
@@ -34,10 +40,9 @@
     $mail->isHTML(true);                                                  // Set email format to HTML
     $mail->Subject = 'Email verificatie';
 
-    //Change verification link when website is live!
     $mail->Body = "Beste $username,<br><br>
                    Om uw registratie te voltooien kunt u op de onderstaande link klikken.<br>
-                   Bevestig je account: <a href='https://www.roy-van-der-lee.nl/fleurtop/verify.php?verificationcode=$verificationcode'>Registreer account</a><br><br>
+                   Bevestig je account: <a href='https://www.roy-van-der-lee.nl/fleurtop/verify.php?accountverification=$encrypted_txt&key=$key'>Registreer account</a><br><br>
                    Met vriendelijk groet,<br>
                    Fleurt Op";
 
