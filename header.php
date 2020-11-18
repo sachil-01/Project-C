@@ -26,7 +26,7 @@
             <ul class="nav-links">
                     <li><a href="adpagina">Aanbod</a></li>
                     <li><a href="blogpage">Blog</a></li>
-                    <li><a href="#">Hoe werkt het?</a></li>
+                    <li><a href="hoewerkthet">Hoe werkt het?</a></li>
 <!--                    <li><input type="search" class="searchbar" onfocus="this.value=''" placeholder="Zoeken..."></i></li>-->
                     <?php
                         if (isset($_SESSION['userId'])) {
