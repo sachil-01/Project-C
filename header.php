@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/NewAdStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700|Montserrat:300" rel="stylesheet">
     <title>Fleurtop</title>
 </head>
@@ -18,16 +19,14 @@
             <a class="logo" href="index.php">
                 <h2 class="nav-title">Fleurt </h2>
                 &nbsp;
-                <img src="images/Logo.png" alt="">
+                <img src="images/Logo green2.png" alt="">
                 <h2 class="nav-title">p</h2>
             </a>
 
             <ul class="nav-links">
                     <li><a href="adpagina.php">Aanbod</a></li>
-
                     <li><a href="blogpage.php">Blog</a></li>
                     <li><a href="hoewerkthet.php">Hoe werkt het?</a></li>
-
 <!--                    <li><input type="search" class="searchbar" onfocus="this.value=''" placeholder="Zoeken..."></i></li>-->
                     <?php
                         if (isset($_SESSION['userId'])) {
