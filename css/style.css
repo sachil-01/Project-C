@@ -119,6 +119,7 @@ nav {
 
 .logout_button:hover{
     background-color: #1b701b;
+    cursor: pointer;
 }
 
 .nav-title {
@@ -411,6 +412,7 @@ nav {
     font-family: 'Lora', serif;
     font-weight: 300;
     text-transform: uppercase;
+    cursor: pointer;
 }
 
 /* Recent advertisements */
@@ -437,6 +439,7 @@ nav {
 .plant:hover{
     transition: transform .2s ease-in;
     transform: translateY(-20px);
+    cursor: pointer;
 }
 
 /* Advertisement image container */
@@ -545,6 +548,10 @@ nav {
 [data-controls="next"]:hover {
     border-color: #1b701b;
     background: #1b701b;
+}
+
+.tns-outer:hover{
+    cursor: pointer;
 }
 
 .my-container > div {

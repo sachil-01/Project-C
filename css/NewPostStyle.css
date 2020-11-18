@@ -1,0 +1,111 @@
+.blogpostform{
+    margin: 5% 20%;
+    background-color: rgba(49, 122, 18, 0.16);
+    padding: 2% 10%;
+    border-radius: 2vw;
+    line-height: 2;
+    font-family: 'Montserrat', serif;
+    font-weight: bold;
+    position: relative;
+}
+
+.blogpostform label{
+    font-weight: bold;
+}
+
+.blogpostform h2{
+    text-align: center;
+}
+
+.blogpostform input[type="text"], .blogpostform input[type="url"]{
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 1vw;
+    font-family: 'Montserrat', serif;
+    font-weight: bold;
+}
+
+.blogpostform input[type="file"]{
+    width: 100%;
+    outline: none;
+    border: none;
+    font-family: 'Montserrat', serif;
+    font-weight: bold;
+}
+
+/* Selectbar */
+.blogpostform select{
+    border: 2px solid green;
+    border-radius: 1vw;
+    outline: none;
+    color: green;
+}
+
+.blogpostform textarea{
+    width: 100%;
+    height: 20vw;
+    outline: none;
+}
+
+.newPostButton {
+    background-color: transparent;
+    border-radius: 1vw;
+    border:2px solid green;
+    display:inline-block;
+    cursor:pointer;
+    color: green;
+    font-family: 'Montserrat', serif;
+    font-size:17px;
+    font-weight:bold;
+    padding:10px 20px;
+    text-decoration:none;
+}
+.newPostButton:hover {
+    color: white;
+    background-color: green;
+    border-color:2px solid green;
+    font-weight: bold;
+}
+
+@media screen and (min-width:1100px){
+    .blogpostform input[type="text"], .blogpostform input[type="url"], .blogpostform select{
+        height: 3vw;
+        font-size: 1vw;
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+
+    .blogpostform textarea{
+        font-size: 1vw;
+    }
+
+    .blogpostform select{
+        height: 2vw;
+    }
+
+    .blogpostform h2{
+        font-size: 2vw;
+    }
+}
+
+@media screen and (max-width:1100px){
+    .blogpostform input[type="text"], .blogpostform input[type="url"], .blogpostform select{
+        height: 5vw;
+        font-size: 2vw;
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+
+    .blogpostform textarea{
+        font-size: 2vw;
+    }
+
+    .blogpostform select{
+        height: 4vw;
+    }
+
+    .blogpostform h2{
+        font-size: 4vw;
+    }
+}
