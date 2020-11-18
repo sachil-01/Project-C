@@ -4,18 +4,9 @@ session_start();
 if(isset($_POST["blog-submit"])) {
     require 'dbh.inc.php';
 
-    //Process the image that is uploaded by the user
-
-    // $target_dir = "uploads/";
-    // $target_file = $target_dir.basename($_FILES["bImage"]["name"]);
-    // $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-
-    // move_uploaded_file($_FILES["bImage"]["tmp_name"], $target_file);
-
     $blogtitle = $_POST["bname"];
     $blogcategory = $_POST["bcategory"];
     $blogdescription = $_POST["bdesc"];
-    $blogImage = $_POST["bImage"];
     $blogLink = $_POST['bLink'];
     $userId = $_SESSION['userId'];
 
@@ -45,20 +36,23 @@ if(isset($_POST["blog-submit"])) {
                 $blogId= $row['idPost'];
             }
     }
+    $blogImage = $_POST["files"];
 
     // Insert blogpost image into database
-    $sql = "INSERT INTO BlogImage(imgName, idBlog) VALUES (?, ?)";
-    $statement = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($statement, $sql)) {
-        header("Location: ../newpost.php?error=sqlerror");
-        exit();
+    foreach($blogImage as $fileName){
+        $sql = "INSERT INTO BlogImage(imgName, idBlog) VALUES (?, ?)";
+        $statement = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($statement, $sql)) {
+            header("Location: ../newpost.php?error=sqlerror");
+            exit();
+        }
+        else {
+            mysqli_stmt_bind_param($statement, "ss", pathinfo($fileName, PATHINFO_FILENAME), $blogId);
+            mysqli_stmt_execute($statement); 
+        }
     }
-    else {
-        mysqli_stmt_bind_param($statement, "ss", $blogImage, $blogId);
-        mysqli_stmt_execute($statement); 
-        header("Location: ../newpost.php?upload=success");
-        header("Location: ../blogpage.php");
-        exit();
-    }
+
+    header("Location: ../newpost.php?upload=success");
+    exit();
 }
 ?>
