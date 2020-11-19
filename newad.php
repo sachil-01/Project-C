@@ -26,23 +26,44 @@ if (isset($_SESSION['userId'])) {
             
             <label>Hoeveelheid water nodig:</label><br>
             <label>
-                <input type="radio" id="weinig" name="water" value="1">
-                <img src="images/weinigwater.png">
+                <input class="waterlight" type="radio" id="weinig" name="water" value="1">
+                <img class="waterlight" src="images/weinigwater.png">
             </label>
             
             <label>
-                <input type="radio" id="gemiddeld" name="water" value="2">
-                <img src="images/gemiddeldwater.png">
+                <input class="waterlight" type="radio" id="gemiddeld" name="water" value="2">
+                <img class="waterlight" src="images/gemiddeldwater.png">
             </label>   
                      
             <label>
-                <input type="radio" id="veel" name="water" value="3">
-                <img src="images/veelwater.png">
+                <input class="waterlight" type="radio" id="veel" name="water" value="3">
+                <img class="waterlight" src="images/veelwater.png">
             </label>
             
             <label>
-                <input type="radio" id="none" name="water" value="0">
-                <img src="images/weetniet.png">
+                <input class="waterlight" type="radio" id="none" name="water" value="0">
+                <img class="waterlight" src="images/weetniet.png">
+            </label>
+            
+            <label>Hoeveelheid licht nodig:</label><br>
+            <label>
+                <input class="waterlight" type="radio" id="weinig" name="water" value="1">
+                <img class="waterlight" src="images/weinigwater.png">
+            </label>
+            
+            <label>
+                <input class="waterlight" type="radio" id="gemiddeld" name="water" value="2">
+                <img class="waterlight" src="images/gemiddeldwater.png">
+            </label>   
+                     
+            <label>
+                <input class="waterlight" type="radio" id="veel" name="water" value="3">
+                <img class="waterlight" src="images/veelwater.png">
+            </label>
+            
+            <label>
+                <input class="waterlight" type="radio" id="none" name="water" value="0">
+                <img class="waterlight" src="images/weetniet.png">
             </label>
             
             <br><label for="desc">Beschrijving</label><br>
