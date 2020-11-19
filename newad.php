@@ -15,13 +15,13 @@ if (isset($_SESSION['userId'])) {
             <input type="text" id="psoort" name="psoort"><br><br>
             
             <label>Type advertentie:</label><br>
-            <input type="radio" id="stekje" name="type" value="stekje">
+            <input class="type" type="radio" id="stekje" name="type" value="stekje">
             <label for="stekje">Stekje</label><br>
-            <input type="radio" id="zaad" name="type" value="zaad">
+            <input class="type" type="radio" id="zaad" name="type" value="zaad">
             <label for="zaad">Zaad</label><br>
-            <input type="radio" id="kiemplant" name="type" value="kiemplant">
+            <input class="type" type="radio" id="kiemplant" name="type" value="kiemplant">
             <label for="kiemplant">Kiemplant</label><br>
-            <input type="radio" id="none" name="type" value="none">
+            <input class="type" type="radio" id="none" name="type" value="none">
             <label for="none">Weet ik niet</label><br><br>
             
             <label>Hoeveelheid water nodig:</label><br>
