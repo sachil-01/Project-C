@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'dbh.inc.php';
 
 //$target_dir = "uploads/";
@@ -7,7 +8,7 @@ require 'dbh.inc.php';
 //$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
 // Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
+if(isset($_POST["ad-submit"])) {
 //    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
 //    if($check !== false) {
 //        echo "Bestand is een foto - " . $check["mime"] . ".";
@@ -22,13 +23,15 @@ if(isset($_POST["submit"])) {
     $plantcategory = $_POST["type"];
     $desc = $_POST["desc"];
     $water = $_POST["water"];
-    $light = $_POST["light"];
+    $light = $_POST["licht"];
     $userId = $_SESSION['userId'];
 
+    if(empty($plantlatinname)) {
+        $plantlatinname = "weet ik niet";
+    }
 
-
-    if (empty($plantname) || empty($plantlatinname) || empty($plantcategory) || empty($water) || empty($light) || empty($desc)) {
-        header("Location: ../loginpagina.php?error=emptyfields");
+    if (empty($plantname) || empty($plantcategory) || empty($water) || empty($light) || empty($desc)) {
+        header("Location: ../newad.php?error=emptyfields");
         exit();
     }
     else {
@@ -41,6 +44,8 @@ if(isset($_POST["submit"])) {
         else {
             mysqli_stmt_bind_param($statement, "ssssiii", $plantname, $plantlatinname, $plantcategory, $desc, $water, $light, $userId);
             mysqli_stmt_execute($statement);
+            echo "done!";
+
         }
     }
 }

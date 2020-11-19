@@ -11,14 +11,21 @@
 .adform form {
     margin-left: 20%;
 }
+
 .adform h2 {
     text-align: center;
 }
+
 .adform input[type="text"] {
      padding: 12px 20px;
      border: 2px solid white;
      border-radius: 4px;
  }
+
+.adform img {
+    display: inline-block;
+}
+
 
 textarea {
     padding: 12px 20px;
@@ -90,6 +97,3 @@ input[type=radio]:checked + img {
 }
 
 
-.adform img {
-    display: inline-block;
-}
