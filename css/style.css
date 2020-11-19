@@ -506,12 +506,13 @@ nav {
     .plant {
         margin: 1em;
     }
+    .nav-links a{
+        color: var(--clr-wit);
+        font-size: 2.5vw;
+    }
 }
 
-.nav-links a{
-    color: var(--clr-wit);
-    font-size: 2.5vw;
-}
+
 
 .footer img{
     width: 100%;
