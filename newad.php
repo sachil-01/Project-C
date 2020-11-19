@@ -4,7 +4,7 @@ include 'header.php';
 <body>
 <?php
 if (isset($_SESSION['userId'])) {
-    echo '
+    ?>
     <div class="adform">
         <h2>Nieuwe advertentie</h2><br>
         <form action="includes/newad.inc.php" method="post" enctype="multipart/form-data" target="adpagina.php">
@@ -77,10 +77,13 @@ if (isset($_SESSION['userId'])) {
             <label><label style="color: red;">*</label> = verplicht</label><br><br>
             <input class="newAdButtons" type="submit" name="ad-submit" value="Plaatsen!">
         </form>
-
+        <form action=\'\' method=\'post\' enctype="multipart/form-data">
+            <input type=\'file\' name=\'file[]\' id=\'file\' multiple>
+            <input class="newAdButtons" type=\'submit\' name=\'submit\' value=\'upload\'>
+        </form>
 
     </div>
-    ';
+    <?php
 } else {
     echo '<div class="notloggedin">
             <h4>Om een advertentie te kunnen plaatsen moet u eerst ingelogd zijn. Klik <a href="loginpagina">HIER</a> om in te loggen.</h4>
