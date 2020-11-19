@@ -91,7 +91,7 @@ nav {
     color: var(--clr-groen);
     text-decoration: none;
     letter-spacing: 2px;
-    font-size: 0.8vw;
+    font-size: 1vw;
     font-family: 'Montserrat', serif;
     font-weight: bold;
     text-transform: uppercase;
@@ -506,6 +506,24 @@ nav {
     .plant {
         margin: 1em;
     }
+    .nav-links a{
+        color: var(--clr-wit);
+        font-size: 2.5vw;
+    }
+}
+
+.newadknop {
+    position: absolute;
+    right: 13%;
+    top: 10vw;
+    border: 3px solid #1B701B;
+    background-color: #1B701B;
+    border-radius: 10px;
+    text-decoration: none;
+    padding: 8px;
+    color: white;
+    font-family: 'Montserrat', serif;
+    font-weight: bold;
 }
 
 .footer img{
