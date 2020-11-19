@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include('header.php');
 ?>
 <head>
@@ -8,6 +9,21 @@
 <body>
     <?php
     if (isset($_SESSION['userId'])) {
+        // array for saving all file names (time().filename)
+        $imageArr = array();
+        if(isset($_POST['submit'])){
+            //inserts image in uploads folder
+            $fileCount = count($_FILES['file']['name']);
+            for($i=0; $i < $fileCount; $i++){
+                //give filename a time to avoid overwriting a file (unique name)
+                $fileName = time().$_FILES['file']['name'][$i];
+                move_uploaded_file($_FILES['file']['tmp_name'][$i], 'uploads/'.$fileName);
+                //add filename to array
+                array_push($imageArr, $fileName);
+            }
+            // array will be used to insert the filenames (one by one) into the blogImage table (database)
+            $_SESSION['images'] = $imageArr;
+        }
         //catch error/success messages
         if (isset($_GET['error'])) {
             //shows error message when file extension is not in the allowtypes array
@@ -27,6 +43,10 @@
     ?>
     <div class="blogpostform">
         <h2>Nieuwe blogpost</h2><br>
+        <form action='' method='post' enctype="multipart/form-data">
+            <input type='file' name='file[]' id='file' multiple>
+            <input class="newPostButton" type='submit' name='submit' value='upload'>
+        </form>
         <form action="includes/newpost.inc.php" method="post">
             <label>Blogtitel</label><br>
             <input type="text" id="bname" name="bname" required><br><br>
@@ -40,9 +60,6 @@
             
             <label>Beschrijving</label><br>
             <textarea id="bdesc" name="bdesc" required></textarea><br><br>
-
-            <label>Afbeeldingen toevoegen</label><br>
-            <input type="file" name="files[]" id="file" multiple><br><br>
 
             <label>URL toevoegen</label><br>
             <input type="url" name="bLink" id="bLink"><br><br>

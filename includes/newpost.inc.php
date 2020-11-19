@@ -31,12 +31,12 @@ if(isset($_POST["blog-submit"])) {
     }
     else {
         mysqli_stmt_execute($statement);
-            $result = mysqli_stmt_get_result($statement);
-            if ($row = mysqli_fetch_assoc($result)) {
-                $blogId= $row['idPost'];
-            }
+        $result = mysqli_stmt_get_result($statement);
+        if ($row = mysqli_fetch_assoc($result)) {
+            $blogId= $row['idPost'];
+        }
     }
-    $blogImage = $_POST["files"];
+    $blogImage = $_SESSION['images'];
 
     // Insert blogpost image into database
     foreach($blogImage as $fileName){
