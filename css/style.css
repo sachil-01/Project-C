@@ -110,7 +110,6 @@ nav {
     color: var(--clr-wit);
     background-color: var(--clr-groen);
     letter-spacing: 2px;
-    font-size: 1vw;
     font-family: 'Montserrat', serif;
     font-weight: 900;
     text-transform: uppercase;
@@ -397,10 +396,6 @@ nav {
     /* Advertisement description headers and description details */
     .description h3, .description h3 span{
         font-size: 1vw;
-    }
-
-    .logout_button {
-        width: 6vw;
     }
 }
 
