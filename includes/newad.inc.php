@@ -6,7 +6,38 @@ require 'dbh.inc.php';
 //$target_file = $target_dir.basename($_FILES["fileToUpload"]["name"]);
 //$uploadOk = 1;
 //$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+// Retrieve blogpost ID before inserting blogpost image(s) to database
+$sql = "SELECT idAd FROM Advertisement WHERE usedId = $userId ORDER BY postDate DESC LIMIT 1";
+$statement = mysqli_stmt_init($conn);
+if (!mysqli_stmt_prepare($statement, $sql)) {
+    header("Location: ../newad.php?error=sqlerror");
+    exit();
+}
+else {
+    mysqli_stmt_execute($statement);
+    $result = mysqli_stmt_get_result($statement);
+    if ($row = mysqli_fetch_assoc($result)) {
+        $blogId= $row['idAdvert'];
+    }
+}
+$blogImage = $_SESSION['images'];
 
+// Insert blogpost image into database
+foreach($blogImage as $fileName){
+    $sql = "INSERT INTO AdImage(imgName, idAdvert) VALUES (?, ?)";
+    $statement = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($statement, $sql)) {
+        header("Location: ../newpost.php?error=sqlerror");
+        exit();
+    }
+    else {
+        mysqli_stmt_bind_param($statement, "ss", pathinfo($fileName, PATHINFO_FILENAME), $blogId);
+        mysqli_stmt_execute($statement);
+    }
+}
+
+header("Location: ../newpost.php?upload=success");
+exit();
 // Check if image file is a actual image or fake image
 if(isset($_POST["ad-submit"])) {
 //    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
@@ -49,38 +80,7 @@ if(isset($_POST["ad-submit"])) {
         }
     }
 
-    // Retrieve blogpost ID before inserting blogpost image(s) to database
-    $sql = "SELECT idAd FROM Advertisement WHERE usedId = $userId ORDER BY postDate DESC LIMIT 1";
-    $statement = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($statement, $sql)) {
-        header("Location: ../newad.php?error=sqlerror");
-        exit();
-    }
-    else {
-        mysqli_stmt_execute($statement);
-        $result = mysqli_stmt_get_result($statement);
-        if ($row = mysqli_fetch_assoc($result)) {
-            $blogId= $row['idAdvert'];
-        }
-    }
-    $blogImage = $_SESSION['images'];
 
-    // Insert blogpost image into database
-    foreach($blogImage as $fileName){
-        $sql = "INSERT INTO AdImage(imgName, idAdvert) VALUES (?, ?)";
-        $statement = mysqli_stmt_init($conn);
-        if (!mysqli_stmt_prepare($statement, $sql)) {
-            header("Location: ../newpost.php?error=sqlerror");
-            exit();
-        }
-        else {
-            mysqli_stmt_bind_param($statement, "ss", pathinfo($fileName, PATHINFO_FILENAME), $blogId);
-            mysqli_stmt_execute($statement);
-        }
-    }
-
-    header("Location: ../newpost.php?upload=success");
-    exit();
 }
 /*
 // Check if file already exists
