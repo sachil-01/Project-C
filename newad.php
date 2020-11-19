@@ -4,6 +4,37 @@ include 'header.php';
 <body>
 <?php
 if (isset($_SESSION['userId'])) {
+    // array for saving all file names (time().filename)
+    $imageArr = array();
+    if(isset($_POST['submit'])){
+        //inserts image in uploads folder
+        $fileCount = count($_FILES['file']['name']);
+        for($i=0; $i < $fileCount; $i++){
+            //give filename a time to avoid overwriting a file (unique name)
+            $fileName = time().$_FILES['file']['name'][$i];
+            move_uploaded_file($_FILES['file']['tmp_name'][$i], 'uploads/'.$fileName);
+            //add filename to array
+            array_push($imageArr, $fileName);
+        }
+        // array will be used to insert the filenames (one by one) into the blogImage table (database)
+        $_SESSION['images'] = $imageArr;
+    }
+    //catch error/success messages
+    if (isset($_GET['error'])) {
+        //shows error message when file extension is not in the allowtypes array
+        if ($_GET['error'] == "extension") {
+            echo '<div class="newposterror"><p>Ongeldige bestand(en) geupload!</p></div>';
+        }
+        //shows sql error message
+        else if ($_GET['error'] == "sqlerror") {
+            echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
+        }
+    }
+    else if (isset($_GET['upload'])){
+        if ($_GET['upload'] == "success") {
+            echo '<div class="newposterror"><p>Uw blogpost is succesvol geupload!</p></div>';
+        }
+    }
     ?>
     <div class="adform">
         <h2>Nieuwe advertentie</h2><br>
@@ -77,9 +108,9 @@ if (isset($_SESSION['userId'])) {
             <label><label style="color: red;">*</label> = verplicht</label><br><br>
             <input class="newAdButtons" type="submit" name="ad-submit" value="Plaatsen!">
         </form>
-        <form action=\'\' method=\'post\' enctype="multipart/form-data">
-            <input type=\'file\' name=\'file[]\' id=\'file\' multiple>
-            <input class="newAdButtons" type=\'submit\' name=\'submit\' value=\'upload\'>
+        <form action='' method='post' enctype="multipart/form-data">
+            <input type='file' name='file[]' id='file' multiple>
+            <input class="newAdButtons" type='submit' name='submit' value='upload'>
         </form>
 
     </div>
