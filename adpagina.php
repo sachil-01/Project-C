@@ -10,7 +10,7 @@
 <body>
     <div class="gallery">
         <h1>Alle aanbiedingen</h1>
-        <a href="newad"><i class="fas fa-plus"></i> Plant plaatsen</a>
+        <a class="newadknop" href="newad"><i class="fas fa-plus"></i> Plant plaatsen</a>
         <div class="searchbar-div">
             <div class="searchbar-margin">
                 <div class="searchbar-main">
