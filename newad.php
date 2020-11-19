@@ -26,23 +26,20 @@ if (isset($_SESSION['userId'])) {
             
             <label>Hoeveelheid water nodig:</label><br>
             <label>
-                <input style="input[type=radio] {
-                                position: absolute;
+                <input style="position: absolute;
                                 opacity: 0;
                                 width: 0;
                                 height: 0;
-                            }
-
                             /* IMAGE STYLES */
-                            input[type=radio] + img {
                                 cursor: pointer;
-                            }
-                            
                             /* CHECKED STYLES */
-                            input[type=radio]:checked + img {
+                            :checked{
                                 outline: 2px solid #31950f;
                         }" type="radio" id="weinig" name="water" value="1">
-                <img src="images/weinigwater.png">
+                <img style="cursor: pointer;
+                :checked{
+                                outline: 2px solid #31950f;
+                        }" src="images/weinigwater.png">
             </label>
             
             <label>
