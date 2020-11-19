@@ -44,25 +44,26 @@ if (isset($_SESSION['userId'])) {
                 <input class="waterlight" type="radio" id="none" name="water" value="0">
                 <img class="waterlight" src="images/weetniet.png">
             </label>
+            <br><br>
             
             <label>Hoeveelheid licht nodig:</label><br>
             <label>
-                <input class="waterlight" type="radio" id="weinig" name="water" value="1">
+                <input class="waterlight" type="radio" id="weinig" name="licht" value="1">
                 <img class="waterlight" src="images/weinigwater.png">
             </label>
             
             <label>
-                <input class="waterlight" type="radio" id="gemiddeld" name="water" value="2">
+                <input class="waterlight" type="radio" id="gemiddeld" name="licht" value="2">
                 <img class="waterlight" src="images/gemiddeldwater.png">
             </label>   
                      
             <label>
-                <input class="waterlight" type="radio" id="veel" name="water" value="3">
+                <input class="waterlight" type="radio" id="veel" name="licht" value="3">
                 <img class="waterlight" src="images/veelwater.png">
             </label>
             
             <label>
-                <input class="waterlight" type="radio" id="none" name="water" value="0">
+                <input class="waterlight" type="radio" id="none" name="licht" value="0">
                 <img class="waterlight" src="images/weetniet.png">
             </label>
             

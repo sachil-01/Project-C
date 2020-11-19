@@ -70,7 +70,7 @@ textarea {
 }
 
 /* HIDE RADIO */
-.waterlight input[type=radio] {
+input[type=radio] {
     position: absolute;
     opacity: 0;
     width: 0;
