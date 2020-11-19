@@ -31,52 +31,80 @@ if (isset($_SESSION['userId'])) {
                                 width: 0;
                                 height: 0;
                             /* IMAGE STYLES */
-                                cursor: pointer;
-                            /* CHECKED STYLES */
-                            :checked{
-                                outline: 2px solid #31950f;
-                        }" type="radio" id="weinig" name="water" value="1">
-                <img style="cursor: pointer;
-                :checked{
-                                outline: 2px solid #31950f;
-                        }" src="images/weinigwater.png">
+                                cursor: pointer;" type="radio" id="weinig" name="water" value="1">
+                <img style="cursor: pointer;" src="images/weinigwater.png">
             </label>
             
             <label>
-                <input type="radio" id="gemiddeld" name="water" value="2">
-                <img src="images/gemiddeldwater.png">
+                <input style="position: absolute;
+                                opacity: 0;
+                                width: 0;
+                                height: 0;
+                            /* IMAGE STYLES */
+                                cursor: pointer;" type="radio" id="gemiddeld" name="water" value="2">
+                <img style="cursor: pointer;" src="images/gemiddeldwater.png">
             </label>   
                      
             <label>
-                <input type="radio" id="veel" name="water" value="3">
-                <img  src="images/veelwater.png">
+                <input style="position: absolute;
+                                opacity: 0;
+                                width: 0;
+                                height: 0;
+                            /* IMAGE STYLES */
+                                cursor: pointer;" type="radio" id="veel" name="water" value="3">
+                <img style="cursor: pointer;" src="images/veelwater.png">
             </label>
             
             <label>
-                <input type="radio" id="none" name="water" value="0">
-                <img  src="images/weetniet.png">
+                <input style="position: absolute;
+                                opacity: 0;
+                                width: 0;
+                                height: 0;
+                            /* IMAGE STYLES */
+                                cursor: pointer;" type="radio" id="none" name="water" value="0">
+                <img style="cursor: pointer;" src="images/weetniet.png">
             </label>
             <br><br>
             
             <label>Hoeveelheid licht nodig:</label><br>
             <label>
-                <input type="radio" id="weinig" name="licht" value="1">
-                <img src="images/weinigwater.png">
+                <input style="position: absolute;
+                                opacity: 0;
+                                width: 0;
+                                height: 0;
+                            /* IMAGE STYLES */
+                                cursor: pointer;" type="radio" id="weinig" name="licht" value="1">
+                <img style="cursor: pointer;" src="images/weinigwater.png">
             </label>
             
             <label>
-                <input type="radio" id="gemiddeld" name="licht" value="2">
-                <img src="images/gemiddeldwater.png">
+                <input style="position: absolute;
+                                opacity: 0;
+                                width: 0;
+                                height: 0;
+                            /* IMAGE STYLES */
+                                cursor: pointer;" type="radio" id="gemiddeld" name="licht" value="2">
+                <img style="cursor: pointer;" src="images/gemiddeldwater.png">
             </label>   
                      
             <label>
-                <input type="radio" id="veel" name="licht" value="3">
-                <img src="images/veelwater.png">
+                <input style="position: absolute;
+                                opacity: 0;
+                                width: 0;
+                                height: 0;
+                            /* IMAGE STYLES */
+                                cursor: pointer;" type="radio" id="veel" name="licht" value="3">
+                <img style="cursor: pointer;" src="images/veelwater.png">
             </label>
             
             <label>
-                <input type="radio" id="none" name="licht" value="0">
-                <img src="images/weetniet.png">
+                <input style="position: absolute;
+                                opacity: 0;
+                                width: 0;
+                                height: 0;
+                            /* IMAGE STYLES */
+                                cursor: pointer;" type="radio" id="none" name="licht" value="0">
+                <img style="cursor: pointer;" src="images/weetniet.png">
             </label>
             
             <br><label for="desc">Beschrijving</label><br>
