@@ -25,7 +25,7 @@ if (isset($_SESSION['userId'])) {
             <label for="none">Weet ik niet</label><br><br>
             
             <br><label for="desc">Beschrijving</label><br>
-            <textarea id="desc" name="desc" rows="5" cols="50"></textarea><br><br>
+            <textarea id="desc" name="desc" rows="5" cols="50" required></textarea><br><br>
             
             <label>Hoeveelheid water nodig:</label><br>
             <label>
@@ -72,7 +72,7 @@ if (isset($_SESSION['userId'])) {
             <br><br>
             
             Selecteer een foto (max 1MB):
-            <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
+            <input type="file" name="files[]" multiple><br><br>
             <input class="newAdButtons" type="submit" name="ad-submit" value="Plaatsen!">
         </form>
 
