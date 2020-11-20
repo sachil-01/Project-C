@@ -4,8 +4,10 @@
 
 <head>
     <title>Advertisements</title>
-    <link rel="stylesheet" type="text/css" href="css\style.css">
+    <link rel="stylesheet" type="text/css" href="css\adPagina.css">
 </head>
+
+
 
 <body>
     <div class="gallery">
@@ -91,7 +93,7 @@
                     <br>
                     <h3> Afstand: <span>0km</span></h3>
                     <h3> Datum: <span>ddmmyy</span></h3>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>  
