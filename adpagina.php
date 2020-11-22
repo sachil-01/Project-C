@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include('header.php');
 ?>
 
@@ -10,6 +11,14 @@
 
 
 <body>
+
+    <?php
+        $sql = "SELECT plantName FROM Advertisement";
+        $result = $conn-> query($sql);
+        
+        
+    ?>
+
     <div class="gallery">
         <h1>Alle aanbiedingen</h1>
         <a class="newadknop" href="newad"><i class="fas fa-plus"></i> Plant plaatsen</a>
@@ -93,7 +102,7 @@
                     <br>
                     <h3> Afstand: <span>0km</span></h3>
                     <h3> Datum: <span>ddmmyy</span></h3>
-                </div> -->
+                </div> 
             </div>
         </div>
     </div>  
