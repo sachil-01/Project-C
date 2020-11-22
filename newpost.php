@@ -23,7 +23,7 @@
             $statement = mysqli_stmt_init($conn);
             if (!mysqli_stmt_prepare($statement, $sql)) {
                 header("Location: newpost.php?error=sqlerror");
-                exit();
+                echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
             }
             else {
                 mysqli_stmt_bind_param($statement, "sssis", $blogtitle, $blogcategory, $blogdescription, $userId, $blogLink);
@@ -35,7 +35,7 @@
             $statement = mysqli_stmt_init($conn);
             if (!mysqli_stmt_prepare($statement, $sql)) {
                 header("Location: newpost.php?error=sqlerror");
-                exit();
+                echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
             }
             else {
                 mysqli_stmt_execute($statement);
@@ -58,7 +58,7 @@
                     $statement = mysqli_stmt_init($conn);
                     if (!mysqli_stmt_prepare($statement, $sql)) {
                         header("Location: newpost.php?error=sqlerror");
-                        exit();
+                        echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
                     }
                     else {
                         mysqli_stmt_bind_param($statement, "ss", pathinfo($fileName, PATHINFO_FILENAME), $blogId);
@@ -70,23 +70,7 @@
                 }
             }
             header("Location: newpost.php?upload=success");
-            exit();
-        }
-        //catch error/success messages
-        if (isset($_GET['error'])) {
-            //shows error message when file extension is not in the allowtypes array
-            if ($_GET['error'] == "extension") {
-                echo '<div class="newposterror"><p>Ongeldige bestand(en) geupload!</p></div>';
-            }
-            //shows sql error message
-            else if ($_GET['error'] == "sqlerror") {
-                echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
-            }
-        }
-        else if (isset($_GET['upload'])){
-            if ($_GET['upload'] == "success") {
-                echo '<div class="newposterror"><p>Uw blogpost is succesvol geupload!</p></div>';
-            }
+            echo '<div class="newposterror"><p>Uw blogpost is succesvol geupload!</p></div>';
         }
     ?>
     <div class="blogpostform">
