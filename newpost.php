@@ -9,45 +9,73 @@
 <body>
     <?php
     if (isset($_SESSION['userId'])) {
-        // array for saving all file names (time().filename)
-        $imageArr = array();
-        if(isset($_POST['submit'])){
+        if(isset($_POST['blog-submit'])){
+            require 'includes/dbh.inc.php';
+
+            $blogtitle = $_POST["bname"];
+            $blogcategory = $_POST["bcategory"];
+            $blogdescription = $_POST["bdesc"];
+            $blogLink = $_POST['bLink'];
+            $userId = $_SESSION['userId'];
+
+            // Insert blogpost data into database
+            $sql = "INSERT INTO Blogpost(blogTitle, blogCategory, blogDesc, blogUserId, blogLink) VALUES (?, ?, ?, ?, ?)";
+            $statement = mysqli_stmt_init($conn);
+            if (!mysqli_stmt_prepare($statement, $sql)) {
+                header("Location: newpost.php?error=sqlerror");
+                echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
+            }
+            else {
+                mysqli_stmt_bind_param($statement, "sssis", $blogtitle, $blogcategory, $blogdescription, $userId, $blogLink);
+                mysqli_stmt_execute($statement); 
+            }
+
+            // Retrieve blogpost ID before inserting blogpost image(s) to database
+            $sql = "SELECT idPost FROM Blogpost WHERE blogUserId = $userId ORDER BY blogDate DESC LIMIT 1";
+            $statement = mysqli_stmt_init($conn);
+            if (!mysqli_stmt_prepare($statement, $sql)) {
+                header("Location: newpost.php?error=sqlerror");
+                echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
+            }
+            else {
+                mysqli_stmt_execute($statement);
+                $result = mysqli_stmt_get_result($statement);
+                if ($row = mysqli_fetch_assoc($result)) {
+                    $blogId= $row['idPost'];
+                }
+            }
+
             //inserts image in uploads folder
             $fileCount = count($_FILES['file']['name']);
             for($i=0; $i < $fileCount; $i++){
-                //give filename a time to avoid overwriting a file (unique name)
-                $fileName = time().$_FILES['file']['name'][$i];
-                move_uploaded_file($_FILES['file']['tmp_name'][$i], 'uploads/'.$fileName);
-                //add filename to array
-                array_push($imageArr, $fileName);
+                //checks if there is a file uploaded
+                if(UPLOAD_ERR_OK == $_FILES['file']['error'][$i]){
+                    //give filename a time to avoid overwriting a file (unique name)
+                    $fileName = time().$_FILES['file']['name'][$i];
+
+                    //insert image to database
+                    $sql = "INSERT INTO BlogImage(imgName, idBlog) VALUES (?, ?)";
+                    $statement = mysqli_stmt_init($conn);
+                    if (!mysqli_stmt_prepare($statement, $sql)) {
+                        header("Location: newpost.php?error=sqlerror");
+                        echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
+                    }
+                    else {
+                        mysqli_stmt_bind_param($statement, "ss", pathinfo($fileName, PATHINFO_FILENAME), $blogId);
+                        mysqli_stmt_execute($statement); 
+                        
+                        //insert image to uploads folder
+                        move_uploaded_file($_FILES['file']['tmp_name'][$i], 'uploads/'.$fileName);
+                    }
+                }
             }
-            // array will be used to insert the filenames (one by one) into the blogImage table (database)
-            $_SESSION['images'] = $imageArr;
-        }
-        //catch error/success messages
-        if (isset($_GET['error'])) {
-            //shows error message when file extension is not in the allowtypes array
-            if ($_GET['error'] == "extension") {
-                echo '<div class="newposterror"><p>Ongeldige bestand(en) geupload!</p></div>';
-            }
-            //shows sql error message
-            else if ($_GET['error'] == "sqlerror") {
-                echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
-            }
-        }
-        else if (isset($_GET['upload'])){
-            if ($_GET['upload'] == "success") {
-                echo '<div class="newposterror"><p>Uw blogpost is succesvol geupload!</p></div>';
-            }
+            header("Location: newpost.php?upload=success");
+            echo '<div class="newposterror"><p>Uw blogpost is succesvol geupload!</p></div>';
         }
     ?>
     <div class="blogpostform">
         <h2>Nieuwe blogpost</h2><br>
-        <form action='' method='post' enctype="multipart/form-data">
-            <input type='file' name='file[]' id='file' multiple>
-            <input class="newPostButton" type='submit' name='submit' value='upload'>
-        </form>
-        <form action="includes/newpost.inc.php" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             <label>Blogtitel</label><br>
             <input type="text" id="bname" name="bname" required><br><br>
             
@@ -57,9 +85,12 @@
                 <option value="speciale evenementen">Speciale evenementen</option>
                 <option value="vieringen en feestdagen">Vieringen en feestdagen</option>
             </select><br><br>
-            
+
             <label>Beschrijving</label><br>
             <textarea id="bdesc" name="bdesc" required></textarea><br><br>
+
+            <label>Afbeeldingen</label><br>
+            <input type='file' name='file[]' id='file' multiple><br><br>
 
             <label>URL toevoegen</label><br>
             <input type="url" name="bLink" id="bLink"><br><br>
