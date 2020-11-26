@@ -14,6 +14,7 @@
             margin: 50px auto 0 auto;
         }
         p {
+            font-family: "Gill Sans", sans-serif;
             margin: 30px auto;
             padding: 0 20%;
             font-size: 1.2rem;
@@ -42,31 +43,31 @@
 
         </div> 
         <div class="wallpaper">
-            <img src="images\plant-wallpaper1.jpg" alt="">
+            <img src="images\chamaedrys.jpg" alt="">
         </div>
 
         <div class="plantjes">
             <h1>Plantjes ruilen</h1>
             <p>
                 Onze website maakt het voor leden mogelijk om diverse plantjes, stekjes en zaden te ruilen met plan liefhebbers. Je kunt ook zoeken naar een bepaalde soort in de zoekbalk. Voor het plaatsen van een plant dien je de soort
-te specificeren, een naam te geven, de hoeveelheid water, een foto en een optionele beschrijving. Nadat je op een 
-post klikt kan er een mailuitwisseling gestart worden om de ruil voort te zetten. Zodra een ruil afgerond is mag je ook een beoordeling plaatsen. 
+                te specificeren, een naam te geven, de hoeveelheid water, een foto en een optionele beschrijving. Nadat je op een 
+                post klikt kan er een mailuitwisseling gestart worden om de ruil voort te zetten. Zodra een ruil afgerond is mag je ook een beoordeling plaatsen. 
             </p>
         </div> 
         <div class="wallpaper">
-            <img src="images\plant-wallpaper1.jpg" alt="">
+            <img src="images\test.jpg" alt="">
         </div>
 
         <div class="blog">
-            <h1>Plogpost Pagina</h1>
+            <h1>Blogpost Pagina</h1>
             <p>
-            Wij houden van een leuke sfeer in de community, daarom hebben wij een plek gemaakt om leuke ervaringen met onze plantliefhebbers te delen. 
-            Heb jij een leuke foto van een plant, of wil je iets interessants delen? Post het in onze blogpost pagina! Talloze andere leden kunnen dit zien en mogen ook reageren.
-            Wij hopen zo om  de community actief en enthousiast te houden voor lange gebruikers en nieuwkomers. 
+                Wij houden van een leuke sfeer in de community, daarom hebben wij een plek gemaakt om leuke ervaringen met onze plantliefhebbers te delen. 
+                Heb jij een leuke foto van een plant, of wil je iets interessants delen? Post het in onze blogpost pagina! Talloze andere leden kunnen dit zien en mogen ook reageren.
+                Wij hopen zo om  de community actief en enthousiast te houden voor lange gebruikers en nieuwkomers. 
             </p>
         </div> 
         <div class="wallpaper">
-            <img src="images\plant-wallpaper1.jpg" alt="">
+            <img src="images\blog2.jpg" alt="">
         </div>
 
 

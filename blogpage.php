@@ -11,13 +11,14 @@
     <div class="blogwrapper">
         <div class="blogheader">
             <h1>Blogposts</h1>
-            <nav>
-                <div class="blogcategories">
-                    <li><a href="#">Verzorging</a></li>
-                    <li><a href="#">Speciale evenementen</a></li>
-                    <li><a href="#">Vieringen en feestdagen</a></li>
-                </div>
-            </nav>  
+            <div class="blogcategories">
+                <li><a href="#">Verzorging</a></li>
+                <li><a href="#">Speciale evenementen</a></li>
+                <li><a href="#">Vieringen en feestdagen</a></li>
+            </div>
+            <form action="newpost.php" method="post">
+                <button class="submit" name="add-post">Upload nieuwe blogpost</button>
+            </form>  
         </div>
         <div class="blogcontainer">
             <div class="grid-3-col">
