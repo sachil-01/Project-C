@@ -11,14 +11,21 @@
 .adform form {
     margin-left: 20%;
 }
+
 .adform h2 {
     text-align: center;
 }
+
 .adform input[type="text"] {
      padding: 12px 20px;
      border: 2px solid white;
      border-radius: 4px;
  }
+
+.adform img {
+    display: inline-block;
+}
+
 
 textarea {
     padding: 12px 20px;
@@ -70,6 +77,7 @@ textarea {
 }
 
 /* HIDE RADIO */
+/*
 input[type=radio] {
     position: absolute;
     opacity: 0;
@@ -78,6 +86,7 @@ input[type=radio] {
 }
 
 /* IMAGE STYLES */
+/*
 input[type=radio] + img {
     cursor: pointer;
 }
@@ -87,6 +96,4 @@ input[type=radio]:checked + img {
     outline: 2px solid #31950f;
 }
 
-.adform img {
-    display: inline-block;
-}
+

@@ -4,22 +4,6 @@ var navSlide = () => {
 	const navLinks = document.querySelectorAll('.nav-links li');
 	let menuOpen = false;
 
-	
-
-	window.onload = function() {
-		var slider = tns({
-				container: '.slidertns',
-				autoplay: true,
-				autoplayButtonOutput: false,
-				// autoplayText: ['<span class="fas fa-play"></span>', '<span class="fas fa-pause"></span>'],
-				controlsText: ['<span class="fas fa-arrow-left"></span>', '<span class="fas fa-arrow-right"></span>'],
-				items: 1,
-				slideBy: 'page',
-				nav: false,
-				mouseDrag: true
-		});
-	}
-
 	burger.addEventListener('click', ()=> {
 
 		// Animate links

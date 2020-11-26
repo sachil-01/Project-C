@@ -1,49 +1,55 @@
 <?php
+session_start();
 require 'dbh.inc.php';
 
-$target_dir = "uploads/";
-$target_file = $target_dir.basename($_FILES["fileToUpload"]["name"]);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+//$target_dir = "uploads/";
+//$target_file = $target_dir.basename($_FILES["fileToUpload"]["name"]);
+//$uploadOk = 1;
+//$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
 // Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    if($check !== false) {
-        echo "Bestand is een foto - " . $check["mime"] . ".";
-        $uploadOk = 1;
-    } else {
-        echo "Dit bestand is geen foto.";
-        $uploadOk = 0;
-    }
+if(isset($_POST["ad-submit"])) {
+//    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+//    if($check !== false) {
+//        echo "Bestand is een foto - " . $check["mime"] . ".";
+//        $uploadOk = 1;
+//    } else {
+//        echo "Dit bestand is geen foto.";
+//        $uploadOk = 0;
+//    }
 
     $plantname = $_POST["pname"];
     $plantlatinname = $_POST["psoort"];
     $plantcategory = $_POST["type"];
     $desc = $_POST["desc"];
     $water = $_POST["water"];
+    $light = $_POST["licht"];
     $userId = $_SESSION['userId'];
 
+    if(empty($plantlatinname)) {
+        $plantlatinname = "weet ik niet";
+    }
 
-
-    if (empty($plantname) || empty($plantlatinname) || empty($plantcategory) || empty($water) || empty($desc)) {
-        header("Location: ../loginpagina.php?error=emptyfields");
+    if (empty($plantname) || empty($plantcategory) || empty($water) || empty($light) || empty($desc)) {
+        header("Location: ../newad.php?error=emptyfields");
         exit();
     }
     else {
-        $sql = "INSERT INTO Advertisement(plantName, plantLatinName, plantCategory, plantDesc, waterManage, Userid) VALUES(".$plantname.",".$plantlatinname.",".$plantcategory.",".$desc.",".$water.",".$userId.")";
+        $sql = "INSERT INTO Advertisement(plantName, plantLatinName, plantCategory, plantDesc, waterManage, lightPattern, Userid) VALUES(?,?,?,?,?,?,?)";
         $statement = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($statement, $sql)) {
-            header("Location: ../loginpagina.php?error=sqlerror");
+            header("Location: ../newad.php?error=sqlerror");
             exit();
         }
         else {
+            mysqli_stmt_bind_param($statement, "ssssiii", $plantname, $plantlatinname, $plantcategory, $desc, $water, $light, $userId);
             mysqli_stmt_execute($statement);
-            $result = mysqli_stmt_result($statement);
+            echo "done!";
+
         }
     }
 }
-
+/*
 // Check if file already exists
 if (file_exists($target_file)) {
     echo "Sorry, deze foto bestaat al.";
@@ -74,3 +80,4 @@ if ($uploadOk == 0) {
         echo "Sorry, er heeft zich een probleem voorgedaan tijdens het uploaden.";
     }
 }
+*/
