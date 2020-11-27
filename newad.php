@@ -29,7 +29,7 @@ if (isset($_SESSION['userId'])) {
         }
 
         // Retrieve blogpost ID before inserting blogpost image(s) to database
-        $sql = "SELECT idAd FROM Advertisement WHERE usedId = $userId ORDER BY postDate DESC LIMIT 1";
+        $sql = "SELECT idAd FROM Advertisement WHERE userId = $userId ORDER BY postDate DESC LIMIT 1";
         $statement = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($statement, $sql)) {
             header("Location: newad.php?error=sqlerror");
@@ -39,7 +39,7 @@ if (isset($_SESSION['userId'])) {
             mysqli_stmt_execute($statement);
             $result = mysqli_stmt_get_result($statement);
             if ($row = mysqli_fetch_assoc($result)) {
-                $idadvert= $row['idAdvert'];
+                $idAdvert= $row['idAdvert'];
             }
         }
 
