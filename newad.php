@@ -1,44 +1,79 @@
 <?php
-include 'header.php';
+session_start();
+include('header.php');
 ?>
 <body>
 <?php
 if (isset($_SESSION['userId'])) {
-    // array for saving all file names (time().filename)
-    $imageArr = array();
     if(isset($_POST['submit'])){
+        require 'includes/dbh.inc.php';
+
+        $plantname = $_POST["pname"];
+        $plantlatinname = $_POST["psoort"];
+        $plantcategory = $_POST["type"];
+        $desc = $_POST["desc"];
+        $water = $_POST["water"];
+        $light = $_POST["licht"];
+        $userId = $_SESSION['userId'];
+
+        // Insert blogpost data into database
+        $sql = "INSERT INTO Advertisement(plantName, plantLatinName, plantCategory, plantDesc, waterManage, lightPattern, Userid) VALUES(?,?,?,?,?,?,?)";
+        $statement = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($statement, $sql)) {
+            header("Location: newpost.php?error=sqlerror");
+            echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
+        }
+        else {
+            mysqli_stmt_bind_param($statement, "sssis", $blogtitle, $blogcategory, $blogdescription, $userId, $blogLink);
+            mysqli_stmt_execute($statement);
+        }
+
+        // Retrieve blogpost ID before inserting blogpost image(s) to database
+        $sql = "SELECT idAd FROM Advertisement WHERE usedId = $userId ORDER BY postDate DESC LIMIT 1";
+        $statement = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($statement, $sql)) {
+            header("Location: newad.php?error=sqlerror");
+            echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error).</p></div>';
+        }
+        else {
+            mysqli_stmt_execute($statement);
+            $result = mysqli_stmt_get_result($statement);
+            if ($row = mysqli_fetch_assoc($result)) {
+                $blogId= $row['idAd'];
+            }
+        }
+
         //inserts image in uploads folder
         $fileCount = count($_FILES['file']['name']);
         for($i=0; $i < $fileCount; $i++){
-            //give filename a time to avoid overwriting a file (unique name)
-            $fileName = time().$_FILES['file']['name'][$i];
-            move_uploaded_file($_FILES['file']['tmp_name'][$i], 'uploads/'.$fileName);
-            //add filename to array
-            array_push($imageArr, $fileName);
+            //checks if there is a file uploaded
+            if(UPLOAD_ERR_OK == $_FILES['file']['error'][$i]){
+                //give filename a time to avoid overwriting a file (unique name)
+                $fileName = time().$_FILES['file']['name'][$i];
+
+                //insert image to database
+                $sql = "INSERT INTO AdImage(imgName, idAdvert) VALUES (?, ?)";
+                $statement = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($statement, $sql)) {
+                    header("Location: newad.php?error=sqlerror");
+                    echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error).</p></div>';
+                }
+                else {
+                    mysqli_stmt_bind_param($statement, "ss", pathinfo($fileName, PATHINFO_FILENAME), $blogId);
+                    mysqli_stmt_execute($statement);
+
+                    //insert image to uploads folder
+                    move_uploaded_file($_FILES['file']['tmp_name'][$i], 'uploads/'.$fileName);
+                }
+            }
         }
-        // array will be used to insert the filenames (one by one) into the blogImage table (database)
-        $_SESSION['images'] = $imageArr;
-    }
-    //catch error/success messages
-    if (isset($_GET['error'])) {
-        //shows error message when file extension is not in the allowtypes array
-        if ($_GET['error'] == "extension") {
-            echo '<div class="newposterror"><p>Ongeldige bestand(en) geupload!</p></div>';
-        }
-        //shows sql error message
-        else if ($_GET['error'] == "sqlerror") {
-            echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
-        }
-    }
-    else if (isset($_GET['upload'])){
-        if ($_GET['upload'] == "success") {
-            echo '<div class="newposterror"><p>Uw blogpost is succesvol geupload!</p></div>';
-        }
+        header("Location: newpost.php?upload=success");
+        echo '<div class="newaderror"><p>Uw blogpost is succesvol geupload!</p></div>';
     }
     ?>
     <div class="adform">
         <h2>Nieuwe advertentie</h2><br>
-        <form action="includes/newad.inc.php" method="post" enctype="multipart/form-data" target="adpagina.php">
+        <form action="" method="post" enctype="multipart/form-data" target="adpagina.php">
             <label for="pname">Plantnaam:<label style="color: red;">*</label></label><br>
             <input type="text" id="pname" name="pname" required><br><br>
             
