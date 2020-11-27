@@ -5,7 +5,7 @@ include('header.php');
 <body>
 <?php
 if (isset($_SESSION['userId'])) {
-    if(isset($_POST['submit'])){
+    if(isset($_POST['ad-submit'])){
         require 'includes/dbh.inc.php';
 
         $plantname = $_POST["pname"];
