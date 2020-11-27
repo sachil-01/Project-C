@@ -21,10 +21,10 @@ if (isset($_SESSION['userId'])) {
         $statement = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($statement, $sql)) {
             header("Location: newpost.php?error=sqlerror");
-            echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
+            echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 101).</p></div>';
         }
         else {
-            mysqli_stmt_bind_param($statement, "sssis", $blogtitle, $blogcategory, $blogdescription, $userId, $blogLink);
+            mysqli_stmt_bind_param($statement, "ssssiii", $plantname, $plantlatinname, $plantcategory, $desc, $water, $light, $userId);
             mysqli_stmt_execute($statement);
         }
 
@@ -33,13 +33,13 @@ if (isset($_SESSION['userId'])) {
         $statement = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($statement, $sql)) {
             header("Location: newad.php?error=sqlerror");
-            echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error).</p></div>';
+            echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 102).</p></div>';
         }
         else {
             mysqli_stmt_execute($statement);
             $result = mysqli_stmt_get_result($statement);
             if ($row = mysqli_fetch_assoc($result)) {
-                $blogId= $row['idAd'];
+                $idadvert= $row['idAdvert'];
             }
         }
 
@@ -56,10 +56,10 @@ if (isset($_SESSION['userId'])) {
                 $statement = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($statement, $sql)) {
                     header("Location: newad.php?error=sqlerror");
-                    echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error).</p></div>';
+                    echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 103).</p></div>';
                 }
                 else {
-                    mysqli_stmt_bind_param($statement, "ss", pathinfo($fileName, PATHINFO_FILENAME), $blogId);
+                    mysqli_stmt_bind_param($statement, "ss", pathinfo($fileName, PATHINFO_FILENAME), $idAdvert);
                     mysqli_stmt_execute($statement);
 
                     //insert image to uploads folder
@@ -68,7 +68,7 @@ if (isset($_SESSION['userId'])) {
             }
         }
         header("Location: newpost.php?upload=success");
-        echo '<div class="newaderror"><p>Uw blogpost is succesvol geupload!</p></div>';
+        echo '<div class="newaderror"><p>Uw advertentie is succesvol geupload!</p></div>';
     }
     ?>
     <div class="adform">
@@ -143,7 +143,7 @@ if (isset($_SESSION['userId'])) {
             <label><label style="color: red;">*</label> = verplicht</label><br><br>
             <input class="newAdButtons" type="submit" name="ad-submit" value="Plaatsen!">
         </form>
-        
+
 
     </div>
     <?php
