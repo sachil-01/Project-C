@@ -67,7 +67,7 @@
             </p>
         </div> 
         <div class="wallpaper">
-            <img src="images\blog2.jpg" alt="">
+            <img src="images\red plants.jpg" alt="">
         </div>
 
 
