@@ -143,10 +143,7 @@ if (isset($_SESSION['userId'])) {
             <label><label style="color: red;">*</label> = verplicht</label><br><br>
             <input class="newAdButtons" type="submit" name="ad-submit" value="Plaatsen!">
         </form>
-        <form action='' method='post' enctype="multipart/form-data">
-            <input type='file' name='file[]' id='file' multiple>
-            <input class="newAdButtons" type='submit' name='submit' value='upload'>
-        </form>
+        
 
     </div>
     <?php
