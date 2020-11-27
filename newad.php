@@ -137,8 +137,8 @@ if (isset($_SESSION['userId'])) {
             </label>
             <br><br>
             
-<!--            Selecteer een foto (max 1MB):-->
-<!--            <input type="file" name="files[]" multiple><br><br>-->
+            Selecteer een foto (max 1MB):
+            <input type="file" name="files[]" id="file" multiple><br><br>
             
             <label><label style="color: red;">*</label> = verplicht</label><br><br>
             <input class="newAdButtons" type="submit" name="ad-submit" value="Plaatsen!">
