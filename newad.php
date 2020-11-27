@@ -39,7 +39,7 @@ if (isset($_SESSION['userId'])) {
             mysqli_stmt_execute($statement);
             $result = mysqli_stmt_get_result($statement);
             if ($row = mysqli_fetch_assoc($result)) {
-                $idAdvert= $row['idAdvert'];
+                $idAdvert= $row['idAd'];
             }
         }
 
