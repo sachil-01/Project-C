@@ -33,22 +33,27 @@ else {
             $waterManage = $adv['waterManage'];
             $lightPattern = $adv['lightPattern'];
             $userId = $adv['userId'];
-            echo '<div class="plant">
-                    <div class="adImage">
-                        <img src="images/plant1.jpg" alt="">
-                    </div>
-                    <div class="description">
-                        <h2>'.$plantName.'</h2>
-                        <br>
-                        <h3> Afstand: <span>0km</span></h3>
-                        <h3> Datum: <span>'.$postDate.'</span></h3>
-                    </div>
-                  </div>';
         }
     }
 };
-
 ?>
+<div class="img-area">
+<?php
+echo '<div class="plant">
+<div class="adImage">
+    <img src="images/plant1.jpg" alt="">
+</div>
+<div class="description">
+    <h2>'.$plantName.'</h2>
+    <br>
+    <h3> Afstand: <span>0km</span></h3>
+    <h3> Datum: <span>'.$postDate.'</span></h3>
+</div>
+</div>';
+?>
+</div>
+
+
 
 
 
