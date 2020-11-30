@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css\adPagina.css">
 </head>
 
+<div class="img-area">
 <?php 
 
 require 'includes/dbh.inc.php';
@@ -33,12 +34,7 @@ else {
             $waterManage = $adv['waterManage'];
             $lightPattern = $adv['lightPattern'];
             $userId = $adv['userId'];
-        }
-    }
-};
-?>
-<div class="img-area">
-<?php
+            
 echo '<div class="plant">
 <div class="adImage">
     <img src="images/plant1.jpg" alt="">
@@ -50,7 +46,13 @@ echo '<div class="plant">
     <h3> Datum: <span>'.$postDate.'</span></h3>
 </div>
 </div>';
+
+        }
+    }
+};
 ?>
+
+
 </div>
 
 
