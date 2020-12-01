@@ -10,8 +10,9 @@
 }
 
 .blogcategories h2{
-    font-size: 2.75vw;
+    font-size: 2.5vw;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .blogcategories li{
@@ -27,9 +28,11 @@
     font-family: 'Lora', serif;
     font-weight: bold;
     text-transform: uppercase;
-    border: 0.1vw solid  #4b9600;
-    width: 100%;
+    width: 90%;
     text-align: center;
+    border-bottom: 0.2vw solid #1b701b;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .blogcategories a:hover{
@@ -222,9 +225,9 @@
         color: #fff;
         padding: 10px;
         width: 70%;
-        height: 5vh;
+        height: 100%;
         border: none;
-        font-size: 20px;
+        font-size: 1rem;
         font-family: 'Lora', serif;
         font-weight: bold;
         outline: none;
