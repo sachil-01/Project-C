@@ -40,7 +40,6 @@ if (isset($_SESSION['userId'])) {
             $result = mysqli_stmt_get_result($statement);
             if ($row = mysqli_fetch_assoc($result)) {
                 $idAdvert= $row['idAd'];
-                echo $idAdvert;
             }
         }
 
