@@ -73,7 +73,7 @@ if (isset($_SESSION['userId'])) {
     ?>
     <div class="adform">
         <h2>Nieuwe advertentie</h2><br>
-        <form action="" method="post" enctype="multipart/form-data" target="adpagina.php">
+        <form action="" method="post" enctype="multipart/form-data" target="adpagina">
             <label for="pname">Plantnaam:<label style="color: red;">*</label></label><br>
             <input type="text" id="pname" name="pname" required><br><br>
             
