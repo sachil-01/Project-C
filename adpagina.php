@@ -13,7 +13,7 @@
 
 require 'includes/dbh.inc.php';
 
-$sql = "SELECT plantName, postDate FROM Advertisement";
+$sql = "SELECT plantName, plantLatinName, postDate FROM Advertisement";
 
 $statement = mysqli_stmt_init($conn);
 if (!mysqli_stmt_prepare($statement, $sql)) {
@@ -34,6 +34,7 @@ else {
             $waterManage = $adv['waterManage'];
             $lightPattern = $adv['lightPattern'];
             $userId = $adv['userId'];
+            $adDate = date("d-m-Y", strtotime($postDate));
             
 echo '<div class="plant">
 <div class="adImage">
@@ -43,7 +44,7 @@ echo '<div class="plant">
     <h2>'.$plantName.'</h2>
     <br>
     <h3> Afstand: <span>0km</span></h3>
-    <h3> Datum: <span>'.$postDate.'</span></h3>
+    <h3> Datum: <span>'.$adDate.'</span></h3>
 </div>
 </div>';
 
