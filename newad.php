@@ -28,7 +28,7 @@ if (isset($_SESSION['userId'])) {
             mysqli_stmt_execute($statement);
         }
 
-        // Retrieve blogpost ID before inserting blogpost image(s) to database
+        // Retrieve advertisement ID before inserting advertisement image(s) to database
         $sql = "SELECT idAd FROM Advertisement WHERE userId = $userId ORDER BY postDate DESC LIMIT 1";
         $statement = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($statement, $sql)) {
@@ -40,6 +40,7 @@ if (isset($_SESSION['userId'])) {
             $result = mysqli_stmt_get_result($statement);
             if ($row = mysqli_fetch_assoc($result)) {
                 $idAdvert= $row['idAd'];
+                echo $idAdvert;
             }
         }
 
@@ -138,7 +139,7 @@ if (isset($_SESSION['userId'])) {
             <br><br>
             
             <label>Selecteer een foto (max 1MB):</label><br>
-            <input type="file" name="files[]" id="file" multiple><br><br>
+            <input type="file" name="file[]" id="file" multiple><br><br>
             
             <label><label style="color: red;">*</label> = verplicht</label><br><br>
             <input class="newAdButtons" type="submit" name="ad-submit" value="Plaatsen!">
