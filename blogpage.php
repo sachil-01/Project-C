@@ -11,16 +11,26 @@
     <div class="blogwrapper">
         <div class="blogheader">
             <h1>Blogposts</h1>
-            <div class="blogcategories">
-                <li><a href="#">Verzorging</a></li>
-                <li><a href="#">Speciale evenementen</a></li>
-                <li><a href="#">Vieringen en feestdagen</a></li>
+            <div class="category-select">
+                <select>
+                    <option>Alle</option>
+                    <option>Verzorging</option>
+                    <option>Speciale evenementen</option>
+                    <option>Vieringen en feestdagen</option>
+                </select>
             </div>
             <form action="newpost.php" method="post">
                 <button class="submit" name="add-post">Upload nieuwe blogpost</button>
             </form>  
         </div>
         <div class="blogcontainer">
+            <div class="blogcategories">
+                    <h2>Categorieën</h2>
+                    <li><a href="#">Alle</a></li>
+                    <li><a href="#">Verzorging</a></li>
+                    <li><a href="#">Speciale evenementen</a></li>
+                    <li><a href="#">Vieringen en feestdagen</a></li>
+            </div>
             <div class="grid-3-col">
                 <div class="blogpost">
                     <div class="blogImage">
