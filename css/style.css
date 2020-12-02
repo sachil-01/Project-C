@@ -33,7 +33,7 @@ body {
     background: var(--clr-wit);
     color: var(--clr-groen);
     margin: 0;
-    font-family: 'Lora', serif;
+    font-family: 'Montserrat', serif;
     font-weight: 300;
     text-transform: uppercase;
     font-size: var(--fs-body);
