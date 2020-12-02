@@ -61,7 +61,7 @@
                         echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
                     }
                     else {
-                        mysqli_stmt_bind_param($statement, "ss", pathinfo($fileName, PATHINFO_FILENAME), $blogId);
+                        mysqli_stmt_bind_param($statement, "ss", pathinfo($fileName, PATHINFO_BASENAME), $blogId);
                         mysqli_stmt_execute($statement); 
                         
                         //insert image to uploads folder

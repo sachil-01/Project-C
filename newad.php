@@ -59,7 +59,7 @@ if (isset($_SESSION['userId'])) {
                     echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 103).</p></div>';
                 }
                 else {
-                    mysqli_stmt_bind_param($statement, "ss", pathinfo($fileName, PATHINFO_FILENAME), $idAdvert);
+                    mysqli_stmt_bind_param($statement, "ss", pathinfo($fileName, PATHINFO_BASENAME), $idAdvert);
                     mysqli_stmt_execute($statement);
 
                     //insert image to uploads folder
