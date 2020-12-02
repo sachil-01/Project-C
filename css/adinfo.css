@@ -1,0 +1,33 @@
+.adWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    height: 80vh;
+    width: 80%;
+    background-color: gray;
+    margin: auto;
+}
+
+.tns-outer {
+    height: 40%;
+    width: 60%;
+}
+
+.tns-nav {
+    margin: 0 auto;
+}
+
+.tns-nav button{
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    margin: 0 5px;
+    border-radius: 50%;
+    background: #4A7C00;
+    border: 0;
+}
+
+button.tns-nav-active {
+    background: #999;
+}

@@ -3,6 +3,20 @@ var navSlide = () => {
 	const nav = document.querySelector('.nav-links');
 	const navLinks = document.querySelectorAll('.nav-links li');
 	let menuOpen = false;
+	
+	
+	window.onload = function() {
+		var slider = tns({
+				container: '.slidertns',
+				autoplay: true,
+				autoplayButtonOutput: false,
+				items: 1,
+				slideBy: 'page',
+				mouseDrag: true,
+				controls: false,
+				navPosition: 'bottom'
+		});
+	}
 
 	burger.addEventListener('click', ()=> {
 

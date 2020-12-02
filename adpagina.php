@@ -24,7 +24,7 @@
         <div class="img-area">
             <div class="plant">
                 <div class="adImage">
-                    <img src="images/plant1.jpg" alt="">
+                    <a href="adinfo"><img src="images/plant1.jpg" alt=""></a>
                 </div>
                 <div class="description">
                     <h2>plantennaam</h2>
