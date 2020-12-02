@@ -20,7 +20,7 @@
                 </select>
             </div>
             <form action="newpost.php" method="post">
-                <button class="submit" name="add-post">Upload nieuwe blogpost</button>
+                <button class="submit" name="add-post"><i class="fas fa-plus"></i>Upload nieuwe blogpost</button>
             </form>  
         </div>
         <div class="blogcontainer">
