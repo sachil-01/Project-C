@@ -1,13 +1,79 @@
 <?php
-include 'header.php';
+session_start();
+include('header.php');
 ?>
 <body>
 <?php
 if (isset($_SESSION['userId'])) {
-    echo '
+    if(isset($_POST['ad-submit'])){
+        require 'includes/dbh.inc.php';
+
+        $plantname = $_POST["pname"];
+        $plantlatinname = $_POST["psoort"];
+        $plantcategory = $_POST["type"];
+        $desc = $_POST["desc"];
+        $water = $_POST["water"];
+        $light = $_POST["licht"];
+        $userId = $_SESSION['userId'];
+
+        // Insert blogpost data into database
+        $sql = "INSERT INTO Advertisement(plantName, plantLatinName, plantCategory, plantDesc, waterManage, lightPattern, Userid) VALUES(?,?,?,?,?,?,?)";
+        $statement = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($statement, $sql)) {
+            header("Location: newpost.php?error=sqlerror");
+            echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 101).</p></div>';
+        }
+        else {
+            mysqli_stmt_bind_param($statement, "ssssiii", $plantname, $plantlatinname, $plantcategory, $desc, $water, $light, $userId);
+            mysqli_stmt_execute($statement);
+        }
+
+        // Retrieve advertisement ID before inserting advertisement image(s) to database
+        $sql = "SELECT idAd FROM Advertisement WHERE userId = $userId ORDER BY postDate DESC LIMIT 1";
+        $statement = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($statement, $sql)) {
+            header("Location: newad.php?error=sqlerror");
+            echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 102).</p></div>';
+        }
+        else {
+            mysqli_stmt_execute($statement);
+            $result = mysqli_stmt_get_result($statement);
+            if ($row = mysqli_fetch_assoc($result)) {
+                $idAdvert= $row['idAd'];
+            }
+        }
+
+        //inserts image in uploads folder
+        $fileCount = count($_FILES['file']['name']);
+        for($i=0; $i < $fileCount; $i++){
+            //checks if there is a file uploaded
+            if(UPLOAD_ERR_OK == $_FILES['file']['error'][$i]){
+                //give filename a time to avoid overwriting a file (unique name)
+                $fileName = time().$_FILES['file']['name'][$i];
+
+                //insert image to database
+                $sql = "INSERT INTO AdImage(imgName, idAdvert) VALUES (?, ?)";
+                $statement = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($statement, $sql)) {
+                    header("Location: newad.php?error=sqlerror");
+                    echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 103).</p></div>';
+                }
+                else {
+                    mysqli_stmt_bind_param($statement, "ss", pathinfo($fileName, PATHINFO_BASENAME), $idAdvert);
+                    mysqli_stmt_execute($statement);
+
+                    //insert image to uploads folder
+                    move_uploaded_file($_FILES['file']['tmp_name'][$i], 'uploads/'.$fileName);
+                }
+            }
+        }
+        header("Location: newpost.php?upload=success");
+        echo '<div class="newaderror"><p>Uw advertentie is succesvol geupload!</p></div>';
+    }
+    ?>
     <div class="adform">
         <h2>Nieuwe advertentie</h2><br>
-        <form action="includes/newad.inc.php" method="post" enctype="multipart/form-data" target="adpagina.php">
+        <form action="" method="post" enctype="multipart/form-data" target="adpagina">
             <label for="pname">Plantnaam:<label style="color: red;">*</label></label><br>
             <input type="text" id="pname" name="pname" required><br><br>
             
@@ -71,8 +137,8 @@ if (isset($_SESSION['userId'])) {
             </label>
             <br><br>
             
-            Selecteer een foto (max 1MB):
-            <input type="file" name="files[]" multiple><br><br>
+            <label>Selecteer een foto (max 1MB):</label><br>
+            <input type="file" name="file[]" id="file" multiple><br><br>
             
             <label><label style="color: red;">*</label> = verplicht</label><br><br>
             <input class="newAdButtons" type="submit" name="ad-submit" value="Plaatsen!">
@@ -80,7 +146,7 @@ if (isset($_SESSION['userId'])) {
 
 
     </div>
-    ';
+    <?php
 } else {
     echo '<div class="notloggedin">
             <h4>Om een advertentie te kunnen plaatsen moet u eerst ingelogd zijn. Klik <a href="loginpagina">HIER</a> om in te loggen.</h4>

@@ -33,7 +33,7 @@ body {
     background: var(--clr-wit);
     color: var(--clr-groen);
     margin: 0;
-    font-family: 'Lora', serif;
+    font-family: 'Montserrat', serif;
     font-weight: 300;
     text-transform: uppercase;
     font-size: var(--fs-body);
@@ -521,8 +521,8 @@ nav {
 
 .newadknop {
     position: absolute;
-    right: 13%;
-    top: 10vw;
+    right: 10%;
+    margin-top: -8%;
     border: 3px solid #1B701B;
     background-color: #1B701B;
     border-radius: 10px;
