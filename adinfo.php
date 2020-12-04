@@ -3,66 +3,74 @@
 ?>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="css/adinfo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
 </head>
 
 <?php
 
-            $servername = "localhost";
-            $dBUsername = "root";
-            $dBPassword = "root";
-            $dBName = "royvan1q_websitedekas";
+    $servername = "localhost";
+    $dBUsername = "root";
+    $dBPassword = "root";
+    $dBName = "royvan1q_websitedekas";
 
-            $conn = new mysqli($servername, $dBUsername, $dBPassword, $dBName);
-            // Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
+    $conn = new mysqli($servername, $dBUsername, $dBPassword, $dBName);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-            $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idImage ORDER BY a.idAd DESC";
-            $result = $conn->query($sql);
-            $number_of_posts = $result->num_rows;
-            if ($result->num_rows > 0) {
-                // output data of each row
+    $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idImage";
+    $result = $conn->query($sql);
+    $number_of_posts = $result->num_rows;
+    if ($result->num_rows > 0) {
+        // output data of each row
 
-                while ($row = $result->fetch_assoc()) {
-                    echo '<div class="advWrapper">
-                        <div class="slidertns">
-                            <img src="uploads/'.$row["imgName"].'" alt="">
-                            <img src="uploads/'.$row["imgName"].'" alt="">
-                            <img src="uploads/'.$row["imgName"].'" alt="">
-                        </div>
-                        <div class="blogDescription">
-                            <h2>'.$row["plantName"].'</h2>
-                            <h3>'.$row["plantLatinName"].'</h3>
-                            <h3>Beschrijving</h3>
-                            <p>'.$row["plantDesc"].'</p>
+        while ($row = $result->fetch_assoc()) {
+           echo'<div class="advWrapper">
+                    <div class="slidertns">
+                        <img src="uploads/'.$row["imgName"].'" alt="">
+                        <img src="uploads/'.$row["imgName"].'" alt="">
+                        <img src="uploads/'.$row["imgName"].'" alt="">
+                    </div>
+                    <div class="plantInfo">
+                        <div class="plantInfoMargin">
+                            <button class="plantMsg">Bericht sturen</button>
+                            <h3>Licht:</h3>
+                            <p>'.$row["lightPattern"].'</p>
+                            <h3>Water:</h3>
                             <p>'.$row["waterManage"].'</p>
-                            <h4 class="alignleft">'.date_format(date_create($row["postDate"]),"d-m-Y").'</h4>
-                            <h4 class="alignright">'.$row["plantCategory"].'</h4>
+                            <h3>Soort:</h3>
+                            <p>'.$row["plantCategory"].'</p>
+                            <h3>Datum:</h3>
+                            <p>'.date_format(date_create($row["postDate"]),"d-m-Y").'</p>
+                            <h3>Beoordeling:</h3>
+                            <p>Later nog doen</p>
+                            <h3>Geupload door:</h3>
+                            <p>'.$row["usernameUser"].'</p>
                         </div>
-                    </div>';
-                }
+                    </div>
 
-            } else {
-                echo "0 results";
-            }
-            $conn->close();
-            ?>
+                    <div class="plantDescription">
+                        <h2>'.$row["plantName"].'</h2>
+                        <h3>'.$row["plantLatinName"].'</h3>
+                        <h3 class="plantDesc">Beschrijving</h3>
+                        <p>'.$row["plantDesc"].'</p>
+                    </div>
+                    <div class="moreAds">
+                        <h3>Meer van '.$row["usernameUser"].'</h3>
+                        <div class="moreAdsImg">
+                            <img src="uploads/'.$row["imgName"].'" alt="">
+                            <img src="uploads/'.$row["imgName"].'" alt="">
+                            <img src="uploads/'.$row["imgName"].'" alt="">
+                        </div>
+                    </div>
+                </div>';
+        }
 
-<!-- <body>
-    <div class="adwrapper">
-        <div class="slidertns">
-            <img src="images/plant1.jpg" alt="">
-            <img src="images/plant2.jpg" alt="">
-        </div>
-        <div class="advTitle">
-            <h1>Test</h1>
-        </div>
-    </div>
-</body> -->
+    } else {
+        echo "0 results";
+    }
+    $conn->close();
 
-<?php 
-    include('footer.php')
+include('footer.php')
 ?>
