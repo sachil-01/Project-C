@@ -45,7 +45,7 @@
 
 require 'includes/dbh.inc.php';
 
-$sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idImage ORDER BY a.idAd DESC";
+$sql = "SELECT * FROM Advertisement";
 
 $statement = mysqli_stmt_init($conn);
 if (!mysqli_stmt_prepare($statement, $sql)) {
@@ -68,17 +68,17 @@ else {
             $userId = $adv['userId'];
             $adDate = date("d-m-Y", strtotime($postDate));
             
-echo '<div class="plant">
-            <div class="adImage">
-                <img src="uploads/'.$adv["imgName"].'" alt="">
-            </div>
-            <div class="description">
-                <h2>'.$plantName.'</h2>
-                <br>
-                <h3> Afstand: <span>0km</span></h3>
-                <h3> Datum: <span>'.$adDate.'</span></h3>
-            </div>
-     </div>';
+        echo '<div class="plant">
+                    <div class="adImage">
+                        <a href="adinfo/'.$idAd.'"><img src="uploads/'.$adv["imgName"].'" alt=""></a>
+                    </div>
+                    <div class="description">
+                        <a href="adinfo?idAd='.$idAd.'"><h2>'.$plantName.'</h2></a>
+                        <br>
+                        <h3> Afstand: <span>0km</span></h3>
+                        <h3> Datum: <span>'.$adDate.'</span></h3>
+                    </div>
+            </div>';
 
         }
     }
