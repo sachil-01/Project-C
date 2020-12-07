@@ -28,7 +28,7 @@ if (isset($_SESSION['userId'])) {
             mysqli_stmt_execute($statement);
         }
 
-        // Retrieve blogpost ID before inserting blogpost image(s) to database
+        // Retrieve advertisement ID before inserting advertisement image(s) to database
         $sql = "SELECT idAd FROM Advertisement WHERE userId = $userId ORDER BY postDate DESC LIMIT 1";
         $statement = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($statement, $sql)) {
@@ -59,7 +59,7 @@ if (isset($_SESSION['userId'])) {
                     echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 103).</p></div>';
                 }
                 else {
-                    mysqli_stmt_bind_param($statement, "ss", pathinfo($fileName, PATHINFO_FILENAME), $idAdvert);
+                    mysqli_stmt_bind_param($statement, "ss", pathinfo($fileName, PATHINFO_BASENAME), $idAdvert);
                     mysqli_stmt_execute($statement);
 
                     //insert image to uploads folder
@@ -73,7 +73,7 @@ if (isset($_SESSION['userId'])) {
     ?>
     <div class="adform">
         <h2>Nieuwe advertentie</h2><br>
-        <form action="" method="post" enctype="multipart/form-data" target="adpagina.php">
+        <form action="" method="post" enctype="multipart/form-data" target="adpagina">
             <label for="pname">Plantnaam:<label style="color: red;">*</label></label><br>
             <input type="text" id="pname" name="pname" required><br><br>
             
@@ -138,7 +138,7 @@ if (isset($_SESSION['userId'])) {
             <br><br>
             
             <label>Selecteer een foto (max 1MB):</label><br>
-            <input type="file" name="files[]" id="file" multiple><br><br>
+            <input type="file" name="file[]" id="file" multiple><br><br>
             
             <label><label style="color: red;">*</label> = verplicht</label><br><br>
             <input class="newAdButtons" type="submit" name="ad-submit" value="Plaatsen!">
