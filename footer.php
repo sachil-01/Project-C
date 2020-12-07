@@ -2,7 +2,8 @@
 <html lang="en">
 <body>
     <div class="footer">
-        <img src="images/footer.png" alt="">   
+        <img src="images/footer.png" alt="">
+        <button class="button">Feedback</button>   
     </div>
     
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>

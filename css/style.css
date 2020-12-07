@@ -533,13 +533,38 @@ nav {
     font-weight: bold;
 }
 
+/* .footer{
+    position: relative;
+} */
+
 .footer img{
     width: 100%;
     height: 100%;
 }
 
-/* Profile page */
+/* Style the button and place it in the middle of the footer image */
+.footer .button {
+    background-color: #4b9600;
+    color: white;
+    font-size: 1rem;
+    padding: 1vw 2vw;
+    border: none;
+    cursor: pointer;
+    outline: none;
 
+    /*Rotate feedback button and align it to the right side*/
+    transform: rotate(-90deg) translate(0, -100%);
+    top: 75%;
+    right: -1px;
+    transform-origin: top right;
+    position: fixed;
+  }
+  
+.footer .button:hover {
+background-color: #1b701b;
+}
+
+/* Profile page */
 .registerbox .ppbutton {
     margin-bottom: 1.5em;
 }
