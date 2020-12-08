@@ -10,9 +10,6 @@
     // Load Composer's autoloader
     require 'vendor/autoload.php';
 
-    // Include encryption function
-    include('../encrypt_decrypt.php');
-
     $mail = new PHPMailer();
 
     //Server settings
@@ -21,11 +18,14 @@
     $mail->Host       = 'smtp.gmail.com';                               // Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                            // Enable SMTP authentication
     $mail->Username   = 'FleurtOpMail2@gmail.com';                       // SMTP username
-    $mail->Password   = 'FleurtOpMail222';                               // SMTP password
+    $mail->Password   = 'fleurtop2020';                               // SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;                   // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
     $mail->Port       = 587;                                               // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
     if (isset($_POST['mail-submit'])){
+        // Include encryption function
+        include('../encrypt_decrypt.php');
+        
         //Checks if system has to send a "Reset password" mail
         $email = $_POST['mailId'];
 
