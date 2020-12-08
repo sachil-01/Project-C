@@ -38,10 +38,12 @@
                 $sql = "SELECT * FROM Blogpost b JOIN User u ON b.blogUserId = u.idUser JOIN BlogImage bi ON b.idPost = bi.idBlog ORDER BY b.idPost DESC";
                 $result = $conn->query($sql);
                 $number_of_posts = $result->num_rows;
+                //array with all blogpost Ids
                 $allIdPosts = array();
                 if ($result->num_rows > 0) {
                     // output data of each row
                     while ($row = $result->fetch_assoc()) {
+                        //checks if blogpost id already exists in array > if blogpost id exists in array -> skip current blogpost
                         if(!in_array($row['idPost'], $allIdPosts)){
                             echo '<div class="blogpost">
                                 <div class="blogImage">
@@ -55,6 +57,7 @@
                                     <h4 class="alignright">'.$row["blogCategory"].'</h4>
                                 </div>
                             </div>';
+                            //add blogpost id to array
                             array_push($allIdPosts, $row['idPost']);
                         }
                     }

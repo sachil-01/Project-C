@@ -24,9 +24,10 @@
 
         require 'includes/dbh.inc.php';
 
-        $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert ORDER BY postDate DESC LIMIT 6";
+        $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert ORDER BY postDate DESC";
 
         $statement = mysqli_stmt_init($conn);
+        $allIdAdvertisements = array();
         if (!mysqli_stmt_prepare($statement, $sql)) {
             header("Location: adpagina.php?error=sqlerror");
             echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
@@ -35,23 +36,32 @@
             mysqli_stmt_execute($statement);
             $result = mysqli_stmt_get_result($statement);
             if ($row = mysqli_fetch_assoc($result)) {
+                $limitPosts = 6;
+                $countPost = 0;
                 foreach ($result as $adv) {
-                    $idAd = $adv['idAd'];
-                    $plantName = $adv['plantName'];
-                    $plantLatinName = $adv['plantLatinName'];
-                    $adDate = date("d-m-Y", strtotime($adv['postDate']));
-                    
-                echo '<div class="plant">
-                        <div class="adImage">
-                        <a href="adinfo?idAd='.$idAd.'"><img src="uploads/'.$adv["imgName"].'" alt=""></a>
-                        </div>
-                        <div class="description">
-                            <h2>'.$plantName.'</h2>
-                            <br>
-                            <h3> Afstand: <span>0km</span></h3>
-                            <h3> Datum: <span>'.$adDate.'</span></h3>
-                        </div>
-                    </div>';
+                    if(!in_array($adv['idAd'], $allIdAdvertisements)){
+                        $idAd = $adv['idAd'];
+                        $plantName = $adv['plantName'];
+                        $plantLatinName = $adv['plantLatinName'];
+                        $adDate = date("d-m-Y", strtotime($adv['postDate']));
+                        
+                        echo '<div class="plant">
+                            <div class="adImage">
+                            <a href="adinfo?idAd='.$idAd.'"><img src="uploads/'.$adv["imgName"].'" alt=""></a>
+                            </div>
+                            <div class="description">
+                                <h2>'.$plantName.'</h2>
+                                <br>
+                                <h3> Afstand: <span>0km</span></h3>
+                                <h3> Datum: <span>'.$adDate.'</span></h3>
+                            </div>
+                        </div>';
+                        array_push($allIdAdvertisements, $adv['idAd']);
+                        $countPost++;
+                        if($countPost == $limitPosts){
+                            break;
+                        }
+                    }
                 }
             }
         };
