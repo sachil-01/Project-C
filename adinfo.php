@@ -21,7 +21,7 @@
 
     $id = $_GET['idAd'];
 
-    $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idImage WHERE a.idAd = '$id'";
+    $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE a.idAd = '$id'";
     // $sql = 'SELECT * FROM Advertisement where idAd = '.$_GET['idAd'];
     $result = $conn->query($sql);
     $number_of_posts = $result->num_rows;
@@ -46,7 +46,6 @@
                             <p>'.$row["waterManage"].'</p>
                             <h3>Soort:</h3>
                             <p>'.$row["plantCategory"].'</p>
-                            <p>'.$_GET['idAd'].'</p>
                             <h3>Datum:</h3>
                             <p>'.date_format(date_create($row["postDate"]),"d-m-Y").'</p>
                             <h3>Beoordeling:</h3>

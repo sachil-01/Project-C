@@ -45,7 +45,7 @@
 
 require 'includes/dbh.inc.php';
 
-$sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idImage";
+$sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert";
 
 $statement = mysqli_stmt_init($conn);
 if (!mysqli_stmt_prepare($statement, $sql)) {
@@ -70,10 +70,10 @@ else {
             
         echo '<div class="plant">
                     <div class="adImage">
-                        <a href="adinfo/'.$idAd.'"><img src="uploads/'.$adv["imgName"].'" alt=""></a>
+                        <a href="adinfo?idAd='.$idAd.'"><img src="uploads/'.$adv["imgName"].'" alt=""></a>
                     </div>
                     <div class="description">
-                        <a href="adinfo?idAd='.$idAd.'"><h2>'.$plantName.'</h2></a>
+                        <h2>'.$plantName.'</h2>
                         <br>
                         <h3> Afstand: <span>0km</span></h3>
                         <h3> Datum: <span>'.$adDate.'</span></h3>
