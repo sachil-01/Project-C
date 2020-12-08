@@ -89,5 +89,6 @@ echo '<div class="plant">
 </div>
 
 <?php
-    include("footer.php");
+    include('footer.php');
+    include('feedback.php');
 ?>

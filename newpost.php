@@ -108,4 +108,5 @@
 
 <?php
     include('footer.php');
+    include('feedback.php');
 ?>

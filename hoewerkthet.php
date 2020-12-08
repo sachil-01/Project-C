@@ -75,5 +75,6 @@ post klikt kan er een mailuitwisseling gestart worden om de ruil voort te zetten
 </html>
 
 <?php 
-    include('footer.php')
+    include('footer.php');
+    include('feedback.php');
 ?>

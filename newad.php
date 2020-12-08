@@ -157,5 +157,6 @@ if (isset($_SESSION['userId'])) {
 </body>
 
 <?php
-include('footer.php');
+    include('footer.php');
+    include('feedback.php');
 ?>

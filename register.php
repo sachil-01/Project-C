@@ -69,5 +69,6 @@
         <div class="push"></div>
     </div>
 <?php
-    include('footer.php')
+    include('footer.php');
+    include('feedback.php');
 ?>
