@@ -45,7 +45,7 @@
 
 require 'includes/dbh.inc.php';
 
-$sql = "SELECT * FROM Advertisement";
+$sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idImage";
 
 $statement = mysqli_stmt_init($conn);
 if (!mysqli_stmt_prepare($statement, $sql)) {

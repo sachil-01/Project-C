@@ -9,10 +9,10 @@
 <?php
 
     $servername = "localhost";
-    $dBUsername = "root";
-    $dBPassword = "root";
+    $dBUsername = "royvan1q_user_dekas";
+    $dBPassword = "Bossex123!";
     $dBName = "royvan1q_websitedekas";
-
+    
     $conn = new mysqli($servername, $dBUsername, $dBPassword, $dBName);
     // Check connection
     if ($conn->connect_error) {
@@ -21,7 +21,7 @@
 
     $id = $_GET['idAd'];
 
-    $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idImage # WHERE a.idAd = '$id'";
+    $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idImage WHERE a.idAd = '$id'";
     // $sql = 'SELECT * FROM Advertisement where idAd = '.$_GET['idAd'];
     $result = $conn->query($sql);
     $number_of_posts = $result->num_rows;
