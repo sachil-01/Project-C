@@ -21,8 +21,6 @@
         <input type="submit" name="submit"> 
         </form> -->
         
-        
-        
         <div class="searchbar-div">
             <div class="searchbar-margin">
                 <div class="searchbar-main">
@@ -34,60 +32,57 @@
             </div>
         </div>
 
-        
-
-        
     </div> 
+
+    <div class="img-area">
+        <?php 
+
+        require 'includes/dbh.inc.php';
+
+        $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert";
+
+        $statement = mysqli_stmt_init($conn);
+        //array with all blogpost Ids
+        $allIdAdvertisements = array();
+        if (!mysqli_stmt_prepare($statement, $sql)) {
+            header("Location: adpagina.php?error=sqlerror");
+            echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
+        }
+        else {
+            mysqli_stmt_execute($statement);
+            $result = mysqli_stmt_get_result($statement);
+            if ($row = mysqli_fetch_assoc($result)) {
+                foreach ($result as $adv) {
+                    //checks if advertisement id already exists in array > if advertisement id exists in array -> skip current advertisement
+                    if(!in_array($adv['idAd'], $allIdAdvertisements)){
+                        $idAd = $adv['idAd'];
+                        $plantName = $adv['plantName'];
+                        $plantLatinName = $adv['plantLatinName'];
+                        $adDate = date("d-m-Y", strtotime($adv['postDate']));
+                        
+                        echo '<div class="plant">
+                            <div class="adImage">
+                                <a href="adinfo?idAd='.$idAd.'"><img src="uploads/'.$adv["imgName"].'" alt=""></a>
+                            </div>
+                            <div class="description">
+                                <h2>'.$plantName.'</h2>
+                                <br>
+                                <h3> Afstand: <span>0km</span></h3>
+                                <h3> Datum: <span>'.$adDate.'</span></h3>
+                            </div>
+                        </div>';
+                        //add advertisement id to array
+                        array_push($allIdAdvertisements, $adv['idAd']);
+                    }
+                }
+            }
+        };
+        ?>
+    </div>
 </body>
 
-<div class="img-area">
-<?php 
-
-require 'includes/dbh.inc.php';
-
-$sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert";
-
-$statement = mysqli_stmt_init($conn);
-if (!mysqli_stmt_prepare($statement, $sql)) {
-    header("Location: adpagina.php?error=sqlerror");
-    echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
-}
-else {
-    mysqli_stmt_execute($statement);
-    $result = mysqli_stmt_get_result($statement);
-    if ($row = mysqli_fetch_assoc($result)) {
-        foreach ($result as $adv) {
-            $idAd = $adv['idAd'];
-            $plantName = $adv['plantName'];
-            $plantLatinName = $adv['plantLatinName'];
-            $plantCategory = $adv['plantCategory'];
-            $plantDesc = $adv['plantDesc'];
-            $postDate = $adv['postDate'];
-            $waterManage = $adv['waterManage'];
-            $lightPattern = $adv['lightPattern'];
-            $userId = $adv['userId'];
-            $adDate = date("d-m-Y", strtotime($postDate));
-            
-        echo '<div class="plant">
-                    <div class="adImage">
-                        <a href="adinfo?idAd='.$idAd.'"><img src="uploads/'.$adv["imgName"].'" alt=""></a>
-                    </div>
-                    <div class="description">
-                        <h2>'.$plantName.'</h2>
-                        <br>
-                        <h3> Afstand: <span>0km</span></h3>
-                        <h3> Datum: <span>'.$adDate.'</span></h3>
-                    </div>
-            </div>';
-
-        }
-    }
-};
-?>
-
-
-</div>
-
 <?php
-    include("footer.php");
+    include('footer.php');
+    include('feedback.php');
 ?>
+

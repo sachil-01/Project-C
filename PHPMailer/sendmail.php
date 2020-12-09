@@ -69,6 +69,31 @@
 
         header("Location: ../forgotpassword.php?success=send");
         exit();
+    } else if (isset($_POST['feedback-submit'])){
+        $fbName = $_POST['feedbackName'];
+        $fbEmail = $_POST['feedbackEmail'];
+        $fbSubject = $_POST['feedbackSubject'];
+        // nl2br function inserts HTML line breaks before all newlines in a string (Preserve breaklines)
+        $fbMessage = nl2br($_POST['feedbackMessage']);
+
+        //Recipients
+        $mail->setFrom('FleurtOpMail2@gmail.com', 'Fleurt Op');
+        $mail->addAddress('FleurtOpMail2@gmail.com', 'Fleurt Op');     // Add a recipient
+
+        // Content
+        $mail->isHTML(true);                                                  // Set email format to HTML
+        $mail->Subject = "$fbSubject";
+
+        $mail->Body = "$fbMessage";
+        $mail->send();
+        
+        //checks if previous page URL contains 'feedback=succes'
+        if(strpos($_SERVER['HTTP_REFERER'], "feedback=success")){
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        } else {
+            header('Location: ' . $_SERVER['HTTP_REFERER'] . "?feedback=success");
+        }
+        exit();
     }
 
     $username = $_SESSION['username'];

@@ -534,17 +534,13 @@ nav {
     font-weight: bold;
 }
 
-/* .footer{
-    position: relative;
-} */
-
 .footer img{
     width: 100%;
     height: 100%;
 }
 
-/* Style the button and place it in the middle of the footer image */
-.footer .button {
+/* Feedback button*/
+.feedback .button {
     background-color: #4b9600;
     color: white;
     font-size: 1rem;
@@ -561,8 +557,102 @@ nav {
     position: fixed;
   }
   
-.footer .button:hover {
+.feedback .button:hover {
 background-color: #1b701b;
+}
+
+/* Feedback form - hidden by default*/
+.feedback-popup, .feedback-popup-success{
+    position: fixed;
+    top: 10%;
+    left: 25%;
+    right: 25%;
+    border: 3px solid #4b9600;
+    border-radius: 1vw;
+    background-color: white;
+}
+
+/* Blur background when feedback form is active */
+.blurBackground, .blurBackground-success{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    opacity: 80%;
+}
+
+.blurBackground, .feedback-popup{
+    display: none;
+}
+
+.blurBackground-success, .feedback-popup-success{
+    display: block;
+}
+
+/* add styles to the pop-up form */
+.popup-form {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+}
+
+/* feedback form header */
+.feedback-popup h1, .feedback-popup-success h1{
+    font-size: 2rem;
+    margin: 2%;
+    text-align: center;
+}
+
+/* full width input fields */
+.popup-form input[type=text], .popup-form input[type=email], .popup-form textarea{
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    outline: none;
+    background: #f1f1f1;
+    font-family: 'Montserrat', serif;
+}
+
+.popup-form textarea{
+    height: 120px;
+}
+
+/* full width input fields */
+.popup-form input[type=text]:focus, .popup-form input[type=email]:focus, .popup-form textarea:focus{
+    background-color: #ddd;
+}
+
+/* feedback submit/close button */
+.popup-form .feedback-submit, .closefeedback-submit{
+    background-color: #4b9600;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    opacity: 0.8;
+    outline: none;
+    font-family: 'Montserrat', serif;
+}
+
+.popup-form .closefeedback-submit{
+    background-color: rgb(150, 150, 150);
+    margin-bottom: 2vw;
+}
+
+.popup-form .feedback-submit:hover{
+    background-color: #1b701b;
+}
+
+.popup-form .closefeedback-submit:hover{
+    background-color: gray;
 }
 
 /* Profile page */
