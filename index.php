@@ -23,6 +23,23 @@
         <?php 
 
         require 'includes/dbh.inc.php';
+        include 'distance.php';
+
+        // Retrieve postal code from current user
+        $currentUserId = $_SESSION['userId'];
+        $sql = "SELECT postalCode FROM User WHERE idUser = $currentUserId";
+        $statement = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($statement, $sql)) {
+            header("Location: adpagina.php?error=sqlerror");
+            echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
+        }
+        else {
+            mysqli_stmt_execute($statement);
+            $result = mysqli_stmt_get_result($statement);
+            if ($row = mysqli_fetch_assoc($result)) {
+                $currentUserPostalCode = $row['postalCode'];
+            }
+        }
 
         $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert ORDER BY postDate DESC";
 
@@ -44,6 +61,8 @@
                         $plantName = $adv['plantName'];
                         $plantLatinName = $adv['plantLatinName'];
                         $adDate = date("d-m-Y", strtotime($adv['postDate']));
+
+                        $distance = getDistance($adv['postalCode'], $currentUserPostalCode);
                         
                         echo '<div class="plant">
                             <div class="adImage">
@@ -52,7 +71,7 @@
                             <div class="description">
                                 <h2>'.$plantName.'</h2>
                                 <br>
-                                <h3> Afstand: <span>0km</span></h3>
+                                <h3> Afstand: <span>'.$distance.'</span></h3>
                                 <h3> Datum: <span>'.$adDate.'</span></h3>
                             </div>
                         </div>';
