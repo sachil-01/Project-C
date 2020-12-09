@@ -7,11 +7,7 @@
 </head>
 
 <?php
-
-    $servername = "localhost";
-    $dBUsername = "royvan1q_user_dekas";
-    $dBPassword = "Bossex123!";
-    $dBName = "royvan1q_websitedekas";
+    require 'includes/dbh.inc.php';
     
     $conn = new mysqli($servername, $dBUsername, $dBPassword, $dBName);
     // Check connection
