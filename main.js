@@ -4,10 +4,8 @@ var navSlide = () => {
 	const navLinks = document.querySelectorAll('.nav-links li');
 	let menuOpen = false;
 
-	const tnsCarousel = document.querySelectorAll('.slidertns');
-		tnsCarousel.forEach(slider => {
-		const tnsSlider = tns({
-			container: slider,
+	const tnsSlider = tns({
+			container: '.slidertns',
 			autoplay: true,
 			autoplayButtonOutput: false,
 			items: 1,
@@ -16,8 +14,6 @@ var navSlide = () => {
 			controls: false,
 			navPosition: 'bottom'                   
 		});
-	});
-
 
 	burger.addEventListener('click', ()=> {
 

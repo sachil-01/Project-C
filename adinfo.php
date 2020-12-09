@@ -18,7 +18,6 @@
     $id = $_GET['idAd'];
 
     $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE a.idAd = '$id'";
-    // $sql = 'SELECT * FROM Advertisement where idAd = '.$_GET['idAd'];
     $result = $conn->query($sql);
     $number_of_posts = $result->num_rows;
     if ($result->num_rows > 0) {
