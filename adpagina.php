@@ -40,19 +40,21 @@
         require 'includes/dbh.inc.php';
         include 'distance.php';
 
-        // Retrieve postal code from current user
-        $currentUserId = $_SESSION['userId'];
-        $sql = "SELECT postalCode FROM User WHERE idUser = $currentUserId";
-        $statement = mysqli_stmt_init($conn);
-        if (!mysqli_stmt_prepare($statement, $sql)) {
-            header("Location: adpagina.php?error=sqlerror");
-            echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
-        }
-        else {
-            mysqli_stmt_execute($statement);
-            $result = mysqli_stmt_get_result($statement);
-            if ($row = mysqli_fetch_assoc($result)) {
-                $currentUserPostalCode = $row['postalCode'];
+        if (isset($_SESSION['userId'])) {
+            // Retrieve postal code from current user
+            $currentUserId = $_SESSION['userId'];
+            $sql = "SELECT postalCode FROM User WHERE idUser = $currentUserId";
+            $statement = mysqli_stmt_init($conn);
+            if (!mysqli_stmt_prepare($statement, $sql)) {
+                header("Location: adpagina.php?error=sqlerror");
+                echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
+            }
+            else {
+                mysqli_stmt_execute($statement);
+                $result = mysqli_stmt_get_result($statement);
+                if ($row = mysqli_fetch_assoc($result)) {
+                    $currentUserPostalCode = $row['postalCode'];
+                }
             }
         }
 
@@ -77,8 +79,11 @@
                         $plantLatinName = $adv['plantLatinName'];
                         $adDate = date("d-m-Y", strtotime($adv['postDate']));
 
-                        $distance = getDistance($adv['postalCode'], $currentUserPostalCode);
-
+                        if (isset($_SESSION['userId'])) {
+                            $distance = getDistance($adv['postalCode'], $currentUserPostalCode);
+                        } else {
+                            $distance = "-- km";
+                        }
                         echo '<div class="plant">
                             <div class="adImage">
                                 <a href="adinfo?idAd='.$idAd.'"><img src="uploads/'.$adv["imgName"].'" alt=""></a>
