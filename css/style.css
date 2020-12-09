@@ -8,6 +8,7 @@
 /* Paar standaard waardes die je later makkelijk weer opnieuw kunt gebruiken */
 :root {
     --clr-groen: #4A7C00;
+    --clr-dark-green:  #1B701B;
     --clr-wit: #FFFFFF;
     --clr-black: #000000;
 
@@ -657,4 +658,89 @@ background-color: #1b701b;
 /* Profile page */
 .registerbox .ppbutton {
     margin-bottom: 1.5em;
+}
+
+/* Advertisement info */
+.advWrapper {
+    display: grid;
+    grid-template-areas: 
+    'img description'
+    'info description'
+    'info moreAds';
+    grid-template-columns: 30%;
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    padding: 10px;
+    width: 80%;
+    margin: auto;
+    background-color: rgb(130, 130, 130);
+    color: var(--clr-dark-green);
+}
+
+.slidertns {
+    grid-area: img;
+}
+
+.tns-nav button{
+    width: 28%;
+    height: 9px;
+    padding: 0;
+    margin-right: 10px;
+    background: var(--clr-dark-green);
+    border: 0;
+}
+
+button.tns-nav-active {
+    background: #9c9a95;
+}
+
+.plantMsg {
+    border: 1vw solid var(--clr-dark-green);
+    margin-bottom: 10px;
+    width: 100%;
+    border-radius: 1vw;
+    outline: none;
+    background-color: var(--clr-dark-green);
+    color: var(--clr-wit);
+    letter-spacing: 2px;
+    font-family: 'Lora', serif;
+    font-weight: 300;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.plantMsg:hover {
+    background-color: #1b701b;
+    border-color: #1b701b;
+}
+
+.plantInfo {
+    grid-area: info;
+    border: 0.2vw solid var(--clr-dark-green);
+    /* flex-direction: column; */
+}
+
+.plantInfoMargin {
+    margin: 1vw;
+}
+
+.plantDescription {
+    grid-area: description;
+}
+
+.moreAds {
+    grid-area: moreAds;
+}
+
+.plantDesc {
+    margin-top: 20px;
+}
+
+.moreAdsImg {
+    display: flex;
+    flex-direction: row;
+}
+
+.moreAdsImg img{
+    width: 30%;
+    margin: 10px;
 }
