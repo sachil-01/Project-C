@@ -84,7 +84,11 @@
         $mail->isHTML(true);                                                  // Set email format to HTML
         $mail->Subject = "$fbSubject";
 
-        $mail->Body = "$fbMessage";
+        $mail->Body = "$fbMessage
+                        <br><br>
+                        Email van zender: $fbEmail
+                        <br>
+                        Naam van zender: $fbName";
         $mail->send();
         
         //checks if previous page URL contains 'feedback=succes'

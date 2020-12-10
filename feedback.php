@@ -6,13 +6,19 @@
 <body>
     <div class="feedback">
         <?php
+            //Close success popup message
+            if(isset($_POST['feedbacksuccess-btn'])){
+                $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                $afterFeedbackSuccess = str_replace('?feedback=success', '', $actual_link);
+                header('Location: ' . $afterFeedbackSuccess);
+                echo "<meta http-equiv='refresh' content='0;url=$afterFeedbackSuccess'>";
+                ?>  
+                    <!-- <button class="button" onclick="feedbackForm('feedback')">Feedback</button> -->
+                <?php
+                exit();
+            }
             if(isset($_GET['feedback'])){
                 if($_GET['feedback']=='success'){
-                    //Close success popup message
-                    if(isset($_POST['feedbacksuccess-btn'])){
-                        $afterFeedbackSuccess = $_SERVER['HTTP_REFERER'].lstrip('feedback=success');
-                        header('Location: ' . $afterFeedbackSuccess);
-                    }
                     ?>
                     <div class="blurBackground-success" id="blur-success"></div>
 
