@@ -12,9 +12,6 @@
                 $afterFeedbackSuccess = str_replace('?feedback=success', '', $actual_link);
                 header('Location: ' . $afterFeedbackSuccess);
                 echo "<meta http-equiv='refresh' content='0;url=$afterFeedbackSuccess'>";
-                ?>  
-                    <!-- <button class="button" onclick="feedbackForm('feedback')">Feedback</button> -->
-                <?php
                 exit();
             }
             if(isset($_GET['feedback'])){
