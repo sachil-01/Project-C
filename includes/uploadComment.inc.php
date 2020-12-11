@@ -8,13 +8,13 @@
         $comment = $_POST["comment-input"];
 
         //limit userinput
-        $comment_length = strlen();
+        $comment_length = strlen($comment);
 
         if($comment_length > 600){
             echo "Uw commentaar is te lang!";
         } else {
             // Insert blogpost data into database
-            $sql = "INSERT INTO blogcomments(commentBlogId, commentUserId, commentMessage) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO Blogcomments(commentBlogId, commentUserId, commentMessage) VALUES (?, ?, ?)";
             $statement = mysqli_stmt_init($conn);
             $previousLink = "../bloginfo.php?idBlog=$blogId";
             if (!mysqli_stmt_prepare($statement, $sql)) {

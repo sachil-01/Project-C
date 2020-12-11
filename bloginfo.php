@@ -11,7 +11,6 @@
     <body>
     <?php
         require 'includes/dbh.inc.php';
-
         if (isset($_GET['idBlog'])) {
             $_SESSION['blogId'] = $_GET['idBlog'];
         }
@@ -26,12 +25,11 @@
     ?>
     <div class="comment-section">
         <?php
-
             //Retrieve username before loading all comments
             $blogId = $_GET['idBlog'];
             $sql = "SELECT u.idUser, u.usernameUser, bc.commentDate, bc.commentMessage, commentId
-                    FROM blogcomments bc
-                    JOIN user u ON bc.commentUserId = u.idUser
+                    FROM Blogcomments bc
+                    JOIN User u ON bc.commentUserId = u.idUser
                     WHERE bc.commentBlogId = '$blogId'
                     ORDER BY bc.commentId";
             $statement = mysqli_stmt_init($conn);
@@ -60,7 +58,7 @@
             }
         ?>
 
-        <form class="comment-upload" action = "includes/uploadComment.inc.php" method="post">
+        <form class="comment-upload" action="includes/uploadComment.inc.php" method="post">
             <textarea onkeyup="textAreaAdjust(this)" type="text" name="comment-input" placeholder="Klik hier om een comment toe te voegen..." required></textarea>
             <button name="comment-submit">Plaats comment</button>
         </form>
