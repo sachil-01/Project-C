@@ -47,7 +47,7 @@
                         if(!in_array($row['idPost'], $allIdPosts)){
                             echo '<div class="blogpost">
                                 <div class="blogImage">
-                                    <img src="uploads/'.$row["imgName"].'" alt="">
+                                    <a href="bloginfo?idAd='.$row["idPost"].'"><img src="uploads/'.$row["imgName"].'" alt=""></a>
                                 </div>
                                 <div class="blogDescription">
                                     <h2>'.$row["blogTitle"].'</h2>

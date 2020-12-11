@@ -8,12 +8,6 @@
 
 <?php
     require 'includes/dbh.inc.php';
-    
-    $conn = new mysqli($servername, $dBUsername, $dBPassword, $dBName);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
 
     $id = $_GET['idAd'];
 
