@@ -35,7 +35,7 @@
         ?>
         <div class="blurBackground" id="blur"></div>
 
-        <button class="button" onclick="feedbackForm('feedback')">Feedback</button>
+        <button class="button" onclick="feedbackForm('feedback')">FEEDBACK</button>
 
         <div class="feedback-popup" id="feedbackForm">
             <h1>Geef uw feedback</h1>
