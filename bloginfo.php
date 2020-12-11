@@ -57,10 +57,19 @@
                 }
             }
         ?>
-
         <form class="comment-upload" action="includes/uploadComment.inc.php" method="post">
-            <textarea onkeyup="textAreaAdjust(this)" type="text" name="comment-input" placeholder="Klik hier om een comment toe te voegen..." required></textarea>
-            <button name="comment-submit">Plaats comment</button>
+            <?php
+            if(isset($_SESSION['userId'])) {
+            ?>
+                <textarea onkeyup="textAreaAdjust(this)" type="text" name="comment-input" placeholder="Klik hier om een comment toe te voegen..." required></textarea>
+                <button name="comment-submit">Plaats comment</button>
+            <?php
+            } else {
+            ?>
+                <a href="loginpagina" >Klik eerst hier om in te loggen voordat u een commentaar kan plaatsen!</a>
+            <?php
+            }
+            ?>
         </form>
     </div>
     </body>

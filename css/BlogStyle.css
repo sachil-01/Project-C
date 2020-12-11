@@ -42,7 +42,7 @@
     cursor: pointer;
 }
 
-.blogheader button, .comment-upload button{
+.blogheader button, .comment-upload button, .comment-upload a{
     border: 1vw solid #1B701B;
     background-color: #1B701B;
     border-radius: 10px;
@@ -55,7 +55,7 @@
     outline: none;
 }
 
-.blogheader button:hover, .comment-upload button:hover{
+.blogheader button:hover, .comment-upload button:hover, .comment-upload a:hover{
     border-color: #208820;
     background-color: #208820;
     cursor: pointer;
@@ -300,4 +300,9 @@
 .comment-upload button{
     border: 0.5vw solid #1B701B;
     float: right;
+}
+
+.comment-upload a{
+    width: 100%;
+    float: left;
 }
