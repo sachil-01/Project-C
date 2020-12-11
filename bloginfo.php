@@ -14,18 +14,10 @@
         if (isset($_GET['idBlog'])) {
             $_SESSION['blogId'] = $_GET['idBlog'];
         }
-
-        if(isset($_GET['upload'])){
-            if(isset($_GET['upload'])=="success"){
-                echo '<div class="newposterror"><p>Comment is geplaatst!</p></div>';
-            } else if(isset($_GET['upload'])=="sqlerror"){
-                echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
-            }
-        }
     ?>
     <div class="comment-section">
         <?php
-            //Retrieve username before loading all comments
+            // Load chat history
             $blogId = $_GET['idBlog'];
             $sql = "SELECT u.idUser, u.usernameUser, bc.commentDate, bc.commentMessage, commentId
                     FROM Blogcomments bc
@@ -57,8 +49,10 @@
                 }
             }
         ?>
+        <!-- post comment form -->
         <form class="comment-upload" action="includes/uploadComment.inc.php" method="post">
             <?php
+            // checks if user is logged in, else display button for user to log in
             if(isset($_SESSION['userId'])) {
             ?>
                 <textarea onkeyup="textAreaAdjust(this)" type="text" name="comment-input" placeholder="Klik hier om een comment toe te voegen..." required></textarea>
