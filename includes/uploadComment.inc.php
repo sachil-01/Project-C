@@ -16,7 +16,7 @@
             // Insert blogpost data into database
             $sql = "INSERT INTO Blogcomments(commentBlogId, commentUserId, commentMessage) VALUES (?, ?, ?)";
             $statement = mysqli_stmt_init($conn);
-            $previousLink = "../bloginfo.php?idBlog=$blogId";
+            $previousLink = "../bloginfo?idBlog=$blogId";
             if (!mysqli_stmt_prepare($statement, $sql)) {
                 header("Location: $previousLink&upload=sqlerror");
                 exit();
@@ -30,9 +30,5 @@
         }
         mysqli_stmt_close($statement);
         mysqli_close($conn);
-    }
-    else {
-        header("Location: ../bloginfo.php");
-        exit();
     }
 ?>
