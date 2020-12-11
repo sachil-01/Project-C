@@ -44,7 +44,7 @@
                     <a href="register.php">Registreren</a>
                     <br>
                     <a href="forgotpassword.php">Wachtwoord vergeten?</a>
-                </form>;
+                </form>
                 <?php
             }
             ?>
@@ -53,5 +53,6 @@
 </body>
 
 <?php
-    include("footer.php");
+    include('footer.php');
+    include('feedback.php');
 ?>

@@ -9,15 +9,11 @@
     position: relative;
 }
 
-.blogpostform label{
-    font-weight: bold;
-}
-
 .blogpostform h2{
     text-align: center;
 }
 
-.blogpostform input[type="text"], .blogpostform input[type="url"]{
+.blogpostform input[type="text"], .blogpostform input[type="url"], .blogpostform textarea, .blogpostform input[type="file"]{
     width: 100%;
     outline: none;
     border: none;
@@ -27,13 +23,8 @@
 }
 
 .blogpostform input[type="file"]{
-    width: 100%;
-    outline: none;
-    border: none;
-    font-family: 'Montserrat', serif;
-    font-weight: bold;
+    border-radius: 0vw;
 }
-
 /* Selectbar */
 .blogpostform select{
     border: 2px solid green;
@@ -43,9 +34,8 @@
 }
 
 .blogpostform textarea{
-    width: 100%;
     height: 20vw;
-    outline: none;
+    resize: none;
 }
 
 .newPostButton {
@@ -78,7 +68,7 @@
     }
 
     .blogpostform textarea{
-        font-size: 1vw;
+        height: 20vw;
     }
 
     .blogpostform select{
@@ -91,7 +81,7 @@
 }
 
 @media screen and (max-width:1100px){
-    .blogpostform input[type="text"], .blogpostform input[type="url"], .blogpostform select{
+    .blogpostform input[type="text"], .blogpostform textarea, .blogpostform input[type="url"], .blogpostform select{
         height: 5vw;
         font-size: 2vw;
         padding-left: 2%;
@@ -99,7 +89,7 @@
     }
 
     .blogpostform textarea{
-        font-size: 2vw;
+        height: 20vw;
     }
 
     .blogpostform select{

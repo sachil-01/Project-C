@@ -2,36 +2,35 @@
     margin: 5% 20%;
     background-color: rgba(49, 122, 18, 0.16);
     padding: 2% 10%;
-    border-radius: 20px;
+    border-radius: 2vw;
     line-height: 2;
-    font-size: large;
     font-family: 'Montserrat', serif;
     font-weight: bold;
-}
-.adform form {
-    margin-left: 20%;
+    position: relative;
 }
 
 .adform h2 {
     text-align: center;
 }
 
-.adform input[type="text"] {
+.adform input[type="text"], .adform input[type="file"], .adform textarea {
      padding: 12px 20px;
      border: 2px solid white;
-     border-radius: 4px;
+     width: 100%;
+     outline: none;
+     border: none;
+     border-radius: 1vw;
+     font-family: 'Montserrat', serif;
+     font-weight: bold;
  }
 
 .adform img {
     display: inline-block;
 }
 
-
-textarea {
-    padding: 12px 20px;
-    border: 2px solid white;
-    border-radius: 4px;
+.adform textarea {
     resize: none;
+    height: 20vw;
 }
 
 .notloggedin {
@@ -55,25 +54,23 @@ textarea {
 
 .newAdButtons {
     background-color: transparent;
-    border-radius:12px;
-    border:2px solid #4A7C00;
+    border-radius: 1vw;
+    border:2px solid green;
     display:inline-block;
     cursor:pointer;
-    color: #4A7C00;
+    color: green;
     font-family: 'Montserrat', serif;
     font-size:17px;
     font-weight:bold;
     padding:10px 20px;
     text-decoration:none;
+    outline: none;
 }
 .newAdButtons:hover {
-    background-color: rgba(49, 149, 15, 0.66);
-    border:2px solid white;
     color: white;
-}
-.newAdButtons:active {
-    position:relative;
-    top:1px;
+    background-color: green;
+    border-color:2px solid green;
+    font-weight: bold;
 }
 
 /* HIDE RADIO */
@@ -96,4 +93,42 @@ input[type=radio]:checked + img {
     outline: 2px solid #31950f;
 }
 
+@media screen and (min-width:1100px){
+    .adform input[type="text"], .adform input[type="file"], .adform textarea{
+        font-size: 1vw;
+        padding-left: 2%;
+        padding-right: 2%;
+    }
 
+    .adform h2{
+        font-size: 2vw;
+    }
+}
+
+@media screen and (max-width:1100px){
+    .adform input[type="text"], .adform input[type="file"], .adform textarea{
+        font-size: 2vw;
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+
+    .adform h2{
+        font-size: 4vw;
+    }
+}
+
+/* error messages */
+.newaderror{
+	width: 350px;
+	border: 3px solid #4A7C00;
+	border-radius: 10px;
+	display: block;
+    margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+}
+
+.newaderror p{
+	text-align: center;
+	font-weight: bold;
+}

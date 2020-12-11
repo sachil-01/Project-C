@@ -22,8 +22,6 @@
         <input type="submit" name="submit"> 
         </form> -->
         
-        
-        
         <div class="searchbar-div">
             <div class="searchbar-margin">
                 <div class="searchbar-main">
@@ -35,18 +33,31 @@
             </div>
         </div>
 
-        
-
-        
     </div> 
-</body>
 
-<div class="img-area">
-<?php 
+    <div class="img-area">
+        <?php 
 
-require 'includes/dbh.inc.php';
+        require 'includes/dbh.inc.php';
+        include 'distance.php';
 
-$sql = "SELECT plantName, plantLatinName, postDate FROM Advertisement";
+        if (isset($_SESSION['userId'])) {
+            // Retrieve postal code from current user
+            $currentUserId = $_SESSION['userId'];
+            $sql = "SELECT postalCode FROM User WHERE idUser = $currentUserId";
+            $statement = mysqli_stmt_init($conn);
+            if (!mysqli_stmt_prepare($statement, $sql)) {
+                header("Location: adpagina.php?error=sqlerror");
+                echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
+            }
+            else {
+                mysqli_stmt_execute($statement);
+                $result = mysqli_stmt_get_result($statement);
+                if ($row = mysqli_fetch_assoc($result)) {
+                    $currentUserPostalCode = $row['postalCode'];
+                }
+            }
+        }
 
 $statement = mysqli_stmt_init($conn);
 if (!mysqli_stmt_prepare($statement, $sql)) {
@@ -81,16 +92,55 @@ echo '<div class="plant">
 </div>
 </div>
 ';
+        $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert";
 
+        $statement = mysqli_stmt_init($conn);
+        //array with all blogpost Ids
+        $allIdAdvertisements = array();
+        if (!mysqli_stmt_prepare($statement, $sql)) {
+            header("Location: adpagina.php?error=sqlerror");
+            echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
         }
-    }
-};
+        else {
+            mysqli_stmt_execute($statement);
+            $result = mysqli_stmt_get_result($statement);
+            if ($row = mysqli_fetch_assoc($result)) {
+                foreach ($result as $adv) {
+                    //checks if advertisement id already exists in array > if advertisement id exists in array -> skip current advertisement
+                    if(!in_array($adv['idAd'], $allIdAdvertisements)){
+                        $idAd = $adv['idAd'];
+                        $plantName = $adv['plantName'];
+                        $plantLatinName = $adv['plantLatinName'];
+                        $adDate = date("d-m-Y", strtotime($adv['postDate']));
 
-?>
-
-
-</div>
+                        if (isset($_SESSION['userId'])) {
+                            $distance = getDistance($adv['postalCode'], $currentUserPostalCode);
+                        } else {
+                            $distance = "-- km";
+                        }
+                        echo '<div class="plant">
+                            <div class="adImage">
+                                <a href="adinfo?idAd='.$idAd.'"><img src="uploads/'.$adv["imgName"].'" alt=""></a>
+                            </div>
+                            <div class="description">
+                                <h2>'.$plantName.'</h2>
+                                <br>
+                                <h3> Afstand: <span>'.$distance.'</span></h3>
+                                <h3> Datum: <span>'.$adDate.'</span></h3>
+                            </div>
+                        </div>';
+                        //add advertisement id to array
+                        array_push($allIdAdvertisements, $adv['idAd']);
+                    }
+                }
+            }
+        };
+        ?>
+    </div>
+</body>
 
 <?php
-    include("footer.php");
+    include('footer.php');
+    include('feedback.php');
 ?>
+

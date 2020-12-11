@@ -10,9 +10,6 @@
     // Load Composer's autoloader
     require 'vendor/autoload.php';
 
-    // Include encryption function
-    include('../encrypt_decrypt.php');
-
     $mail = new PHPMailer();
 
     //Server settings
@@ -21,11 +18,14 @@
     $mail->Host       = 'smtp.gmail.com';                               // Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                            // Enable SMTP authentication
     $mail->Username   = 'FleurtOpMail2@gmail.com';                       // SMTP username
-    $mail->Password   = 'FleurtOpMail222';                               // SMTP password
+    $mail->Password   = 'fleurtop2020';                               // SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;                   // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
     $mail->Port       = 587;                                               // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
     if (isset($_POST['mail-submit'])){
+        // Include encryption function
+        include('../encrypt_decrypt.php');
+        
         //Checks if system has to send a "Reset password" mail
         $email = $_POST['mailId'];
 
@@ -68,6 +68,35 @@
         $mail->send();
 
         header("Location: ../forgotpassword.php?success=send");
+        exit();
+    } else if (isset($_POST['feedback-submit'])){
+        $fbName = $_POST['feedbackName'];
+        $fbEmail = $_POST['feedbackEmail'];
+        $fbSubject = $_POST['feedbackSubject'];
+        // nl2br function inserts HTML line breaks before all newlines in a string (Preserve breaklines)
+        $fbMessage = nl2br($_POST['feedbackMessage']);
+
+        //Recipients
+        $mail->setFrom('FleurtOpMail2@gmail.com', 'Fleurt Op');
+        $mail->addAddress('FleurtOpMail2@gmail.com', 'Fleurt Op');     // Add a recipient
+
+        // Content
+        $mail->isHTML(true);                                                  // Set email format to HTML
+        $mail->Subject = "$fbSubject";
+
+        $mail->Body = "$fbMessage
+                        <br><br>
+                        Email van zender: $fbEmail
+                        <br>
+                        Naam van zender: $fbName";
+        $mail->send();
+        
+        //checks if previous page URL contains 'feedback=succes'
+        if(strpos($_SERVER['HTTP_REFERER'], "feedback=success")){
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        } else {
+            header('Location: ' . $_SERVER['HTTP_REFERER'] . "?feedback=success");
+        }
         exit();
     }
 
