@@ -2,6 +2,7 @@
     session_start();
     include('header.php');
 ?>
+<script src="adpagina.js"></script>
 
 <head>
     <title>Advertisements</title>
@@ -78,11 +79,13 @@ echo '<div class="plant">
     <h3> Afstand: <span>0km</span></h3>
     <h3> Datum: <span>'.$adDate.'</span></h3>
 </div>
-</div>';
+</div>
+';
 
         }
     }
 };
+
 ?>
 
 
