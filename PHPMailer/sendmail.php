@@ -78,18 +78,41 @@
 
         //Recipients
         $mail->setFrom('FleurtOpMail2@gmail.com', 'Fleurt Op');
-        $mail->addAddress('FleurtOpMail2@gmail.com', 'Fleurt Op');     // Add a recipient
+        //$mail->addAddress('FleurtOpMail2@gmail.com', 'Fleurt Op');          // Add a recipient
+        //$mail->addAddress("$fbEmail","$fbName");                            // Add a second recipient
 
-        // Content
-        $mail->isHTML(true);                                                  // Set email format to HTML
-        $mail->Subject = "$fbSubject";
+        $recipients = array(
+            'FleurtOpMail2@gmail.com' => 'Fleurt Op',
+            "$fbEmail" => "$fbName",
+        );
 
-        $mail->Body = "$fbMessage
-                        <br><br>
-                        Email van zender: $fbEmail
-                        <br>
-                        Naam van zender: $fbName";
-        $mail->send();
+        foreach($recipients as $email => $name)
+        {
+            $mail->addAddress($email, $name);
+
+            // Content
+            $mail->isHTML(true);                                                  // Set email format to HTML
+            $mail->Subject = "$fbSubject";
+
+            if($email != "FleurtOpMail2@gmail.com"){
+                $extraBodyMessage = "Bedankt voor uw feedback op onze website!
+                                     <br><br>
+                                     Hieronder kunt u nog uw feedback terugzien:
+                                     <br>
+                                     __________________________________________
+                                     <br><br>";
+            } else {
+                $extraBodyMessage = "";
+            }
+            
+            $mail->Body = $extraBodyMessage . "$fbMessage
+                            <br><br>
+                            Email van zender: $fbEmail
+                            <br>
+                            Naam van zender: $fbName";
+            $mail->send();
+            $mail->ClearAllRecipients();
+        }
         
         //checks if previous page URL contains 'feedback=succes'
         if(strpos($_SERVER['HTTP_REFERER'], "feedback=success")){

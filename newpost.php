@@ -14,7 +14,8 @@
 
             $blogtitle = $_POST["bname"];
             $blogcategory = $_POST["bcategory"];
-            $blogdescription = $_POST["bdesc"];
+            //nl2br() function saves breaklines of user
+            $blogdescription = nl2br($_POST["bdesc"]);
             $blogLink = $_POST['bLink'];
             $userId = $_SESSION['userId'];
 

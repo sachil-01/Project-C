@@ -14,6 +14,7 @@
 }
 
 .blogpostform input[type="text"], .blogpostform input[type="url"], .blogpostform textarea, .blogpostform input[type="file"]{
+    padding: 12px 20px;
     width: 100%;
     outline: none;
     border: none;
