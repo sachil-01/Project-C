@@ -9,25 +9,20 @@
     <link rel="stylesheet" type="text/css" href="css\adPagina.css">
 </head>
 
-<body>
-
-    
-
+<body>    
     <div class="gallery">
         <h1>Alle aanbiedingen</h1>
         <a class="newadknop" href="newad"><i class="fas fa-plus"></i>Plant plaatsen</a>
-        
-        <!-- <form method="POST">
-        <input type="text" name="search">
-        <input type="submit" name="submit"> 
-        </form> -->
+
         
         <div class="searchbar-div">
             <div class="searchbar-margin">
                 <div class="searchbar-main">
                     <div class="searchbar-main-content">
-                        <input type="search" class="searchbar-input" onfocus="this.value=''" placeholder="Zoeken...">
-                        <!-- <button type="submit" class="zoekknop">Zoeken</button> -->
+                        <form action="" method="post">
+                            <input type="text" class="searchbar-input" name="search-input" onfocus="this.value=''" placeholder="Zoeken...">
+                            <button class="" name="search-submit">Zoeken</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -37,7 +32,6 @@
 
     <div class="img-area">
         <?php 
-
         require 'includes/dbh.inc.php';
         include 'distance.php';
 
@@ -59,42 +53,24 @@
             }
         }
 
-$statement = mysqli_stmt_init($conn);
-if (!mysqli_stmt_prepare($statement, $sql)) {
-    header("Location: adpagina.php?error=sqlerror");
-    echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
-}
-else {
-    mysqli_stmt_execute($statement);
-    $result = mysqli_stmt_get_result($statement);
-    if ($row = mysqli_fetch_assoc($result)) {
-        foreach ($result as $adv) {
-            $idAd = $adv['idAd'];
-            $plantName = $adv['plantName'];
-            $plantLatinName = $adv['plantLatinName'];
-            $plantCategory = $adv['plantCategory'];
-            $plantDesc = $adv['plantDesc'];
-            $postDate = $adv['postDate'];
-            $waterManage = $adv['waterManage'];
-            $lightPattern = $adv['lightPattern'];
-            $userId = $adv['userId'];
-            $adDate = date("d-m-Y", strtotime($postDate));
-            
-echo '<div class="plant">
-<div class="adImage">
-    <img src="images/plant1.jpg" alt="">
-</div>
-<div class="description">
-    <h2>'.$plantName.'</h2>
-    <br>
-    <h3> Afstand: <span>0km</span></h3>
-    <h3> Datum: <span>'.$adDate.'</span></h3>
-</div>
-</div>
-';
+        if(isset($_POST['search-submit'])){
+            $searchvalue = $_POST['search-input'];
+            //split search input by every space
+            $searchpieces = explode(" ", $searchvalue);
+            //for loop to create "a.plantName LIKE '%$array[0]%'" for every array item
+            $temp = "a.plantName LIKE ";    
+            for ($i = 0; $i < count($searchpieces); $i++){
+                if($i == count($searchpieces) - 1){
+                    $temp = $temp . "'%".$searchpieces[$i]."%'";
+                } else {
+                    $temp = $temp . "'%".$searchpieces[$i]."%' OR a.plantName LIKE ";
+                }
+            }
+            $sql = "SELECT DISTINCT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE $temp ORDER BY a.idAd DESC";
+        } else {
+            $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert ORDER BY a.idAd DESC";
+        }
         
-        $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert ORDER BY a.idAd DESC";
-
         $statement = mysqli_stmt_init($conn);
         //array with all blogpost Ids
         $allIdAdvertisements = array();
