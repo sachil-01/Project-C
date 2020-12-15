@@ -12,19 +12,23 @@
     $id = $_GET['idAd'];
 
     $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE a.idAd = '$id'";
-    $result = $conn->query($sql);
-    $number_of_posts = $result->num_rows;
+    $result = mysqli_query($conn, $sql);
+
     if ($result->num_rows > 0) {
         // output data of each row
 
-        while ($row = $result->fetch_assoc()) {
+        $row = $result->fetch_assoc();
            echo'<div class="advWrapper">
-                    <div class="slidertns">
-                        <img src="uploads/'.$row["imgName"].'" alt="">
-                        <img src="uploads/'.$row["imgName"].'" alt="">
-                        <img src="uploads/'.$row["imgName"].'" alt="">
-                    </div>
-                    <div class="plantInfo">
+
+                        <div class="slidertns">';
+                            $resultInner = $conn->query($sql);
+                                while ($row2 = mysqli_fetch_array($resultInner)) {
+
+                                    echo ' <img src="uploads/'.$row2["imgName"].'" alt="">';
+
+                                }
+                       echo' </div>
+                        <div class="plantInfo">
                         <div class="plantInfoMargin">
                             <a href="mailto:'.$row["emailUser"].'?subject=Fleurt op '.$row["plantName"].' advertentie">
                             <button class="plantMsg">Bericht sturen</button>
@@ -59,12 +63,11 @@
                         </div>
                     </div>
                 </div>';
-        }
-
     } else {
         echo "0 results";
     }
     $conn->close();
 
-include('footer.php')
+include('footer.php');
+include('feedback.php');
 ?>
