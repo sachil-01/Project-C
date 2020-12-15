@@ -26,10 +26,21 @@
                     <li><a href="adpagina">Aanbod</a></li>
                     <li><a href="blogpage">Blog</a></li>
                     <li><a href="hoewerkthet">Hoe werkt het?</a></li>
-<!--                    <li><input type="search" class="searchbar" onfocus="this.value=''" placeholder="Zoeken..."></i></li>-->
                     <?php
-                        if (isset($_SESSION['userId'])) {
-                            echo '<li><a href="profilepage.php"><i class="fas fa-user"></i>Mijn profiel</a><li>';
+                        $id = $_SESSION['userId'];
+                        if (isset($id)) {
+                            require 'includes/dbh.inc.php';
+                            $sql = $conn->query("SELECT admin FROM User WHERE idUser = '$id'") or die($conn->error);
+                            /* fetch associative array */
+                            while ($row = $sql->fetch_assoc()) {
+                                if($row["admin"] == 1){
+                                    $user = " Dashboard";
+                                } else if ($row["admin"] == 0){
+                                    $user = " Mijn profiel";
+                                }
+                            }
+                            $_SESSION['admin'] = $row["admin"];
+                            echo '<li><a href="profilepage.php"><i class="fas fa-user"></i>'.$user.'</a><li>';
                             echo '<form action="includes/logout.inc.php" method="post">
                                     <button class="logout_button" type="submit" name="logout-submit">Logout</button>
                                 </form>';
