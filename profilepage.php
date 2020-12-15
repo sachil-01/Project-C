@@ -17,28 +17,30 @@
         $adArray = array();
         $blogArray = array();
         
-        $sql = "SELECT a.plantName, a.postDate FROM User u JOIN advertisement a ON u.idUser = a.userId WHERE u.idUser='$id'";
+        $sql = "SELECT a.plantName, a.postDate FROM User u JOIN Advertisement a ON u.idUser = a.userId WHERE u.idUser='$id'";
         $userAdvertisements = '<table class="ads-blogs-list"><tr class="ads-blogs-columnnames"><td><p>Advertentienaam</p></td><td><p>Geplaatst op</p></td><td><p>Verloopt op</p></td><td><p>Opties</p></td></tr>';
-        $userAdvertisement = '<tr><td><p><span>Advertentienaam: </span>'.$row["plantName"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["postDate"]),"d-m-Y").'</p></td><td><p><span>Verloopt op: </span>dd-mm-yyyy</p></td><td><button class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
-        array_push($adArray, $sql, $userAdvertisements, $userAdvertisement);
+        array_push($adArray, $sql, $userAdvertisements);
         
-        $sql = "SELECT b.blogTitle, b.blogDate FROM User u JOIN blogpost b ON u.idUser = b.blogUserId WHERE u.idUser='$id'";
+        $sql = "SELECT b.blogTitle, b.blogDate FROM User u JOIN Blogpost b ON u.idUser = b.blogUserId WHERE u.idUser='$id'";
         $userBlogs = '<table class="ads-blogs-list"><tr class="ads-blogs-columnnames"><td><p>Blogtitel</p></td><td><p>Geplaatst op</p></td><td><p>Opties</p></td></tr>';
-        $userBlog = '<tr><td><p><span>Blogtitle: </span>'.$row["blogTitle"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p></td><td><button class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
-        array_push($blogArray, $sql, $userBlogs, $userBlog);
+        array_push($blogArray, $sql, $userBlogs);
 
         $adBlogArray = array($adArray, $blogArray);
         
-        for($i = 0; $i < count($adBlogArray); $i++){
-            $result = $conn->query($adBlogArray[$i][0]);
+        for($i = 0; $i < count($adBlogArray[$i]); $i++){                                    //loop through advertisement array or blogpost array
+            $result = $conn->query($adBlogArray[$i][0]);                                    //make connection with database and run query
             $number_of_posts = $result->num_rows;
             if ($result->num_rows > 0) {
                 // output data of each row
                 while ($row = $result->fetch_assoc()) {
-                    $adBlogArray[$i][1] = $adBlogArray[$i][1] . $adBlogArray[$i][2];
+                    if($i == 00){                                                           //checks if it's the advertisement array
+                        $adBlogArray[$i][1] = $adBlogArray[$i][1] . '<tr><td><p><span>Advertentienaam: </span>'.$row["plantName"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["postDate"]),"d-m-Y").'</p></td><td><p><span>Verloopt op: </span>dd-mm-yyyy</p></td><td><button class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
+                    } else {
+                        $adBlogArray[$i][1] = $adBlogArray[$i][1] . '<tr><td><p><span>Blogtitle: </span>'.$row["blogTitle"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p></td><td><button class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
+                    }
                 }
             }
-            $adBlogArray[$i][1] = $adBlogArray[$i][1] . '</table>';
+            $adBlogArray[$i][1] = $adBlogArray[$i][1] . '</table>';                         //end html <table> tag
         }
 
         $userAdvertisements = $adBlogArray[0][1];
