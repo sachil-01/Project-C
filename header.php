@@ -39,7 +39,6 @@
                                     $user = " Mijn profiel";
                                 }
                             }
-                            $_SESSION['admin'] = $row["admin"];
                             echo '<li><a href="profilepage.php"><i class="fas fa-user"></i>'.$user.'</a><li>';
                             echo '<form action="includes/logout.inc.php" method="post">
                                     <button class="logout_button" type="submit" name="logout-submit">Logout</button>

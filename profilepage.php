@@ -25,6 +25,7 @@
                 $toevoeging = $row["houseNumberExtra"];
                 $postcode = $row["postalCode"];
                 $admin = $row["admin"];
+                $biography = $row["biography"];
             }
 
             //checks if user is an admin or not
@@ -117,7 +118,7 @@
                             </div>
                             <div class="profile-leftpart-down">
                                 <p>Biografie</p>
-                                <textarea name="userBiography" placeholder="Voeg een biografie toe aan uw profiel"></textarea>
+                                <textarea name="userBiography" placeholder="Voeg een biografie toe aan uw profiel"><?php echo $biography; ?></textarea>
                             </div>
                         </div>
                     </td>
