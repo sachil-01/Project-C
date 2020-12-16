@@ -45,16 +45,20 @@
 
                 $adBlogArray = array($adArray, $blogArray);
                 
+                $countAds = 0;
+                $countBlogs = 0;
                 for($i = 0; $i < count($adBlogArray[$i]); $i++){                                    //loop through advertisement array or blogpost array
                     $result = $conn->query($adBlogArray[$i][0]);                                    //make connection with database and run query
                     $number_of_posts = $result->num_rows;
                     if ($result->num_rows > 0) {
                         // output data of each row
                         while ($row = $result->fetch_assoc()) {
-                            if($i == 00){                                                           //checks if it's the advertisement array
+                            if($i == 0){                                                           //checks if it's the advertisement array
                                 $adBlogArray[$i][1] = $adBlogArray[$i][1] . '<tr><td><p><span>Advertentienaam: </span>'.$row["plantName"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["postDate"]),"d-m-Y").'</p></td><td><p><span>Verloopt op: </span>dd-mm-yyyy</p></td><td><button class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
+                                $countAds++;
                             } else {
                                 $adBlogArray[$i][1] = $adBlogArray[$i][1] . '<tr><td><p><span>Blogtitle: </span>'.$row["blogTitle"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p></td><td><button class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
+                                $countBlogs++;
                             }
                         }
                     }
@@ -112,9 +116,9 @@
                                     <span class="fa fa-star"></span>
                                     <span class="fa fa-star"></span>
                                 <p>Aantal advertenties</p>
-                                <span>0 advertenties</span>
+                                <span><?php echo $countAds; ?> advertenties</span>
                                 <p>Aantal blogposts</p>
-                                <span>0 blogposts</span>
+                                <span><?php echo $countBlogs; ?> blogposts</span>
                             </div>
                             <div class="profile-leftpart-down">
                                 <p>Biografie</p>
