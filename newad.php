@@ -15,20 +15,21 @@ include('header.php');
             $plantname = $_POST["pname"];
             $plantlatinname = $_POST["psoort"];
             $plantcategory = $_POST["type"];
+            $planttype = $_POST["soort"];
             $desc = $_POST["desc"];
             $water = $_POST["water"];
             $light = $_POST["licht"];
             $userId = $_SESSION['userId'];
 
             // Insert blogpost data into database
-            $sql = "INSERT INTO Advertisement(plantName, plantLatinName, plantCategory, plantDesc, waterManage, lightPattern, Userid) VALUES(?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO Advertisement(plantName, plantLatinName, plantType, plantCategory, plantDesc, waterManage, lightPattern, Userid) VALUES(?,?,?,?,?,?,?,?)";
             $statement = mysqli_stmt_init($conn);
             if (!mysqli_stmt_prepare($statement, $sql)) {
                 header("Location: newad.php?error=sqlerror");
                 echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 101).</p></div>';
             }
             else {
-                mysqli_stmt_bind_param($statement, "ssssiii", $plantname, $plantlatinname, $plantcategory, $desc, $water, $light, $userId);
+                mysqli_stmt_bind_param($statement, "sssssiii", $plantname, $plantlatinname, $planttype, $plantcategory, $desc, $water, $light, $userId);
                 mysqli_stmt_execute($statement);
             }
 
@@ -81,8 +82,22 @@ include('header.php');
                 <label for="pname">Plantnaam:<label style="color: red;">*</label></label><br>
                 <input type="text" id="pname" name="pname" required><br><br>
                 
-                <label for="psoort">Plantensoort:</label><br>
+                <label for="psoort">Latijnse naam:</label><br>
                 <input type="text" id="psoort" name="psoort"><br><br>
+
+                <label>Soort plant:<label style="color: red;">*</label></label><br>
+                <input type="radio" id="boom" name="soort" value="boom"
+                <label for="boom">Boom</label><br>
+                <input type="radio" id="struik" name="soort" value="struik"
+                <label for="struik">Struik</label><br>
+                <input type="radio" id="kruidachtige" name="soort" value="kruidachtige"
+                <label for="kruidachtige">Kruidachtige</label><br>
+                <input type="radio" id="bodembedekker" name="soort" value="bodembedekker"
+                <label for="bodembedekker">Bodembedekker</label><br>
+                <input type="radio" id="klimplant" name="soort" value="klimplant"
+                <label for="klimplant">Klimplant</label><br>
+                <input type="radio" id="waterplant" name="soort" value="waterplant"
+                <label for="waterplant">Waterplant</label><br><br>
                 
                 <label>Type advertentie:<label style="color: red;">*</label></label><br>
                 <input type="radio" id="stekje" name="type" value="stekje">
