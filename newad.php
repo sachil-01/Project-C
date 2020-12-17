@@ -12,67 +12,86 @@ include('header.php');
         if(isset($_POST['ad-submit'])){
             require 'includes/dbh.inc.php';
 
-            $plantname = $_POST["pname"];
-            $plantlatinname = $_POST["psoort"];
-            $plantcategory = $_POST["type"];
-            $desc = $_POST["desc"];
-            $water = $_POST["water"];
-            $light = $_POST["licht"];
-            $userId = $_SESSION['userId'];
-
-            // Insert blogpost data into database
-            $sql = "INSERT INTO Advertisement(plantName, plantLatinName, plantCategory, plantDesc, waterManage, lightPattern, Userid) VALUES(?,?,?,?,?,?,?)";
-            $statement = mysqli_stmt_init($conn);
-            if (!mysqli_stmt_prepare($statement, $sql)) {
-                header("Location: newad.php?error=sqlerror");
-                echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 101).</p></div>';
-            }
-            else {
-                mysqli_stmt_bind_param($statement, "ssssiii", $plantname, $plantlatinname, $plantcategory, $desc, $water, $light, $userId);
-                mysqli_stmt_execute($statement);
-            }
-
-            // Retrieve advertisement ID before inserting advertisement image(s) to database
-            $sql = "SELECT idAd FROM Advertisement WHERE userId = $userId ORDER BY postDate DESC LIMIT 1";
-            $statement = mysqli_stmt_init($conn);
-            if (!mysqli_stmt_prepare($statement, $sql)) {
-                header("Location: newad.php?error=sqlerror");
-                echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 102).</p></div>';
-            }
-            else {
-                mysqli_stmt_execute($statement);
-                $result = mysqli_stmt_get_result($statement);
-                if ($row = mysqli_fetch_assoc($result)) {
-                    $idAdvert= $row['idAd'];
-                }
-            }
-
-            //inserts image in uploads folder
+            $allowed = ['png', 'jpg', 'gif', 'jpeg'];
             $fileCount = count($_FILES['file']['name']);
-            for($i=0; $i < $fileCount; $i++){
-                //checks if there is a file uploaded
-                if(UPLOAD_ERR_OK == $_FILES['file']['error'][$i]){
-                    //give filename a time to avoid overwriting a file (unique name)
-                    $fileName = time().$_FILES['file']['name'][$i];
 
-                    //insert image to database
-                    $sql = "INSERT INTO AdImage(imgName, idAdvert) VALUES (?, ?)";
+            //Check if user uploaded images
+            for($i=0; $i < $fileCount; $i++){
+                if(!in_array(strtolower(pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION)), $allowed)){
+                    $imageFormats = false;
+                    break;
+                }
+                $imageFormats = true;
+            }
+
+            if($imageFormats){
+                if($fileCount >= 2 && $fileCount <= 3){
+                    $plantname = $_POST["pname"];
+                    $plantlatinname = $_POST["psoort"];
+                    $plantcategory = $_POST["type"];
+                    $desc = $_POST["desc"];
+                    $water = $_POST["water"];
+                    $light = $_POST["licht"];
+                    $userId = $_SESSION['userId'];
+
+                    // Insert blogpost data into database
+                    $sql = "INSERT INTO Advertisement(plantName, plantLatinName, plantCategory, plantDesc, waterManage, lightPattern, Userid) VALUES(?,?,?,?,?,?,?)";
                     $statement = mysqli_stmt_init($conn);
                     if (!mysqli_stmt_prepare($statement, $sql)) {
                         header("Location: newad.php?error=sqlerror");
-                        echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 103).</p></div>';
+                        echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 101).</p></div>';
                     }
                     else {
-                        mysqli_stmt_bind_param($statement, "ss", pathinfo($fileName, PATHINFO_BASENAME), $idAdvert);
+                        mysqli_stmt_bind_param($statement, "ssssiii", $plantname, $plantlatinname, $plantcategory, $desc, $water, $light, $userId);
                         mysqli_stmt_execute($statement);
-
-                        //insert image to uploads folder
-                        move_uploaded_file($_FILES['file']['tmp_name'][$i], 'uploads/'.$fileName);
                     }
+
+                    // Retrieve advertisement ID before inserting advertisement image(s) to database
+                    $sql = "SELECT idAd FROM Advertisement WHERE userId = $userId ORDER BY postDate DESC LIMIT 1";
+                    $statement = mysqli_stmt_init($conn);
+                    if (!mysqli_stmt_prepare($statement, $sql)) {
+                        header("Location: newad.php?error=sqlerror");
+                        echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 102).</p></div>';
+                    }
+                    else {
+                        mysqli_stmt_execute($statement);
+                        $result = mysqli_stmt_get_result($statement);
+                        if ($row = mysqli_fetch_assoc($result)) {
+                            $idAdvert= $row['idAd'];
+                        }
+                    }
+
+                    //inserts image in uploads folder
+                    for($i=0; $i < $fileCount; $i++){
+                        //checks if there is a file uploaded
+                        if(UPLOAD_ERR_OK == $_FILES['file']['error'][$i]){
+                            //give filename a time to avoid overwriting a file (unique name)
+                            $fileName = time().$_FILES['file']['name'][$i];
+
+                            //insert image to database
+                            $sql = "INSERT INTO AdImage(imgName, idAdvert) VALUES (?, ?)";
+                            $statement = mysqli_stmt_init($conn);
+                            if (!mysqli_stmt_prepare($statement, $sql)) {
+                                header("Location: newad.php?error=sqlerror");
+                                echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 103).</p></div>';
+                            }
+                            else {
+                                mysqli_stmt_bind_param($statement, "ss", pathinfo($fileName, PATHINFO_BASENAME), $idAdvert);
+                                mysqli_stmt_execute($statement);
+
+                                //insert image to uploads folder
+                                move_uploaded_file($_FILES['file']['tmp_name'][$i], 'uploads/'.$fileName);
+                            }
+                        }
+                    }
+                    header("Location: newad.php?upload=success");
+                    echo '<div class="newaderror"><p>Uw advertentie is succesvol geupload!</p></div>';
+                } else {
+                    echo '<div class="newaderror"><p>Er is een minimum van 2 foto\'s en een maximum van 3 foto\'s toegestaan.</p></div>';
                 }
+            } else {
+                echo '<div class="newaderror"><p>Alleen "jpg", "png", "gif" en "jpeg" bestanden zijn toegestaan!</p></div>';
             }
-            header("Location: newad.php?upload=success");
-            echo '<div class="newaderror"><p>Uw advertentie is succesvol geupload!</p></div>';
         }
         ?>
         <div class="adform">
