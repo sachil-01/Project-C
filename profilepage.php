@@ -40,7 +40,7 @@
                 $userAdvertisements = '<table class="ads-blogs-list"><tr class="ads-blogs-columnnames"><td><p>Advertentienaam</p></td><td><p>Geplaatst op</p></td><td><p>Verloopt op</p></td><td><p>Opties</p></td></tr>';
                 array_push($adArray, $sql, $userAdvertisements);
                 
-                $sql = "SELECT b.blogTitle, b.blogDate FROM User u JOIN Blogpost b ON u.idUser = b.blogUserId WHERE u.idUser='$id'";
+                $sql = "SELECT b.blogTitle, b.idPost, b.blogDate FROM User u JOIN Blogpost b ON u.idUser = b.blogUserId WHERE u.idUser='$id'";
                 $userBlogs = '<table class="ads-blogs-list"><tr class="ads-blogs-columnnames"><td><p>Blogtitel</p></td><td><p>Geplaatst op</p></td><td><p>Opties</p></td></tr>';
                 array_push($blogArray, $sql, $userBlogs);
 
@@ -57,7 +57,7 @@
                                 $adBlogArray[$i][1] = $adBlogArray[$i][1] . '<tr><td><p><span>Advertentienaam: </span>'.$row["plantName"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["postDate"]),"d-m-Y").'</p></td><td><p><span>Verloopt op: </span>dd-mm-yyyy</p></td><td><button class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
                                 $countAds++;
                             } else {
-                                $adBlogArray[$i][1] = $adBlogArray[$i][1] . '<tr><td><p><span>Blogtitle: </span>'.$row["blogTitle"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p></td><td><button class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
+                                $adBlogArray[$i][1] = $adBlogArray[$i][1] . '<tr><td><p><span>Blogtitle: </span>'.$row["blogTitle"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p></td><td><button id="userBlogpost" value='.$row["idPost"].' onclick="adminDeleteBlogpost(this.value, this.id)" class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
                                 $countBlogs++;
                             }
                         }
@@ -98,7 +98,7 @@
                             } else if($i == 1){                                                         //checks if it's the advertisements array
                                 $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '<tr><td><p><span>Advertentienaam: </span>'.$row["plantName"].'</p></td><td><p><span>Advertentie-id: </span>'.$row["idAd"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["postDate"]),"d-m-Y").'</p></td><td><p><span>Verloopt op: </span>dd-mm-yyyy</p></td><td><button class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
                             } else{                                                                   //blogposts array
-                                $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '<tr><td><p><span>Blogtitle: </span>'.$row["blogTitle"].'</p></td><td><p><span>Blog-id: </span>'.$row["idPost"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p></td><td><button id="adminBlogpost" value='.$row["idPost"].' onclick="adminDeleteBlogpost(this.value)" class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
+                                $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '<tr><td><p><span>Blogtitle: </span>'.$row["blogTitle"].'</p></td><td><p><span>Blog-id: </span>'.$row["idPost"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p></td><td><button id="adminBlogpost" value='.$row["idPost"].' onclick="adminDeleteBlogpost(this.value, this.id)" class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
                             }
                         }
                     }
@@ -286,23 +286,6 @@
                 </div>
             </div>
 
-            <script>
-                //adminBlogpost
-                // document.getElementById("demo").onclick = function() {myFunction()};
-                //blogpostId is the id of the blogpost stored in the button value
-                function adminDeleteBlogpost(blogpostId){
-                    $.ajax({
-                        url: "adminFunctions.php",
-                        type: 'post',
-                        data: {id: blogpostId},
-                        success: function(result)
-                        {
-                            document.getElementById("adminDisplayBlogpostFunc").innerHTML = result;
-                        }
-                    })
-                }
-            </script>
-
             <!-- ADMIN FUNCTIONS -->
             <div class="chosen-admin-func-container" id="adminDisplayResultList">
                 <div class="admin-row">
@@ -337,6 +320,26 @@
             }
             ?>
         </body>
+
+        <script>
+            //blogpostId is the id of the blogpost stored in the button value
+            function adminDeleteBlogpost(blogpostId, blogpostUser){
+                $.ajax({
+                    url: "adminFunctions.php",
+                    type: 'post',
+                    data: {id: blogpostId, user: blogpostUser},
+                    success: function(result)
+                    {
+                        //checks which list needs to be updated
+                        if(blogpostUser == "adminBlogpost"){ //admin blogpost list
+                            document.getElementById("adminDisplayBlogpostFunc").innerHTML = result;
+                        } else { // registered user blogpost list
+                            document.getElementById("userBlogsList").innerHTML = result;
+                        }
+                    }
+                })
+            }
+        </script>
 
         <?php
     } else {
