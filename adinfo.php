@@ -29,24 +29,52 @@
                                 }
                        echo' </div>
                         <div class="plantInfo">
-                        <div class="plantInfoMargin">
-                            <a href="mailto:'.$row["emailUser"].'?subject=Fleurt op '.$row["plantName"].' advertentie">
-                            <button class="plantMsg">Bericht sturen</button>
-                            </a>
-                            <h3>Licht:</h3>
-                            <p>'.$row["lightPattern"].'</p>
-                            <h3>Water:</h3>
-                            <p>'.$row["waterManage"].'</p>
-                            <h3>Soort:</h3>
-                            <p>'.$row["plantCategory"].'</p>
-                            <h3>Datum:</h3>
-                            <p>'.date_format(date_create($row["postDate"]),"d-m-Y").'</p>
-                            <h3>Beoordeling:</h3>
-                            <p>Later nog doen</p>
-                            <h3>Geupload door:</h3>
-                            <p>'.$row["usernameUser"].'</p>
+                            <div class="plantInfoMargin">
+                                <a class="plantInner" href="mailto:'.$row["emailUser"].'?subject=Fleurt op '.$row["plantName"].' advertentie">
+                                <button class="plantMsg">Bericht sturen</button>
+                                </a>
+                                <h3 class="plantInner">Licht:</h3>';
+
+                                $light = $row["lightPattern"] * 2;
+
+                                for($i=0; $i<=5; $i++) {
+
+                                    if ($light >= 1) {
+                                        echo '<span class="fas fa-lightbulb light-checked"></span>';
+                                        $light--;
+                                    } else {
+                                        echo '<span class="fas fa-lightbulb"></span>';
+                                        }
+                                }
+                                echo '
+                                <h3 class="plantInner">Water:</h3>';
+
+                                $light = $row["waterManage"]*2;
+
+                                for($i=0; $i<=5; $i++) {
+
+                                    if ($light >= 1) {
+                                        echo '<span class="fas fa-tint drop-checked"></span>';
+                                        $light--;
+                                    } else {
+                                        echo '<span class="fas fa-tint"></span>';
+                                        }
+                                }
+                                echo '
+                                <h3 class="plantInner">Soort:</h3>
+                                <p class="plantInner">'.$row["plantCategory"].'</p>
+                                <h3 class="plantInner">Datum:</h3>
+                                <p class="plantInner">'.date_format(date_create($row["postDate"]),"d-m-Y").'</p>
+                                <h3 class="plantInner">Beoordeling:</h3>
+                                <span class="fa fa-star star-checked"></span>
+                                <span class="fa fa-star star-checked"></span>
+                                <span class="fa fa-star star-checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <h3 class="plantInner">Geupload door:</h3>
+                                <p class="plantInner">'.$row["usernameUser"].'</p>
+                            </div>
                         </div>
-                    </div>
 
                     <div class="plantDescription">
                         <h2>'.$row["plantName"].'</h2>

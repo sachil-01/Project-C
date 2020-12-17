@@ -674,7 +674,7 @@ nav {
     padding: 10px;
     width: 80%;
     margin: auto;
-    background-color: rgb(130, 130, 130);
+    background-color: rgb(240, 240, 240);
     color: var(--clr-dark-green);
 }
 
@@ -717,11 +717,14 @@ button.tns-nav-active {
 .plantInfo {
     grid-area: info;
     border: 0.2vw solid var(--clr-dark-green);
-    /* flex-direction: column; */
 }
 
 .plantInfoMargin {
     margin: 1vw;
+}
+
+.plantInner {
+    margin-top: 20px;
 }
 
 .plantDescription {
@@ -744,4 +747,36 @@ button.tns-nav-active {
 .moreAdsImg img{
     width: 30%;
     margin: 10px;
+}
+
+.fa-tint {
+    margin-right: 20px;
+    margin-top: 20px;
+    color: grey;
+    font-size: var(--fs-h2);
+}
+
+.fa-lightbulb {
+    margin-right: 20px;
+    margin-top: 20px;
+    font-size: var(--fs-h2);
+    color: grey;
+}
+
+.drop-checked {
+    color: blue;
+}
+
+.light-checked {
+    color: #F4DC85;
+}
+
+.fa-star {
+    margin-right: 10px;
+    margin-top: 20px;
+    font-size: var(--fs-h2);
+}
+
+.star-checked {
+    color: orange;
 }
