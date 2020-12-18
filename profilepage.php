@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
     session_start();
     require 'header.php';
@@ -39,7 +40,7 @@
                 $userAdvertisements = '<table class="ads-blogs-list"><tr class="ads-blogs-columnnames"><td><p>Advertentienaam</p></td><td><p>Geplaatst op</p></td><td><p>Verloopt op</p></td><td><p>Opties</p></td></tr>';
                 array_push($adArray, $sql, $userAdvertisements);
                 
-                $sql = "SELECT b.blogTitle, b.blogDate FROM User u JOIN Blogpost b ON u.idUser = b.blogUserId WHERE u.idUser='$id'";
+                $sql = "SELECT b.blogTitle, b.idPost, b.blogDate FROM User u JOIN Blogpost b ON u.idUser = b.blogUserId WHERE u.idUser='$id'";
                 $userBlogs = '<table class="ads-blogs-list"><tr class="ads-blogs-columnnames"><td><p>Blogtitel</p></td><td><p>Geplaatst op</p></td><td><p>Opties</p></td></tr>';
                 array_push($blogArray, $sql, $userBlogs);
 
@@ -49,7 +50,6 @@
                 $countBlogs = 0;
                 for($i = 0; $i < count($adBlogArray[$i]); $i++){                                    //loop through advertisement array or blogpost array
                     $result = $conn->query($adBlogArray[$i][0]);                                    //make connection with database and run query
-                    $number_of_posts = $result->num_rows;
                     if ($result->num_rows > 0) {
                         // output data of each row
                         while ($row = $result->fetch_assoc()) {
@@ -57,7 +57,7 @@
                                 $adBlogArray[$i][1] = $adBlogArray[$i][1] . '<tr><td><p><span>Advertentienaam: </span>'.$row["plantName"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["postDate"]),"d-m-Y").'</p></td><td><p><span>Verloopt op: </span>dd-mm-yyyy</p></td><td><button class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
                                 $countAds++;
                             } else {
-                                $adBlogArray[$i][1] = $adBlogArray[$i][1] . '<tr><td><p><span>Blogtitle: </span>'.$row["blogTitle"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p></td><td><button class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
+                                $adBlogArray[$i][1] = $adBlogArray[$i][1] . '<tr><td><p><span>Blogtitle: </span>'.$row["blogTitle"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p></td><td><button id="userBlogpost" value='.$row["idPost"].' onclick="adminDeleteBlogpost(this.value, this.id)" class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
                                 $countBlogs++;
                             }
                         }
@@ -67,6 +67,47 @@
 
                 $userAdvertisements = $adBlogArray[0][1];
                 $userBlogs = $adBlogArray[1][1];
+            } else { //load all result lists for admin -> users, advertisements, blogposts
+                // fetch all required data of advertisements, users and blogposts and save the html of each in a string
+                // string will be used in javascript function to load the right html when user switches between tabs
+                $userArray = array();
+                $adArray = array();
+                $blogArray = array();
+
+                $sql = "SELECT u.usernameUser, u.idUser FROM User u";
+                $adminUsers = '<table class="ads-blogs-list"><tr class="ads-blogs-columnnames"><td><p>Gebruikersnaam</p></td><td><p>Gebruikers-id</p></td><td><p>Opties</p></td></tr>';
+                array_push($userArray, $sql, $adminUsers);
+                
+                $sql = "SELECT a.plantName, a.idAd, a.postDate FROM Advertisement a";
+                $adminAdvertisements = '<table class="ads-blogs-list"><tr class="ads-blogs-columnnames"><td><p>Advertentienaam</p></td><td><p>Advertentie-id</p></td><td><p>Geplaatst op</p></td><td><p>Verloopt op</p></td><td><p>Opties</p></td></tr>';
+                array_push($adArray, $sql, $adminAdvertisements);
+                
+                $sql = "SELECT b.blogTitle, b.idPost, b.blogDate FROM Blogpost b";
+                $adminBlogs = '<table class="ads-blogs-list"><tr class="ads-blogs-columnnames"><td><p>Blogtitel</p></td><td><p>Blog-id</p></td><td><p>Geplaatst op</p></td><td><p>Opties</p></td></tr>';
+                array_push($blogArray, $sql, $adminBlogs);
+
+                $userAdBlogArray = array($userArray, $adArray, $blogArray);
+                
+                for($i = 0; $i <= count($userAdBlogArray[$i]); $i++){                                    //loop through advertisement array, user array or blogpost array
+                    $result = $conn->query($userAdBlogArray[$i][0]);                                    //make connection with database and run query
+                    if ($result->num_rows > 0) {
+                        // output data of each row
+                        while ($row = $result->fetch_assoc()) {
+                            if($i == 0){                                                                //checks if it's the users array
+                                $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '<tr><td><p><span>Gebruikersnaam: </span>'.$row["usernameUser"].'</p></td><td><p><span>Gebruikers-id: </span>'.$row["idUser"].'</p></td><td><button class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
+                            } else if($i == 1){                                                         //checks if it's the advertisements array
+                                $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '<tr><td><p><span>Advertentienaam: </span>'.$row["plantName"].'</p></td><td><p><span>Advertentie-id: </span>'.$row["idAd"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["postDate"]),"d-m-Y").'</p></td><td><p><span>Verloopt op: </span>dd-mm-yyyy</p></td><td><button class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
+                            } else{                                                                   //blogposts array
+                                $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '<tr><td><p><span>Blogtitle: </span>'.$row["blogTitle"].'</p></td><td><p><span>Blog-id: </span>'.$row["idPost"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p></td><td><button id="adminBlogpost" value='.$row["idPost"].' onclick="adminDeleteBlogpost(this.value, this.id)" class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
+                            }
+                        }
+                    }
+                    $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '</table>';                    //end html <table> tag
+                }
+
+                $adminUsers = $userAdBlogArray[0][1];
+                $adminAdvertisements = $userAdBlogArray[1][1];
+                $adminBlogs = $userAdBlogArray[2][1];
             }
 
             if (isset($_GET['error'])) {
@@ -219,23 +260,23 @@
             <?php
             } else { //admin functions
             ?>
-            <div class="admin-container">
+            <div class="admin-container" id="adminDisplayFuncList">
                 <div class="admin-row">
                     <div class="admin-func">
-                        <div class="details">
+                        <div class="details" onclick="adminDisplayFunc('adminDisplayUserFunc')" id="adminUserFunc">
                             <h2>Gebruikers<h2>
                             <p>Klik hier om gebruikers te verwijderen</p>
                             <img src="images/userIcon3.png" alt="">
                         </div>
                     </div>
-                    <div class="admin-func">
+                    <div class="admin-func" onclick="adminDisplayFunc('adminDisplayAdvertisementFunc')" id="adminAdvertisementFunc">
                         <div class="details">
                             <h2>Advertenties<h2>
                             <p>Klik hier om advertenties te verwijderen</p>
                             <img src="images/userAds.png" alt="">
                         </div>
                     </div>
-                    <div class="admin-func">
+                    <div class="admin-func" onclick="adminDisplayFunc('adminDisplayBlogpostFunc')" id="adminBlogpostFunc">
                         <div class="details">
                             <h2>Blogposts<h2>
                             <p>Klik hier om blogposts te verwijderen</p>
@@ -244,10 +285,61 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ADMIN FUNCTIONS -->
+            <div class="chosen-admin-func-container" id="adminDisplayResultList">
+                <div class="admin-row">
+                    <div class="chosen-admin-func">
+                        <div class="admin-func-header">
+                            <button id="backToAllAdminFunc" onclick="adminDisplayAllFunc()">Terug naar het overzicht</button>
+                            <h2 id="chosenAdminFuncTitle"><h2>
+                        </div>
+                        <!-- <br>
+                        <input id="adminSearchInput" onkeyup="adminSearch()" class="admin-search" type="text" placeholder="Zoeken..">
+                        <p id="adminSearchBtn">Zoeken</p> -->
+                        <br>
+                        <div id="adminDisplayUserFunc">
+                            <?php
+                                echo "$adminUsers";
+                            ?>
+                        </div>
+                        <div id="adminDisplayAdvertisementFunc">
+                            <?php
+                                echo "$adminAdvertisements";
+                            ?>
+                        </div>
+                        <div id="adminDisplayBlogpostFunc">
+                            <?php
+                                echo "$adminBlogs";
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <?php
             }
             ?>
         </body>
+
+        <script>
+            //blogpostId is the id of the blogpost stored in the button value
+            function adminDeleteBlogpost(blogpostId, blogpostUser){
+                $.ajax({
+                    url: "adminFunctions.php",
+                    type: 'post',
+                    data: {id: blogpostId, user: blogpostUser},
+                    success: function(result)
+                    {
+                        //checks which list needs to be updated
+                        if(blogpostUser == "adminBlogpost"){ //admin blogpost list
+                            document.getElementById("adminDisplayBlogpostFunc").innerHTML = result;
+                        } else { // registered user blogpost list
+                            document.getElementById("userBlogsList").innerHTML = result;
+                        }
+                    }
+                })
+            }
+        </script>
 
         <?php
     } else {
