@@ -12,9 +12,8 @@
         if(isset($_POST['blog-submit'])){
             require 'includes/dbh.inc.php';
 
-            $allowed = ['png', 'jpg', 'gif', 'jpeg'];
+            $allowed = ['png', 'jpg', 'gif', 'jpeg', ''];
             $fileCount = count($_FILES['file']['name']);
-
             //Check if user uploaded images
             for($i=0; $i < $fileCount; $i++){
                 if(!in_array(strtolower(pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION)), $allowed)){
