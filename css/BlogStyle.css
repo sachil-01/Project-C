@@ -138,6 +138,8 @@
 
 .blogImage img{
     object-fit: cover;
+    height: 40vh;
+    width: 100%;
     object-position: center;
     transform: scale(1);
     transition: 0.3s ease-in-out;
