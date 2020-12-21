@@ -11,7 +11,7 @@
 <body>    
     <div class="gallery">
         <h1>Alle aanbiedingen</h1>
-        <a class="newadknop" href="newad"><i class="fas fa-plus"></i>Plant plaatsen</a>
+        <a class="newadknop" href="newad"><i class="fas fa-plus"></i> Plant plaatsen</a>
 
         
         <div class="searchbar-div">
@@ -95,16 +95,18 @@
                             $distance = "-- km";
                         }
                         echo '<div class="plant">
-                            <div class="adImage">
-                                <a href="adinfo?idAd='.$idAd.'"><img src="uploads/'.$adv["imgName"].'" alt=""></a>
-                            </div>
-                            <div class="description">
-                                <h2>'.$plantName.'</h2>
-                                <br>
-                                <h3> Afstand: <span>'.$distance.'</span></h3>
-                                <h3> Datum: <span>'.$adDate.'</span></h3>
-                            </div>
-                        </div>';
+                                <a class="linkPlant" href="adinfo?idAd='.$idAd.'">
+                                    <div class="adImage">
+                                        <img src="uploads/'.$adv["imgName"].'" alt="">
+                                    </div>
+                                    <div class="description">
+                                        <h2>'.$plantName.'</h2>
+                                        <br>
+                                        <h3> Afstand: <span>'.$distance.'</span></h3>
+                                        <h3> Datum: <span>'.$adDate.'</span></h3>
+                                    </div>
+                                </a>
+                            </div>';
                         //add advertisement id to array
                         array_push($allIdAdvertisements, $adv['idAd']);
                     }

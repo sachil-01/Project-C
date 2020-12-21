@@ -40,10 +40,10 @@
                                 for($i=0; $i<=5; $i++) {
 
                                     if ($light >= 1) {
-                                        echo '<span class="fas fa-lightbulb light-checked"></span>';
+                                        echo '<span class="fas fa-sun sun-checked"></span>';
                                         $light--;
                                     } else {
-                                        echo '<span class="fas fa-lightbulb"></span>';
+                                        echo '<span class="fas fa-sun"></span>';
                                         }
                                 }
                                 echo '
