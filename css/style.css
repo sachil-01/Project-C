@@ -228,17 +228,6 @@ nav {
     display: flex;
 }
 
-@keyframes navLinkFade{
-    from{
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to{
-        opacity: 1;
-        transform: translateX(0px);
-    }
-}
-
 /* Burger menu toggle */
 .toggle .line1{
     transform: translateY(8px) rotate(-45deg);
@@ -811,5 +800,16 @@ button.tns-nav-active {
     /* Advertisement description headers and description details */
     .description h3, .description h3 span{
         font-size: 3vw;
+    }
+}
+
+@keyframes navLinkFade{
+    from{
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0px);
     }
 }
