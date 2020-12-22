@@ -801,7 +801,6 @@ button.tns-nav-active {
         'info'
         'moreAds';
         grid-template-columns: repeat(1,1fr);
-        padding: 0;
     }
 
     .moreAdsImg img{
