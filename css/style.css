@@ -222,10 +222,105 @@ nav {
     transition: all 0.3s ease;
 }
 
+@media screen and (max-width:1300px){
+    .nav-links{
+        width: 60%;
+    }
+}
+
+/* When the screen is less than 1100px wide, stack the links and the search field vertically instead of horizontally */
+@media screen and (max-width:1100px){
+    body{
+        overflow-x: hidden;
+    }
+
+    .logo h2 {
+        display: none;
+    }
+
+    .logo img{
+        width: 5vw;
+    }
+
+    /* burger menu background */
+    .nav-links{
+        position: absolute;
+        right: 0px;
+        height: 60vh;
+        top: 6vh;
+        background-color: var(--clr-groen); opacity: 0.90;
+        display: none;
+        flex-direction: column;
+        text-align: center;
+        z-index: 9999;
+        width: 50%;
+
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+    }
+    .nav-links li{
+        opacity: 0;
+    }
+
+    .nav-links a{
+        color: var(--clr-wit);
+        font-size: 1.5vw;
+    }
+
+    .nav-links a:hover{
+        border-bottom: 0.2vw solid var(--clr-wit);
+    }
+
+    .burger{
+        display: block;
+    }
+
+    .welcome-div h1, .welcome-div h2{
+        font-size: 3.5vw;
+    }
+    
+    .welcome-div p{
+        font-size: 2vw;
+    }
+
+    .welcome-div button{
+        font-size: 2vw;
+        border: 2vw solid  #4b9600;
+        border-radius: 2vw;
+        margin-bottom: 10px;
+    }
+
+    .Explore-btn:hover{
+        background-color: #1b701b;
+        border-color: #1b701b;
+    }
+
+    /* Advertisement plant name */
+    .description h2{
+        font-size: 4vw;
+    }
+
+    /* Advertisement description headers and description details */
+    .description h3, .description h3 span{
+        font-size: 3vw;
+    }
+}
+
 /* Nativagion bar toggle */
 .nav-active{
     transform: translateX(0%);
     display: flex;
+}
+
+@keyframes navLinkFade{
+    from{
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0px);
+    }
 }
 
 /* Burger menu toggle */
@@ -275,6 +370,46 @@ nav {
     padding-right: 50px;
     max-width: 800px;
     color: var(--clr-groen);
+}
+@media screen and (min-width:1100px){
+    .welcome-div h1, .welcome-div h2{
+        font-size: 1.5vw;
+    }
+
+    .welcome-div {
+        height: 600px;
+    }
+
+    .welcome-div p{
+        font-size: 1vw;
+    }
+
+    .welcome-bg img{
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    .welcome-div button{
+        font-size: 1vw;
+        border: 1vw solid #4b9600;
+        border-radius: 1vw;
+    }
+
+    .Explore-btn:hover{
+        background-color: #1b701b;
+        border: 1vw solid  #1b701b;
+    }
+
+    /* Advertisement plant name */
+    .description h2{
+        font-size: 2vw;
+    }
+
+    /* Advertisement description headers and description details */
+    .description h3, .description h3 span{
+        font-size: 1vw;
+    }
 }
 
 .welcome-div button{
@@ -375,6 +510,21 @@ nav {
 
 .fa-search {
     color: var(--clr-wit);
+}
+
+@media screen and (max-width: 768px){    
+    .welcome-div {
+        height: 300px;
+    }
+
+    /* space between advertisement posts */
+    .plant {
+        margin: 1em;
+    }
+    .nav-links a{
+        color: var(--clr-wit);
+        font-size: 2.5vw;
+    }
 }
 
 .newadknop {
@@ -643,9 +793,6 @@ button.tns-nav-active {
 }
 
 @media screen and (max-width: 768px){    
-    .welcome-div {
-        height: 300px;
-    }
 
     .advWrapper {
         grid-template-areas: 
@@ -654,6 +801,7 @@ button.tns-nav-active {
         'info'
         'moreAds';
         grid-template-columns: repeat(1,1fr);
+        padding: 0;
     }
 
     .moreAdsImg img{
@@ -663,153 +811,11 @@ button.tns-nav-active {
     .fa-sun {
         margin-right: 10px;
     }
-
-    /* space between advertisement posts */
-    .plant {
-        margin: 1em;
-    }
-    .nav-links a{
-        color: var(--clr-wit);
-        font-size: 2.5vw;
-    }
 }
+
 
 @media screen and (min-width:1024px){
-    .welcome-div h1, .welcome-div h2{
-        font-size: 1.5vw;
-    }
-
     .advWrapper {
         max-width: 80%;
-    }
-
-    .welcome-div {
-        height: 600px;
-    }
-
-    .welcome-div p{
-        font-size: 1vw;
-    }
-
-    .welcome-bg img{
-        margin-left: auto;
-        margin-right: auto;
-        width: 100%;
-    }
-
-    .welcome-div button{
-        font-size: 1vw;
-        border: 1vw solid #4b9600;
-        border-radius: 1vw;
-    }
-
-    .Explore-btn:hover{
-        background-color: #1b701b;
-        border: 1vw solid  #1b701b;
-    }
-
-    /* Advertisement plant name */
-    .description h2{
-        font-size: 2vw;
-    }
-
-    /* Advertisement description headers and description details */
-    .description h3, .description h3 span{
-        font-size: 1vw;
-    }
-}
-
-@media screen and (max-width:1300px){
-    .nav-links{
-        width: 60%;
-    }
-}
-
-/* When the screen is less than 1100px wide, stack the links and the search field vertically instead of horizontally */
-@media screen and (max-width:1100px){
-    body{
-        overflow-x: hidden;
-    }
-
-    .logo h2 {
-        display: none;
-    }
-
-    .logo img{
-        width: 5vw;
-    }
-
-    /* burger menu background */
-    .nav-links{
-        position: absolute;
-        right: 0px;
-        height: 60vh;
-        top: 6vh;
-        background-color: var(--clr-groen); opacity: 0.90;
-        display: none;
-        flex-direction: column;
-        text-align: center;
-        z-index: 9999;
-        width: 50%;
-
-        transform: translateX(100%);
-        transition: transform 0.5s ease-in;
-    }
-    .nav-links li{
-        opacity: 0;
-    }
-
-    .nav-links a{
-        color: var(--clr-wit);
-        font-size: 1.5vw;
-    }
-
-    .nav-links a:hover{
-        border-bottom: 0.2vw solid var(--clr-wit);
-    }
-
-    .burger{
-        display: block;
-    }
-
-    .welcome-div h1, .welcome-div h2{
-        font-size: 3.5vw;
-    }
-    
-    .welcome-div p{
-        font-size: 2vw;
-    }
-
-    .welcome-div button{
-        font-size: 2vw;
-        border: 2vw solid  #4b9600;
-        border-radius: 2vw;
-        margin-bottom: 10px;
-    }
-
-    .Explore-btn:hover{
-        background-color: #1b701b;
-        border-color: #1b701b;
-    }
-
-    /* Advertisement plant name */
-    .description h2{
-        font-size: 4vw;
-    }
-
-    /* Advertisement description headers and description details */
-    .description h3, .description h3 span{
-        font-size: 3vw;
-    }
-}
-
-@keyframes navLinkFade{
-    from{
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to{
-        opacity: 1;
-        transform: translateX(0px);
     }
 }
