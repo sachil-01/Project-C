@@ -164,7 +164,7 @@ nav {
 
 .searchbar-main {
     position: relative;
-    align-content: center;
+    text-align: center;
     border-radius: 2px;
     height: 100%;
 }
@@ -175,19 +175,32 @@ nav {
     background-color: #fff;
     border-radius: 2px;
     box-shadow: 0 2px 7px 0 hsla(0,0%,82.4%,.25);
-    border: 1px solid #f1f4f3;
 }
 
 .searchbar-input {
     font-size: 1vw;
-    color: #707c75;
+    /* color: #707c75; */
     height: 100%;
     padding-left: 30px;
     margin: 0;
     border: 2px solid var(--clr-groen);
     border-radius: 5px;
-    width: 100%;
+    width: 90%;
     outline: none;
+}
+
+.searchbar-button {
+    border: 2px solid var(--clr-groen);
+    border-radius: 5px;
+    height: 100%;
+    width: 5%;
+    margin: 0;
+    float: right;
+}
+
+.fa-search {
+    color: var(--clr-groen);
+    font-size: 20px;
 }
 
 ::-webkit-search-cancel-button{
@@ -501,6 +514,30 @@ nav {
     margin-top: 10px;
 }
 
+/* Advertisement button */
+.newadknop {
+    text-align: center;
+    height: 50px;
+    margin-bottom: 1%;
+}
+
+.newadbutton {
+    border: 3px solid #1B701B;
+    background-color: #1B701B;
+    border-radius: 10px;
+    width: 25%;
+    padding: 8px;
+    height: 100%;
+}
+
+.newadlink {
+    text-decoration: none;
+    font-size: var(--fs-body);
+    color: white;
+    font-family: 'Montserrat', serif;
+    font-weight: bold;
+}
+
 /* Advertisement discription container*/
 .description{
     padding-bottom: 3%;
@@ -508,9 +545,6 @@ nav {
     text-align: center;
 }
 
-.fa-search {
-    color: var(--clr-wit);
-}
 
 @media screen and (max-width: 768px){    
     .welcome-div {
@@ -525,20 +559,27 @@ nav {
         color: var(--clr-wit);
         font-size: 2.5vw;
     }
-}
 
-.newadknop {
-    position: absolute;
-    right: 10%;
-    margin-top: -8%;
-    border: 3px solid #1B701B;
-    background-color: #1B701B;
-    border-radius: 10px;
-    text-decoration: none;
-    padding: 8px;
-    color: white;
-    font-family: 'Montserrat', serif;
-    font-weight: bold;
+    .searchbar-input {
+        width: 80%;
+        font-size: 3vw;
+    }
+
+    .searchbar-button {
+        width: 15%;
+    }
+
+    .newadbutton {
+        width: 40%;
+    }
+
+    .newadlink {
+        font-size: 3vw;
+    }
+
+    .searchbar-div {
+        height: 50px;
+    }
 }
 
 .footer img{

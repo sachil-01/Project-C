@@ -11,18 +11,17 @@
 <body>    
     <div class="gallery">
         <h1>Alle aanbiedingen</h1>
-        <a class="newadknop" href="newad"><i class="fas fa-plus"></i> Plant plaatsen</a>
-
+        <div class="newadknop">
+            <button class="newadbutton"><a class="newadlink" href="newad"><i class="fas fa-plus"></i> Plant plaatsen</a></button>
+        </div>
         
         <div class="searchbar-div">
             <div class="searchbar-margin">
                 <div class="searchbar-main">
-                    <div class="searchbar-main-content">
-                        <form action="" method="post">
+                        <form class="searchbar-main-content" action="" method="post">
                             <input type="text" class="searchbar-input" name="search-input" onfocus="this.value=''" placeholder="Zoeken...">
-                            <button class="" name="search-submit">Zoeken</button>
+                            <button class="searchbar-button" name="search-submit"><i class="fas fa-search"></i></button>
                         </form>
-                    </div>
                 </div>
             </div>
         </div>
