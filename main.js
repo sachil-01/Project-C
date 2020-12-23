@@ -32,6 +32,21 @@ function adminDisplayAllFunc(){
 //	document.getElementById("adminSearchBtn").innerHTML = adminSearchInput.value;
 //}
 
+// Search filters
+function showHideAdvanceSearch() {
+	if(document.getElementById("advanced-search-box").style.display=="none") {
+		document.getElementById("advanced-search-box").style.display = "block";
+		document.getElementById("advance_search_submit").value= "1";
+	} else {
+		document.getElementById("advanced-search-box").style.display = "none";
+		document.getElementById("with_the_exact_of").value= "";
+		document.getElementById("without").value= "";
+		document.getElementById("starts_with").value= "";
+		document.getElementById("search_in").value= "";
+		document.getElementById("advance_search_submit").value= "";
+	}
+}
+
 
 var profileTabsBtn = document.getElementById('ads-blogs-btns')
 var userAdsBtn = document.getElementById('ad-btn')
