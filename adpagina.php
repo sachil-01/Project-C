@@ -28,6 +28,45 @@
 
     </div> 
 
+    
+        <form class="search-filters" action="" method="post">
+            <div class="filters">
+                <div class="filterplantsoort">
+                    <label>Soort</label>
+                    <select class="selectsoort" name="soort">
+                        <option value="">Alle</option>
+                        <option value="Stekje">Stekje</option>
+                        <option value="Zaad">Zaad</option>
+                        <option value="Kiemplant">Kiemplant</option>
+                    </select>
+                </div>
+                
+                <div class="filterAfstand">
+                    <label>Afstand</label>
+                    <select class="selectAfstand" name="afstand">
+                        <option value="">Geen voorkeur</option>
+                        <option value="tien">< 10KM</option>
+                        <option value="vijftien">< 15KM</option>
+                        <option value="twintig">< 20 KM</option>
+                    </select>
+                </div>
+
+                <div class="filterdatefrom">
+                    <label>Van</label>
+                    <input type="date" name="date_from" id="from">
+                </div>
+                
+                <div class="filterdateto">
+                    <label>Tot</label>
+                    <input type="date" name="date_to" id="to">
+                </div>
+
+                <div class="submitfilters">
+                    <input type="submit" name="submit-filters">
+                </div>
+            </div>
+        </form>
+
     <div class="img-area">
         <?php 
         require 'includes/dbh.inc.php';
@@ -67,6 +106,26 @@
             $sql = "SELECT DISTINCT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE $temp ORDER BY a.idAd DESC";
         } else {
             $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert ORDER BY a.idAd DESC";
+        }
+
+        if(isset($_POST['submit-filters'])){
+            $filterPlantsoort = $_POST['soort'];
+
+            $filterAfstand = $_POST['afstand'];
+
+            $filterDateFrom = $_POST['date_from'];
+            $filterDfrom = strtotime($filterDateFrom);
+            $filterDfrom = date("Y/m/d", $filterDfrom);
+
+            $filterDateTo = $_POST['date_to'];
+            $filterDTo = strtotime($filterDateTo);
+            $filterDTo = date("Y/m/d", $filterDTo);
+
+
+            if($filterPlantsoort != "" || $filterDateFrom != "" || $filterDateTo != "") {
+                $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE plantCategory = '$filterPlantsoort' OR postDate >= '$filterDateFrom' AND postDate < '$filterDateTo' ORDER BY a.idAd DESC";
+                $data = mysqli_query($conn, $sql) or die('error');
+            }
         }
         
         $statement = mysqli_stmt_init($conn);
