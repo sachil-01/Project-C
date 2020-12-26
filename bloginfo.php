@@ -155,7 +155,7 @@
         $.ajax({
             url: "adminFunctions.php",
             type: 'post',
-            data: {id: blogpostId, user: blogpostUser},
+            data: {function: "blogpost", id: blogpostId, user: blogpostUser},
             success: function(result)
             {
                 //display result after clicking on "delete blogpost"
