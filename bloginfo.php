@@ -27,23 +27,7 @@
                 echo '<div class="userFunctions-btn">
                       <button onclick="showDeletePopUp()" class="user-delete-blogpost-btn">Verwijder</button>
                       <button class="user-edit-blogpost-btn">Wijzig</button>
-                      </div>
-                      <!-- pop up message when user clicks on delete button -->
-                    <div id="userDeleteBlogpostPopUp">
-                        <div class="blurBackground-success"></div>
-
-                        <div class="feedback-popup-success">
-                            <br>
-                            <h1>Weet u zeker dat u uw blogpost wilt verwijderen?</h1>
-                            <div class="popup-form">
-                                <!-- Close popup form button -->
-                                <br>
-                                <button class="feedback-submit" id="blogpostDelete" value='.$row["idPost"].' onclick="userDeleteBlogpost(this.value, this.id)">Verwijder blogpost</button>
-                                <button class="closefeedback-submit" onclick=userPopUpMessage()>Annuleren</button>
-                                <br><br>
-                            </div>
-                        </div>
-                    </div>';
+                      </div>';
             }
 
             echo'<div class="advWrapper">
@@ -75,6 +59,22 @@
                                 <img src="uploads/'.$row["imgName"].'" alt="">
                                 <img src="uploads/'.$row["imgName"].'" alt="">
                                 <img src="uploads/'.$row["imgName"].'" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- pop up message when user clicks on delete button -->
+                    <div id="userDeleteBlogpostPopUp">
+                        <div class="blurBackground-success"></div>
+
+                        <div class="feedback-popup-success">
+                            <br>
+                            <h1>Weet u zeker dat u uw blogpost wilt verwijderen?</h1>
+                            <div class="popup-form">
+                                <!-- Close popup form button -->
+                                <br>
+                                <button class="feedback-submit" id="blogpostDelete" value='.$row["idPost"].' onclick="userDeleteBlogpost(this.value, this.id)">Verwijder blogpost</button>
+                                <button class="closefeedback-submit" onclick=userPopUpMessage()>Annuleren</button>
+                                <br><br>
                             </div>
                         </div>
                     </div>';
