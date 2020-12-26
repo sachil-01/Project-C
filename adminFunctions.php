@@ -51,7 +51,7 @@
         $advertisementId = $_POST['id'];
         $advertisementUser = $_POST['user'];
 
-        $sql = "DELETE FROM adImage WHERE idAdvert = '$advertisementId'";
+        $sql = "DELETE FROM AdImage WHERE idAdvert = '$advertisementId'";
 
         if ($conn->query($sql) === TRUE) {
 
