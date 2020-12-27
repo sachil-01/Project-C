@@ -7,6 +7,22 @@
         $blogpostId = $_POST['id'];
         $blogpostUser = $_POST['user'];
 
+        //collect all image names
+        $sql = "SELECT imgName FROM BlogImage WHERE idBlog = '$blogpostId'";
+        $result = $conn->query($sql);                                    //make connection with database and run query
+        $imgNames = array();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                array_push($imgNames, $row['imgName']);
+            }
+        }
+
+        //delete all blogpost pictures from uploads folder
+        foreach($imgNames as $imgName){
+            $path = 'uploads/'.$imgName;
+            unlink($path);
+        }
+
         $sql = "DELETE FROM BlogImage WHERE idBlog = '$blogpostId'";
 
         if ($conn->query($sql) === TRUE) {
@@ -50,6 +66,22 @@
     } else if($_POST['function'] == "advertisement"){
         $advertisementId = $_POST['id'];
         $advertisementUser = $_POST['user'];
+
+        //collect all image names
+        $sql = "SELECT imgName FROM AdImage WHERE idAdvert = '$advertisementId'";
+        $result = $conn->query($sql);                                    //make connection with database and run query
+        $imgNames = array();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                array_push($imgNames, $row['imgName']);
+            }
+        }
+
+        //delete all advertisement pictures from uploads folder
+        foreach($imgNames as $imgName){
+            $path = 'uploads/'.$imgName;
+            unlink($path);
+        }
 
         $sql = "DELETE FROM AdImage WHERE idAdvert = '$advertisementId'";
 
