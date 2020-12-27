@@ -57,7 +57,7 @@
                                 $adBlogArray[$i][1] = $adBlogArray[$i][1] . '<tr><td><p><span>Advertentienaam: </span>'.$row["plantName"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["postDate"]),"d-m-Y").'</p></td><td><p><span>Verloopt op: </span>dd-mm-yyyy</p></td><td><button id="userAdvertisement" value='.$row["idAd"].' onclick="adminDeleteAdvertisement(this.value, this.id)" class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
                                 $countAds++;
                             } else {
-                                $adBlogArray[$i][1] = $adBlogArray[$i][1] . '<tr><td><p><span>Blogtitle: </span>'.$row["blogTitle"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p></td><td><button id="userBlogpost" value='.$row["idPost"].' onclick="adminDeleteBlogpost(this.value, this.id)" class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
+                                $adBlogArray[$i][1] = $adBlogArray[$i][1] . '<tr><td><p><span>Blogtitel: </span>'.$row["blogTitle"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p></td><td><button id="userBlogpost" value='.$row["idPost"].' onclick="adminDeleteBlogpost(this.value, this.id)" class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
                                 $countBlogs++;
                             }
                         }
@@ -98,7 +98,7 @@
                             } else if($i == 1){                                                         //checks if it's the advertisements array
                                 $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '<tr><td><p><span>Advertentienaam: </span>'.$row["plantName"].'</p></td><td><p><span>Advertentie-id: </span>'.$row["idAd"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["postDate"]),"d-m-Y").'</p></td><td><p><span>Verloopt op: </span>dd-mm-yyyy</p></td><td><button id="adminAdvertisement" value='.$row["idAd"].' onclick="adminDeleteAdvertisement(this.value, this.id)" class="Delete-btn">verwijder</button></td></tr>';
                             } else{                                                                   //blogposts array
-                                $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '<tr><td><p><span>Blogtitle: </span>'.$row["blogTitle"].'</p></td><td><p><span>Blog-id: </span>'.$row["idPost"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p></td><td><button id="adminBlogpost" value='.$row["idPost"].' onclick="adminDeleteBlogpost(this.value, this.id)" class="Delete-btn">verwijder</button></td></tr>';
+                                $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '<tr><td><p><span>Blogtitel: </span>'.$row["blogTitle"].'</p></td><td><p><span>Blog-id: </span>'.$row["idPost"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p></td><td><button id="adminBlogpost" value='.$row["idPost"].' onclick="adminDeleteBlogpost(this.value, this.id)" class="Delete-btn">verwijder</button></td></tr>';
                             }
                         }
                     }
@@ -157,9 +157,9 @@
                                     <span class="fa fa-star"></span>
                                     <span class="fa fa-star"></span>
                                 <p>Aantal advertenties</p>
-                                <span><?php echo $countAds; ?> advertenties</span>
+                                <span><span id="totalads"></span><span id="starttotalads"><?php echo $countAds; ?></span> advertenties</span>
                                 <p>Aantal blogposts</p>
-                                <span><?php echo $countBlogs; ?> blogposts</span>
+                                <span><span id="totalblogs"></span><span id="starttotalblogs"><?php echo $countBlogs; ?></span> blogposts</span>
                             </div>
                             <div class="profile-leftpart-down">
                                 <p>Biografie</p>
@@ -335,6 +335,8 @@
                             document.getElementById("adminDisplayBlogpostFunc").innerHTML = result;
                         } else { // registered user blogpost list
                             document.getElementById("userBlogsList").innerHTML = result;
+                            document.getElementById("totalblogs").innerHTML = (result.match(/Blogtitel:/g) || []).length;
+                            document.getElementById("starttotalblogs").innerHTML = "";
                         }
                     }
                 })
@@ -352,6 +354,8 @@
                             document.getElementById("adminDisplayAdvertisementFunc").innerHTML = result;
                         } else { // registered user advertisement list
                             document.getElementById("userAdsList").innerHTML = result;
+                            document.getElementById("totalads").innerHTML = (result.match(/Advertentienaam:/g) || []).length;
+                            document.getElementById("starttotalads").innerHTML = "";
                         }
                     }
                 })
