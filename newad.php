@@ -98,7 +98,7 @@ include('header.php');
         ?>
         <div class="adform">
             <h2>Nieuwe advertentie</h2><br>
-            <form action="" method="post" enctype="multipart/form-data" target="adpagina">
+            <form action="" method="post" enctype="multipart/form-data" target="_self">
                 <label for="pname">Plantnaam:<label style="color: red;">*</label></label><br>
                 <input type="text" id="pname" name="pname" required><br><br>
                 
