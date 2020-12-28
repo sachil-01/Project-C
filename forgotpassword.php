@@ -65,7 +65,7 @@
                             else {
                                 //update password in database
                                 mysqli_stmt_execute($statement);
-                                echo '<div class="loginerror"><p>Wachtwoord is gewijzigd!</p></div>';
+                                echo "<script type='text/javascript'> document.location = 'loginpagina?success=updatesuccess'; </script>";
                             }
                         }
                     }
@@ -83,7 +83,6 @@
                                     <br>
                                     <button type="submit" name="password-submit">Wijzig wachtwoord</button>
                                     <br><br>
-                                    <a href="loginpagina.php">Inloggen</a>
                                 </form>
                             </div>
                         </div>

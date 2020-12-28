@@ -35,7 +35,7 @@
                 <?php
                 require 'includes/dbh.inc.php';
 
-                $sql = "SELECT * FROM Blogpost b JOIN User u ON b.blogUserId = u.idUser JOIN BlogImage bi ON b.idPost = bi.idBlog ORDER BY b.idPost DESC";
+                $sql = "SELECT * FROM Blogpost b JOIN User u ON b.blogUserId = u.idUser LEFT JOIN BlogImage bi ON b.idPost = bi.idBlog ORDER BY b.idPost DESC";
                 $result = $conn->query($sql);
                 $number_of_posts = $result->num_rows;
                 //array with all blogpost Ids

@@ -70,16 +70,18 @@
                             $distance = "-- km";
                         }
                         echo '<div class="plant">
-                            <div class="adImage">
-                            <a href="adinfo?idAd='.$idAd.'"><img src="uploads/'.$adv["imgName"].'" alt=""></a>
-                            </div>
-                            <div class="description">
-                                <h2>'.$plantName.'</h2>
-                                <br>
-                                <h3> Afstand: <span>'.$distance.'</span></h3>
-                                <h3> Datum: <span>'.$adDate.'</span></h3>
-                            </div>
-                        </div>';
+                                <a class="linkPlant" href="adinfo?idAd='.$idAd.'">
+                                    <div class="adImage">
+                                        <img src="uploads/'.$adv["imgName"].'" alt="">
+                                    </div>
+                                    <div class="description">
+                                        <h2>'.$plantName.'</h2>
+                                        <br>
+                                        <h3> Afstand: <span>'.$distance.'</span></h3>
+                                        <h3> Datum: <span>'.$adDate.'</span></h3>
+                                    </div>
+                                </a>
+                            </div>';
                         array_push($allIdAdvertisements, $adv['idAd']);
                         $countPost++;
                         if($countPost == $limitPosts){
