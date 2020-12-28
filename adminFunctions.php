@@ -60,6 +60,7 @@
             if ($conn->query($sql) === TRUE) {
                 //if user clicks on delete button on advertisement page
                 if($advertisementUser == "advertisementDelete"){
+//                    ### Hier code toevoegen voor mooier uiterlijk en link naar aanbod pagina ###
                     echo "Advertentie is verwijderd.";
                 } else {
                     //check if its a registered user or an admin
