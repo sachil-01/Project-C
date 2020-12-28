@@ -42,7 +42,7 @@
     cursor: pointer;
 }
 
-.blogheader button, .comment-upload button, .comment-upload a{
+.blogheader button, .comment-upload button, .comment-upload a, .user-delete-blogpost-btn, .user-edit-blogpost-btn{
     border: 1vw solid #1B701B;
     background-color: #1B701B;
     border-radius: 10px;
@@ -256,6 +256,10 @@
         margin-top: 1%;
         width: 100%;
     }
+
+    #userDeleteBlogpostPopUp h1{
+        font-size: 1.5rem;
+    }
 }
 
 /* Comment section for blogpost */
@@ -268,7 +272,7 @@
     border: 3px solid #1B701B;
     border-radius: 10px;
     margin-bottom: 2%;
-    max-width: 75%;                 /*DEPENDING ON WHICH USER*/
+    max-width: 75%;          
     min-width: 60%;
     float: left;             /*DEPENDING ON WHICH USER*/
 }
@@ -307,4 +311,47 @@
 .comment-upload a{
     width: 100%;
     float: left;
+}
+
+/* Blogpost page edit and delete button */
+
+.userFunctions-btn{
+    /* float: right to push bloginfo down */
+    float: right; 
+    width: 100%;
+    margin-right: 10%;
+}
+
+.user-delete-blogpost-btn, .user-edit-blogpost-btn{
+    float: right;
+    border: 10px solid rgb(190, 6, 6);
+    background-color: rgb(190, 6, 6);
+    padding: 0;
+    margin-bottom: 1%;
+    margin-left: 5px;
+}
+
+.user-edit-blogpost-btn{
+    border-color: rgb(62, 117, 199);
+    background-color: rgb(62, 117, 199);
+}
+
+.user-edit-blogpost-btn:hover{
+    border-color:  rgb(47, 87, 148);
+    background-color: rgb(47, 87, 148);
+    cursor: pointer;
+}
+
+.user-delete-blogpost-btn:hover{
+    border-color: rgb(145, 6, 6);
+    background-color: rgb(145, 6, 6);
+    cursor: pointer;
+}
+
+#userDeleteBlogpostPopUp{
+    display: none;
+}
+
+#userDisplayBlogpost{
+    height: 75vh;
 }

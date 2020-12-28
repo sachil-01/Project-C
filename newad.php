@@ -25,7 +25,7 @@ include('header.php');
             }
 
             if($imageFormats){
-                if($fileCount >= 2 && $fileCount <= 3){
+                if($fileCount >= 1 && $fileCount <= 3){
                     $plantname = $_POST["pname"];
                     $plantlatinname = $_POST["psoort"];
                     $plantcategory = $_POST["type"];
@@ -87,8 +87,10 @@ include('header.php');
                     header("Location: newad.php?upload=success");
                     echo '<div class="newaderror"><p>Uw advertentie is succesvol geupload!</p></div>';
                 } else {
-                    echo '<div class="newaderror"><p>Er is een minimum van 2 foto\'s en een maximum van 3 foto\'s toegestaan.</p></div>';
+                    echo '<div class="newaderror"><p>Er is een minimum van 1 foto en een maximum van 3 foto\'s toegestaan.</p></div>';
                 }
+            } else if($fileCount == 1){
+                echo '<div class="newaderror"><p>U moet minimaal 1 foto uploaden! Er is een maximum van 3 foto\'s toegestaan.</p></div>';
             } else {
                 echo '<div class="newaderror"><p>Alleen "jpg", "png", "gif" en "jpeg" bestanden zijn toegestaan!</p></div>';
             }
@@ -96,7 +98,7 @@ include('header.php');
         ?>
         <div class="adform">
             <h2>Nieuwe advertentie</h2><br>
-            <form action="" method="post" enctype="multipart/form-data" target="adpagina">
+            <form action="" method="post" enctype="multipart/form-data" target="_self">
                 <label for="pname">Plantnaam:<label style="color: red;">*</label></label><br>
                 <input type="text" id="pname" name="pname" required><br><br>
                 

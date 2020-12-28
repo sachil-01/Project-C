@@ -10,7 +10,8 @@
     </head>
 
     <body>
-    <?
+        <div id="userDisplayBlogpost">
+        <?
         require 'includes/dbh.inc.php';
         $blogId = $_GET['idBlog'];
 
@@ -21,6 +22,14 @@
             // output data of each row
 
             $row = $result->fetch_assoc();
+            //checks if user is the publisher of the blogpost
+            if($row["idUser"] == $_SESSION['userId']){
+                echo '<div class="userFunctions-btn">
+                      <button onclick="showDeletePopUp()" class="user-delete-blogpost-btn">Verwijder</button>
+                      <button class="user-edit-blogpost-btn">Wijzig</button>
+                      </div>';
+            }
+
             echo'<div class="advWrapper">
                         <div class="slidertns">';
                         $resultInner = $conn->query($sql);
@@ -52,13 +61,23 @@
                                 <img src="uploads/'.$row["imgName"].'" alt="">
                             </div>
                         </div>
+                    </div>
+                    <!-- pop up message when user clicks on delete button -->
+                    <div id="userDeleteBlogpostPopUp">
+                        <div class="blurBackground-success"></div>
+
+                        <div class="feedback-popup-success">
+                            <br>
+                            <h1>Weet u zeker dat u uw blogpost wilt verwijderen?</h1>
+                            <div class="popup-form">
+                                <!-- Close popup form button -->
+                                <br>
+                                <button class="feedback-submit" id="blogpostDelete" value='.$row["idPost"].' onclick="userDeleteBlogpost(this.value, this.id)">Verwijder blogpost</button>
+                                <button class="closefeedback-submit" onclick=userPopUpMessage()>Annuleren</button>
+                                <br><br>
+                            </div>
+                        </div>
                     </div>';
-
-        } else {
-            echo "0 results";
-        }
-        // $conn->close();
-
             
         if (isset($_GET['idBlog'])) {
             $_SESSION['blogId'] = $_GET['idBlog'];
@@ -67,7 +86,6 @@
     <div class="comment-section">
         <?php
             // Load chat history
-
             $sql = "SELECT u.idUser, u.usernameUser, bc.commentDate, bc.commentMessage, commentId
                     FROM Blogcomments bc
                     JOIN User u ON bc.commentUserId = u.idUser
@@ -109,11 +127,18 @@
             <?php
             } else {
             ?>
-                <a href="loginpagina" >Klik eerst hier om in te loggen voordat u een commentaar kan plaatsen!</a>
+                <a href="loginpagina">Klik eerst hier om in te loggen voordat u een commentaar kan plaatsen!</a>
             <?php
             }
             ?>
         </form>
+    </div>
+    <?php
+        //Give error when blogpost doesn't exist
+        } else {
+            echo "Blogpost bestaat niet meer.";
+        }
+    ?>
     </div>
     </body>
 </html>
@@ -124,10 +149,29 @@
         element.style.height = "0.5px";
         element.style.height = (25+element.scrollHeight)+"px";
     }
+
+    //blogpostId is the id of the blogpost stored in the button value
+    function userDeleteBlogpost(blogpostId, blogpostUser){
+        $.ajax({
+            url: "adminFunctions.php",
+            type: 'post',
+            data: {function: "blogpost", id: blogpostId, user: blogpostUser},
+            success: function(result)
+            {
+                //display result after clicking on "delete blogpost"
+                document.getElementById("userDisplayBlogpost").innerHTML = result;
+            }
+        })
+    }
+
+    function showDeletePopUp(){
+        document.getElementById("userDeleteBlogpostPopUp").style.cssText = "display: block;";
+    }
+
+    function userPopUpMessage(chosenOption){
+        document.getElementById("userDeleteBlogpostPopUp").style.cssText = "display: none;";
+    }
 </script>
-
-
-
 
 <?
     include('footer.php');

@@ -36,7 +36,7 @@
                 $adArray = array();
                 $blogArray = array();
                 
-                $sql = "SELECT a.plantName, a.postDate FROM User u JOIN Advertisement a ON u.idUser = a.userId WHERE u.idUser='$id'";
+                $sql = "SELECT a.plantName, a.postDate, a.idAd FROM User u JOIN Advertisement a ON u.idUser = a.userId WHERE u.idUser='$id'";
                 $userAdvertisements = '<table class="ads-blogs-list"><tr class="ads-blogs-columnnames"><td><p>Advertentienaam</p></td><td><p>Geplaatst op</p></td><td><p>Verloopt op</p></td><td><p>Opties</p></td></tr>';
                 array_push($adArray, $sql, $userAdvertisements);
                 
@@ -54,7 +54,7 @@
                         // output data of each row
                         while ($row = $result->fetch_assoc()) {
                             if($i == 0){                                                           //checks if it's the advertisement array
-                                $adBlogArray[$i][1] = $adBlogArray[$i][1] . '<tr><td><p><span>Advertentienaam: </span>'.$row["plantName"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["postDate"]),"d-m-Y").'</p></td><td><p><span>Verloopt op: </span>dd-mm-yyyy</p></td><td><button class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
+                                $adBlogArray[$i][1] = $adBlogArray[$i][1] . '<tr><td><p><span>Advertentienaam: </span>'.$row["plantName"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["postDate"]),"d-m-Y").'</p></td><td><p><span>Verloopt op: </span>dd-mm-yyyy</p></td><td><button id="userAdvertisement" value='.$row["idAd"].' onclick="adminDeleteAdvertisement(this.value, this.id)" class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
                                 $countAds++;
                             } else {
                                 $adBlogArray[$i][1] = $adBlogArray[$i][1] . '<tr><td><p><span>Blogtitle: </span>'.$row["blogTitle"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p></td><td><button id="userBlogpost" value='.$row["idPost"].' onclick="adminDeleteBlogpost(this.value, this.id)" class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
@@ -94,11 +94,11 @@
                         // output data of each row
                         while ($row = $result->fetch_assoc()) {
                             if($i == 0){                                                                //checks if it's the users array
-                                $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '<tr><td><p><span>Gebruikersnaam: </span>'.$row["usernameUser"].'</p></td><td><p><span>Gebruikers-id: </span>'.$row["idUser"].'</p></td><td><button class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
+                                $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '<tr><td><p><span>Gebruikersnaam: </span>'.$row["usernameUser"].'</p></td><td><p><span>Gebruikers-id: </span>'.$row["idUser"].'</p></td><td><button class="Delete-btn">verwijder</button></td></tr>';
                             } else if($i == 1){                                                         //checks if it's the advertisements array
-                                $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '<tr><td><p><span>Advertentienaam: </span>'.$row["plantName"].'</p></td><td><p><span>Advertentie-id: </span>'.$row["idAd"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["postDate"]),"d-m-Y").'</p></td><td><p><span>Verloopt op: </span>dd-mm-yyyy</p></td><td><button class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
+                                $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '<tr><td><p><span>Advertentienaam: </span>'.$row["plantName"].'</p></td><td><p><span>Advertentie-id: </span>'.$row["idAd"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["postDate"]),"d-m-Y").'</p></td><td><p><span>Verloopt op: </span>dd-mm-yyyy</p></td><td><button id="adminAdvertisement" value='.$row["idAd"].' onclick="adminDeleteAdvertisement(this.value, this.id)" class="Delete-btn">verwijder</button></td></tr>';
                             } else{                                                                   //blogposts array
-                                $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '<tr><td><p><span>Blogtitle: </span>'.$row["blogTitle"].'</p></td><td><p><span>Blog-id: </span>'.$row["idPost"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p></td><td><button id="adminBlogpost" value='.$row["idPost"].' onclick="adminDeleteBlogpost(this.value, this.id)" class="adDelete-btn">verwijder</button><button class="adEdit-btn">wijzig</button></td></tr>';
+                                $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '<tr><td><p><span>Blogtitle: </span>'.$row["blogTitle"].'</p></td><td><p><span>Blog-id: </span>'.$row["idPost"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p></td><td><button id="adminBlogpost" value='.$row["idPost"].' onclick="adminDeleteBlogpost(this.value, this.id)" class="Delete-btn">verwijder</button></td></tr>';
                             }
                         }
                     }
@@ -327,7 +327,7 @@
                 $.ajax({
                     url: "adminFunctions.php",
                     type: 'post',
-                    data: {id: blogpostId, user: blogpostUser},
+                    data: {function: "blogpost", id: blogpostId, user: blogpostUser},
                     success: function(result)
                     {
                         //checks which list needs to be updated
@@ -335,6 +335,23 @@
                             document.getElementById("adminDisplayBlogpostFunc").innerHTML = result;
                         } else { // registered user blogpost list
                             document.getElementById("userBlogsList").innerHTML = result;
+                        }
+                    }
+                })
+            }
+
+            function adminDeleteAdvertisement(advertisementId, advertisementUser){
+                $.ajax({
+                    url: "adminFunctions.php",
+                    type: 'post',
+                    data: {function: "advertisement", id: advertisementId, user: advertisementUser},
+                    success: function(result)
+                    {
+                        //checks which list needs to be updated
+                        if(advertisementUser == "adminAdvertisement"){ //admin advertisement list
+                            document.getElementById("adminDisplayAdvertisementFunc").innerHTML = result;
+                        } else { // registered user advertisement list
+                            document.getElementById("userAdsList").innerHTML = result;
                         }
                     }
                 })
