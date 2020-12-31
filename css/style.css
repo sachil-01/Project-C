@@ -528,14 +528,18 @@ nav {
     width: 25%;
     padding: 8px;
     height: 100%;
-}
-
-.newadlink {
-    text-decoration: none;
+    outline: none;
     font-size: var(--fs-body);
     color: white;
     font-family: 'Montserrat', serif;
     font-weight: bold;
+    text-decoration: none;
+}
+
+.newadbutton:hover{
+    border-color: #208820;
+    background-color: #208820;
+    cursor: pointer;
 }
 
 /* Advertisement discription container*/

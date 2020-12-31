@@ -46,17 +46,19 @@
                         //checks if blogpost id already exists in array > if blogpost id exists in array -> skip current blogpost
                         if(!in_array($row['idPost'], $allIdPosts)){
                             echo '<div class="blogpost">
-                                <div class="blogImage">
-                                    <a href="bloginfo?idBlog='.$row["idPost"].'"><img src="uploads/'.$row["imgName"].'" alt=""></a>
-                                </div>
-                                <div class="blogDescription">
-                                    <h2>'.$row["blogTitle"].'</h2>
-                                    <h3>'.$row["firstName"].'</h3>
-                                    <p>'.$row["blogDesc"].'</p>
-                                    <h4 class="alignleft">'.date_format(date_create($row["blogDate"]),"d-m-Y").'</h4>
-                                    <h4 class="alignright">'.$row["blogCategory"].'</h4>
-                                </div>
-                            </div>';
+                                    <a class="linkPlant" href="bloginfo?idBlog='.$row["idPost"].'">
+                                    <div class="blogImage">
+                                        <img src="uploads/'.$row["imgName"].'" alt="">
+                                    </div>
+                                    <div class="blogDescription">
+                                        <h2>'.$row["blogTitle"].'</h2>
+                                        <h3>'.$row["firstName"].'</h3>
+                                        <p>'.$row["blogDesc"].'</p>
+                                        <h4 class="alignleft">'.date_format(date_create($row["blogDate"]),"d-m-Y").'</h4>
+                                        <h4 class="alignright">'.$row["blogCategory"].'</h4>
+                                    </div>
+                                    </a>
+                                  </div>';
                             //add blogpost id to array
                             array_push($allIdPosts, $row['idPost']);
                         }

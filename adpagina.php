@@ -5,23 +5,23 @@
 
 <head>
     <title>Advertisements</title>
-    <link rel="stylesheet" type="text/css" href="css\adPagina.css">
+    <link rel="stylesheet" type="text/css" href="css\style.css">
 </head>
 
 <body>    
     <div class="gallery">
         <h1>Alle aanbiedingen</h1>
         <div class="newadknop">
-            <button class="newadbutton"><a class="newadlink" href="newad"><i class="fas fa-plus"></i> Plant plaatsen</a></button>
+            <a href="newad"><button href="newad" class="newadbutton"><i class="fas fa-plus"></i> Plant plaatsen</button></a>
         </div>
         
         <div class="searchbar-div">
             <div class="searchbar-margin">
                 <div class="searchbar-main">
-                        <form class="searchbar-main-content" action="" method="post">
-                            <input type="text" class="searchbar-input" name="search-input" onfocus="this.value=''" placeholder="Zoeken...">
-                            <button class="searchbar-button" name="search-submit"><i class="fas fa-search"></i></button>
-                        </form>
+                    <form class="searchbar-main-content" action="" method="post">
+                        <input type="text" class="searchbar-input" name="search-input" onfocus="this.value=''" placeholder="Zoeken...">
+                        <button class="searchbar-button" name="search-submit"><i class="fas fa-search"></i></button>
+                    </form>
                 </div>
             </div>
         </div>
