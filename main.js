@@ -88,8 +88,14 @@ var slider = () => {
 		slideBy: 'page',
 		mouseDrag: true,
 		controls: false,
-		navPosition: 'bottom'                   
-	});
+		navPosition: 'bottom'
+	})
+	//add 'type' attribute to every button to avoid submitting form when clicking the button
+	var items = tnsSlider.getInfo();
+	const keys = Object.keys(items.navItems)
+	for (const key of keys) {
+		items.navItems[key].type = 'button';
+	}
 }
 
 var app = () => {

@@ -15,7 +15,7 @@
 
             $id = $_GET['idAd'];
 
-            $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE a.idAd = '$id'";
+            $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser LEFT JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE a.idAd = '$id'";
             $result = mysqli_query($conn, $sql);
 
             if ($result->num_rows > 0) {
@@ -31,7 +31,6 @@
                 }
 
                 echo'<div class="advWrapper">
-
                                 <div class="slidertns">';
                                     $resultInner = $conn->query($sql);
                                         while ($row2 = mysqli_fetch_array($resultInner)) {

@@ -342,6 +342,11 @@
     cursor: pointer;
 }
 
+.user-edit-blogpost-btn a{
+    color: white;
+    text-decoration: none;
+}
+
 .user-delete-blogpost-btn:hover{
     border-color: rgb(145, 6, 6);
     background-color: rgb(145, 6, 6);

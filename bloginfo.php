@@ -15,9 +15,8 @@
         require 'includes/dbh.inc.php';
         $blogId = $_GET['idBlog'];
 
-        $sql = "SELECT * FROM Blogpost b JOIN User u ON b.blogUserId = u.idUser JOIN BlogImage bi ON b.idPost = bi.idBlog WHERE b.idPost = '$blogId'";
+        $sql = "SELECT * FROM Blogpost b JOIN User u ON b.blogUserId = u.idUser LEFT JOIN BlogImage bi ON b.idPost = bi.idBlog WHERE b.idPost = '$blogId'";
         $result = $conn->query($sql);
-        $number_of_posts = $result->num_rows;
         if ($result->num_rows > 0) {
             // output data of each row
 
@@ -26,7 +25,7 @@
             if($row["idUser"] == $_SESSION['userId']){
                 echo '<div class="userFunctions-btn">
                       <button onclick="showDeletePopUp()" class="user-delete-blogpost-btn">Verwijder</button>
-                      <button class="user-edit-blogpost-btn">Wijzig</button>
+                      <a href="editAdOrBlog.php?blogpostId='.$row["idPost"].'"><button class="user-edit-blogpost-btn">Wijzig</button></a>
                       </div>';
             }
 
@@ -34,9 +33,7 @@
                         <div class="slidertns">';
                         $resultInner = $conn->query($sql);
                             while ($row2 = mysqli_fetch_array($resultInner)) {
-
                                 echo ' <img src="uploads/'.$row2["imgName"].'" alt="">';
-
                             }
                    echo' </div>
                         <div class="plantInfo">
@@ -78,10 +75,8 @@
                             </div>
                         </div>
                     </div>';
-            
-        if (isset($_GET['idBlog'])) {
-            $_SESSION['blogId'] = $_GET['idBlog'];
-        }
+            // session used for edit page to check if user is the owner of the blogpost
+            $_SESSION["idUser"] = $row["idUser"];
     ?>
     <div class="comment-section">
         <?php
