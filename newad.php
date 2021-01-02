@@ -27,7 +27,8 @@ include('header.php');
             if($imageFormats){
                 if($fileCount >= 1 && $fileCount <= 3){
                     $plantname = $_POST["pname"];
-                    $plantlatinname = $_POST["psoort"];
+                    $plantlatinname = $_POST["plname"];
+                    $plantsoort = $_POST["psoort"];
                     $plantcategory = $_POST["type"];
                     $desc = $_POST["desc"];
                     $water = $_POST["water"];
@@ -35,14 +36,14 @@ include('header.php');
                     $userId = $_SESSION['userId'];
 
                     // Insert blogpost data into database
-                    $sql = "INSERT INTO Advertisement(plantName, plantLatinName, plantCategory, plantDesc, waterManage, lightPattern, Userid) VALUES(?,?,?,?,?,?,?)";
+                    $sql = "INSERT INTO Advertisement(plantName, plantLatinName, plantType, plantCategory, plantDesc, waterManage, lightPattern, Userid) VALUES(?,?,?,?,?,?,?,?)";
                     $statement = mysqli_stmt_init($conn);
                     if (!mysqli_stmt_prepare($statement, $sql)) {
                         header("Location: newad.php?error=sqlerror");
                         echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 101).</p></div>';
                     }
                     else {
-                        mysqli_stmt_bind_param($statement, "ssssiii", $plantname, $plantlatinname, $plantcategory, $desc, $water, $light, $userId);
+                        mysqli_stmt_bind_param($statement, "sssssiii", $plantname, $plantlatinname, $plantsoort, $plantcategory, $desc, $water, $light, $userId);
                         mysqli_stmt_execute($statement);
                     }
 
@@ -101,17 +102,29 @@ include('header.php');
             <form action="" method="post" enctype="multipart/form-data" target="_self">
                 <label for="pname">Plantnaam:<label style="color: red;">*</label></label><br>
                 <input type="text" id="pname" name="pname" required><br><br>
-                
-                <label for="psoort">Plantensoort:</label><br>
-                <input type="text" id="psoort" name="psoort"><br><br>
-                
-                <label>Type advertentie:<label style="color: red;">*</label></label><br>
+
+                <label for="plname">Latijnse naam:</label><br>
+                <input type="text" id="plname" name="plname"><br><br>
+
+                <label for="psoort">Soort:<label style="color: red;">*</label></label><br>
+                <input type="text" list="psoort" name="psoort" required>
+                <datalist id="psoort">
+                    <option value="boom">
+                    <option value="struik">
+                    <option value="kruidachtige">
+                    <option value="bodembedekker">
+                    <option value="klimplant">
+                    <option value="waterplant">
+                </datalist><br><br>
+                <label>Type:<label style="color: red;">*</label></label><br>
                 <input type="radio" id="stekje" name="type" value="stekje">
                 <label for="stekje">Stekje</label><br>
                 <input type="radio" id="zaad" name="type" value="zaad">
                 <label for="zaad">Zaad</label><br>
                 <input type="radio" id="kiemplant" name="type" value="kiemplant">
-                <label for="kiemplant">Kiemplant</label><br>
+                <label for="kiemplant">Plant</label><br>
+                <input type="radio" id="bol" name="type" value="bol">
+                <label for="bol">Bollen</label><br>
                 <input type="radio" id="none" name="type" value="none">
                 <label for="none">Weet ik niet</label><br><br>
                 
