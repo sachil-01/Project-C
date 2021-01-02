@@ -47,29 +47,35 @@
                                         <h3 class="plantInner">Licht:</h3>';
 
                                         $light = $row["lightPattern"] * 2;
+                                        if ($light == 0) {
+                                            echo '<span class="fas fa-question"></span>';
+                                        } else {
+                                            for ($i = 0; $i <= 5; $i++) {
 
-                                        for($i=0; $i<=5; $i++) {
-
-                                            if ($light >= 1) {
-                                                echo '<span class="fas fa-sun sun-checked"></span>';
-                                                $light--;
-                                            } else {
-                                                echo '<span class="fas fa-sun"></span>';
+                                                if ($light >= 1) {
+                                                    echo '<span class="fas fa-sun sun-checked"></span>';
+                                                    $light--;
+                                                } else {
+                                                    echo '<span class="fas fa-sun"></span>';
                                                 }
+                                            }
                                         }
                                         echo '
                                         <h3 class="plantInner">Water:</h3>';
 
                                         $light = $row["waterManage"]*2;
+                                        if ($light == 0) {
+                                            echo '<span class="fas fa-question"></span>';
+                                        } else {
+                                            for($i=0; $i<=5; $i++) {
 
-                                        for($i=0; $i<=5; $i++) {
-
-                                            if ($light >= 1) {
-                                                echo '<span class="fas fa-tint drop-checked"></span>';
-                                                $light--;
-                                            } else {
-                                                echo '<span class="fas fa-tint"></span>';
-                                                }
+                                                if ($light >= 1) {
+                                                    echo '<span class="fas fa-tint drop-checked">&nbsp;</span>';
+                                                    $light--;
+                                                } else {
+                                                    echo '<span class="fas fa-tint">&nbsp;</span>';
+                                                    }
+                                            }
                                         }
                                         echo '
                                         <h3 class="plantInner">Soort:</h3>
