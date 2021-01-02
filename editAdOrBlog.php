@@ -11,9 +11,9 @@
 
 <body>
     <?php
+    require 'includes/dbh.inc.php';
     // Update blogpost after clicking the submit button
     if(isset($_POST['blog-update'])){
-        require 'includes/dbh.inc.php';
 
         $allowed = ['png', 'jpg', 'gif', 'jpeg', ''];
         $fileCount = count($_FILES['file']['name']);
@@ -73,7 +73,6 @@
             echo '<div class="newposterror"><p>Alleen "jpg", "png", "gif" en "jpeg" bestanden zijn toegestaan!</p></div>';
         }
     } else if(isset($_POST['ad-update'])){
-        require 'includes/dbh.inc.php';
 
         $allowed = ['png', 'jpg', 'gif', 'jpeg', ''];
         $fileCount = count($_FILES['file']['name']);
@@ -164,7 +163,6 @@
                 //replace <br> tags from blog description with newlines
                 $blogDesc = str_replace("<br />", "\n", $row["blogDesc"]);
                 $blogLink = $row['blogLink'];
-                $blogImages = $_SESSION['blogImages'];
                 $blogImages = array();
 
                 $resultInner = $conn->query($sql);
@@ -245,7 +243,7 @@
             // ---------------------------- UPDATE ADVERTISEMENT FORM ---------------------------- 
 
             $advertisementId = $_GET['advertisementId'];
-            $sql = "SELECT * FROM Advertisement A JOIN User u ON a.userId = u.idUser LEFT JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE a.idAd = '$advertisementId'";
+            $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser LEFT JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE a.idAd = '$advertisementId'";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -271,7 +269,7 @@
         ?>
         <div class="adform">
             <h2>Update advertentie</h2><br>
-            <form action="" method="post" enctype="multipart/form-data" target="_self">
+            <form action="" method="post" enctype="multipart/form-data">
                 <label for="pname">Plantnaam <label style="color: red;">*</label></label><br>
                 <input type="text" id="pname" name="pname" value="<?php echo $plantName;?>" required><br><br>
                 

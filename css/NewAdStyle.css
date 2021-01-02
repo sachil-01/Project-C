@@ -148,6 +148,10 @@ input[type=radio]:checked + img {
 	margin-top: 10px;
 }
 
+.newaderror p{
+	text-align: center;
+}
+
 .uploaddescription{
     font-style: italic;
 }
