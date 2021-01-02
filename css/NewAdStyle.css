@@ -104,17 +104,25 @@ input[type=radio]:checked + img {
     .adform h2{
         font-size: 2vw;
     }
+
+    .adform select{
+        font-size: 1vw;
+       }
 }
 
 @media screen and (max-width:1100px){
     .adform input[type="text"], .adform input[type="file"], .adform textarea{
-        font-size: 2vw;
+        font-size: 16px;
         padding-left: 2%;
         padding-right: 2%;
     }
 
     .adform h2{
         font-size: 4vw;
+    }
+
+    .adform select{
+     font-size: 16px;
     }
 }
 
@@ -150,7 +158,6 @@ input[type=radio]:checked + img {
     outline: none;
     border: none;
     border-radius: 1vw;
-    font-size: 2vw;
     padding-left: 2%;
     padding-right: 2%;
 }
