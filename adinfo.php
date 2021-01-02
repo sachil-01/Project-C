@@ -26,7 +26,7 @@
                 if($row["userId"] == $_SESSION['userId']){
                     echo '<div class="userFunctions-btn">
                         <button onclick="showDeletePopUp()" class="user-delete-blogpost-btn">Verwijder</button>
-                        <button class="user-edit-blogpost-btn">Wijzig</button>
+                        <a href="editAdOrBlog.php?advertisementId='.$row["idAd"].'"><button class="user-edit-blogpost-btn">Wijzig</button></a>
                         </div>';
                 }
 
@@ -118,6 +118,8 @@
                                 </div>
                             </div>
                         </div>';
+                // session used for edit page to check if user is the owner of the advertisement        
+                $_SESSION["idUser"] = $row["idUser"];
             //Give error when advertisement doesn't exist
             } else {
                 echo "Advertentie bestaat niet meer.";

@@ -168,8 +168,6 @@ include('header.php');
                 <label><label style="color: red;">*</label> = verplicht</label><br><br>
                 <input class="newAdButtons" type="submit" name="ad-submit" value="Plaatsen!">
             </form>
-
-
         </div>
     <?php
     } else {

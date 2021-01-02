@@ -7,6 +7,7 @@
     font-family: 'Montserrat', serif;
     font-weight: bold;
     position: relative;
+    text-transform: none;
 }
 
 .adform h2 {
@@ -115,6 +116,10 @@ input[type=radio]:checked + img {
     .adform h2{
         font-size: 4vw;
     }
+}
+
+.advertImageWarning{
+    text-transform: uppercase;
 }
 
 /* error messages */
