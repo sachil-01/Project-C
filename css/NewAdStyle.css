@@ -123,6 +123,8 @@ input[type=radio]:checked + img {
         margin: 0;
         border-radius: 0;
     }
+}
+
 .advertImageWarning{
     text-transform: uppercase;
 }
@@ -138,7 +140,17 @@ input[type=radio]:checked + img {
 	margin-top: 10px;
 }
 
-.newaderror p{
-	text-align: center;
-	font-weight: bold;
+.uploaddescription{
+    font-style: italic;
+}
+
+.adform select{
+    width: 100%;
+    height: 5vh;
+    outline: none;
+    border: none;
+    border-radius: 1vw;
+    font-size: 2vw;
+    padding-left: 2%;
+    padding-right: 2%;
 }

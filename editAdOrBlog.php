@@ -87,23 +87,24 @@
         }
 
         if($imageFormats){
-            $plantName = $_POST["plantName"];
-            $plantLatinName = $_POST["plantLatinName"];
+            $plantName = $_POST["pname"];
+            $plantLatinName = $_POST["plname"];
             //nl2br() function saves breaklines of user
-            $plantDesc = nl2br($_POST["plantDesc"]);
-            $plantCategory = $_POST['plantCategory'];
+            $plantDesc = nl2br($_POST["desc"]);
+            $plantCategory = $_POST['type'];
             $advertisementId = $_GET['advertisementId'];
-            $waterManage = $_POST['waterManage'];
-            $lightPattern = $_POST['lightPattern'];
+            $waterManage = $_POST['water'];
+            $lightPattern = $_POST['licht'];
+            $plantsoort = $_POST["psoort"];
 
             //update blogpost data
-            $sql = "UPDATE Advertisement SET plantName=?, plantLatinName=?, plantCategory=?, plantDesc=?, waterManage=?, lightPattern=? WHERE idAd='$advertisementId'";
+            $sql = "UPDATE Advertisement SET plantName=?, plantLatinName=?, plantType=?, plantCategory=?, plantDesc=?, waterManage=?, lightPattern=? WHERE idAd='$advertisementId'";
             $statement = mysqli_stmt_init($conn);
             if (!mysqli_stmt_prepare($statement, $sql)) {
                 echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
             }                       
             else {
-                mysqli_stmt_bind_param($statement, "ssssii", $plantName, $plantLatinName, $plantCategory, $plantDesc, $waterManage, $lightPattern);
+                mysqli_stmt_bind_param($statement, "sssssii", $plantName, $plantLatinName, $plantsoort, $plantCategory, $plantDesc, $waterManage, $lightPattern);
                 mysqli_stmt_execute($statement); 
             }
 
@@ -254,6 +255,7 @@
                 $AdvertisementId = $row["idAd"];
                 $plantName = $row["plantName"];
                 $plantLatinName = $row["plantLatinName"];
+                $plantType = $row["plantType"];
                 //replace <br> tags from plant description with newlines
                 $plantDesc = str_replace("<br />", "\n", $row["plantDesc"]);
                 $plantCategory = $row['plantCategory'];
@@ -270,26 +272,39 @@
         <div class="adform">
             <h2>Update advertentie</h2><br>
             <form action="" method="post" enctype="multipart/form-data" target="_self">
-                <label for="pname">Plantnaam:<label style="color: red;">*</label></label><br>
+                <label for="pname">Plantnaam <label style="color: red;">*</label></label><br>
                 <input type="text" id="pname" name="pname" value="<?php echo $plantName;?>" required><br><br>
                 
-                <label for="psoort">Plantensoort:</label><br>
-                <input type="text" id="psoort" name="psoort" value="<?php echo $plantLatinName;?>" ><br><br>
+                <label for="plname">Latijnse naam</label><br>
+                <input type="text" id="plname" name="plname" value="<?php echo $plantLatinName;?>" ><br><br>
                 
-                <label>Type advertentie:<label style="color: red;">*</label></label><br>
+                <label for="psoort">Soort <label style="color: red;">*</label></label><br>
+                <select  id="psoort" name="psoort">
+                    <option value="<?php echo $plantType; ?>" style="display:none;"><?php echo $plantType; ?></option>
+                    <option value="boom">boom</option>
+                    <option value="struik">struik</option>
+                    <option value="kruidachtige">kruidachtige</option>
+                    <option value="bodembedekker">bodembedekker</option>
+                    <option value="klimplant">klimplant</option>
+                    <option value="waterplant">waterplant</option>
+                </select><br><br>
+
+                <label>Type <label style="color: red;">*</label></label><br>
                 <input type="radio" id="stekje" name="type" value="stekje" <?php echo ($plantCategory == 'stekje') ?  "checked" : "" ;  ?>>
                 <label for="stekje">Stekje</label><br>
                 <input type="radio" id="zaad" name="type" value="zaad" <?php echo ($plantCategory == 'zaad') ?  "checked" : "" ;  ?>>
                 <label for="zaad">Zaad</label><br>
                 <input type="radio" id="kiemplant" name="type" value="kiemplant" <?php echo ($plantCategory == 'kiemplant') ?  "checked" : "" ;  ?>>
                 <label for="kiemplant">Kiemplant</label><br>
+                <input type="radio" id="bol" name="type" value="bol"  <?php echo ($plantCategory == 'bol') ?  "checked" : "" ;  ?>>
+                <label for="bol">Bollen</label><br>
                 <input type="radio" id="none" name="type" value="none" <?php echo ($plantCategory == 'none') ?  "checked" : "" ;  ?>>
                 <label for="none">Weet ik niet</label><br><br>
                 
-                <br><label for="desc">Beschrijving<label style="color: red;">*</label></label><br>
+                <br><label for="desc">Beschrijving <label style="color: red;">*</label></label><br>
                 <textarea id="desc" name="desc" rows="5" cols="50" required><?php echo $plantDesc;?></textarea><br><br>
                 
-                <label>Hoeveelheid water nodig:<label style="color: red;">*</label></label><br>
+                <label>Hoeveelheid water nodig <label style="color: red;">*</label></label><br>
                 <label>
                     <input style="position: absolute; opacity: 0; width: 0; height: 0; cursor: pointer;" type="radio" id="weinig" name="water" value="1" <?php echo ($waterManage == '1') ?  "checked" : "" ;  ?>>
                     <img style="cursor: pointer;" src="images/weinigwater.png">
@@ -311,7 +326,7 @@
                 </label>
                 <br><br>
                 
-                <label>Hoeveelheid licht nodig:<label style="color: red;">*</label></label><br>
+                <label>Hoeveelheid licht nodig <label style="color: red;">*</label></label><br>
                 <label>
                     <input style="position: absolute; opacity: 0; width: 0; height: 0; cursor: pointer;" type="radio" id="weinig" name="licht" value="1" <?php echo ($lightPattern == '1') ?  "checked" : "" ;  ?>>
                     <img style="cursor: pointer;" src="images/weiniglicht.png">
@@ -333,7 +348,7 @@
                 </label>
                 <br><br>
 
-                <label>Afbeeldingen</label><br>
+                <label>Afbeeldingen <label style="color: red;">*</label></label><br>
                 <!-- checks if blogpost has images -->
                 <?php
                     if(!empty($plantImages) && $plantImages[0] != ""){
@@ -360,12 +375,12 @@
                 <?php
                     } else {
                         ?>
-                        <p class="advertImageWarning">Uw advertentie heeft 0 afbeeldingen. Om uw advertentie te kunnen updaten moet u minimaal 1 foto selecteren!</p>
+                        <p class="uploaddescription">Uw advertentie heeft 0 afbeeldingen. Om uw advertentie te kunnen updaten moet u minimaal 1 foto selecteren!</p>
                         <?php
                     }
                 ?>
-                
-                <label>Selecteer een foto (max 1MB):</label><br>
+                <br>
+                <label class="uploaddescription">Selecteer een foto (max 1MB)</label><br>
                 <input type="file" name="file[]" id="file" multiple><br><br>
                 
                 <label><label style="color: red;">*</label> = verplicht</label><br><br>

@@ -100,23 +100,23 @@ include('header.php');
         <div class="adform">
             <h2>Nieuwe advertentie</h2><br>
             <form action="" method="post" enctype="multipart/form-data" target="_self">
-                <label for="pname">Plantnaam:<label style="color: red;">*</label></label><br>
+                <label for="pname">Plantnaam <label style="color: red;">*</label></label><br>
                 <input type="text" id="pname" name="pname" required><br><br>
 
-                <label for="plname">Latijnse naam:</label><br>
+                <label for="plname">Latijnse naam</label><br>
                 <input type="text" id="plname" name="plname"><br><br>
 
-                <label for="psoort">Soort:<label style="color: red;">*</label></label><br>
-                <input type="text" list="psoort" name="psoort" required>
-                <datalist id="psoort">
-                    <option value="boom">
-                    <option value="struik">
-                    <option value="kruidachtige">
-                    <option value="bodembedekker">
-                    <option value="klimplant">
-                    <option value="waterplant">
-                </datalist><br><br>
-                <label>Type:<label style="color: red;">*</label></label><br>
+                <label for="psoort">Soort <label style="color: red;">*</label></label><br>
+                <select  id="psoort" name="psoort">
+                    <option value="boom">boom</option>
+                    <option value="struik">struik</option>
+                    <option value="kruidachtige">kruidachtige</option>
+                    <option value="bodembedekker">bodembedekker</option>
+                    <option value="klimplant">klimplant</option>
+                    <option value="waterplant">waterplant</option>
+                </select><br><br>
+
+                <label>Type <label style="color: red;">*</label></label><br>
                 <input type="radio" id="stekje" name="type" value="stekje">
                 <label for="stekje">Stekje</label><br>
                 <input type="radio" id="zaad" name="type" value="zaad">
@@ -126,12 +126,12 @@ include('header.php');
                 <input type="radio" id="bol" name="type" value="bol">
                 <label for="bol">Bollen</label><br>
                 <input type="radio" id="none" name="type" value="none">
-                <label for="none">Weet ik niet</label><br><br>
+                <label for="none">Weet ik niet</label><br>
                 
-                <br><label for="desc">Beschrijving<label style="color: red;">*</label></label><br>
+                <br><label for="desc">Beschrijving <label style="color: red;">*</label></label><br>
                 <textarea id="desc" name="desc" rows="5" cols="50" required></textarea><br><br>
                 
-                <label>Hoeveelheid water nodig:<label style="color: red;">*</label></label><br>
+                <label>Hoeveelheid water nodig <label style="color: red;">*</label></label><br>
                 <label>
                     <input style="position: absolute; opacity: 0; width: 0; height: 0; cursor: pointer;" type="radio" id="weinig" name="water" value="1">
                     <img style="cursor: pointer;" src="images/weinigwater.png">
@@ -153,7 +153,7 @@ include('header.php');
                 </label>
                 <br><br>
                 
-                <label>Hoeveelheid licht nodig:<label style="color: red;">*</label></label><br>
+                <label>Hoeveelheid licht nodig <label style="color: red;">*</label></label><br>
                 <label>
                     <input style="position: absolute; opacity: 0; width: 0; height: 0; cursor: pointer;" type="radio" id="weinig" name="licht" value="1">
                     <img style="cursor: pointer;" src="images/weiniglicht.png">
@@ -175,7 +175,8 @@ include('header.php');
                 </label>
                 <br><br>
                 
-                <label>Selecteer een foto (max 1MB):</label><br>
+                <label>Afbeeldingen <label style="color: red;">*</label></label><br>
+                <label class="uploaddescription">Selecteer een foto (max 1MB)</label><br>
                 <input type="file" name="file[]" id="file" multiple><br><br>
                 
                 <label><label style="color: red;">*</label> = verplicht</label><br><br>
