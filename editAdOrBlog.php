@@ -259,7 +259,7 @@
             // ---------------------------- UPDATE ADVERTISEMENT FORM ---------------------------- 
 
             $advertisementId = $_GET['advertisementId'];
-            $sql = "SELECT * FROM Advertisement A JOIN User u ON a.userId = u.idUser LEFT JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE a.idAd = '$advertisementId'";
+            $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser LEFT JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE a.idAd = '$advertisementId'";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
