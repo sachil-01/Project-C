@@ -91,7 +91,7 @@ nav {
 .nav-links a{
     color: var(--clr-groen);
     text-decoration: none;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     font-size: 1vw;
     font-family: 'Montserrat', serif;
     font-weight: bold;
@@ -316,6 +316,11 @@ nav {
     /* Advertisement description headers and description details */
     .description h3, .description h3 span{
         font-size: 3vw;
+    }
+
+    .searchbar-input {
+        width: 80%;
+        font-size: 16px;
     }
 }
 
@@ -562,11 +567,6 @@ nav {
     .nav-links a{
         color: var(--clr-wit);
         font-size: 2.5vw;
-    }
-
-    .searchbar-input {
-        width: 80%;
-        font-size: 3vw;
     }
 
     .searchbar-button {
