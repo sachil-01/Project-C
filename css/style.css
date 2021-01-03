@@ -179,7 +179,6 @@ nav {
 
 .searchbar-input {
     font-size: 1vw;
-    /* color: #707c75; */
     height: 100%;
     padding-left: 30px;
     margin: 0;
@@ -196,6 +195,11 @@ nav {
     width: 5%;
     margin: 0;
     float: right;
+    outline: none;
+}
+
+.searchbar-button:hover{
+    background-color: rgb(230, 230, 230);;
 }
 
 .fa-search {
