@@ -11,9 +11,9 @@
 
 <body>
     <?php
-    require 'includes/dbh.inc.php';
     // Update blogpost after clicking the submit button
     if(isset($_POST['blog-update'])){
+        require 'includes/dbh.inc.php';
 
         $allowed = ['png', 'jpg', 'gif', 'jpeg', ''];
         $fileCount = count($_FILES['file']['name']);
@@ -22,11 +22,15 @@
             if(!in_array(strtolower(pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION)), $allowed)){
                 $imageFormats = false;
                 break;
+            } else if ($_FILES['file']['size'][$i] > 1*1048576){ //1*1048576 == 1mb
+                $imageSize = false;
+                break;
             }
+            $imageSize = true;
             $imageFormats = true;
         }
 
-        if($imageFormats){
+        if($imageFormats && $imageSize){
             $blogtitle = $_POST["bname"];
             $blogcategory = $_POST["bcategory"];
             //nl2br() function saves breaklines of user
@@ -69,10 +73,13 @@
             }
             echo "<script type='text/javascript'>window.top.location='https://www.roy-van-der-lee.nl/fleurtop/editAdOrBlog.php?blogpostId=$blogId&upload=success';</script>";
             echo '<div class="newposterror"><p>Uw blogpost is succesvol geupdate!</p></div>';
-        } else {
+        } else if($imageFormats == false){
             echo '<div class="newposterror"><p>Alleen "jpg", "png", "gif" en "jpeg" bestanden zijn toegestaan!</p></div>';
+        } else if($imageSize == false){
+            echo '<div class="newposterror"><p>Uw afbeelding mag maar maximaal 1mb zijn!</p></div>';
         }
     } else if(isset($_POST['ad-update'])){
+        require 'includes/dbh.inc.php';
 
         $allowed = ['png', 'jpg', 'gif', 'jpeg', ''];
         $fileCount = count($_FILES['file']['name']);
@@ -81,11 +88,15 @@
             if(!in_array(strtolower(pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION)), $allowed)){
                 $imageFormats = false;
                 break;
+            } else if ($_FILES['file']['size'][$i] > 1*1048576){ //1*1048576 == 1mb
+                $imageSize = false;
+                break;
             }
+            $imageSize = true;
             $imageFormats = true;
         }
 
-        if($imageFormats){
+        if($imageFormats && $imageSize){
             $plantName = $_POST["pname"];
             $plantLatinName = $_POST["plname"];
             //nl2br() function saves breaklines of user
@@ -131,8 +142,12 @@
             }
             echo "<script type='text/javascript'>window.top.location='https://www.roy-van-der-lee.nl/fleurtop/editAdOrBlog.php?advertisementId=$advertisementId&upload=success';</script>";
             echo '<div class="newposterror"><p>Uw advertentie is succesvol geupdate!</p></div>';
-        } else {
-            echo '<div class="newposterror"><p>Alleen "jpg", "png", "gif" en "jpeg" bestanden zijn toegestaan!</p></div>';
+        } else if($imageFormats == false){
+            echo '<div class="newaderror"><p>Alleen "jpg", "png", "gif" en "jpeg" bestanden zijn toegestaan!</p></div>';
+        } else if($imageSize == false){
+            echo '<div class="newaderror"><p>Uw afbeelding mag maar maximaal 1mb zijn!</p></div>';
+        } else if($fileCount == 1){
+            echo '<div class="newaderror"><p>U moet minimaal 1 foto uploaden! Er is een maximum van 3 foto\'s toegestaan.</p></div>';
         }
     }
 
@@ -163,6 +178,7 @@
                 //replace <br> tags from blog description with newlines
                 $blogDesc = str_replace("<br />", "\n", $row["blogDesc"]);
                 $blogLink = $row['blogLink'];
+                $blogImages = $_SESSION['blogImages'];
                 $blogImages = array();
 
                 $resultInner = $conn->query($sql);
@@ -243,7 +259,7 @@
             // ---------------------------- UPDATE ADVERTISEMENT FORM ---------------------------- 
 
             $advertisementId = $_GET['advertisementId'];
-            $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser LEFT JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE a.idAd = '$advertisementId'";
+            $sql = "SELECT * FROM Advertisement A JOIN User u ON a.userId = u.idUser LEFT JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE a.idAd = '$advertisementId'";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -269,7 +285,7 @@
         ?>
         <div class="adform">
             <h2>Update advertentie</h2><br>
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="" method="post" enctype="multipart/form-data" target="_self">
                 <label for="pname">Plantnaam <label style="color: red;">*</label></label><br>
                 <input type="text" id="pname" name="pname" value="<?php echo $plantName;?>" required><br><br>
                 

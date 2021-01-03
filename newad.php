@@ -20,11 +20,15 @@ include('header.php');
                 if(!in_array(strtolower(pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION)), $allowed)){
                     $imageFormats = false;
                     break;
+                } else if ($_FILES['file']['size'][$i] > 1*1048576){ //1*1048576 == 1mb
+                    $imageSize = false;
+                    break;
                 }
+                $imageSize = true;
                 $imageFormats = true;
             }
 
-            if($imageFormats){
+            if($imageFormats && $imageSize){
                 if($fileCount >= 1 && $fileCount <= 3){
                     $plantname = $_POST["pname"];
                     $plantlatinname = $_POST["plname"];
@@ -90,10 +94,12 @@ include('header.php');
                 } else {
                     echo '<div class="newaderror"><p>Er is een minimum van 1 foto en een maximum van 3 foto\'s toegestaan.</p></div>';
                 }
+            } else if($imageFormats == false){
+                echo '<div class="newaderror"><p>Alleen "jpg", "png", "gif" en "jpeg" bestanden zijn toegestaan!</p></div>';
+            } else if($imageSize == false){
+                echo '<div class="newaderror"><p>Uw afbeelding mag maar maximaal 1mb zijn!</p></div>';
             } else if($fileCount == 1){
                 echo '<div class="newaderror"><p>U moet minimaal 1 foto uploaden! Er is een maximum van 3 foto\'s toegestaan.</p></div>';
-            } else {
-                echo '<div class="newaderror"><p>Alleen "jpg", "png", "gif" en "jpeg" bestanden zijn toegestaan!</p></div>';
             }
         }
         ?>
