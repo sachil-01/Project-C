@@ -27,6 +27,7 @@
                 $postcode = $row["postalCode"];
                 $admin = $row["admin"];
                 $biography = $row["biography"];
+                $_SESSION["idUser"] = $row["idUser"];
             }
 
             //checks if user is an admin or not
