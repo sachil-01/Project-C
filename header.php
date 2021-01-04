@@ -26,23 +26,22 @@
                     <li><a href="adpagina">Aanbod</a></li>
                     <li><a href="blogpage">Blog</a></li>
                     <li><a href="hoewerkthet">Hoe werkt het?</a></li>
+                    <li><a href="overons">Over ons</a></li>
                     <?php
                         $id = $_SESSION['userId'];
                         if (isset($id)) {
                             require 'includes/dbh.inc.php';
                             $sql = $conn->query("SELECT admin FROM User WHERE idUser = '$id'") or die($conn->error);
                             /* fetch associative array */
-                            while ($row = $sql->fetch_assoc()) {
-                                if($row["admin"] == 1){
-                                    $user = " Dashboard";
-                                } else if ($row["admin"] == 0){
-                                    $user = " Mijn profiel";
-                                }
+                            $row = $sql->fetch_assoc();
+                            echo '<li><a href="profilepage"><i class="fas fa-user"></i> Mijn profiel</a></li>';
+                            //if user is an admin, add dashboard tab to navbar
+                            if($row['admin'] == 1){
+                                echo '<li><a href="dashboard"><i class="fas fa-user-friends"></i> Dashboard</a></li>';
                             }
-                            echo '<li><a href="profilepage.php"><i class="fas fa-user"></i>'.$user.'</a><li>';
                             echo '<form action="includes/logout.inc.php" method="post">
-                                    <button class="logout_button" type="submit" name="logout-submit">Logout</button>
-                                </form>';
+                                    <li><button class="logout_button" type="submit" name="logout-submit">Uitloggen</button></li>
+                                  </form>';
                         }
                         else {
                             echo '<li><a href="loginpagina">Login/Register</a></li>';
@@ -53,12 +52,10 @@
             </ul>
 
             <div class="burger">
-                        <div class="line1"></div>
-                        <div class="line2"></div>
-                        <div class="line3"></div>
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
             </div>
         </nav>
 </body>
-
-
 </html>

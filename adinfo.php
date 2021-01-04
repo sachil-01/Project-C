@@ -15,7 +15,7 @@
 
             $id = $_GET['idAd'];
 
-            $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE a.idAd = '$id'";
+            $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser LEFT JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE a.idAd = '$id'";
             $result = mysqli_query($conn, $sql);
 
             if ($result->num_rows > 0) {
@@ -26,12 +26,11 @@
                 if($row["userId"] == $_SESSION['userId']){
                     echo '<div class="userFunctions-btn">
                         <button onclick="showDeletePopUp()" class="user-delete-blogpost-btn">Verwijder</button>
-                        <button class="user-edit-blogpost-btn">Wijzig</button>
+                        <a href="editAdOrBlog.php?advertisementId='.$row["idAd"].'"><button class="user-edit-blogpost-btn">Wijzig</button></a>
                         </div>';
                 }
 
                 echo'<div class="advWrapper">
-
                                 <div class="slidertns">';
                                     $resultInner = $conn->query($sql);
                                         while ($row2 = mysqli_fetch_array($resultInner)) {
@@ -48,29 +47,35 @@
                                         <h3 class="plantInner">Licht:</h3>';
 
                                         $light = $row["lightPattern"] * 2;
+                                        if ($light == 0) {
+                                            echo '<span class="fas fa-question"></span>';
+                                        } else {
+                                            for ($i = 0; $i <= 5; $i++) {
 
-                                        for($i=0; $i<=5; $i++) {
-
-                                            if ($light >= 1) {
-                                                echo '<span class="fas fa-sun sun-checked"></span>';
-                                                $light--;
-                                            } else {
-                                                echo '<span class="fas fa-sun"></span>';
+                                                if ($light >= 1) {
+                                                    echo '<span class="fas fa-sun sun-checked"></span>';
+                                                    $light--;
+                                                } else {
+                                                    echo '<span class="fas fa-sun"></span>';
                                                 }
+                                            }
                                         }
                                         echo '
                                         <h3 class="plantInner">Water:</h3>';
 
                                         $light = $row["waterManage"]*2;
+                                        if ($light == 0) {
+                                            echo '<span class="fas fa-question"></span>';
+                                        } else {
+                                            for($i=0; $i<=5; $i++) {
 
-                                        for($i=0; $i<=5; $i++) {
-
-                                            if ($light >= 1) {
-                                                echo '<span class="fas fa-tint drop-checked"></span>';
-                                                $light--;
-                                            } else {
-                                                echo '<span class="fas fa-tint"></span>';
-                                                }
+                                                if ($light >= 1) {
+                                                    echo '<span class="fas fa-tint drop-checked">&nbsp;</span>';
+                                                    $light--;
+                                                } else {
+                                                    echo '<span class="fas fa-tint">&nbsp;</span>';
+                                                    }
+                                            }
                                         }
                                         echo '
                                         <h3 class="plantInner">Soort:</h3>
@@ -84,7 +89,7 @@
                                         <span class="fa fa-star"></span>
                                         <span class="fa fa-star"></span>
                                         <h3 class="plantInner">Geupload door:</h3>
-                                        <p class="plantInner">'.$row["usernameUser"].'</p>
+                                        <p class="plantInner"><a href="userpage?IdUser='.$row["userId"].'">'.$row["usernameUser"].'</a></p>
                                     </div>
                                 </div>
 
@@ -113,12 +118,14 @@
                                 <div class="popup-form">
                                     <!-- Close popup form button -->
                                     <br>
-                                    <button class="feedback-submit" id="advertisementDelete" value='.$row["idAd"].' onclick="adminDeleteAdvertisement(this.value, this.id)">Verwijder advertentie</button>
+                                    <button class="feedback-submit" id="advertisementDelete" value='.$row["idAd"].' onclick="userDeleteAdvertisement(this.value, this.id)">Verwijder advertentie</button>
                                     <button class="closefeedback-submit" onclick=userPopUpMessage()>Annuleren</button>
                                     <br><br>
                                 </div>
                             </div>
                         </div>';
+                // session used for edit page to check if user is the owner of the advertisement        
+                $_SESSION["idUser"] = $row["idUser"];
             //Give error when advertisement doesn't exist
             } else {
                 echo "Advertentie bestaat niet meer.";
@@ -133,7 +140,7 @@
 
 <script>
     //blogpostId is the id of the blogpost stored in the button value
-    function adminDeleteAdvertisement(advertisementId, advertisementUser){
+    function userDeleteAdvertisement(advertisementId, advertisementUser){
         $.ajax({
             url: "adminFunctions.php",
             type: 'post',

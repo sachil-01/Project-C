@@ -5,23 +5,23 @@
 
 <head>
     <title>Advertisements</title>
-    <link rel="stylesheet" type="text/css" href="css\adPagina.css">
+    <link rel="stylesheet" type="text/css" href="css\style.css">
 </head>
 
 <body>    
     <div class="gallery">
         <h1>Alle aanbiedingen</h1>
         <div class="newadknop">
-            <button class="newadbutton"><a class="newadlink" href="newad"><i class="fas fa-plus"></i> Plant plaatsen</a></button>
+            <a href="newad"><button href="newad" class="newadbutton"><i class="fas fa-plus"></i> Plant plaatsen</button></a>
         </div>
         
         <div class="searchbar-div">
             <div class="searchbar-margin">
                 <div class="searchbar-main">
-                        <form class="searchbar-main-content" action="" method="post">
-                            <input type="text" class="searchbar-input" name="search-input" onfocus="this.value=''" placeholder="Zoeken...">
-                            <button class="searchbar-button" name="search-submit"><i class="fas fa-search"></i></button>
-                        </form>
+                    <form class="searchbar-main-content" action="" method="post">
+                        <input type="text" class="searchbar-input" name="search-input" onfocus="this.value=''" placeholder="Zoeken...">
+                        <button class="searchbar-button" name="search-submit"><i class="fas fa-search"></i></button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -129,7 +129,7 @@
         }
         
         $statement = mysqli_stmt_init($conn);
-        //array with all blogpost Ids
+        //array with all advertisement Ids
         $allIdAdvertisements = array();
         if (!mysqli_stmt_prepare($statement, $sql)) {
             header("Location: adpagina.php?error=sqlerror");
@@ -138,37 +138,34 @@
         else {
             mysqli_stmt_execute($statement);
             $result = mysqli_stmt_get_result($statement);
-            if ($row = mysqli_fetch_assoc($result)) {
-                foreach ($result as $adv) {
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
                     //checks if advertisement id already exists in array > if advertisement id exists in array -> skip current advertisement
-                    if(!in_array($adv['idAd'], $allIdAdvertisements)){
-                        $idAd = $adv['idAd'];
-                        $plantName = $adv['plantName'];
-                        $plantLatinName = $adv['plantLatinName'];
-                        $adDate = date("d-m-Y", strtotime($adv['postDate']));
-
+                    if(!in_array($row['idAd'], $allIdAdvertisements)){
                         if (isset($_SESSION['userId'])) {
-                            $distance = getDistance($adv['postalCode'], $currentUserPostalCode);
+                            $distance = getDistance($row['postalCode'], $currentUserPostalCode);
                         } else {
                             $distance = "-- km";
                         }
                         echo '<div class="plant">
-                                <a class="linkPlant" href="adinfo?idAd='.$idAd.'">
+                                <a class="linkPlant" href="adinfo?idAd='.$row['idAd'].'">
                                     <div class="adImage">
-                                        <img src="uploads/'.$adv["imgName"].'" alt="">
+                                        <img src="uploads/'.$row["imgName"].'" alt="">
                                     </div>
                                     <div class="description">
-                                        <h2>'.$plantName.'</h2>
+                                        <h2>'.$row['plantName'].'</h2>
                                         <br>
                                         <h3> Afstand: <span>'.$distance.'</span></h3>
-                                        <h3> Datum: <span>'.$adDate.'</span></h3>
+                                        <h3> Datum: <span>'.date("d-m-Y", strtotime($row['postDate'])).'</span></h3>
                                     </div>
                                 </a>
                             </div>';
                         //add advertisement id to array
-                        array_push($allIdAdvertisements, $adv['idAd']);
+                        array_push($allIdAdvertisements, $row['idAd']);
                     }
                 }
+            } else {
+                echo "0 resultaten";
             }
         };
         ?>

@@ -301,6 +301,7 @@
     resize: none;
     float: left;
     font-size: 16px;
+    outline: none;
 }
 
 .comment-upload button{
@@ -340,6 +341,11 @@
     border-color:  rgb(47, 87, 148);
     background-color: rgb(47, 87, 148);
     cursor: pointer;
+}
+
+.user-edit-blogpost-btn a{
+    color: white;
+    text-decoration: none;
 }
 
 .user-delete-blogpost-btn:hover{

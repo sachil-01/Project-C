@@ -81,7 +81,7 @@ nav {
 .nav-links{
     display: flex;
     justify-content: space-around;
-    width: 50%;
+    width: 55%;
 }
 
 .nav-links li{
@@ -91,7 +91,7 @@ nav {
 .nav-links a{
     color: var(--clr-groen);
     text-decoration: none;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     font-size: 1vw;
     font-family: 'Montserrat', serif;
     font-weight: bold;
@@ -179,7 +179,6 @@ nav {
 
 .searchbar-input {
     font-size: 1vw;
-    /* color: #707c75; */
     height: 100%;
     padding-left: 30px;
     margin: 0;
@@ -196,6 +195,11 @@ nav {
     width: 5%;
     margin: 0;
     float: right;
+    outline: none;
+}
+
+.searchbar-button:hover{
+    background-color: rgb(230, 230, 230);;
 }
 
 .fa-search {
@@ -316,6 +320,11 @@ nav {
     /* Advertisement description headers and description details */
     .description h3, .description h3 span{
         font-size: 3vw;
+    }
+
+    .searchbar-input {
+        width: 80%;
+        font-size: 16px;
     }
 }
 
@@ -528,14 +537,18 @@ nav {
     width: 25%;
     padding: 8px;
     height: 100%;
-}
-
-.newadlink {
-    text-decoration: none;
+    outline: none;
     font-size: var(--fs-body);
     color: white;
     font-family: 'Montserrat', serif;
     font-weight: bold;
+    text-decoration: none;
+}
+
+.newadbutton:hover{
+    border-color: #208820;
+    background-color: #208820;
+    cursor: pointer;
 }
 
 /* Advertisement discription container*/
@@ -558,11 +571,6 @@ nav {
     .nav-links a{
         color: var(--clr-wit);
         font-size: 2.5vw;
-    }
-
-    .searchbar-input {
-        width: 80%;
-        font-size: 3vw;
     }
 
     .searchbar-button {
@@ -739,12 +747,14 @@ nav {
     height: 9px;
     padding: 0;
     margin-right: 10px;
-    background: var(--clr-dark-green);
+    background: #9c9a95;
     border: 0;
+    outline: none;
 }
 
 button.tns-nav-active {
-    background: #9c9a95;
+    background: var(--clr-dark-green);
+    outline: none;
 }
 
 .plantMsg {
@@ -777,6 +787,21 @@ button.tns-nav-active {
 
 .plantInner {
     margin-top: 20px;
+}
+
+/* adinfo username */
+.plantInner a, .plantInfoMargin a{
+    text-decoration: none;
+    color: var(--clr-dark-green);
+    border: 1px solid transparent;
+    padding: 2%;
+    border-radius: 1vw;
+}
+
+.plantInner a:hover, .plantInfoMargin a:hover{
+    border-color: var(--clr-dark-green);
+    background-color: var(--clr-dark-green);
+    color: white;
 }
 
 .plantDescription {
@@ -823,7 +848,7 @@ button.tns-nav-active {
     color: #F4DC85;
 }
 
-.fa-star {
+.plantInfoMargin .fa-star {
     margin-right: 10px;
     margin-top: 20px;
     font-size: var(--fs-h2);
