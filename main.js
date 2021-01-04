@@ -26,12 +26,45 @@ function adminDisplayAllFunc(){
 	document.getElementById("adminDisplayResultList").style.cssText = "display: none;";
 }
 
-//var adminSearchInput = document.getElementById('adminSearchInput')
-
-//function adminSearch(){
-//	document.getElementById("adminSearchBtn").innerHTML = adminSearchInput.value;
-//}
-
+//DELETE BLOGPOST ADMIN FUNCTION
+//blogpostId is the id of the blogpost stored in the button value
+function adminDeleteBlogpost(blogpostId, blogpostUser){
+    $.ajax({
+        url: "adminFunctions.php",
+        type: 'post',
+        data: {function: "blogpost", id: blogpostId, user: blogpostUser},
+        success: function(result)
+        {
+            //checks which list needs to be updated
+            if(blogpostUser == "adminBlogpost"){ //admin blogpost list
+                document.getElementById("adminDisplayBlogpostFunc").innerHTML = result;
+            } else { // registered user blogpost list
+                document.getElementById("userBlogsList").innerHTML = result;
+                document.getElementById("totalblogs").innerHTML = (result.match(/Blogtitel:/g) || []).length;
+                document.getElementById("starttotalblogs").innerHTML = "";
+            }
+        }
+    })
+}
+//DELETE ADVERTISEMENT ADMIN FUNCTION
+function adminDeleteAdvertisement(advertisementId, advertisementUser){
+    $.ajax({
+        url: "adminFunctions.php",
+        type: 'post',
+        data: {function: "advertisement", id: advertisementId, user: advertisementUser},
+        success: function(result)
+        {
+            //checks which list needs to be updated
+            if(advertisementUser == "adminAdvertisement"){ //admin advertisement list
+                document.getElementById("adminDisplayAdvertisementFunc").innerHTML = result;
+            } else { // registered user advertisement list
+                document.getElementById("userAdsList").innerHTML = result;
+                document.getElementById("totalads").innerHTML = (result.match(/Advertentienaam:/g) || []).length;
+                document.getElementById("starttotalads").innerHTML = "";
+            }
+        }
+    })
+}
 
 var profileTabsBtn = document.getElementById('ads-blogs-btns')
 var userAdsBtn = document.getElementById('ad-btn')

@@ -118,7 +118,7 @@
                                 <div class="popup-form">
                                     <!-- Close popup form button -->
                                     <br>
-                                    <button class="feedback-submit" id="advertisementDelete" value='.$row["idAd"].' onclick="adminDeleteAdvertisement(this.value, this.id)">Verwijder advertentie</button>
+                                    <button class="feedback-submit" id="advertisementDelete" value='.$row["idAd"].' onclick="userDeleteAdvertisement(this.value, this.id)">Verwijder advertentie</button>
                                     <button class="closefeedback-submit" onclick=userPopUpMessage()>Annuleren</button>
                                     <br><br>
                                 </div>
@@ -140,7 +140,7 @@
 
 <script>
     //blogpostId is the id of the blogpost stored in the button value
-    function adminDeleteAdvertisement(advertisementId, advertisementUser){
+    function userDeleteAdvertisement(advertisementId, advertisementUser){
         $.ajax({
             url: "adminFunctions.php",
             type: 'post',

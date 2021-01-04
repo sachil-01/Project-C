@@ -77,6 +77,7 @@
                     </div>';
             // session used for edit page to check if user is the owner of the blogpost
             $_SESSION["idUser"] = $row["idUser"];
+            $_SESSION['blogId'] = $row["idPost"];
     ?>
     <div class="comment-section">
         <?php
