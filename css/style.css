@@ -790,7 +790,7 @@ button.tns-nav-active {
 }
 
 /* adinfo username */
-.plantInner a{
+.plantInner a, .plantInfoMargin a{
     text-decoration: none;
     color: var(--clr-dark-green);
     border: 1px solid transparent;
@@ -798,7 +798,7 @@ button.tns-nav-active {
     border-radius: 1vw;
 }
 
-.plantInner a:hover{
+.plantInner a:hover, .plantInfoMargin a:hover{
     border-color: var(--clr-dark-green);
     background-color: var(--clr-dark-green);
     color: white;
