@@ -79,37 +79,34 @@
         else {
             mysqli_stmt_execute($statement);
             $result = mysqli_stmt_get_result($statement);
-            if ($row = mysqli_fetch_assoc($result)) {
-                foreach ($result as $adv) {
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
                     //checks if advertisement id already exists in array > if advertisement id exists in array -> skip current advertisement
-                    if(!in_array($adv['idAd'], $allIdAdvertisements)){
-                        $idAd = $adv['idAd'];
-                        $plantName = $adv['plantName'];
-                        $plantLatinName = $adv['plantLatinName'];
-                        $adDate = date("d-m-Y", strtotime($adv['postDate']));
-
+                    if(!in_array($row['idAd'], $allIdAdvertisements)){
                         if (isset($_SESSION['userId'])) {
-                            $distance = getDistance($adv['postalCode'], $currentUserPostalCode);
+                            $distance = getDistance($row['postalCode'], $currentUserPostalCode);
                         } else {
                             $distance = "-- km";
                         }
                         echo '<div class="plant">
-                                <a class="linkPlant" href="adinfo?idAd='.$idAd.'">
+                                <a class="linkPlant" href="adinfo?idAd='.$row['idAd'].'">
                                     <div class="adImage">
-                                        <img src="uploads/'.$adv["imgName"].'" alt="">
+                                        <img src="uploads/'.$row["imgName"].'" alt="">
                                     </div>
                                     <div class="description">
-                                        <h2>'.$plantName.'</h2>
+                                        <h2>'.$row['plantName'].'</h2>
                                         <br>
                                         <h3> Afstand: <span>'.$distance.'</span></h3>
-                                        <h3> Datum: <span>'.$adDate.'</span></h3>
+                                        <h3> Datum: <span>'.date("d-m-Y", strtotime($row['postDate'])).'</span></h3>
                                     </div>
                                 </a>
                             </div>';
                         //add advertisement id to array
-                        array_push($allIdAdvertisements, $adv['idAd']);
+                        array_push($allIdAdvertisements, $row['idAd']);
                     }
                 }
+            } else {
+                echo "0 resultaten";
             }
         };
         ?>
