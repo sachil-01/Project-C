@@ -26,6 +26,7 @@
                     <li><a href="adpagina">Aanbod</a></li>
                     <li><a href="blogpage">Blog</a></li>
                     <li><a href="hoewerkthet">Hoe werkt het?</a></li>
+                    <li><a href="overons">Over ons</a></li>
                     <?php
                         $id = $_SESSION['userId'];
                         if (isset($id)) {

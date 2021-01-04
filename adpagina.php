@@ -70,7 +70,7 @@
         }
         
         $statement = mysqli_stmt_init($conn);
-        //array with all blogpost Ids
+        //array with all advertisement Ids
         $allIdAdvertisements = array();
         if (!mysqli_stmt_prepare($statement, $sql)) {
             header("Location: adpagina.php?error=sqlerror");

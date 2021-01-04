@@ -12,6 +12,7 @@
     height: 100%;
 }
 
+/* profilepage */
 .profile-leftpart-up{
     height: 34%;
 }
@@ -21,7 +22,17 @@
     height: 64%;
 }
 
-.profile-leftpart-down, .profile-leftpart-up, .profilebox-right, .dashboard{
+/* userprofile page */
+.userprofile-leftpart-up{
+    height: 50%;
+}
+
+.userprofile-leftpart-down{
+    margin-top: 15px;
+    height: 47%;
+}
+
+.profile-leftpart-down, .profile-leftpart-up, .userprofile-leftpart-up, .userprofile-leftpart-down, .profilebox-right, .dashboard{
     background-color: rgb(240, 240, 240);
     border: 2vw solid rgb(240, 240, 240);
     border-radius: 1vw;
@@ -394,6 +405,12 @@
     color: orange;
 }
 
+.fa-star{
+    margin-top: 1%;
+    margin-bottom: 1%;
+    font-size: var(--fs-h2);
+}
+
 .profileError{
 	width: 350px;
 	border: 3px solid #4A7C00;
@@ -411,4 +428,25 @@
 
 .ads-blogs-list .Delete-btn{
     width: 100%;
+}
+
+/* !important to force <p> tag to be normal (not bold) */
+.userData{
+    font-weight: normal !important;
+}
+
+/* All advertisements */
+.img-area{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* All blogposts */
+.grid-3-col{
+    float: none !important;
+}
+
+.emptyAdOrBlogList{
+    text-align: center;
 }

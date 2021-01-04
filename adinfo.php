@@ -89,7 +89,7 @@
                                         <span class="fa fa-star"></span>
                                         <span class="fa fa-star"></span>
                                         <h3 class="plantInner">Geupload door:</h3>
-                                        <p class="plantInner">'.$row["usernameUser"].'</p>
+                                        <p class="plantInner"><a href="userpage?IdUser='.$row["userId"].'">'.$row["usernameUser"].'</a></p>
                                     </div>
                                 </div>
 
