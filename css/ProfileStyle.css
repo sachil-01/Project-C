@@ -23,16 +23,18 @@
 }
 
 /* userprofile page */
-.userprofile-leftpart-up{
-    height: 50%;
+.userprofilebox{
+    width: 80%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.userprofile-leftpart-down{
-    margin-top: 15px;
-    height: 47%;
+.userprofilebox{
+    font-weight: bold;
 }
 
-.profile-leftpart-down, .profile-leftpart-up, .userprofile-leftpart-up, .userprofile-leftpart-down, .profilebox-right, .dashboard{
+.profile-leftpart-down, .profile-leftpart-up, .userprofile-up-left, .userprofile-up-right, .profilebox-right, .dashboard{
     background-color: rgb(240, 240, 240);
     border: 2vw solid rgb(240, 240, 240);
     border-radius: 1vw;
@@ -64,8 +66,11 @@
     }
 
     /* Dashboard */
-    .dashboard-left, .dashboard-right{
+    .dashboard-left, .dashboard-right, .userprofile-up-left, .userprofile-up-right{
         width: 49%;
+    }
+
+    .dashboard-left, .dashboard-right{
         margin-bottom: 4%;
     }
 
@@ -73,6 +78,14 @@
         float: left;
         padding-right: 5%;
         border-right: 2px solid #4b9600;
+    }
+
+    .userprofile-up-left{
+        float: left;
+    }
+
+    .userprofile-up-right{
+        float: right;
     }
 
     .dashboard-right{
@@ -144,6 +157,10 @@
     /* admin search bar */
     .admin-search{
         width: 100%;
+    }
+
+    .userprofile-up-right{
+        margin-top: 15px;
     }
 }
 
@@ -406,8 +423,8 @@
 }
 
 .fa-star{
-    margin-top: 1%;
-    margin-bottom: 1%;
+    margin-top: 5px;
+    margin-bottom: 5px;
     font-size: var(--fs-h2);
 }
 
@@ -433,6 +450,7 @@
 /* !important to force <p> tag to be normal (not bold) */
 .userData{
     font-weight: normal !important;
+    word-wrap: break-word !important;
 }
 
 /* All advertisements */

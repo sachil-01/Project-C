@@ -33,7 +33,7 @@
         }
     }
     
-    $sql = $conn->query("SELECT * FROM User WHERE idUser='$id'") or die($conn->error);
+    $sql = $conn->query("SELECT * FROM User u WHERE idUser='$id'") or die($conn->error);
 
     /* fetch associative array */
     while ($row = $sql->fetch_assoc()) {
@@ -49,6 +49,18 @@
         $biography = $row["biography"];
         $_SESSION["idUser"] = $row["idUser"];
     }
+
+    //count total advertisements of user
+    $sql = $conn->query("SELECT COUNT(a.idAd) as totalAds FROM User u JOIN Advertisement a ON a.userId = u.idUser WHERE idUser='$id'") or die($conn->error);
+    while ($row = $sql->fetch_assoc()) {
+        $countAds = $row["totalAds"];
+    }
+
+    //count total blogposts of user
+    $sql = $conn->query("SELECT COUNT(b.idPost) as totalBlogs FROM User u JOIN Blogpost b ON b.blogUserId = u.idUser WHERE idUser='$id'") or die($conn->error);
+    while ($row = $sql->fetch_assoc()) {
+        $countBlogs = $row["totalBlogs"];
+    }
     ?>
     <table class="profilebox">
         <tr>
@@ -57,46 +69,28 @@
             </div>
         </tr>
         <tr>
-            <td>
-                <div class="profilebox-left">
-                    <div class="userprofile-leftpart-up">
-                        <p>Beoordeling</p>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        <p>Aantal advertenties</p>
-                        <p class="userData"><?php echo $countAds; ?> advertenties</p>
-                        <p>Aantal blogposts</p>
-                        <p class="userData"><?php echo $countBlogs; ?> blogposts</p>
-                    </div>
-                    <div class="userprofile-leftpart-down">
-                        <p>Biografie</p>
-                        <p class="userData"><?php echo $biography != "" ? $biography : "Gebruiker heeft nog geen biografie toegevoegd." ; ?></p>
-                    </div>
+            <div class="userprofilebox">
+                <div class="userprofile-up-left">
+                    <p>Beoordeling</p>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    <p>Aantal advertenties</p>
+                    <p class="userData"><?php echo $countAds; ?> advertenties</p>
+                    <p>Aantal blogposts</p>
+                    <p class="userData"><?php echo $countBlogs; ?> blogposts</p>
                 </div>
-            </td>
-            <td>
-                <div class="profilebox-right">
+                <div class="userprofile-up-right">
                     <p>Gebruikersnaam</p>
                     <p class="userData"><?php echo $gebruikersnaam; ?></p>
                     <p>E-mail</p>
                     <p class="userData"><?php echo $emailadres; ?></p>
-                    <p>Voornaam</p>
-                    <p class="userData"><?php echo $voornaam; ?></p>
-                    <p>Achternaam</p>
-                    <p class="userData"><?php echo $achternaam; ?></p>
-                    <p>Straatnaam</p>
-                    <p class="userData"><?php echo $straat; ?></p>
-                    <p>Huisnummer</p>
-                    <p class="userData"><?php echo $huisnummer; ?></p>
-                    <p>Toevoeging</p>
-                    <p class="userData"><?php echo $toevoeging != "" ? $toevoeging: "N.v.t." ; ?></p>
-                    <p>Postcode</p>
-                    <p class="userData"><?php echo $postcode; ?></p>
+                    <p>Biografie</p>
+                    <p class="userData"><?php echo $biography != "" ? $biography : "Gebruiker heeft nog geen biografie toegevoegd." ; ?></p>
                 </div>
-            </td>
+            </div>
         </tr>
     </table>
 

@@ -12,17 +12,7 @@ if (isset($_POST['update-submit'])) {
     $huisnummer = $_POST['huisNummer'];
     $toevoeging = $_POST['toevoeging'];
     $postcode = $_POST['postcode'];
-
-    $sql = $conn->query("SELECT admin FROM User WHERE idUser = '$id'") or die($conn->error);
-
-    /* fetch associative array */
-    while ($row = $sql->fetch_assoc()) {
-        if($row["admin"] == 1){
-            $biography = "";
-        } else if ($row["admin"] == 0){
-            $biography = $_POST['userBiography'];
-        }
-    }
+    $biography = $_POST['userBiography'];
 
     // error berichten in header
     if (empty($username) || empty($email) || empty($firstname) || empty($lastname)) {
