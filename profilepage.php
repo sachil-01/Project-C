@@ -62,6 +62,8 @@
                             $countBlogs++;
                         }
                     }
+                } else {
+                    $adBlogArray[$i][1] = "<p class='emptyAdOrBlogList'>0 resultaten.</p>";
                 }
                 $adBlogArray[$i][1] = $adBlogArray[$i][1] . '</table>';                         //end html <table> tag
             }

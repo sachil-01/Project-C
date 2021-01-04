@@ -57,6 +57,8 @@
                                     $adminBlogs = $adminBlogs . '<tr><td><p><span>Blogtitel: </span>'.$row["blogTitle"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p></td><td><button id="userBlogpost" value='.$row["idPost"].' onclick="adminDeleteBlogpost(this.value, this.id)" class="adDelete-btn">verwijder</button><a href="editAdOrBlog.php?blogpostId='.$row["idPost"].'"><button class="adEdit-btn">wijzig</button></a></td></tr>';
                                 }
                             }
+                        } else {
+                            $adminBlogs = "<p class='emptyAdOrBlogList'>0 resultaten.</p>";
                         }
                         $adminBlogs = $adminBlogs . '</table>';                    //end html <table> tag
                         echo "$adminBlogs";
@@ -122,6 +124,8 @@
                                 $adminAdvertisements = $adminAdvertisements . '<tr><td><p><span>Advertentienaam: </span>'.$row["plantName"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["postDate"]),"d-m-Y").'</p></td><td><p><span>Verloopt op: </span>'.$expiredDate.'</p></td><td><button id="userAdvertisement" value='.$row["idAd"].' onclick="adminDeleteAdvertisement(this.value, this.id)" class="adDelete-btn">verwijder</button><a href="editAdOrBlog.php?advertisementId='.$row["idAd"].'"><button class="adEdit-btn">wijzig</button></a></td></tr>';
                             }
                         }
+                    } else {
+                        $adminAdvertisements = "<p class='emptyAdOrBlogList'>0 resultaten.</p>";
                     }
                     $adminAdvertisements = $adminAdvertisements . '</table>';                    //end html <table> tag
                     echo "$adminAdvertisements";
