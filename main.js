@@ -130,6 +130,44 @@ function previewImage() {
 		document.getElementById("imagePreviewPrevious").style.cssText = "display: block;";
 		document.getElementById("imagePreviewNext").style.cssText = "display: block;";
 		document.getElementById("imagePreviewGallery").style.cssText = "display: block;";
+	} else {
+		document.getElementById("imagePreviewPrevious").style.cssText = "display: none;";
+		document.getElementById("imagePreviewNext").style.cssText = "display: none;";
+		document.getElementById("imagePreviewGallery").style.cssText = "display: none;";
+    }
+}
+
+//Function to display every image from the image gallery in update forms
+function previewImgGallery(imgId, index) {
+	var file = document.getElementById("file").files;
+	var fileReader = new FileReader();
+
+	fileReader.onload = function (event) {
+		document.getElementById(imgId).setAttribute("src", event.target.result)
+	};
+
+	fileReader.readAsDataURL(file[index]);
+}
+
+//Function to create <img> tag for image gallery in update forms
+function createImgTag() {
+	var file = document.getElementById("file").files;
+	if (file.length > 0) {
+		//display image gallery when file length is greater than 0
+		document.getElementById("imagePreviewGallery").style.cssText = "display: block;";
+
+		//remove OLD preview Images before displaying NEW preview images
+		document.getElementById('imagePreviewGallery').innerHTML = "";
+
+		for (i = 0; i < file.length; i++) {
+			var img = new Image();	//create new <img> tag
+			img.id = "imagePreview" + i; //set id attribute
+			img.className = "imagePreviewItem"; //set class attribute
+			document.getElementById('imagePreviewGallery').appendChild(img); //add <img> tag to parent div
+			previewImgGallery(img.id, i);
+		}
+	} else {
+		document.getElementById("imagePreviewGallery").style.cssText = "display: none;";
     }
 }
 

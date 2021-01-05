@@ -126,7 +126,7 @@ input[type=radio]:checked + img {
     }
 
     .newAdButtons span{
-        display: none !important;
+        display: none;
     }
 
     #imagePreviewPrevious:before{

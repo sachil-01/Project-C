@@ -232,7 +232,11 @@
                     <?php
                         }
                     ?>
-                    <input type='file' name='file[]' id='file' multiple><br><br>
+                    <br>
+                    <!-- display image after selecting -->
+                    <div id="imagePreviewGallery" class="imagePreviewGallery"></div>
+                    <label class="uploaddescription">Selecteer een foto (max 1MB)</label><br>
+                    <input type="file" name="file[]" id="file" accept=".png, .jpg, .jpeg, .gif" onchange="createImgTag()" multiple><br><br>
 
                     <label>URL toevoegen</label><br>
                     <input type="url" name="bLink" id="bLink" value="<?php echo $blogLink; ?>"><br><br>
@@ -394,8 +398,10 @@
                     }
                 ?>
                 <br>
+                <!-- display image after selecting -->
+                <div id="imagePreviewGallery" class="imagePreviewGallery"></div>
                 <label class="uploaddescription">Selecteer een foto (max 1MB)</label><br>
-                <input type="file" name="file[]" id="file" multiple><br><br>
+                <input type="file" name="file[]" id="file" accept=".png, .jpg, .jpeg, .gif" onchange="createImgTag()" multiple><br><br>
                 
                 <label><label style="color: red;">*</label> = verplicht</label><br><br>
                 <input class="newAdButtons" type="submit" name="ad-update" value="Plaatsen!">
