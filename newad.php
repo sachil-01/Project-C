@@ -182,8 +182,15 @@ include('header.php');
                 <br><br>
                 
                 <label>Afbeeldingen <label style="color: red;">*</label></label><br>
+                <!-- display image after selecting -->
+                <div id="imagePreviewGallery">
+                    <img id="imagePreview">
+                    <button type="button" id="imagePreviewPrevious" onclick="previewCurrentImage('previous')" class="newAdButtons"><span>Vorige afbeelding</span></button>
+                    <button type="button" id="imagePreviewNext" onclick="previewCurrentImage('next')" class="newAdButtons"><span>Volgende afbeelding</span></button>
+                    <br><br><br>
+                </div>
                 <label class="uploaddescription">Selecteer een foto (max 1MB)</label><br>
-                <input type="file" name="file[]" id="file" multiple><br><br>
+                <input type="file" name="file[]" id="file" accept=".png, .jpg, .jpeg, .gif" onchange="previewImage()" multiple><br><br>
                 
                 <label><label style="color: red;">*</label> = verplicht</label><br><br>
                 <input class="newAdButtons" type="submit" name="ad-submit" value="Plaatsen!">

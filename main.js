@@ -69,7 +69,7 @@ function adminDeleteAdvertisement(advertisementId, advertisementUser){
 var profileTabsBtn = document.getElementById('ads-blogs-btns')
 var userAdsBtn = document.getElementById('ad-btn')
 var userBlogsBtn = document.getElementById('blog-btn')
-
+	//advertisement tab
     function leftClick(){
         profileTabsBtn.style.left= '0';
         userAdsBtn.style.color= 'white';
@@ -77,14 +77,61 @@ var userBlogsBtn = document.getElementById('blog-btn')
 	document.getElementById("userBlogsList").style.cssText = "display: none;";
 	document.getElementById("userAdsList").style.cssText = "display: block;";
     }
-
+	//blogpost tab
     function rightClick(){
         profileTabsBtn.style.left= '50%'
         userAdsBtn.style.color= 'gray'
         userBlogsBtn.style.color= 'white'
 	document.getElementById("userBlogsList").style.cssText = "display: block;";
 	document.getElementById("userAdsList").style.cssText = "display: none;";
+}
+
+function previewCurrentImage(button) {
+	var file = document.getElementById("file").files;
+	var fileReader = new FileReader();
+
+	fileReader.onload = function (event) {
+		document.getElementById("imagePreview").setAttribute("src", event.target.result)
+	};
+
+	//if next image button is clicked
+	if (button == "next") {
+		if (currentImage < file.length - 1) {
+			currentImage++;
+		} else {
+			currentImage = 0;
+		}
+	//if previous button is clicked
+	} else {
+		if (currentImage > 0) {
+			currentImage--;
+		} else {
+			currentImage = file.length - 1;
+		}
+	}
+
+	fileReader.readAsDataURL(file[currentImage]);
+}
+
+var currentImage = 0;
+
+function previewImage() {
+	var file = document.getElementById("file").files;
+	if (file.length > 0) {
+		var fileReader = new FileReader();
+
+		fileReader.onload = function (event) {
+			document.getElementById("imagePreview").setAttribute("src", event.target.result)
+		};
+
+		fileReader.readAsDataURL(file[currentImage]);
+
+		//display image gallery and buttons when file length is greater than 0
+		document.getElementById("imagePreviewPrevious").style.cssText = "display: block;";
+		document.getElementById("imagePreviewNext").style.cssText = "display: block;";
+		document.getElementById("imagePreviewGallery").style.cssText = "display: block;";
     }
+}
 
 var navSlide = () => {
 	const burger = document.querySelector('.burger');

@@ -111,8 +111,15 @@
             <textarea id="bdesc" name="bdesc" required></textarea><br><br>
 
             <label>Afbeeldingen</label><br>
+            <!-- display image after selecting -->
+            <div id="imagePreviewGallery">
+                <img id="imagePreview">
+                <button type="button" id="imagePreviewPrevious" onclick="previewCurrentImage('previous')" class="newPostButton"><span>Vorige afbeelding</span></button>
+                <button type="button" id="imagePreviewNext" onclick="previewCurrentImage('next')" class="newPostButton"><span>Volgende afbeelding</span></button>
+                <br><br><br>
+            </div>
             <label class="uploaddescription">Selecteer een foto (max 1MB)</label><br>
-            <input type='file' name='file[]' id='file' multiple><br><br>
+            <input type="file" name="file[]" id="file" accept=".png, .jpg, .jpeg, .gif" onchange="previewImage()" multiple><br><br>
 
             <label>URL toevoegen</label><br>
             <input type="url" name="bLink" id="bLink"><br><br>
