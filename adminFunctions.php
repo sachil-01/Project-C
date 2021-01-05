@@ -106,10 +106,10 @@
                 } else {
                     //check if its a registered user or an admin
                     if($advertisementUser == "adminAdvertisement"){
-                        $sql = "SELECT plantName, idAd, postDate FROM Advertisement";
+                        $sql = "SELECT plantName, idAd, postDate, plantCategory FROM Advertisement";
                         $adminAdvertisements = '<table class="ads-blogs-list"><tr class="ads-blogs-columnnames"><td><p>Advertentienaam</p></td><td><p>Advertentie-id</p></td><td><p>Geplaatst op</p></td><td><p>Verloopt op</p></td><td><p>Opties</p></td></tr>';
                     } else {
-                        $sql = "SELECT a.plantName, a.idAd, a.postDate FROM Advertisement a WHERE a.userId = '$userId'";
+                        $sql = "SELECT a.plantName, a.idAd, a.postDate, plantCategory FROM Advertisement a WHERE a.userId = '$userId'";
                         $adminAdvertisements = '<table class="ads-blogs-list"><tr class="ads-blogs-columnnames"><td><p>Advertentienaam</p></td><td><p>Geplaatst op</p></td><td><p>Verloopt op</p></td><td><p>Opties</p></td></tr>';
                     }
                                                 
