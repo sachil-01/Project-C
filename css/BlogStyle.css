@@ -314,6 +314,21 @@
     float: left;
 }
 
+/* user page redirection */
+.userPageRedirection{
+    text-decoration: none;
+    color: var(--clr-dark-green);
+    border: 1px solid transparent;
+    padding: 2%;
+    border-radius: 1vw;
+}
+
+.userPageRedirection:hover{
+    border-color: var(--clr-dark-green);
+    background-color: var(--clr-dark-green);
+    color: white;
+}
+
 /* Blogpost page edit and delete button */
 
 .userFunctions-btn{

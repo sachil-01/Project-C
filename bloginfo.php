@@ -40,7 +40,7 @@
                             <div class="plantInfoMargin">
                                 <p>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p>
                                 <h3>Geupload door:</h3>
-                                <p><a href="userpage?IdUser='.$row["idUser"].'">'.$row["usernameUser"].'</a></p>
+                                <p><a class="userPageRedirection" href="userpage?IdUser='.$row["idUser"].'">'.$row["usernameUser"].'</a></p>
                             </div>
                         </div>
 
