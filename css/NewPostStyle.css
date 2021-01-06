@@ -53,7 +53,9 @@
     padding:10px 20px;
     text-decoration:none;
     outline: none;
+    margin-top: 10px;
 }
+
 .newPostButton:hover, .deleteBlogpostImage:hover{
     color: white;
     background-color: green;
@@ -131,6 +133,19 @@
     .deleteBlogpostImage{
         width: 100%;
     }
+
+    /* next/previous image button (preview image) content */
+    .newPostButton span{
+        display: none;
+    }
+
+    #imagePreviewPrevious:before{
+        content: "<";
+    }
+
+    #imagePreviewNext:before{
+        content: ">";
+    }
 }
 
 /* error messages */
@@ -152,4 +167,25 @@
 /* delete buttons for deleting images of blogpost */
 .ads-blogs-list{
     width: 100%;
+}
+
+/* image preview */
+.imagePreviewItem{
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    float: left;
+    padding: 5px;
+}
+
+.imagePreviewGallery{
+    border: 2px solid #4A7C00;
+    height: 150px;
+    float: left;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+#imageWarning, #maxImageWarning{
+    color: red;
 }

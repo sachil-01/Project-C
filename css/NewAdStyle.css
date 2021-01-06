@@ -124,6 +124,18 @@ input[type=radio]:checked + img {
     .adform select{
      font-size: 16px;
     }
+
+    .newAdButtons span{
+        display: none;
+    }
+
+    #imagePreviewPrevious:before{
+        content: "<";
+    }
+
+    #imagePreviewNext:before{
+        content: ">";
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -164,4 +176,18 @@ input[type=radio]:checked + img {
     border-radius: 1vw;
     padding-left: 2%;
     padding-right: 2%;
+}
+
+/* image preview gallery */
+
+#imagePreviewPrevious, #imagePreviewNext, #imagePreviewGallery{
+    display: none;
+}
+
+#imagePreviewNext{
+    float: right;
+}
+
+#imagePreviewPrevious{
+    float: left;
 }

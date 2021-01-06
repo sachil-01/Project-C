@@ -88,6 +88,8 @@
                                         <span class="fa fa-star star-checked"></span>
                                         <span class="fa fa-star"></span>
                                         <span class="fa fa-star"></span>
+                                        <br><br>
+                                        <a class="plantInner" href=""><button class="plantMsg">Beoordeling plaatsen</button></a>
                                         <h3 class="plantInner">Geupload door:</h3>
                                         <p class="plantInner"><a href="userpage?IdUser='.$row["userId"].'">'.$row["usernameUser"].'</a></p>
                                     </div>
@@ -101,10 +103,47 @@
                             </div>
                             <div class="moreAds">
                                 <h3>Meer van '.$row["usernameUser"].'</h3>
-                                <div class="moreAdsImg">
-                                    <img src="uploads/'.$row["imgName"].'" alt="">
-                                    <img src="uploads/'.$row["imgName"].'" alt="">
-                                    <img src="uploads/'.$row["imgName"].'" alt="">
+                                <div class="moreAdsImg">';
+                                    $username = $row["usernameUser"];
+                                    $sql = "SELECT ai.imgName, a.idAd, a.plantName, a.postDate FROM Advertisement a JOIN User u ON a.userId = u.idUser LEFT JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE u.usernameUser = '$username' AND a.idAd != '$id' ORDER BY a.postDate DESC";
+                                    $resultInner = $conn->query($sql);
+                                    $allAdvertisementIds = array(); //array to avoid printing multiple images of one advertisement
+
+                                    if ($resultInner->num_rows > 0) {
+                                        include 'distance.php';
+
+                                        $moreAdsLimit = 3; //show only 3 other ads of user
+                                        while ($row3 = mysqli_fetch_array($resultInner)) {
+                                            if($row3['imgName'] != "" && !(in_array($row3['idAd'], $allAdvertisementIds))){
+                                                if (isset($_SESSION['userId'])) {
+                                                    $distance = getDistance($row['postalCode'], $row['postalCode']);
+                                                } else {
+                                                    $distance = "-- km";
+                                                }
+                                                echo '<div class="plant-small">
+                                                        <a class="linkPlant" href="adinfo?idAd='.$row3['idAd'].'">
+                                                            <div class="adImage">
+                                                                <img src="uploads/'.$row3["imgName"].'" alt="">
+                                                            </div>
+                                                            <div class="description">
+                                                                <h2>'.$row3['plantName'].'</h2>
+                                                                <br>
+                                                                <h3> Afstand: <span>'.$distance.'</span></h3>
+                                                                <h3> Datum: <span>'.date("d-m-Y", strtotime($row3['postDate'])).'</span></h3>
+                                                            </div>
+                                                        </a>
+                                                     </div>';
+                                                array_push($allAdvertisementIds, $row3['idAd']);
+                                                $moreAdsLimit--;
+                                                if($moreAdsLimit == 0){
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        echo "<p class='moreAdsErrorMessage'>".$row["usernameUser"]." heeft geen andere advertenties geplaatst</p>";
+                                    }
+                                echo '
                                 </div>
                             </div>
                         </div>

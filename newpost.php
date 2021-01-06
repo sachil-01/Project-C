@@ -16,6 +16,8 @@
             $fileCount = count($_FILES['file']['name']);
             //Check if user uploaded images
             for($i=0; $i < $fileCount; $i++){
+                $imageSize = true;
+                $imageFormats = true;
                 if(!in_array(strtolower(pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION)), $allowed)){
                     $imageFormats = false;
                     break;
@@ -23,8 +25,6 @@
                     $imageSize = false;
                     break;
                 }
-                $imageSize = true;
-                $imageFormats = true;
             }
 
             if($imageFormats && $imageSize){
@@ -97,7 +97,7 @@
     <div class="blogpostform">
         <h2>Nieuwe blogpost</h2><br>
         <form action="" method="post" enctype="multipart/form-data">
-            <label>Blogtitel</label><br>
+            <label>Blogtitel <label style="color: red;">*</label></label><br>
             <input type="text" id="bname" name="bname" required><br><br>
             
             <label>Blogcategorie</label><br>
@@ -107,15 +107,23 @@
                 <option value="vieringen en feestdagen">Vieringen en feestdagen</option>
             </select><br><br>
 
-            <label>Beschrijving</label><br>
+            <label>Beschrijving <label style="color: red;">*</label></label><br>
             <textarea id="bdesc" name="bdesc" required></textarea><br><br>
 
             <label>Afbeeldingen</label><br>
+            <!-- display image after selecting -->
+            <div id="imagePreviewGallery">
+                <img id="imagePreview">
+                <button type="button" id="imagePreviewPrevious" onclick="previewCurrentImage('previous')" class="newPostButton"><span>Vorige afbeelding</span></button>
+                <button type="button" id="imagePreviewNext" onclick="previewCurrentImage('next')" class="newPostButton"><span>Volgende afbeelding</span></button>
+                <br><br><br>
+            </div>
             <label class="uploaddescription">Selecteer een foto (max 1MB)</label><br>
-            <input type='file' name='file[]' id='file' multiple><br><br>
+            <input type="file" name="file[]" id="file" accept=".png, .jpg, .jpeg, .gif" onchange="previewImage()" multiple><br><br>
 
             <label>URL toevoegen</label><br>
             <input type="url" name="bLink" id="bLink"><br><br>
+            <label><label style="color: red;">*</label> = verplicht</label><br><br>
             <input class="newPostButton" type="submit" name="blog-submit" value="Blogpost plaatsen">
         </form>
     </div>

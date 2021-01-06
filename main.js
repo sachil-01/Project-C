@@ -69,22 +69,107 @@ function adminDeleteAdvertisement(advertisementId, advertisementUser){
 var profileTabsBtn = document.getElementById('ads-blogs-btns')
 var userAdsBtn = document.getElementById('ad-btn')
 var userBlogsBtn = document.getElementById('blog-btn')
-
-    function leftClick(){
-        profileTabsBtn.style.left= '0';
-        userAdsBtn.style.color= 'white';
-        userBlogsBtn.style.color= 'gray';
+//advertisement tab
+function leftClick(){
+    profileTabsBtn.style.left= '0';
+    userAdsBtn.style.color= 'white';
+    userBlogsBtn.style.color= 'gray';
 	document.getElementById("userBlogsList").style.cssText = "display: none;";
 	document.getElementById("userAdsList").style.cssText = "display: block;";
-    }
-
-    function rightClick(){
-        profileTabsBtn.style.left= '50%'
-        userAdsBtn.style.color= 'gray'
-        userBlogsBtn.style.color= 'white'
+}
+//blogpost tab
+function rightClick(){
+	profileTabsBtn.style.left = '50%';
+	userAdsBtn.style.color = 'gray';
+	userBlogsBtn.style.color = 'white';
 	document.getElementById("userBlogsList").style.cssText = "display: block;";
 	document.getElementById("userAdsList").style.cssText = "display: none;";
+}
+
+function previewCurrentImage(button) {
+	var file = document.getElementById("file").files;
+	var fileReader = new FileReader();
+
+	fileReader.onload = function (event) {
+		document.getElementById("imagePreview").setAttribute("src", event.target.result)
+	};
+
+	//if next image button is clicked
+	if (button == "next") {
+		if (currentImage < file.length - 1) {
+			currentImage++;
+		} else {
+			currentImage = 0;
+		}
+	//if previous button is clicked
+	} else {
+		if (currentImage > 0) {
+			currentImage--;
+		} else {
+			currentImage = file.length - 1;
+		}
+	}
+
+	fileReader.readAsDataURL(file[currentImage]);
+}
+
+var currentImage = 0;
+
+function previewImage() {
+	var file = document.getElementById("file").files;
+	if (file.length > 0) {
+		var fileReader = new FileReader();
+
+		fileReader.onload = function (event) {
+			document.getElementById("imagePreview").setAttribute("src", event.target.result)
+		};
+
+		fileReader.readAsDataURL(file[currentImage]);
+
+		//display image gallery and buttons when file length is greater than 0
+		document.getElementById("imagePreviewPrevious").style.cssText = "display: block;";
+		document.getElementById("imagePreviewNext").style.cssText = "display: block;";
+		document.getElementById("imagePreviewGallery").style.cssText = "display: block;";
+	} else {
+		document.getElementById("imagePreviewPrevious").style.cssText = "display: none;";
+		document.getElementById("imagePreviewNext").style.cssText = "display: none;";
+		document.getElementById("imagePreviewGallery").style.cssText = "display: none;";
     }
+}
+
+//Function to display every image from the image gallery in update forms
+function previewImgGallery(imgId, index) {
+	var file = document.getElementById("file").files;
+	var fileReader = new FileReader();
+
+	fileReader.onload = function (event) {
+		document.getElementById(imgId).setAttribute("src", event.target.result)
+	};
+
+	fileReader.readAsDataURL(file[index]);
+}
+
+//Function to create <img> tag for image gallery in update forms
+function createImgTag() {
+	var file = document.getElementById("file").files;
+	if (file.length > 0) {
+		//display image gallery when file length is greater than 0
+		document.getElementById("imagePreviewGallery").style.cssText = "display: block;";
+
+		//remove OLD preview Images before displaying NEW preview images
+		document.getElementById('imagePreviewGallery').innerHTML = "";
+
+		for (i = 0; i < file.length; i++) {
+			var img = new Image();	//create new <img> tag
+			img.id = "imagePreview" + i; //set id attribute
+			img.className = "imagePreviewItem"; //set class attribute
+			document.getElementById('imagePreviewGallery').appendChild(img); //add <img> tag to parent div
+			previewImgGallery(img.id, i);
+		}
+	} else {
+		document.getElementById("imagePreviewGallery").style.cssText = "display: none;";
+    }
+}
 
 var navSlide = () => {
 	const burger = document.querySelector('.burger');

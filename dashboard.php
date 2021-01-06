@@ -30,7 +30,7 @@
             $adminUsers = '<table class="ads-blogs-list"><tr class="ads-blogs-columnnames"><td><p>Gebruikersnaam</p></td><td><p>Gebruikers-id</p></td><td><p>Opties</p></td></tr>';
             array_push($userArray, $sql, $adminUsers);
             
-            $sql = "SELECT a.plantName, a.idAd, a.postDate FROM Advertisement a";
+            $sql = "SELECT a.plantName, a.idAd, a.postDate, a.plantCategory FROM Advertisement a";
             $adminAdvertisements = '<table class="ads-blogs-list"><tr class="ads-blogs-columnnames"><td><p>Advertentienaam</p></td><td><p>Advertentie-id</p></td><td><p>Geplaatst op</p></td><td><p>Verloopt op</p></td><td><p>Opties</p></td></tr>';
             array_push($adArray, $sql, $adminAdvertisements);
             
