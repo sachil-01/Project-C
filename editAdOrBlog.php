@@ -190,7 +190,7 @@
             <div class="blogpostform">
                 <h2>Update blogpost</h2><br>
                 <form action="" method="post" enctype="multipart/form-data">
-                    <label>Blogtitel</label><br>
+                    <label>Blogtitel <label style="color: red;">*</label></label><br>
                     <input type="text" id="bname" name="bname" value="<?php echo $blogTitle; ?>" required><br><br>
                     
                     <label>Blogcategorie</label><br>
@@ -202,7 +202,7 @@
                         <option value="vieringen en feestdagen">Vieringen en feestdagen</option>
                     </select><br><br>
 
-                    <label>Beschrijving</label><br>
+                    <label>Beschrijving <label style="color: red;">*</label></label><br>
                     <textarea id="bdesc" name="bdesc" required><?php echo $blogDesc; ?></textarea><br><br>
 
                     <label>Afbeeldingen</label><br>
@@ -240,6 +240,7 @@
 
                     <label>URL toevoegen</label><br>
                     <input type="url" name="bLink" id="bLink" value="<?php echo $blogLink; ?>"><br><br>
+                    <label><label style="color: red;">*</label> = verplicht</label><br><br>
                     <input class="newPostButton" type="submit" name="blog-update" value="Blogpost updaten">
                 </form>
             </div>

@@ -97,7 +97,7 @@
     <div class="blogpostform">
         <h2>Nieuwe blogpost</h2><br>
         <form action="" method="post" enctype="multipart/form-data">
-            <label>Blogtitel</label><br>
+            <label>Blogtitel <label style="color: red;">*</label></label><br>
             <input type="text" id="bname" name="bname" required><br><br>
             
             <label>Blogcategorie</label><br>
@@ -107,7 +107,7 @@
                 <option value="vieringen en feestdagen">Vieringen en feestdagen</option>
             </select><br><br>
 
-            <label>Beschrijving</label><br>
+            <label>Beschrijving <label style="color: red;">*</label></label><br>
             <textarea id="bdesc" name="bdesc" required></textarea><br><br>
 
             <label>Afbeeldingen</label><br>
@@ -123,6 +123,7 @@
 
             <label>URL toevoegen</label><br>
             <input type="url" name="bLink" id="bLink"><br><br>
+            <label><label style="color: red;">*</label> = verplicht</label><br><br>
             <input class="newPostButton" type="submit" name="blog-submit" value="Blogpost plaatsen">
         </form>
     </div>
