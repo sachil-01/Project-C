@@ -767,13 +767,12 @@ button.tns-nav-active {
     color: var(--clr-wit);
     letter-spacing: 2px;
     font-family: 'Lora', serif;
-    font-weight: 300;
     text-transform: uppercase;
     cursor: pointer;
 }
 .plantMsg:hover {
-    background-color: #1b701b;
-    border-color: #1b701b;
+    background-color: #175717;
+    border-color: #175717;
 }
 
 .plantInfo {
@@ -790,7 +789,7 @@ button.tns-nav-active {
 }
 
 /* adinfo username */
-.plantInner a, .plantInfoMargin a{
+.plantInner a{
     text-decoration: none;
     color: var(--clr-dark-green);
     border: 1px solid transparent;
@@ -798,7 +797,7 @@ button.tns-nav-active {
     border-radius: 1vw;
 }
 
-.plantInner a:hover, .plantInfoMargin a:hover{
+.plantInner a:hover{
     border-color: var(--clr-dark-green);
     background-color: var(--clr-dark-green);
     color: white;
