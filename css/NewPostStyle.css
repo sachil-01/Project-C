@@ -185,3 +185,7 @@
     overflow: scroll;
     overflow-x: hidden;
 }
+
+#imageWarning, #maxImageWarning{
+    color: red;
+}

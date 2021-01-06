@@ -69,19 +69,19 @@ function adminDeleteAdvertisement(advertisementId, advertisementUser){
 var profileTabsBtn = document.getElementById('ads-blogs-btns')
 var userAdsBtn = document.getElementById('ad-btn')
 var userBlogsBtn = document.getElementById('blog-btn')
-	//advertisement tab
-    function leftClick(){
-        profileTabsBtn.style.left= '0';
-        userAdsBtn.style.color= 'white';
-        userBlogsBtn.style.color= 'gray';
+//advertisement tab
+function leftClick(){
+    profileTabsBtn.style.left= '0';
+    userAdsBtn.style.color= 'white';
+    userBlogsBtn.style.color= 'gray';
 	document.getElementById("userBlogsList").style.cssText = "display: none;";
 	document.getElementById("userAdsList").style.cssText = "display: block;";
-    }
-	//blogpost tab
-    function rightClick(){
-        profileTabsBtn.style.left= '50%'
-        userAdsBtn.style.color= 'gray'
-        userBlogsBtn.style.color= 'white'
+}
+//blogpost tab
+function rightClick(){
+	profileTabsBtn.style.left = '50%';
+	userAdsBtn.style.color = 'gray';
+	userBlogsBtn.style.color = 'white';
 	document.getElementById("userBlogsList").style.cssText = "display: block;";
 	document.getElementById("userAdsList").style.cssText = "display: none;";
 }

@@ -17,6 +17,8 @@ include('header.php');
 
             //Check if user uploaded images
             for($i=0; $i < $fileCount; $i++){
+                $imageSize = true;
+                $imageFormats = true;
                 if(!in_array(strtolower(pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION)), $allowed)){
                     $imageFormats = false;
                     break;
@@ -24,10 +26,8 @@ include('header.php');
                     $imageSize = false;
                     break;
                 }
-                $imageSize = true;
-                $imageFormats = true;
             }
-
+            
             if($imageFormats && $imageSize){
                 if($fileCount >= 1 && $fileCount <= 3){
                     $plantname = $_POST["pname"];
@@ -98,8 +98,6 @@ include('header.php');
                 echo '<div class="newaderror"><p>Alleen "jpg", "png", "gif" en "jpeg" bestanden zijn toegestaan!</p></div>';
             } else if($imageSize == false){
                 echo '<div class="newaderror"><p>Uw afbeelding mag maar maximaal 1mb zijn!</p></div>';
-            } else if($fileCount == 1){
-                echo '<div class="newaderror"><p>U moet minimaal 1 foto uploaden! Er is een maximum van 3 foto\'s toegestaan.</p></div>';
             }
         }
         ?>
@@ -190,10 +188,11 @@ include('header.php');
                     <br><br><br>
                 </div>
                 <label class="uploaddescription">Selecteer een foto (max 1MB)</label><br>
-                <input type="file" name="file[]" id="file" accept=".png, .jpg, .jpeg, .gif" onchange="previewImage()" multiple><br><br>
+                <input type="file" name="file[]" id="file" accept=".png, .jpg, .jpeg, .gif" onchange="fileFunctions()" multiple><br><br>
                 
                 <label><label style="color: red;">*</label> = verplicht</label><br><br>
-                <input class="newAdButtons" type="submit" name="ad-submit" value="Plaatsen!">
+                <p id="maxImageWarning" style="color: red;">Uw advertentie mag maximaal 3 afbeelding bevatten.</p>
+                <input class="newAdButtons" type="submit" name="ad-submit" value="Plaatsen!" id="ad-submit">
             </form>
         </div>
     <?php
@@ -204,6 +203,27 @@ include('header.php');
     }
     ?>
 </body>
+
+<script>
+    imageWarning();
+
+    function fileFunctions(){
+        previewImage();
+        imageWarning();
+    }
+    //checks if advertisement contains at least 1 picture
+    function imageWarning(){
+        var file = document.getElementById("file").files;
+        //disable update button if advertisement has more than 3 images
+        if(file.length > 3){
+            document.getElementById('ad-submit').disabled = true;
+            document.getElementById('maxImageWarning').hidden = false;
+        } else {
+            document.getElementById('ad-submit').disabled = false;
+            document.getElementById('maxImageWarning').hidden = true;
+        }
+    }
+</script>
 
 <?php
     include('footer.php');

@@ -19,6 +19,8 @@
         $fileCount = count($_FILES['file']['name']);
         //Check if user uploaded images
         for($i=0; $i < $fileCount; $i++){
+            $imageSize = true;
+            $imageFormats = true;
             if(!in_array(strtolower(pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION)), $allowed)){
                 $imageFormats = false;
                 break;
@@ -26,8 +28,6 @@
                 $imageSize = false;
                 break;
             }
-            $imageSize = true;
-            $imageFormats = true;
         }
 
         if($imageFormats && $imageSize){
@@ -85,6 +85,8 @@
         $fileCount = count($_FILES['file']['name']);
         //Check if user uploaded images
         for($i=0; $i < $fileCount; $i++){
+            $imageSize = true;
+            $imageFormats = true;
             if(!in_array(strtolower(pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION)), $allowed)){
                 $imageFormats = false;
                 break;
@@ -92,8 +94,6 @@
                 $imageSize = false;
                 break;
             }
-            $imageSize = true;
-            $imageFormats = true;
         }
 
         if($imageFormats && $imageSize){
@@ -393,7 +393,7 @@
                 <?php
                     } else {
                         ?>
-                        <p class="uploaddescription">Uw advertentie heeft 0 afbeeldingen. Om uw advertentie te kunnen updaten moet u minimaal 1 foto selecteren!</p>
+                        <p id="emptyImageGallery" class="uploaddescription" style="color: red;">Uw advertentie heeft 0 afbeeldingen. Om uw advertentie te kunnen updaten moet u minimaal 1 foto selecteren!</p>
                         <?php
                     }
                 ?>
@@ -401,24 +401,37 @@
                 <!-- display image after selecting -->
                 <div id="imagePreviewGallery" class="imagePreviewGallery"></div>
                 <label class="uploaddescription">Selecteer een foto (max 1MB)</label><br>
-                <input type="file" name="file[]" id="file" accept=".png, .jpg, .jpeg, .gif" onchange="createImgTag()" multiple><br><br>
+                <input type="file" name="file[]" id="file" accept=".png, .jpg, .jpeg, .gif" onchange="fileFunctions()" multiple><br><br>
                 
                 <label><label style="color: red;">*</label> = verplicht</label><br><br>
-                <input class="newAdButtons" type="submit" name="ad-update" value="Plaatsen!">
+                <p id="imageWarning">Uw advertentie moet minimaal 1 afbeelding bevatten.</p>
+                <p id="maxImageWarning">Uw advertentie mag maximaal 3 afbeelding bevatten.</p>
+                <input class="newAdButtons" type="submit" name="ad-update" value="Advertentie updaten" id="ad-update">
             </form>
+            <script>
+                var totalPlantImages = <?php echo count($plantImages); ?>
+            </script>
         </div>
         <?php
         //show message when registered user tries to edit a blogpost of another user
         } else {
             echo'<div class="notloggedin">
                     <h4>U kunt niet de advertentie van een andere gebruiker wijzigen.</h4>
-                </div>';
+                 </div>';
         }
     }
     ?>
 </body>
 
 <script scr="main.js">
+    imageWarning();
+
+    //call two functions when selecting pictures
+    function fileFunctions(){
+        createImgTag();
+        imageWarning();
+    }
+
     function deleteBlogpostImage(editpage, imgname, row){
         //delete specific image
         $.ajax({
@@ -433,10 +446,35 @@
                     idOfButton = "imgButton" + row;
                     //remove image "delete" button
                     document.getElementById(idOfButton).remove();
+                    totalPlantImages = totalPlantImages - 1;
                     location.reload(); //refresh page after deleting image
                 }
             }
         })
+    }
+
+    //checks if advertisement contains at least 1 picture
+    function imageWarning(){
+        var file = document.getElementById("file").files;
+        //disable update button if advertisement has more than 3 images
+        if((file.length + totalPlantImages) > 4 || (totalPlantImages == 3 && totalPlantImages + file.length > 3)){
+            document.getElementById('maxImageWarning').hidden = false;
+            document.getElementById('ad-update').disabled = true;
+            document.getElementById('emptyImageGallery').hidden = true;
+            document.getElementById('imageWarning').hidden = true;
+        //allow user to update when advertisement has a minimum of 1 image and a maximum of 3 images
+        } else if ((file.length > 0 && totalPlantImages > 0) || (totalPlantImages > 0 && file.length == 0 && document.body.contains(document.getElementById('emptyImageGallery')) == false) || (file.length > 0  && document.body.contains(document.getElementById('emptyImageGallery')))){
+            document.getElementById('maxImageWarning').hidden = true;
+            document.getElementById('imageWarning').hidden = true;
+            document.getElementById('ad-update').disabled = false;
+            document.getElementById('emptyImageGallery').hidden = true;
+        //disable update button if advertisement has zero images
+        } else if((file.length == 0 && totalPlantImages == 0) || document.body.contains(document.getElementById('emptyImageGallery'))){
+            document.getElementById('maxImageWarning').hidden = true;
+            document.getElementById('imageWarning').hidden = false;
+            document.getElementById('ad-update').disabled = true;
+            document.getElementById('emptyImageGallery').hidden = false;
+        }
     }
 </script>
 

@@ -16,6 +16,8 @@
             $fileCount = count($_FILES['file']['name']);
             //Check if user uploaded images
             for($i=0; $i < $fileCount; $i++){
+                $imageSize = true;
+                $imageFormats = true;
                 if(!in_array(strtolower(pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION)), $allowed)){
                     $imageFormats = false;
                     break;
@@ -23,8 +25,6 @@
                     $imageSize = false;
                     break;
                 }
-                $imageSize = true;
-                $imageFormats = true;
             }
 
             if($imageFormats && $imageSize){
