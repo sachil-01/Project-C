@@ -633,7 +633,7 @@ nav {
 }
 
 /* Feedback form - hidden by default*/
-.feedback-popup, .feedback-popup-success{
+.feedback-popup, .feedback-popup-success, .userRatingForm{
     position: fixed;
     top: 10%;
     left: 25%;
@@ -660,7 +660,7 @@ nav {
     display: none;
 }
 
-.blurBackground-success, .feedback-popup-success{
+.blurBackground-success, .feedback-popup-success, .form{
     display: block;
 }
 
@@ -673,10 +673,100 @@ nav {
 }
 
 /* feedback form header */
-.feedback-popup h1, .feedback-popup-success h1{
+.feedback-popup h1, .feedback-popup-success h1, .userRatingForm h1{
     font-size: 2rem;
     margin: 2%;
     text-align: center;
+}
+
+.userRatingForm h1{
+    word-break: break-word;
+}
+
+.userRatingForm h1 span, #ratingSuccess{
+    display: none;
+}
+
+.plant-star-widget, .communication-star-widget{
+    direction: rtl;
+}
+
+/* rating stars */
+.plant-star-widget label, .communication-star-widget label{
+    margin: 1%;
+    font-size: var(--fs-h2);
+    transition: all 0.2s ease;
+}
+
+.plant-star-container .plant-star-widget input, .communication-star-container .communication-star-widget input{
+    display: none;
+}
+
+input:not(:checked) ~ label:hover,
+input:not(:checked) ~ label:hover ~ label{
+    color: orange;
+}
+
+input:checked ~ label{
+    color: orange;
+}
+
+input#plant-rate-5:checked ~ label,
+input#communication-rate-5:checked ~ label{
+    color: rgb(255, 234, 73);
+    text-shadow: 0 0 10px rgb(185, 113, 58);
+}
+
+.userRatingDescription, .userRatingWarning{
+    text-align: center;
+    margin-bottom: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.userRatingWarning{
+    color: red;
+    margin-bottom: 5px;
+    display: none;
+}
+
+.userRatingForm .feedback-submit{
+    margin-top: 5%;
+}
+
+.ratingFormBody{
+    width: 100%;
+}
+
+.ratingFormBody-left{
+    text-align: center;
+}
+
+.ratingFormBody-right{
+    text-align: center;
+}
+
+@media screen and (max-width: 590px){
+    .userRatingForm h1 span{
+        display: inline-block;
+    }
+}
+
+@media screen and (max-width: 1000px){
+    .userRatingForm{
+        left: 5%;
+        right: 5%;
+    }
+}
+
+@media screen and (max-width: 1500px){
+    .ratingFormBody-left{
+        display: block;
+    }
+
+    .ratingFormBody-right{
+        display: block;
+    }
 }
 
 /* full width input fields */
@@ -701,7 +791,7 @@ nav {
 }
 
 /* feedback submit/close button */
-.popup-form .feedback-submit, .closefeedback-submit{
+.popup-form .feedback-submit, .closefeedback-submit, .closeRatingErrorMessage{
     background-color: #4b9600;
     color: white;
     padding: 16px 20px;
@@ -714,12 +804,18 @@ nav {
     font-family: 'Montserrat', serif;
 }
 
+.closeRatingErrorMessage{
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 2vw;
+}
+
 .popup-form .closefeedback-submit{
     background-color: rgb(150, 150, 150);
     margin-bottom: 2vw;
 }
 
-.popup-form .feedback-submit:hover{
+.popup-form .feedback-submit:hover, .closeRatingErrorMessage:hover{
     background-color: #1b701b;
 }
 

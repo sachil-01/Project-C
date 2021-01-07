@@ -72,11 +72,27 @@
             <div class="userprofilebox">
                 <div class="userprofile-up-left">
                     <p>Beoordeling</p>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
+                    <?php
+                        $sql = "SELECT * FROM Rating WHERE adUser = '$id'";
+                        $result = $conn->query($sql);
+
+                        $allUserRatingRates = array();
+                        foreach($result as $ratingId) {
+                            // output data of each row
+                            array_push($allUserRatingRates, $ratingId['userRating']);
+                        }
+                        $averageUserRating = array_sum($allUserRatingRates) / count($allUserRatingRates);
+                        if(count($allUserRatingRates) == 0){
+                            $averageUserRating = 0;
+                        }
+                        for($i = 0; $i < $averageUserRating; $i++){
+                            echo '<label class="fa fa-star star-checked"></label>';
+                        }
+                        for($i = 5; $i > $averageUserRating; $i--){
+                            echo '<label class="fa fa-star"></label>';
+                        }
+                        echo "<h3 style='display: inline;'>(".count($allUserRatingRates).")</h3>";
+                    ?>
                     <p>Aantal advertenties</p>
                     <p class="userData"><?php echo $countAds; ?> advertenties</p>
                     <p>Aantal blogposts</p>

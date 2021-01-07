@@ -82,14 +82,31 @@
                                         <p class="plantInner">'.$row["plantCategory"].'</p>
                                         <h3 class="plantInner">Datum:</h3>
                                         <p class="plantInner">'.date_format(date_create($row["postDate"]),"d-m-Y").'</p>
-                                        <h3 class="plantInner">Beoordeling:</h3>
-                                        <span class="fa fa-star star-checked"></span>
-                                        <span class="fa fa-star star-checked"></span>
-                                        <span class="fa fa-star star-checked"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
+                                        <h3 class="plantInner">Beoordeling:</h3>';
+                                            $sql = "SELECT * FROM Rating WHERE advertisementId = '$id'";
+                                            $result = $conn->query($sql);
+
+                                            $allPlantQualityRates = array();
+                                            foreach($result as $ratingId) {
+                                                // output data of each row
+                                                array_push($allPlantQualityRates, $ratingId['plantQuality']);
+                                            }
+                                            $averagePlantQuality = array_sum($allPlantQualityRates) / count($allPlantQualityRates);
+                                            if(count($allPlantQualityRates) == 0){
+                                                $averagePlantQuality = 0;
+                                            }
+                                            for($i = 0; $i < $averagePlantQuality; $i++){
+                                                echo '<label class="fa fa-star star-checked"></label>';
+                                            }
+                                            for($i = 5; $i > $averagePlantQuality; $i--){
+                                                echo '<label class="fa fa-star"></label>';
+                                            }
+
+                                            echo "<h3 style='display: inline;'>(".count($allPlantQualityRates).")</h3>";
+
+                                            echo '
                                         <br><br>
-                                        <a class="plantInner" href=""><button class="plantMsg">Beoordeling plaatsen</button></a>
+                                        <button onclick="showRatingForm()" class="plantMsg">Beoordeling plaatsen</button>
                                         <h3 class="plantInner">Geupload door:</h3>
                                         <p class="plantInner"><a href="userpage?IdUser='.$row["userId"].'">'.$row["usernameUser"].'</a></p>
                                     </div>
@@ -162,6 +179,138 @@
                                     <br><br>
                                 </div>
                             </div>
+                        </div>
+                        <!-- pop up message when rating is successfully posted -->
+                        <div id="ratingSuccess">
+                            <div class="blurBackground-success"></div>
+
+                            <div class="userRatingForm">
+                                <br>
+                                <h1>Beoordelings<span>-</span>formulier</h1>
+                                <p class="userRatingDescription">Bedankt voor uw beoordeling!</p>
+                                <button class="closeRatingErrorMessage" onclick=userPopUpMessage("ratingsuccess")>Sluiten</button>
+                            </div>
+                        </div>
+                        <!-- pop up message when user clicks on rating button -->
+                        <div id="ratingForm">
+                            <div class="blurBackground-success"></div>
+
+                            <div class="userRatingForm">
+                                <br>
+                                <h1>Beoordelings<span>-</span>formulier</h1>';
+                                    if(isset($_SESSION['userId']) && $_SESSION['userId'] != $row['idUser']){
+                                        $sql = "SELECT userId FROM Rating WHERE advertisementId = '$id'";
+                                        
+                                        $result = $conn->query($sql);
+                                        $ratingUserIds = array();
+                                        foreach($result as $ratingId) {
+                                            // output data of each row
+                                            array_push($ratingUserIds, $ratingId['userId']);
+                                        }
+                                        if(!in_array($_SESSION['userId'], $ratingUserIds)){
+                                    echo '
+                                        <div class="popup-form">
+                                            <p class="userRatingDescription">Vul de onderstaande gegevens in om een beoordeling te plaatsen.</p>
+                                            <table class="ratingFormBody">
+                                                <tr>
+                                                    <td class="ratingFormBody-left">
+                                                        <h2>Plantkwaliteit</h2>
+                                                        <p>Wat vindt u van de kwaliteit van de plant?</p>
+                                                        <div class="plant-star-container">
+                                                            <div class="plant-star-widget">
+                                                                <input type="radio" name="plantRating" id="plant-rate-5">
+                                                                <label for="plant-rate-5" class="fa fa-star"></label>
+                                                                <input type="radio" name="plantRating" id="plant-rate-4">
+                                                                <label for="plant-rate-4" class="fa fa-star"></label>
+                                                                <input type="radio" name="plantRating" id="plant-rate-3">
+                                                                <label for="plant-rate-3" class="fa fa-star"></label>
+                                                                <input type="radio" name="plantRating" id="plant-rate-2">
+                                                                <label for="plant-rate-2" class="fa fa-star"></label>
+                                                                <input type="radio" name="plantRating" id="plant-rate-1">
+                                                                <label for="plant-rate-1" class="fa fa-star"></label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="ratingFormBody-right">
+                                                        <h2>Communicatie</h2>
+                                                        <p>Wat vindt u van de communicatie met de aanbieder?</p>
+                                                        <div class="communication-star-container">
+                                                            <div class="communication-star-widget">
+                                                                <input type="radio" name="communicationRating" id="communication-rate-5">
+                                                                <label for="communication-rate-5" class="fa fa-star"></label>
+                                                                <input type="radio" name="communicationRating" id="communication-rate-4">
+                                                                <label for="communication-rate-4" class="fa fa-star"></label>
+                                                                <input type="radio" name="communicationRating" id="communication-rate-3">
+                                                                <label for="communication-rate-3" class="fa fa-star"></label>
+                                                                <input type="radio" name="communicationRating" id="communication-rate-2">
+                                                                <label for="communication-rate-2" class="fa fa-star"></label>
+                                                                <input type="radio" name="communicationRating" id="communication-rate-1">
+                                                                <label for="communication-rate-1" class="fa fa-star"></label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <!-- Close popup form button -->
+                                            <br>
+                                            <p id="selectAllStarsWarning" class="userRatingWarning">U heeft nog niet alles beoordeeld!</p>
+                                            <button class="feedback-submit" id="addRating" data-adUser='.$row['idUser'].' value='.$row["idAd"].' onclick="ratingForm(this, this.value)">Beoordeling plaatsen</button>
+                                            <button class="closefeedback-submit" onclick=userPopUpMessage("rating")>Annuleren</button>
+                                            <br><br>
+                                        </div>';
+                                        } else {
+                                            $idOfUser = $_SESSION['userId'];
+                                            $sql = "SELECT * FROM Rating WHERE advertisementId = '$id'";
+                                        
+                                            $result = $conn->query($sql);
+
+                                            $ratingId = $result->fetch_assoc();
+                                            // output data of each row
+                                            $givenPlantQuality = $ratingId['plantQuality'];
+                                            $givenUserRating = $ratingId['userRating'];
+
+                                            echo '<p class="userRatingDescription">U heeft deze advertentie al beoordeeld. Hieronder kunt u uw beoordeling terugzien.</p>
+                                                    <table class="ratingFormBody">
+                                                        <tr>
+                                                            <td class="ratingFormBody-left">
+                                                                <h2>Plantkwaliteit</h2>
+                                                                <p>Wat vindt u van de kwaliteit van de plant?</p>
+                                                                <div class="plant-star-container">
+                                                                    <div class="plant-star-widget">';                             
+                                                                        for($i = 0; $i < $givenPlantQuality; $i++){
+                                                                            echo '<label for="plant-rate-1" class="fa fa-star star-checked"></label>';
+                                                                        }
+                                                                    echo '
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="ratingFormBody-right">
+                                                                <h2>Communicatie</h2>
+                                                                <p>Wat vindt u van de communicatie met de aanbieder?</p>
+                                                                <div class="communication-star-container">
+                                                                    <div class="communication-star-widget">';                             
+                                                                    for($i = 0; $i < $givenUserRating; $i++){
+                                                                        echo '<label for="communication-rate-1" class="fa fa-star star-checked"></label>';
+                                                                    }
+                                                                echo '
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <br>
+                                                  <button class="closeRatingErrorMessage" onclick=userPopUpMessage("rating")>Sluiten</button>';
+                                        }
+                                    } else if($_SESSION['userId'] == $row['idUser']){
+                                        echo "<p class='userRatingDescription'>U kunt niet uw eigen advertentie beoordelen</p>
+                                              <button class='closeRatingErrorMessage' onclick=userPopUpMessage('rating')>Sluiten</button>";
+                                        
+                                    } else {
+                                        echo "<p class='userRatingDescription'>Om een advertentie te kunnen beoordelen moet u eerst ingelogd zijn. Klik <a href='loginpagina'>HIER</a> om in te loggen.</p>
+                                              <button class='closeRatingErrorMessage' onclick=userPopUpMessage('rating')>Sluiten</button>";
+                                    }
+                            echo '
+                            </div>
                         </div>';
                 // session used for edit page to check if user is the owner of the advertisement        
                 $_SESSION["idUser"] = $row["idUser"];
@@ -192,11 +341,72 @@
         })
     }
 
+    function showRatingForm(){
+        document.getElementById("ratingForm").style.cssText = "display: block;";
+    }
+
     function showDeletePopUp(){
         document.getElementById("userDeleteBlogpostPopUp").style.cssText = "display: block;";
     }
 
     function userPopUpMessage(chosenOption){
         document.getElementById("userDeleteBlogpostPopUp").style.cssText = "display: none;";
+        //reset rating form when user clicks cancel
+        if(chosenOption == "rating"){
+            document.getElementById("ratingForm").style.cssText = "display: none;";
+            var plantRating = document.getElementsByName('plantRating');
+            var communicationRating = document.getElementsByName('communicationRating');
+            for (var i = 0, length = plantRating.length; i < length; i++) {
+                plantRating[i].checked = false;
+                communicationRating[i].checked = false;
+            }
+        } else if(chosenOption == "ratingsuccess"){
+            document.getElementById("ratingSuccess").style.cssText = "display: none;";
+            location.reload();
+        }
+    }
+
+    function ratingForm(ratingFormSelf, adId){
+        var plantRating = document.getElementsByName('plantRating');
+        var communicationRating = document.getElementsByName('communicationRating');
+        var adUser = $(ratingFormSelf).attr('data-adUser');
+        var ischecked_method = false;
+        var ischecked_method2 = false;
+        var plantRatingValue;
+        var communicationRatingValue;
+
+        //checks if user has filled in all required fields in rating form
+        for (var i = 0, length = plantRating.length; i < length; i++) {
+            if (plantRating[i].checked) {
+                ischecked_method = true;
+                plantRatingValue = plantRating[i].id.slice(-1);
+            }
+            if(communicationRating[i].checked){
+                ischecked_method2 = true;
+                communicationRatingValue = communicationRating[i].id.slice(-1);
+            }
+        }
+        
+        if(!ischecked_method || !ischecked_method2)   {
+            document.getElementById("selectAllStarsWarning").style.cssText = "display: block;";
+        } else { //if user filled in all required fields in rating form
+            document.getElementById("selectAllStarsWarning").style.cssText = "display: none;";
+
+            //add rating to table
+            $.ajax({
+                url: "includes/rating.inc.php",
+                type: 'post',
+                data: {advertisementId: adId, plantQuality: plantRatingValue, userRating: communicationRatingValue, advertisementUser: adUser},
+                success: function(result)
+                {
+                    //checks which list needs to be updated
+                    if(result == "success"){
+                        document.getElementById("ratingForm").style.cssText = "display: none;";
+                        userPopUpMessage("rating"); //remove chosen stars
+                        document.getElementById("ratingSuccess").style.cssText = "display: block;";
+                    }
+                }
+            })
+        }
     }
 </script>

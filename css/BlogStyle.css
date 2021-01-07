@@ -369,7 +369,7 @@
     cursor: pointer;
 }
 
-#userDeleteBlogpostPopUp{
+#userDeleteBlogpostPopUp, #ratingForm{
     display: none;
 }
 
