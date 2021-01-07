@@ -7,6 +7,7 @@
     font-family: 'Montserrat', serif;
     font-weight: bold;
     position: relative;
+    text-transform: none;
 }
 
 .blogpostform h2{
@@ -39,7 +40,7 @@
     resize: none;
 }
 
-.newPostButton {
+.newPostButton, .deleteBlogpostImage{
     background-color: transparent;
     border-radius: 1vw;
     border:2px solid green;
@@ -52,8 +53,10 @@
     padding:10px 20px;
     text-decoration:none;
     outline: none;
+    margin-top: 10px;
 }
-.newPostButton:hover {
+
+.newPostButton:hover, .deleteBlogpostImage:hover{
     color: white;
     background-color: green;
     border-color:2px solid green;
@@ -79,6 +82,14 @@
     .blogpostform h2{
         font-size: 2vw;
     }
+
+    .ads-blogs-list span{
+        display: none;
+    }
+
+    .blogpostImagesOptions{
+        float: right;
+    }
 }
 
 @media screen and (max-width:1100px){
@@ -100,6 +111,41 @@
     .blogpostform h2{
         font-size: 4vw;
     }
+
+    .blogpostform{
+        margin: 5% 10%;
+    }
+
+    .ads-blogs-list span{
+        display: inline;
+    }
+
+    .ads-blogs-columnnames{
+        display: none;
+    }
+
+    .ads-blogs-list td{
+        display: flex;
+        flex-direction: row;
+        flex: 100%;
+    }
+
+    .deleteBlogpostImage{
+        width: 100%;
+    }
+
+    /* next/previous image button (preview image) content */
+    .newPostButton span{
+        display: none;
+    }
+
+    #imagePreviewPrevious:before{
+        content: "<";
+    }
+
+    #imagePreviewNext:before{
+        content: ">";
+    }
 }
 
 /* error messages */
@@ -116,4 +162,30 @@
 .newposterror p{
 	text-align: center;
 	font-weight: bold;
+}
+
+/* delete buttons for deleting images of blogpost */
+.ads-blogs-list{
+    width: 100%;
+}
+
+/* image preview */
+.imagePreviewItem{
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    float: left;
+    padding: 5px;
+}
+
+.imagePreviewGallery{
+    border: 2px solid #4A7C00;
+    height: 150px;
+    float: left;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+#imageWarning, #maxImageWarning{
+    color: red;
 }

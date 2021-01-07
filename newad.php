@@ -12,92 +12,130 @@ include('header.php');
         if(isset($_POST['ad-submit'])){
             require 'includes/dbh.inc.php';
 
-            $plantname = $_POST["pname"];
-            $plantlatinname = $_POST["psoort"];
-            $plantcategory = $_POST["type"];
-            $desc = $_POST["desc"];
-            $water = $_POST["water"];
-            $light = $_POST["licht"];
-            $userId = $_SESSION['userId'];
+            $allowed = ['png', 'jpg', 'gif', 'jpeg'];
+            $fileCount = count($_FILES['file']['name']);
 
-            // Insert blogpost data into database
-            $sql = "INSERT INTO Advertisement(plantName, plantLatinName, plantCategory, plantDesc, waterManage, lightPattern, Userid) VALUES(?,?,?,?,?,?,?)";
-            $statement = mysqli_stmt_init($conn);
-            if (!mysqli_stmt_prepare($statement, $sql)) {
-                header("Location: newad.php?error=sqlerror");
-                echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 101).</p></div>';
-            }
-            else {
-                mysqli_stmt_bind_param($statement, "ssssiii", $plantname, $plantlatinname, $plantcategory, $desc, $water, $light, $userId);
-                mysqli_stmt_execute($statement);
-            }
-
-            // Retrieve advertisement ID before inserting advertisement image(s) to database
-            $sql = "SELECT idAd FROM Advertisement WHERE userId = $userId ORDER BY postDate DESC LIMIT 1";
-            $statement = mysqli_stmt_init($conn);
-            if (!mysqli_stmt_prepare($statement, $sql)) {
-                header("Location: newad.php?error=sqlerror");
-                echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 102).</p></div>';
-            }
-            else {
-                mysqli_stmt_execute($statement);
-                $result = mysqli_stmt_get_result($statement);
-                if ($row = mysqli_fetch_assoc($result)) {
-                    $idAdvert= $row['idAd'];
+            //Check if user uploaded images
+            for($i=0; $i < $fileCount; $i++){
+                $imageSize = true;
+                $imageFormats = true;
+                if(!in_array(strtolower(pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION)), $allowed)){
+                    $imageFormats = false;
+                    break;
+                } else if ($_FILES['file']['size'][$i] > 1*1048576){ //1*1048576 == 1mb
+                    $imageSize = false;
+                    break;
                 }
             }
+            
+            if($imageFormats && $imageSize){
+                if($fileCount >= 1 && $fileCount <= 3){
+                    $plantname = $_POST["pname"];
+                    $plantlatinname = $_POST["plname"];
+                    $plantsoort = $_POST["psoort"];
+                    $plantcategory = $_POST["type"];
+                    $desc = $_POST["desc"];
+                    $water = $_POST["water"];
+                    $light = $_POST["licht"];
+                    $userId = $_SESSION['userId'];
 
-            //inserts image in uploads folder
-            $fileCount = count($_FILES['file']['name']);
-            for($i=0; $i < $fileCount; $i++){
-                //checks if there is a file uploaded
-                if(UPLOAD_ERR_OK == $_FILES['file']['error'][$i]){
-                    //give filename a time to avoid overwriting a file (unique name)
-                    $fileName = time().$_FILES['file']['name'][$i];
-
-                    //insert image to database
-                    $sql = "INSERT INTO AdImage(imgName, idAdvert) VALUES (?, ?)";
+                    // Insert blogpost data into database
+                    $sql = "INSERT INTO Advertisement(plantName, plantLatinName, plantType, plantCategory, plantDesc, waterManage, lightPattern, Userid) VALUES(?,?,?,?,?,?,?,?)";
                     $statement = mysqli_stmt_init($conn);
                     if (!mysqli_stmt_prepare($statement, $sql)) {
                         header("Location: newad.php?error=sqlerror");
-                        echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 103).</p></div>';
+                        echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 101).</p></div>';
                     }
                     else {
-                        mysqli_stmt_bind_param($statement, "ss", pathinfo($fileName, PATHINFO_BASENAME), $idAdvert);
+                        mysqli_stmt_bind_param($statement, "sssssiii", $plantname, $plantlatinname, $plantsoort, $plantcategory, $desc, $water, $light, $userId);
                         mysqli_stmt_execute($statement);
-
-                        //insert image to uploads folder
-                        move_uploaded_file($_FILES['file']['tmp_name'][$i], 'uploads/'.$fileName);
                     }
+
+                    // Retrieve advertisement ID before inserting advertisement image(s) to database
+                    $sql = "SELECT idAd FROM Advertisement WHERE userId = $userId ORDER BY postDate DESC LIMIT 1";
+                    $statement = mysqli_stmt_init($conn);
+                    if (!mysqli_stmt_prepare($statement, $sql)) {
+                        header("Location: newad.php?error=sqlerror");
+                        echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 102).</p></div>';
+                    }
+                    else {
+                        mysqli_stmt_execute($statement);
+                        $result = mysqli_stmt_get_result($statement);
+                        if ($row = mysqli_fetch_assoc($result)) {
+                            $idAdvert= $row['idAd'];
+                        }
+                    }
+
+                    //inserts image in uploads folder
+                    for($i=0; $i < $fileCount; $i++){
+                        //checks if there is a file uploaded
+                        if(UPLOAD_ERR_OK == $_FILES['file']['error'][$i]){
+                            //give filename a time to avoid overwriting a file (unique name)
+                            $fileName = time().$_FILES['file']['name'][$i];
+
+                            //insert image to database
+                            $sql = "INSERT INTO AdImage(imgName, idAdvert) VALUES (?, ?)";
+                            $statement = mysqli_stmt_init($conn);
+                            if (!mysqli_stmt_prepare($statement, $sql)) {
+                                header("Location: newad.php?error=sqlerror");
+                                echo '<div class="newaderror"><p>Er is iets fout gegaan (sql error: 103).</p></div>';
+                            }
+                            else {
+                                mysqli_stmt_bind_param($statement, "ss", pathinfo($fileName, PATHINFO_BASENAME), $idAdvert);
+                                mysqli_stmt_execute($statement);
+
+                                //insert image to uploads folder
+                                move_uploaded_file($_FILES['file']['tmp_name'][$i], 'uploads/'.$fileName);
+                            }
+                        }
+                    }
+                    header("Location: newad.php?upload=success");
+                    echo '<div class="newaderror"><p>Uw advertentie is succesvol geupload!</p></div>';
+                } else {
+                    echo '<div class="newaderror"><p>Er is een minimum van 1 foto en een maximum van 3 foto\'s toegestaan.</p></div>';
                 }
+            } else if($imageFormats == false){
+                echo '<div class="newaderror"><p>Alleen "jpg", "png", "gif" en "jpeg" bestanden zijn toegestaan!</p></div>';
+            } else if($imageSize == false){
+                echo '<div class="newaderror"><p>Uw afbeelding mag maar maximaal 1mb zijn!</p></div>';
             }
-            header("Location: newad.php?upload=success");
-            echo '<div class="newaderror"><p>Uw advertentie is succesvol geupload!</p></div>';
         }
         ?>
         <div class="adform">
             <h2>Nieuwe advertentie</h2><br>
-            <form action="" method="post" enctype="multipart/form-data" target="adpagina">
-                <label for="pname">Plantnaam:<label style="color: red;">*</label></label><br>
+            <form action="" method="post" enctype="multipart/form-data" target="_self">
+                <label for="pname">Plantnaam <label style="color: red;">*</label></label><br>
                 <input type="text" id="pname" name="pname" required><br><br>
-                
-                <label for="psoort">Plantensoort:</label><br>
-                <input type="text" id="psoort" name="psoort"><br><br>
-                
-                <label>Type advertentie:<label style="color: red;">*</label></label><br>
+
+                <label for="plname">Latijnse naam</label><br>
+                <input type="text" id="plname" name="plname"><br><br>
+
+                <label for="psoort">Soort <label style="color: red;">*</label></label><br>
+                <select  id="psoort" name="psoort">
+                    <option value="boom">boom</option>
+                    <option value="struik">struik</option>
+                    <option value="kruidachtige">kruidachtige</option>
+                    <option value="bodembedekker">bodembedekker</option>
+                    <option value="klimplant">klimplant</option>
+                    <option value="waterplant">waterplant</option>
+                </select><br><br>
+
+                <label>Type <label style="color: red;">*</label></label><br>
                 <input type="radio" id="stekje" name="type" value="stekje">
                 <label for="stekje">Stekje</label><br>
                 <input type="radio" id="zaad" name="type" value="zaad">
                 <label for="zaad">Zaad</label><br>
                 <input type="radio" id="kiemplant" name="type" value="kiemplant">
-                <label for="kiemplant">Kiemplant</label><br>
+                <label for="kiemplant">Plant</label><br>
+                <input type="radio" id="bol" name="type" value="bol">
+                <label for="bol">Bollen</label><br>
                 <input type="radio" id="none" name="type" value="none">
-                <label for="none">Weet ik niet</label><br><br>
+                <label for="none">Weet ik niet</label><br>
                 
-                <br><label for="desc">Beschrijving<label style="color: red;">*</label></label><br>
+                <br><label for="desc">Beschrijving <label style="color: red;">*</label></label><br>
                 <textarea id="desc" name="desc" rows="5" cols="50" required></textarea><br><br>
                 
-                <label>Hoeveelheid water nodig:<label style="color: red;">*</label></label><br>
+                <label>Hoeveelheid water nodig <label style="color: red;">*</label></label><br>
                 <label>
                     <input style="position: absolute; opacity: 0; width: 0; height: 0; cursor: pointer;" type="radio" id="weinig" name="water" value="1">
                     <img style="cursor: pointer;" src="images/weinigwater.png">
@@ -119,7 +157,7 @@ include('header.php');
                 </label>
                 <br><br>
                 
-                <label>Hoeveelheid licht nodig:<label style="color: red;">*</label></label><br>
+                <label>Hoeveelheid licht nodig <label style="color: red;">*</label></label><br>
                 <label>
                     <input style="position: absolute; opacity: 0; width: 0; height: 0; cursor: pointer;" type="radio" id="weinig" name="licht" value="1">
                     <img style="cursor: pointer;" src="images/weiniglicht.png">
@@ -141,14 +179,21 @@ include('header.php');
                 </label>
                 <br><br>
                 
-                <label>Selecteer een foto (max 1MB):</label><br>
-                <input type="file" name="file[]" id="file" multiple><br><br>
+                <label>Afbeeldingen <label style="color: red;">*</label></label><br>
+                <!-- display image after selecting -->
+                <div id="imagePreviewGallery">
+                    <img id="imagePreview">
+                    <button type="button" id="imagePreviewPrevious" onclick="previewCurrentImage('previous')" class="newAdButtons"><span>Vorige afbeelding</span></button>
+                    <button type="button" id="imagePreviewNext" onclick="previewCurrentImage('next')" class="newAdButtons"><span>Volgende afbeelding</span></button>
+                    <br><br><br>
+                </div>
+                <label class="uploaddescription">Selecteer een foto (max 1MB)</label><br>
+                <input type="file" name="file[]" id="file" accept=".png, .jpg, .jpeg, .gif" onchange="fileFunctions()" multiple><br><br>
                 
                 <label><label style="color: red;">*</label> = verplicht</label><br><br>
-                <input class="newAdButtons" type="submit" name="ad-submit" value="Plaatsen!">
+                <p id="maxImageWarning" style="color: red;">Uw advertentie mag maximaal 3 afbeelding bevatten.</p>
+                <input class="newAdButtons" type="submit" name="ad-submit" value="Plaatsen!" id="ad-submit">
             </form>
-
-
         </div>
     <?php
     } else {
@@ -158,6 +203,27 @@ include('header.php');
     }
     ?>
 </body>
+
+<script>
+    imageWarning();
+
+    function fileFunctions(){
+        previewImage();
+        imageWarning();
+    }
+    //checks if advertisement contains at least 1 picture
+    function imageWarning(){
+        var file = document.getElementById("file").files;
+        //disable update button if advertisement has more than 3 images
+        if(file.length > 3){
+            document.getElementById('ad-submit').disabled = true;
+            document.getElementById('maxImageWarning').hidden = false;
+        } else {
+            document.getElementById('ad-submit').disabled = false;
+            document.getElementById('maxImageWarning').hidden = true;
+        }
+    }
+</script>
 
 <?php
     include('footer.php');

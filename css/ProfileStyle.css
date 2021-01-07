@@ -1,0 +1,470 @@
+/* Grey background of register form */
+.profilebox, .dashboard{
+    width: 80%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    border-spacing: 15px;
+}
+
+.profilebox-left, .profilebox-right{
+    width: 100%;
+    height: 100%;
+}
+
+/* profilepage */
+.profile-leftpart-up{
+    height: 34%;
+}
+
+.profile-leftpart-down{
+    margin-top: 15px;
+    height: 64%;
+}
+
+/* userprofile page */
+.userprofilebox{
+    width: 80%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.userprofilebox{
+    font-weight: bold;
+}
+
+.profile-leftpart-down, .profile-leftpart-up, .userprofile-up-left, .userprofile-up-right, .profilebox-right, .dashboard{
+    background-color: rgb(240, 240, 240);
+    border: 2vw solid rgb(240, 240, 240);
+    border-radius: 1vw;
+}
+
+@media screen and (min-width: 1100px){
+    /*Switching tabs */
+    .ads-blogs-toggle-btn{
+        width: 49.5%;
+        padding: 10px 40px;
+        font-size: 18px;
+    }
+
+    .ads-blogs-list .adDelete-btn{
+        width: 55%;
+    }
+    
+    .ads-blogs-list .adEdit-btn{
+        width: 43%;
+    }
+
+    .ads-blogs-list span{
+        display: none;
+    }
+
+    .ads-blogs-columnnames p{
+        font-weight: bold;
+        font-size: 15px;
+    }
+
+    /* Dashboard */
+    .dashboard-left, .dashboard-right, .userprofile-up-left, .userprofile-up-right{
+        width: 49%;
+    }
+
+    .dashboard-left, .dashboard-right{
+        margin-bottom: 4%;
+    }
+
+    .dashboard-left{
+        float: left;
+        padding-right: 5%;
+        border-right: 2px solid #4b9600;
+    }
+
+    .userprofile-up-left{
+        float: left;
+    }
+
+    .userprofile-up-right{
+        float: right;
+    }
+
+    .dashboard-right{
+        padding-left: 3%;
+        float: right;
+    }
+
+    /* admin functions */
+    .admin-func{
+        flex: 1;
+    }
+
+    /* admin search bar */
+    .admin-search{
+        width: 60%;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+}
+
+@media screen and (max-width: 1100px){
+    .profilebox td{
+        width: 100%;
+        display: block;
+    }
+
+    .profilebox-right{
+        margin-top: 15px;
+    }
+
+    /*Switching tabs */
+    .ads-blogs-toggle-btn{
+        width: 49%;
+        padding: 2%;
+        font-size: 1rem;
+    }
+
+    .ads-blogs-list td{
+        display: block;
+    }
+
+    .ads-blogs-list .adDelete-btn{
+        width: 49%;
+    }
+    
+    .ads-blogs-list .adEdit-btn{
+        width: 49%;
+    }
+
+    .ads-blogs-list span{
+        display: inline;
+    }
+
+    .ads-blogs-columnnames td{
+        display: none;
+    }
+
+    /* Dashboard */
+    .dashboard{
+        width: 100%;
+    }
+
+    /* admin functions */
+    .admin-func{
+        flex-direction: row;
+        flex: 100%;
+    }
+
+    /* admin search bar */
+    .admin-search{
+        width: 100%;
+    }
+
+    .userprofile-up-right{
+        margin-top: 15px;
+    }
+}
+
+/* Login form header */
+.profilebox h1{
+	margin: 3%;
+	text-align: center;
+	font-size: 2rem;
+}
+
+/* Login form paragraph */
+.profilebox p{
+	text-align: left;
+    margin: 0px;
+	font-weight: bold;
+}
+
+/* Field input */
+.profilebox input{
+	margin-bottom: 2%;
+}
+
+/* Field boxes */
+.profilebox input[type="text"], input[type="number"], .profile-leftpart-down textarea{
+	border: none;
+	border-bottom: 1px solid black;
+	background: transparent;
+	outline: none;
+	height: 40px;
+	width: 100%;
+	color: black;
+	font-size: 16px;
+}
+
+.profile-leftpart-down textarea{
+    resize: none;
+    height: 92%;
+    font-family: 400 13.3333px Arial;
+}
+
+/* Update button */
+.profilebox button, .ads-blogs-list button{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+	border: none;
+	outline: none;
+	width: 260px;
+	height: 35px;
+	background: #66CC00;
+	color: white;
+	font-size: 18px;
+	border-radius: 1vw;
+    margin-top: 15px;
+}
+
+/* Button effect */
+.profilebox button:hover, .ads-blogs-list button:hover{
+	cursor: pointer;
+	background: #228B22;
+}
+
+/* Switching tabs */
+.ads-blogs-box{
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ads-blogs-tabs{
+    margin: 35px auto;
+    position: relative;
+    border-radius: 30px;
+    background: lightgray;
+}
+
+.ads-blogs-toggle-btn{
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+#ads-blogs-btns{
+    left: 0;
+    top: 0;
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background: #4b9600;
+    border-radius: 30px;
+    transition: .5s;
+}
+
+/* advertisements and blogposts list */
+.ads-blogs-list{
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    font: 400 13.3333px Arial;
+    border-spacing: 0px;
+}
+
+.ads-blogs-list button{
+    float: right;
+    border: none;
+    outline: none;
+	background: #66CC00;
+    color: white;
+    margin-top: 0px;
+    margin-right: 1%;
+}
+
+/* hide blogpost list and show advertisement list */
+#userBlogsList{
+    display: none;
+}
+
+.admin-container{
+    margin: 5%
+}
+
+.chosen-admin-func-container{
+    margin: 5%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.admin-row{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.admin-func{
+    position: relative;
+    max-width: 460px;
+    overflow: hidden;
+    background: rgb(81, 163, 0);
+    border-radius: 1vw;
+    margin: 2%;
+}
+
+.chosen-admin-func, .admin-func{
+    width: 100%;
+    height: 100%;
+}
+
+.chosen-admin-func{
+    width: 100%;
+}
+
+#backToAllAdminFunc{
+    margin: 2%;
+    border: 5px solid #66CC00;
+    background: #66CC00;
+    font-weight: 600;
+    font-size: 1rem;
+    float: right;
+	color: white;
+    border-radius: 1vw;
+    outline: none;
+}
+
+#backToAllAdminFunc:hover{
+    border-color: #228B22;
+    background: #228B22;
+}
+
+#chosenAdminFuncTitle{
+    background-color: rgb(81, 163, 0);
+    border-radius: 10px;
+    border: 1.4vw solid rgb(81, 163, 0);
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 3%;
+}
+
+#adminDisplayFuncList{
+    display: block;
+}
+
+#adminDisplayResultList{
+    display: none;
+    width: 80%;
+}
+
+.admin-search{
+    outline: none;
+    border: 2px solid  #4b9600;
+    border-radius: 10px;
+    height: 4vh;
+    margin-bottom: 3%;
+}
+
+.admin-func img{
+    opacity: 0.8;
+    position: relative;
+    margin: auto;
+    transition: 0.6s;
+    width: 60%;
+    transition-property: opacity;
+    margin-top: -15%;
+}
+
+.admin-func:hover img{
+    opacity: 1;
+}
+
+.admin-func .details{
+    z-index: 1;
+    top: 0;
+    right: 0;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+}
+
+.admin-func .details h2{
+    text-align: center;
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 70px;
+    transition: 0.4s;
+    transition-property: transform;
+}
+
+.admin-func:hover .details h2{
+    transform: translateY(-30px);
+}
+
+.admin-func .details p{
+    margin: 0px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    padding-left: 2%;
+    padding-right: 2%;
+    text-transform: none;
+    opacity: 0;
+    transition: 0.6s;
+    transition-property: opacity, transform;
+}
+
+.admin-func:hover .details p{
+    opacity: 1;
+    transform: translateY(-50px);
+}
+
+/* user rating stars */
+.checked {
+    color: orange;
+}
+
+.fa-star{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: var(--fs-h2);
+}
+
+.profileError{
+	width: 350px;
+	border: 3px solid #4A7C00;
+	border-radius: 10px;
+	display: block;
+    margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+}
+
+.profileError p{
+	text-align: center;
+	font-weight: bold;
+}
+
+.ads-blogs-list .Delete-btn{
+    width: 100%;
+}
+
+/* !important to force <p> tag to be normal (not bold) */
+.userData{
+    font-weight: normal !important;
+    word-wrap: break-word !important;
+}
+
+/* All advertisements */
+.img-area{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* All blogposts */
+.grid-3-col{
+    float: none !important;
+}
+
+.emptyAdOrBlogList{
+    text-align: center;
+}

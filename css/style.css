@@ -81,7 +81,7 @@ nav {
 .nav-links{
     display: flex;
     justify-content: space-around;
-    width: 50%;
+    width: 55%;
 }
 
 .nav-links li{
@@ -91,7 +91,7 @@ nav {
 .nav-links a{
     color: var(--clr-groen);
     text-decoration: none;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     font-size: 1vw;
     font-family: 'Montserrat', serif;
     font-weight: bold;
@@ -164,7 +164,7 @@ nav {
 
 .searchbar-main {
     position: relative;
-    align-content: center;
+    text-align: center;
     border-radius: 2px;
     height: 100%;
 }
@@ -175,19 +175,36 @@ nav {
     background-color: #fff;
     border-radius: 2px;
     box-shadow: 0 2px 7px 0 hsla(0,0%,82.4%,.25);
-    border: 1px solid #f1f4f3;
 }
 
 .searchbar-input {
     font-size: 1vw;
-    color: #707c75;
     height: 100%;
     padding-left: 30px;
     margin: 0;
     border: 2px solid var(--clr-groen);
     border-radius: 5px;
-    width: 100%;
+    width: 90%;
     outline: none;
+}
+
+.searchbar-button {
+    border: 2px solid var(--clr-groen);
+    border-radius: 5px;
+    height: 100%;
+    width: 5%;
+    margin: 0;
+    float: right;
+    outline: none;
+}
+
+.searchbar-button:hover{
+    background-color: rgb(230, 230, 230);;
+}
+
+.fa-search {
+    color: var(--clr-groen);
+    font-size: 20px;
 }
 
 ::-webkit-search-cancel-button{
@@ -300,9 +317,18 @@ nav {
         font-size: 4vw;
     }
 
+    .plant-small .description h2, .plant-small .description h3, .plant-small .description h3 span{
+        font-size: 16px;
+    }
+
     /* Advertisement description headers and description details */
     .description h3, .description h3 span{
         font-size: 3vw;
+    }
+
+    .searchbar-input {
+        width: 80%;
+        font-size: 16px;
     }
 }
 
@@ -434,6 +460,11 @@ nav {
 }
 
 /* One advertisement */
+.linkPlant {
+    text-decoration: none;
+    color: var(--clr-dark-green);
+}
+
 .plant {
     margin: 3em;
     position: relative;
@@ -441,10 +472,21 @@ nav {
     width: 50vh;
     min-width: 20vh;
     overflow: hidden;
-    box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.3)
+    box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.3);
+    background-color: white;
 }
 
-.plant:hover{
+.plant-small{
+    margin: 10px;
+    position: relative;
+    border-bottom: 0.25vw solid var(--clr-groen);
+    width: 30%;
+    overflow: hidden;
+    box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.3);
+    background-color: white;
+}
+
+.plant:hover, .plant-small:hover{
     transition: transform .2s ease-in;
     transform: translateY(-20px);
     cursor: pointer;
@@ -458,6 +500,8 @@ nav {
 /* Advertisement image */
 .adImage img{
     object-fit: cover;
+    height: 40vh;
+    width: 100%;
     object-position: center;
     transform: scale(1);
     transition: 0.3s ease-in-out;
@@ -494,6 +538,34 @@ nav {
     margin-top: 10px;
 }
 
+/* Advertisement button */
+.newadknop {
+    text-align: center;
+    height: 50px;
+    margin-bottom: 1%;
+}
+
+.newadbutton {
+    border: 3px solid #1B701B;
+    background-color: #1B701B;
+    border-radius: 10px;
+    width: 25%;
+    padding: 8px;
+    height: 100%;
+    outline: none;
+    font-size: var(--fs-body);
+    color: white;
+    font-family: 'Montserrat', serif;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.newadbutton:hover{
+    border-color: #208820;
+    background-color: #208820;
+    cursor: pointer;
+}
+
 /* Advertisement discription container*/
 .description{
     padding-bottom: 3%;
@@ -501,9 +573,6 @@ nav {
     text-align: center;
 }
 
-.fa-search {
-    color: var(--clr-wit);
-}
 
 @media screen and (max-width: 768px){    
     .welcome-div {
@@ -518,20 +587,22 @@ nav {
         color: var(--clr-wit);
         font-size: 2.5vw;
     }
-}
 
-.newadknop {
-    position: absolute;
-    right: 10%;
-    margin-top: -8%;
-    border: 3px solid #1B701B;
-    background-color: #1B701B;
-    border-radius: 10px;
-    text-decoration: none;
-    padding: 8px;
-    color: white;
-    font-family: 'Montserrat', serif;
-    font-weight: bold;
+    .searchbar-button {
+        width: 15%;
+    }
+
+    .newadbutton {
+        width: 40%;
+    }
+
+    .newadlink {
+        font-size: 3vw;
+    }
+
+    .searchbar-div {
+        height: 50px;
+    }
 }
 
 .footer img{
@@ -672,9 +743,9 @@ nav {
     grid-template-rows: auto;
     grid-gap: 10px;
     padding: 10px;
-    width: 80%;
+    width: 100%;
     margin: auto;
-    background-color: rgb(130, 130, 130);
+    background-color: rgb(240, 240, 240);
     color: var(--clr-dark-green);
 }
 
@@ -682,17 +753,24 @@ nav {
     grid-area: img;
 }
 
+#tns1 > .tns-item {
+    height: 40vh;
+    object-fit: cover;
+}
+
 .tns-nav button{
     width: 28%;
     height: 9px;
     padding: 0;
     margin-right: 10px;
-    background: var(--clr-dark-green);
+    background: #9c9a95;
     border: 0;
+    outline: none;
 }
 
 button.tns-nav-active {
-    background: #9c9a95;
+    background: var(--clr-dark-green);
+    outline: none;
 }
 
 .plantMsg {
@@ -705,23 +783,40 @@ button.tns-nav-active {
     color: var(--clr-wit);
     letter-spacing: 2px;
     font-family: 'Lora', serif;
-    font-weight: 300;
     text-transform: uppercase;
     cursor: pointer;
 }
 .plantMsg:hover {
-    background-color: #1b701b;
-    border-color: #1b701b;
+    background-color: #175717;
+    border-color: #175717;
 }
 
 .plantInfo {
     grid-area: info;
     border: 0.2vw solid var(--clr-dark-green);
-    /* flex-direction: column; */
 }
 
 .plantInfoMargin {
     margin: 1vw;
+}
+
+.plantInner {
+    margin-top: 20px;
+}
+
+/* adinfo username */
+.plantInner a{
+    text-decoration: none;
+    color: var(--clr-dark-green);
+    border: 1px solid transparent;
+    padding: 2%;
+    border-radius: 1vw;
+}
+
+.plantInner a:hover{
+    border-color: var(--clr-dark-green);
+    background-color: var(--clr-dark-green);
+    color: white;
 }
 
 .plantDescription {
@@ -742,6 +837,75 @@ button.tns-nav-active {
 }
 
 .moreAdsImg img{
-    width: 30%;
-    margin: 10px;
+    width: 100%;
+    height: 25vh;
+}
+
+.moreAdsErrorMessage{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid var(--clr-dark-green);
+    padding: 5%;
+    width: 100%;
+    margin-bottom: 0%;
+}
+
+.fa-tint {
+    margin-right: 20px;
+    margin-top: 20px;
+    color: grey;
+    font-size: var(--fs-h2);
+}
+
+.fa-sun {
+    margin-right: 20px;
+    margin-top: 20px;
+    font-size: var(--fs-h2);
+    color: grey;
+}
+
+.drop-checked {
+    color: blue;
+}
+
+.sun-checked {
+    color: #F4DC85;
+}
+
+.plantInfoMargin .fa-star {
+    margin-right: 10px;
+    margin-top: 20px;
+    font-size: var(--fs-h2);
+}
+
+.star-checked {
+    color: orange;
+}
+
+@media screen and (max-width: 768px){    
+
+    .advWrapper {
+        grid-template-areas: 
+        'img'
+        'description'
+        'info'
+        'moreAds';
+        grid-template-columns: repeat(1,1fr);
+    }
+
+    .moreAdsImg img{
+        margin: 6px;
+    }
+
+    .fa-sun {
+        margin-right: 10px;
+    }
+}
+
+
+@media screen and (min-width:1024px){
+    .advWrapper {
+        max-width: 80%;
+    }
 }

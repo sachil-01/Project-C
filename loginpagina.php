@@ -19,6 +19,10 @@
                 else if ($_GET['error'] == "nouser") {
                     echo '<div class="loginerror"><p>E-mail of gebruikersnaam bestaat niet.</p></div>';
                 }
+            } else if (isset($_GET['success'])){
+                if ($_GET['success'] == "updatesuccess") {
+                    echo '<div class="loginerror"><p>Wachtwoord is gewijzigd!</p></div>';
+                }
             }
         ?>
         <div class="loginbox">

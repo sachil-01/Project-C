@@ -1,8 +1,6 @@
 <?php
 session_start();
 if (isset($_POST['update-submit'])) {
-    
-
     require 'dbh.inc.php';
 
     $id = $_SESSION['userId'];
@@ -14,10 +12,9 @@ if (isset($_POST['update-submit'])) {
     $huisnummer = $_POST['huisNummer'];
     $toevoeging = $_POST['toevoeging'];
     $postcode = $_POST['postcode'];
-
+    $biography = $_POST['userBiography'];
 
     // error berichten in header
-
     if (empty($username) || empty($email) || empty($firstname) || empty($lastname)) {
         header("Location: ../profilepage.php?error=emptyfields&uid=".$username."&mail=".$email);
         exit();
@@ -66,15 +63,14 @@ if (isset($_POST['update-submit'])) {
                         exit();
                     }
             else {
-                $sql = "UPDATE User SET usernameUser=?, emailUser=?, firstName=?, lastName=?, streetName=?, houseNumber=?, houseNumberExtra=?, postalCode=?  WHERE idUser='$id'";
+                $sql = "UPDATE User SET usernameUser=?, emailUser=?, firstName=?, lastName=?, streetName=?, houseNumber=?, houseNumberExtra=?, postalCode=?, biography=?  WHERE idUser='$id'";
                 $statement = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($statement, $sql)) {
                     header("Location: ../profilepage.php?error=sqlerror");
                     exit();
                 }                       
                 else {
-
-                    mysqli_stmt_bind_param($statement, "sssssiss", $username, $email, $firstname, $lastname, $straat, $huisnummer, $toevoeging, $postcode);
+                    mysqli_stmt_bind_param($statement, "sssssisss", $username, $email, $firstname, $lastname, $straat, $huisnummer, $toevoeging, $postcode, $biography);
                     mysqli_stmt_execute($statement); 
                     header("Location: ../profilepage.php?update=success");
                     exit();
