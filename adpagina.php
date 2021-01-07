@@ -31,14 +31,31 @@
     
         <form class="search-filters" action="" method="post">
             <div class="filters">
-                <div class="filterplantsoort">
-                    <label>Soort</label>
-                    <select class="selectsoort" name="soort">
-                        <option value="">Alle</option>
-                        <option value="Stekje">Stekje</option>
-                        <option value="Zaad">Zaad</option>
-                        <option value="Kiemplant">Kiemplant</option>
-                    </select>
+                <label>Soort</label>
+                    <?php
+                    require 'includes/dbh.inc.php';
+
+                    
+                    $sql = "SELECT DISTINCT plantCategory FROM Advertisement";
+                    $statement = mysqli_stmt_init($conn);
+                        if (!mysqli_stmt_prepare($statement, $sql)) {
+                            echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
+                        }
+                        else {
+                            mysqli_stmt_execute($statement);
+                            $result = mysqli_stmt_get_result($statement);
+                                foreach ($result as $row) 
+                                {
+                                    ?>
+                                    <div class="filterplantsoort">
+                                        <label><input type="checkbox" name="check_list[]" class="soort" value="<?php echo $row['plantCategory']; ?>"  > <?php echo $row['plantCategory']; ?></label>
+                                    </div>
+                            <?php
+                                }
+                            }
+                    ?>
+                    </div>
+                </div>
                 </div>
                 
                 <div class="filterAfstand">
@@ -69,7 +86,6 @@
 
     <div class="img-area">
         <?php 
-        require 'includes/dbh.inc.php';
         include 'distance.php';
 
         if (isset($_SESSION['userId'])) {
@@ -120,6 +136,14 @@
             $filterDateTo = $_POST['date_to'];
             $filterDTo = strtotime($filterDateTo);
             $filterDTo = date("Y/m/d", $filterDTo);
+
+            if(!empty($_POST['check_list'])) {
+                foreach($_POST['check_list'] as $check) {
+                        echo $check; //echoes the value set in the HTML form for each checked checkbox.
+                                     //so, if I were to check 1, 3, and 5 it would echo value 1, value 3, value 5.
+                                     //in your case, it would echo whatever $row['Report ID'] is equivalent to.
+                }
+            }
 
 
             if($filterPlantsoort != "" || $filterDateFrom != "" || $filterDateTo != "") {
@@ -176,4 +200,3 @@
     include('footer.php');
     include('feedback.php');
 ?>
-
