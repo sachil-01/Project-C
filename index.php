@@ -20,7 +20,7 @@
 
 
     <div class="gallery">
-        <h1>Nieuwste aanbod</h1>
+        <h1 style="margin-bottom: 0;">Nieuwste aanbod</h1>
         <span class="scroll">
 
         </span>
