@@ -762,7 +762,7 @@ nav {
     color: orange;
 }
 
-input:checked ~ label{
+.plant-star-widget input:checked ~ label{
     color: orange;
 }
 
