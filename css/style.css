@@ -36,7 +36,7 @@ body {
     margin: 0;
     font-family: 'Montserrat', serif;
     font-weight: 300;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     font-size: var(--fs-body);
     line-height: 1.6;
     overflow-x: hidden;
@@ -151,6 +151,47 @@ nav {
     padding-left: 5px;
     display: inline-block;
     font-size: 2.0vw;
+}
+
+.scroll {
+    position: absolute;
+    font-size: 1.3em;
+    margin-top: 2%;
+    display: inline-block;
+    text-decoration: none;
+    z-index: 99;
+    content: '';
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    top: 10px;
+    right: 0;
+    left: 0;
+    -webkit-animation: 3s arrow infinite ease;
+    animation: 3s arrow infinite ease;
+    border-right: 2px solid var(--clr-groen);
+    border-bottom: 2px solid var(--clr-groen);
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+@-webkit-keyframes arrow {
+    0%,100% {
+        top:10px;
+    }
+    50% {
+        top:30px;
+    }
+}
+@keyframes arrow {
+    0%,100% {
+        top:10px;
+    }
+    50% {
+        top:30px;
+    }
 }
 
 .searchbar-div {
@@ -457,6 +498,7 @@ nav {
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
+    margin-top: 5%;
 }
 
 /* One advertisement */
@@ -513,11 +555,15 @@ nav {
 }
 
 /* Recent advertisements header */
+.gallery {
+    position: relative;
+}
+
 .gallery h1{
     font-size: 3vw;
     text-align: center;
     margin-top: 5%;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
 }
 
 /* Advertisement plant name */
@@ -577,6 +623,10 @@ nav {
 @media screen and (max-width: 768px){    
     .welcome-div {
         height: 300px;
+    }
+
+    .scroll {
+        display: none;
     }
 
     /* space between advertisement posts */
@@ -702,8 +752,8 @@ nav {
     display: none;
 }
 
-input:not(:checked) ~ label:hover,
-input:not(:checked) ~ label:hover ~ label{
+.plant-star-widget input:not(:checked) ~ label:hover,
+.plant-star-widget input:not(:checked) ~ label:hover ~ label{
     color: orange;
 }
 
