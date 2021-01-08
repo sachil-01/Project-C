@@ -17,8 +17,13 @@
         </table>
     </div>
 
+
+
     <div class="gallery">
-        <h1>Recent geuploade planten</h1>
+        <h1>Nieuwste aanbod</h1>
+        <span class="scroll">
+
+        </span>
         <div class="img-area">
         <?php 
 
