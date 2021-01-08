@@ -240,7 +240,7 @@ nav {
 }
 
 .searchbar-button:hover{
-    background-color: rgb(230, 230, 230);;
+    background-color: rgb(230, 230, 230);
 }
 
 .fa-search {
@@ -534,6 +534,10 @@ nav {
     cursor: pointer;
 }
 
+.plant-small:hover{
+    transform: translateY(-5px);
+}
+
 /* Advertisement image container */
 .adImage{
     overflow: hidden;
@@ -803,7 +807,7 @@ input#communication-rate-5:checked ~ label{
 }
 
 @media screen and (max-width: 1000px){
-    .userRatingForm{
+    .feedback-popup, .feedback-popup-success, .userRatingForm{
         left: 5%;
         right: 5%;
     }
@@ -1038,10 +1042,6 @@ button.tns-nav-active {
         'info'
         'moreAds';
         grid-template-columns: repeat(1,1fr);
-    }
-
-    .moreAdsImg img{
-        margin: 6px;
     }
 
     .fa-sun {
