@@ -48,7 +48,7 @@
                                 {
                                     ?>
                                     <div class="filterplantsoort">
-                                        <label><input type="checkbox" name="check_list[]" class="soort" value="<?php echo $row['plantCategory']; ?>"  > <?php echo $row['plantCategory']; ?></label>
+                                        <label><input type="checkbox" name="check_list[]" class="soort" value="<?php echo $row['plantCategory']; ?>"> <?php echo $row['plantCategory']; ?></label>
                                     </div>
                             <?php
                                 }
@@ -58,7 +58,7 @@
                 </div>
                 </div>
                 
-                <div class="filterAfstand">
+                <!-- <div class="filterAfstand">
                     <label>Afstand</label>
                     <select class="selectAfstand" name="afstand">
                         <option value="">Geen voorkeur</option>
@@ -66,7 +66,7 @@
                         <option value="vijftien">< 15KM</option>
                         <option value="twintig">< 20 KM</option>
                     </select>
-                </div>
+                </div> -->
 
                 <div class="filterdatefrom">
                     <label>Van</label>
@@ -125,31 +125,67 @@
         }
 
         if(isset($_POST['submit-filters'])){
-            $filterPlantsoort = $_POST['soort'];
-
             $filterAfstand = $_POST['afstand'];
-
             $filterDateFrom = $_POST['date_from'];
-            $filterDfrom = strtotime($filterDateFrom);
-            $filterDfrom = date("Y/m/d", $filterDfrom);
-
             $filterDateTo = $_POST['date_to'];
-            $filterDTo = strtotime($filterDateTo);
-            $filterDTo = date("Y/m/d", $filterDTo);
 
-            if(!empty($_POST['check_list'])) {
-                foreach($_POST['check_list'] as $check) {
-                        echo $check; //echoes the value set in the HTML form for each checked checkbox.
-                                     //so, if I were to check 1, 3, and 5 it would echo value 1, value 3, value 5.
-                                     //in your case, it would echo whatever $row['Report ID'] is equivalent to.
-                }
+            if(isset($_POST['check_list'])) {
+                    $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE plantCategory IN ('" 
+                    . implode("','", $_POST['check_list']) 
+                    . "') ORDER BY a.idAd DESC ";
+                    $data = mysqli_query($conn, $sql) or die ("error");
             }
 
+            if(isset($_POST['check_list']) && $filterDateFrom != "" && $filterDateTo != "") {
+                $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE plantCategory IN ('" 
+                . implode("','", $_POST['check_list']) 
+                . "') AND postDate >= '$filterDateFrom' AND postDate < '$filterDateTo' ORDER BY a.idAd DESC ";
+                $data = mysqli_query($conn, $sql) or die ("error");
+            }
 
-            if($filterPlantsoort != "" || $filterDateFrom != "" || $filterDateTo != "") {
-                $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE plantCategory = '$filterPlantsoort' OR postDate >= '$filterDateFrom' AND postDate < '$filterDateTo' ORDER BY a.idAd DESC";
+            if($filterDateFrom != "" || $filterDateTo != "") {
+                $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE postDate >= '$filterDateFrom' AND postDate < '$filterDateTo' ORDER BY a.idAd DESC";
                 $data = mysqli_query($conn, $sql) or die('error');
             }
+
+            if($filterDateFrom != "") {
+                $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE postDate >= '$filterDateFrom' ORDER BY a.idAd DESC";
+                $data = mysqli_query($conn, $sql) or die('error');
+            }
+
+            
+            if($filterDateTo != "") {
+                $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE postDate < '$filterDateTo' ORDER BY a.idAd DESC";
+                $data = mysqli_query($conn, $sql) or die('error');
+            }
+        
+        
+            unset($sql2);
+
+            $plantCategory = $_POST['check_list'];
+
+            if ($plantCategory)  {
+                $sql2[] = " plantCategory = '$plantCategory' ";
+            }
+            if ($filterDateFrom) {
+                $sql2[] = " postDate >= '$filterDateFrom' ";
+            }
+            if ($filterDateTo) {
+                $sql2[] = " postDate < '$filterDateTo' ";
+            }
+
+            $query = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert";
+
+            if (!empty($sql)) {
+                $query .= ' WHERE ' . implode(' AND ', $sql2);
+            }
+
+            echo $query;
+            $data = mysqli_query($conn, $query) or die('error');
+            // echo $data;
+            // mysql_query($query);
+
+
         }
         
         $statement = mysqli_stmt_init($conn);
@@ -179,6 +215,7 @@
                                     <div class="description">
                                         <h2>'.$row['plantName'].'</h2>
                                         <br>
+                                        <h2>'.$row['plantCategory'].'</h2>
                                         <h3> Afstand: <span>'.$distance.'</span></h3>
                                         <h3> Datum: <span>'.date("d-m-Y", strtotime($row['postDate'])).'</span></h3>
                                     </div>
