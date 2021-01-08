@@ -155,7 +155,7 @@
                             <input type="text" name="lastName" value="<?php echo $achternaam; ?>" required>
                             <p>Straatnaam</p>
                             <input type="text" name="straatNaam" value="<?php echo $straat; ?>" required>
-                            <p>Nummer</p>
+                            <p>Huisnummer</p>
                             <input type="number" name="huisNummer" value="<?php echo $huisnummer; ?>" required>
                             <p>Toevoeging</p>
                             <input type="text" name="toevoeging" value="<?php echo $toevoeging; ?>">
