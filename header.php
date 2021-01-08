@@ -16,10 +16,10 @@
 <nav>
        
             <a class="logo" href="index">
-                <h2 class="nav-title">Fleurt </h2>
+                <h2 class="nav-title">FLEURT </h2>
                 &nbsp;
                 <img src="images/Logo green2.png" alt="">
-                <h2 class="nav-title">p</h2>
+                <h2 class="nav-title">P</h2>
             </a>
 
             <ul class="nav-links">
