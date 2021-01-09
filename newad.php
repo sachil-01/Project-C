@@ -129,7 +129,7 @@ include('header.php');
                 <label for="kiemplant">Plant</label><br>
                 <input type="radio" id="bol" name="type" value="bol">
                 <label for="bol">Bollen</label><br>
-                <input type="radio" id="none" name="type" value="Onbekend">
+                <input type="radio" id="none" name="type" value="onbekend">
                 <label for="none">Weet ik niet</label><br>
                 
                 <br><label for="desc">Beschrijving <label style="color: red;">*</label></label><br>
