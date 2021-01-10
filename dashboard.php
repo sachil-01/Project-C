@@ -30,7 +30,7 @@
             $adminUsers = '<table class="ads-blogs-list"><tr class="ads-blogs-columnnames"><td><p>Gebruikersnaam</p></td><td><p>Gebruikers-id</p></td><td><p>Opties</p></td></tr>';
             array_push($userArray, $sql, $adminUsers);
             
-            $sql = "SELECT a.plantName, a.idAd, a.postDate, a.plantCategory FROM Advertisement a";
+            $sql = "SELECT a.plantName, a.idAd, a.postDate FROM Advertisement a";
             $adminAdvertisements = '<table class="ads-blogs-list"><tr class="ads-blogs-columnnames"><td><p>Advertentienaam</p></td><td><p>Advertentie-id</p></td><td><p>Geplaatst op</p></td><td><p>Verloopt op</p></td><td><p>Opties</p></td></tr>';
             array_push($adArray, $sql, $adminAdvertisements);
             
@@ -46,7 +46,7 @@
                     // output data of each row
                     while ($row = $result->fetch_assoc()) {
                         if($i == 0){                                                                //checks if it's the users array
-                            $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '<tr><td><p><span>Gebruikersnaam: </span>'.$row["usernameUser"].'</p></td><td><p><span>Gebruikers-id: </span>'.$row["idUser"].'</p></td><td><button class="Delete-btn">verwijder</button></td></tr>';
+                            $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '<tr><td><p><span>Gebruikersnaam: </span>'.$row["usernameUser"].'</p></td><td><p><span>Gebruikers-id: </span>'.$row["idUser"].'</p></td><td><button id="adminUser" value='.$row["idUser"].' onclick="adminDeleteUser(this.value, this.id)" class="Delete-btn">verwijder</button></td></tr>';
                         } else if($i == 1){                                                         //checks if it's the advertisements array
                             $expiredDate = ($row['plantCategory'] == 'stekje' || $row['plantCategory'] == 'kiemplant') ? date_format(date_add(date_create($row["postDate"]), date_interval_create_from_date_string("2 months")), "d-m-Y") : date_format(date_add(date_create($row["postDate"]), date_interval_create_from_date_string("1 year")), "d-m-Y");        
                             $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '<tr><td><p><span>Advertentienaam: </span>'.$row["plantName"].'</p></td><td><p><span>Advertentie-id: </span>'.$row["idAd"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["postDate"]),"d-m-Y").'</p></td><td><p><span>Verloopt op: </span>'.$expiredDate.'</p></td><td><button id="adminAdvertisement" value='.$row["idAd"].' onclick="adminDeleteAdvertisement(this.value, this.id)" class="Delete-btn">verwijder</button></td></tr>';
@@ -54,8 +54,6 @@
                             $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '<tr><td><p><span>Blogtitel: </span>'.$row["blogTitle"].'</p></td><td><p><span>Blog-id: </span>'.$row["idPost"].'</p></td><td><p><span>Release datum: </span>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p></td><td><button id="adminBlogpost" value='.$row["idPost"].' onclick="adminDeleteBlogpost(this.value, this.id)" class="Delete-btn">verwijder</button></td></tr>';
                         }
                     }
-                } else {
-                    $userAdBlogArray[$i][1] = "<p class='emptyAdOrBlogList'>0 resultaten.</p>";
                 }
                 $userAdBlogArray[$i][1] = $userAdBlogArray[$i][1] . '</table>';                    //end html <table> tag
             }
