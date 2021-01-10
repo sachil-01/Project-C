@@ -129,43 +129,44 @@
             $filterDateFrom = $_POST['date_from'];
             $filterDateTo = $_POST['date_to'];
 
-            if(isset($_POST['check_list'])) {
-                    $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE plantCategory IN ('" 
-                    . implode("','", $_POST['check_list']) 
-                    . "') ORDER BY a.idAd DESC ";
-                    $data = mysqli_query($conn, $sql) or die ("error");
-            }
+            // if(isset($_POST['check_list'])) {
+            //         $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE plantCategory IN ('" 
+            //         . implode("','", $_POST['check_list']) 
+            //         . "') ORDER BY a.idAd DESC ";
+            //         $data = mysqli_query($conn, $sql) or die ("error");
+            // }
 
-            if(isset($_POST['check_list']) && $filterDateFrom != "" && $filterDateTo != "") {
-                $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE plantCategory IN ('" 
-                . implode("','", $_POST['check_list']) 
-                . "') AND postDate >= '$filterDateFrom' AND postDate < '$filterDateTo' ORDER BY a.idAd DESC ";
-                $data = mysqli_query($conn, $sql) or die ("error");
-            }
+            // if(isset($_POST['check_list']) && $filterDateFrom != "" && $filterDateTo != "") {
+            //     $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE plantCategory IN ('" 
+            //     . implode("','", $_POST['check_list']) 
+            //     . "') AND postDate >= '$filterDateFrom' AND postDate < '$filterDateTo' ORDER BY a.idAd DESC ";
+            //     $data = mysqli_query($conn, $sql) or die ("error");
+            // }
 
-            if($filterDateFrom != "" || $filterDateTo != "") {
-                $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE postDate >= '$filterDateFrom' AND postDate < '$filterDateTo' ORDER BY a.idAd DESC";
-                $data = mysqli_query($conn, $sql) or die('error');
-            }
+            // if($filterDateFrom != "" || $filterDateTo != "") {
+            //     $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE postDate >= '$filterDateFrom' AND postDate < '$filterDateTo' ORDER BY a.idAd DESC";
+            //     $data = mysqli_query($conn, $sql) or die('error');
+            // }
 
-            if($filterDateFrom != "") {
-                $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE postDate >= '$filterDateFrom' ORDER BY a.idAd DESC";
-                $data = mysqli_query($conn, $sql) or die('error');
-            }
+            // if($filterDateFrom != "") {
+            //     $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE postDate >= '$filterDateFrom' ORDER BY a.idAd DESC";
+            //     $data = mysqli_query($conn, $sql) or die('error');
+            // }
 
             
-            if($filterDateTo != "") {
-                $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE postDate < '$filterDateTo' ORDER BY a.idAd DESC";
-                $data = mysqli_query($conn, $sql) or die('error');
-            }
+            // if($filterDateTo != "") {
+            //     $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE postDate < '$filterDateTo' ORDER BY a.idAd DESC";
+            //     $data = mysqli_query($conn, $sql) or die('error');
+            // }
         
         
             unset($sql2);
 
             $plantCategory = $_POST['check_list'];
+            $test = "('" . implode("','", $_POST['check_list']) . "')";
 
             if ($plantCategory)  {
-                $sql2[] = " plantCategory = '$plantCategory' ";
+                $sql2[] = " plantCategory IN $test ";
             }
             if ($filterDateFrom) {
                 $sql2[] = " postDate >= '$filterDateFrom' ";
@@ -174,18 +175,17 @@
                 $sql2[] = " postDate < '$filterDateTo' ";
             }
 
-            $query = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert";
+            $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert";
 
-            if (!empty($sql)) {
-                $query .= ' WHERE ' . implode(' AND ', $sql2);
+            if (!empty($sql2)) {
+                $sql .= ' WHERE ' . implode(' AND ', $sql2) . ' ORDER BY a.idAd DESC ' ;
             }
 
-            echo $query;
-            $data = mysqli_query($conn, $query) or die('error');
-            // echo $data;
-            // mysql_query($query);
-
-
+            if (empty($sql2)) {
+                $sql .= ' ORDER BY a.idAd DESC ' ;
+            }
+            
+            $data = mysqli_query($conn, $sql) or die('error');
         }
         
         $statement = mysqli_stmt_init($conn);
