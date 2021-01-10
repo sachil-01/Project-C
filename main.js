@@ -66,6 +66,20 @@ function adminDeleteAdvertisement(advertisementId, advertisementUser){
     })
 }
 
+function adminDeleteUser(userId, registeredUser) {
+	$.ajax({
+		url: "adminFunctions.php",
+		type: 'post',
+		data: { function: "user", id: userId, user: registeredUser },
+		success: function (result) {
+			//checks which list needs to be updated
+			if (registeredUser == "adminUser") { //admin advertisement list
+				document.getElementById("adminDisplayUserFunc").innerHTML = result;
+			}
+		}
+	})
+}
+
 var profileTabsBtn = document.getElementById('ads-blogs-btns')
 var userAdsBtn = document.getElementById('ad-btn')
 var userBlogsBtn = document.getElementById('blog-btn')

@@ -27,6 +27,7 @@
 .blogpostform input[type="file"]{
     border-radius: 0vw;
 }
+
 /* Selectbar */
 .blogpostform select{
     border: 2px solid green;
@@ -71,12 +72,17 @@
         padding-right: 2%;
     }
 
+    .blogpostform input[type="file"]{
+        font-size: 1vw;
+    }
+
     .blogpostform textarea{
         height: 20vw;
     }
 
     .blogpostform select{
         height: 2vw;
+        width: 100%;
     }
 
     .blogpostform h2{
@@ -94,10 +100,13 @@
 
 @media screen and (max-width:1100px){
     .blogpostform input[type="text"], .blogpostform textarea, .blogpostform input[type="url"], .blogpostform select{
-        height: 5vw;
-        font-size: 2vw;
+        font-size: 16px;
         padding-left: 2%;
         padding-right: 2%;
+    }
+
+    .blogpostform input[type="file"]{
+        font-size: 16px;
     }
 
     .blogpostform textarea{
@@ -105,7 +114,12 @@
     }
 
     .blogpostform select{
-        height: 4vw;
+        height: 5vh;
+        width: 100%;
+        outline: none;
+        border-radius: 1vw;
+        padding-left: 2%;
+        padding-right: 2%;
     }
 
     .blogpostform h2{

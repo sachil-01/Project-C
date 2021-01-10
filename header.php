@@ -11,15 +11,22 @@
     <link rel="stylesheet" href="css/NewAdStyle.css">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700|Montserrat:300" rel="stylesheet">
     <title>Fleurtop</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/fleurtop/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/fleurtop/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/fleurtop/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
 </head>
 <body>
 <nav>
        
             <a class="logo" href="index">
-                <h2 class="nav-title">Fleurt </h2>
+                <h2 class="nav-title">FLEURT </h2>
                 &nbsp;
                 <img src="images/Logo green2.png" alt="">
-                <h2 class="nav-title">p</h2>
+                <h2 class="nav-title">P</h2>
             </a>
 
             <ul class="nav-links">

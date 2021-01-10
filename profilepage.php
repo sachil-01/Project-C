@@ -111,11 +111,27 @@
                         <div class="profilebox-left">
                             <div class="profile-leftpart-up">
                                 <p>Beoordeling</p>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
+                                    <?php
+                                        $sql = "SELECT * FROM Rating WHERE adUser = '$id'";
+                                        $result = $conn->query($sql);
+
+                                        $allUserRatingRates = array();
+                                        foreach($result as $ratingId) {
+                                            // output data of each row
+                                            array_push($allUserRatingRates, $ratingId['userRating']);
+                                        }
+                                        $averageUserRating = array_sum($allUserRatingRates) / count($allUserRatingRates);
+                                        if(count($allUserRatingRates) == 0){
+                                            $averageUserRating = 0;
+                                        }
+                                        for($i = 0; $i < $averageUserRating; $i++){
+                                            echo '<label class="fa fa-star star-checked"></label>';
+                                        }
+                                        for($i = 5; $i > $averageUserRating; $i--){
+                                            echo '<label class="fa fa-star"></label>';
+                                        }
+                                        echo "<h3 style='display: inline;'>(".count($allUserRatingRates).")</h3>";
+                                    ?>
                                 <p>Aantal advertenties</p>
                                 <span><span id="totalads"></span><span id="starttotalads"><?php echo $countAds; ?></span> advertenties</span>
                                 <p>Aantal blogposts</p>
@@ -139,7 +155,7 @@
                             <input type="text" name="lastName" value="<?php echo $achternaam; ?>" required>
                             <p>Straatnaam</p>
                             <input type="text" name="straatNaam" value="<?php echo $straat; ?>" required>
-                            <p>Nummer</p>
+                            <p>Huisnummer</p>
                             <input type="number" name="huisNummer" value="<?php echo $huisnummer; ?>" required>
                             <p>Toevoeging</p>
                             <input type="text" name="toevoeging" value="<?php echo $toevoeging; ?>">

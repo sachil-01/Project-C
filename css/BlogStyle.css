@@ -177,7 +177,7 @@
     }
 
     .blogDescription h2{
-        font-size: 2vw;
+        font-size: 16px;
     }
 
     .blogcategories a{
@@ -369,7 +369,7 @@
     cursor: pointer;
 }
 
-#userDeleteBlogpostPopUp{
+#userDeleteBlogpostPopUp, #ratingForm{
     display: none;
 }
 
