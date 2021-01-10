@@ -128,38 +128,7 @@
             $filterAfstand = $_POST['afstand'];
             $filterDateFrom = $_POST['date_from'];
             $filterDateTo = $_POST['date_to'];
-
-            // if(isset($_POST['check_list'])) {
-            //         $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE plantCategory IN ('" 
-            //         . implode("','", $_POST['check_list']) 
-            //         . "') ORDER BY a.idAd DESC ";
-            //         $data = mysqli_query($conn, $sql) or die ("error");
-            // }
-
-            // if(isset($_POST['check_list']) && $filterDateFrom != "" && $filterDateTo != "") {
-            //     $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE plantCategory IN ('" 
-            //     . implode("','", $_POST['check_list']) 
-            //     . "') AND postDate >= '$filterDateFrom' AND postDate < '$filterDateTo' ORDER BY a.idAd DESC ";
-            //     $data = mysqli_query($conn, $sql) or die ("error");
-            // }
-
-            // if($filterDateFrom != "" || $filterDateTo != "") {
-            //     $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE postDate >= '$filterDateFrom' AND postDate < '$filterDateTo' ORDER BY a.idAd DESC";
-            //     $data = mysqli_query($conn, $sql) or die('error');
-            // }
-
-            // if($filterDateFrom != "") {
-            //     $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE postDate >= '$filterDateFrom' ORDER BY a.idAd DESC";
-            //     $data = mysqli_query($conn, $sql) or die('error');
-            // }
-
-            
-            // if($filterDateTo != "") {
-            //     $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE postDate < '$filterDateTo' ORDER BY a.idAd DESC";
-            //     $data = mysqli_query($conn, $sql) or die('error');
-            // }
-        
-        
+                    
             unset($sql2);
 
             $plantCategory = $_POST['check_list'];
@@ -184,7 +153,7 @@
             if (empty($sql2)) {
                 $sql .= ' ORDER BY a.idAd DESC ' ;
             }
-            
+
             $data = mysqli_query($conn, $sql) or die('error');
         }
         
