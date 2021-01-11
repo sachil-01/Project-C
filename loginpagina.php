@@ -34,7 +34,7 @@
                 <?php
             } else {
                 ?>
-                <form action="includes/login.inc.php" method="post">
+                <form action="includes/login.inc.php" method="post" autocomplete="on">
                     <br>
                     <h1>Inloggen</h1>
                     <p style="text-align:left">E-mail of Gebruikersnaam</p>
