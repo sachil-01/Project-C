@@ -57,16 +57,6 @@
                     </div>
                 </div>
                 </div>
-                
-                <!-- <div class="filterAfstand">
-                    <label>Afstand</label>
-                    <select class="selectAfstand" name="afstand">
-                        <option value="">Geen voorkeur</option>
-                        <option value="tien">< 10KM</option>
-                        <option value="vijftien">< 15KM</option>
-                        <option value="twintig">< 20 KM</option>
-                    </select>
-                </div> -->
 
                 <div class="filterdatefrom">
                     <label>Van</label>
