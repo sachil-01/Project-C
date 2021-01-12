@@ -2,6 +2,7 @@
     session_start();
     include('header.php');
     require 'includes/dbh.inc.php';
+    include 'distance.php';
 ?>
 
 <head>
@@ -46,6 +47,18 @@
                         <label class="filterlabel">Datum tot en met</label><br>
                         <input type="date" name="date_to" id="to" onchange="sortByDate()">
                     </div>
+
+                    <?php
+                        if(isset($_SESSION['userId'])){
+                    ?>
+                        <div class="filterdistance">
+                            <label class="filterlabel">Afstand tot en met</label><br><br>
+                            <input type="range" min="1" step="0.1" class="distanceSlider" id="selectedDistance" onchange="getDistanceThenSortAdvertisement(this.value)">
+                            <p id="distanceInput"></p>
+                        </div>
+                    <?php
+                        }
+                    ?>
             </div>
         </div>
 
@@ -53,8 +66,6 @@
 
     <div class="img-area" id="advertisementGallery">
         <?php 
-        include 'distance.php';
-
         if (isset($_SESSION['userId'])) {
             // Retrieve postal code from current user
             $currentUserId = $_SESSION['userId'];
@@ -78,6 +89,7 @@
         $statement = mysqli_stmt_init($conn);
         //array with all advertisement Ids
         $allIdAdvertisements = array();
+        $maxDistance = 0;
         if (!mysqli_stmt_prepare($statement, $sql)) {
             header("Location: adpagina.php?error=sqlerror");
             echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
@@ -91,6 +103,10 @@
                     if(!in_array($row['idAd'], $allIdAdvertisements)){
                         if (isset($_SESSION['userId'])) {
                             $distance = getDistance($row['postalCode'], $currentUserPostalCode);
+                            $getNumberFromDistance = explode(" ", $distance);
+                            if($getNumberFromDistance[0] > $maxDistance){
+                                $maxDistance = $getNumberFromDistance[0];
+                            }
                         } else {
                             $distance = "-- km";
                         }
@@ -122,21 +138,37 @@
 <script>
     var allCheckedFilters = [];
 
+    document.getElementById('distanceInput').innerHTML = <?php echo $maxDistance; ?>;
+    document.getElementById('selectedDistance').value = <?php echo $maxDistance; ?>;
+    document.getElementById('selectedDistance').max = <?php echo $maxDistance; ?>;
+
     function sortByDate(){
-        SelectedFromDate = document.getElementById('from').value;
-        SelectedToDate = document.getElementById('to').value;
+        selectedFromDate = document.getElementById('from').value;
+        selectedToDate = document.getElementById('to').value;
         searchValue = document.getElementById('advertisementSearchbar').value;
+        distanceHTML = document.getElementById('distanceInput');
+        //check if user is logged in else no max distance is set
+        if(distanceHTML){
+            maxDistanceValue = document.getElementById('distanceInput').innerHTML;
+        } else {
+            maxDistanceValue = 0;
+        }
 
         $.ajax({
             url: "searchAndFilterAdvertisements.php",
             type: 'post',
-            data: {fromDate: SelectedFromDate, toDate: SelectedToDate, filters: allCheckedFilters, searchInput: searchValue},
+            data: {fromDate: selectedFromDate, toDate: selectedToDate, filters: allCheckedFilters, searchInput: searchValue, selectedDistance: maxDistanceValue},
             success: function(result)
             {
                 //display result after clicking on "delete blogpost"
                 document.getElementById("advertisementGallery").innerHTML = result;
             }
         })
+    }
+
+    function getDistanceThenSortAdvertisement(selectedDistance){
+        document.getElementById('distanceInput').innerHTML = selectedDistance;
+        sortByDate();
     }
 
     //add selected filter options to array then search for the correct advertisements

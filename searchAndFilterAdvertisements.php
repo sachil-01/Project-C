@@ -25,6 +25,7 @@
     $plantCategories = $_POST['filters'];
     $fromDate = $_POST['fromDate'];
     $toDate = $_POST['toDate'];
+    $selectedDistance = $_POST['selectedDistance'];
 
     //search function
         if(!empty($searchInput)){
@@ -94,24 +95,33 @@
                     if(!in_array($row['idAd'], $allIdAdvertisements)){
                         if (isset($_SESSION['userId'])) {
                             $distance = getDistance($row['postalCode'], $currentUserPostalCode);
+                            $getNumberFromDistance = explode(" ", $distance);
+                            if( $getNumberFromDistance[0] <= $selectedDistance){
+                                $allowDisplay = true;
+                            } else {
+                                $allowDisplay = false;
+                            }
                         } else {
                             $distance = "-- km";
+                            $allowDisplay = true;
                         }
-                        $allAdvertisementsHTML = $allAdvertisementsHTML . '<div class="plant">
-                                                                                <a class="linkPlant" href="adinfo?idAd='.$row['idAd'].'">
-                                                                                    <div class="adImage">
-                                                                                        <img src="uploads/'.$row["imgName"].'" alt="">
-                                                                                    </div>
-                                                                                    <div class="description">
-                                                                                        <h2>'.$row['plantName'].'</h2>
-                                                                                        <br>
-                                                                                        <h3> Afstand: <span>'.$distance.'</span></h3>
-                                                                                        <h3> Datum: <span>'.date("d-m-Y", strtotime($row['postDate'])).'</span></h3>
-                                                                                    </div>
-                                                                                </a>
-                                                                            </div>';
-                        //add advertisement id to array
-                        array_push($allIdAdvertisements, $row['idAd']);
+                        if( $allowDisplay ){
+                            $allAdvertisementsHTML = $allAdvertisementsHTML . '<div class="plant">
+                                                                                    <a class="linkPlant" href="adinfo?idAd='.$row['idAd'].'">
+                                                                                        <div class="adImage">
+                                                                                            <img src="uploads/'.$row["imgName"].'" alt="">
+                                                                                        </div>
+                                                                                        <div class="description">
+                                                                                            <h2>'.$row['plantName'].'</h2>
+                                                                                            <br>
+                                                                                            <h3> Afstand: <span>'.$distance.'</span></h3>
+                                                                                            <h3> Datum: <span>'.date("d-m-Y", strtotime($row['postDate'])).'</span></h3>
+                                                                                        </div>
+                                                                                    </a>
+                                                                                </div>';
+                            //add advertisement id to array
+                            array_push($allIdAdvertisements, $row['idAd']);
+                        }
                     }
                 }
                 echo "$allAdvertisementsHTML";
