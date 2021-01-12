@@ -1,6 +1,7 @@
 <?php
     session_start();
     include('header.php');
+    require 'includes/dbh.inc.php';
 ?>
 
 <head>
@@ -18,61 +19,39 @@
         <div class="searchbar-div">
             <div class="searchbar-margin">
                 <div class="searchbar-main">
-                    <form class="searchbar-main-content" action="" method="post">
-                        <input type="text" class="searchbar-input" name="search-input" onfocus="this.value=''" placeholder="Zoeken...">
-                        <button class="searchbar-button" name="search-submit"><i class="fas fa-search"></i></button>
-                    </form>
+                    <input type="text" id="advertisementSearchbar" class="searchbar-input" name="search-input" onkeyup="sortByDate()" onfocus="this.value=''" placeholder="Zoeken...">
                 </div>
             </div>
         </div>
         <div class="filters">
-            <form class="search-filters" action="" method="post">
+            <div class="search-filters">
                 <h2 class="filtertitel">Zoek filters</h2>
                     <div class="plantsoort">
                         <label class="filterlabel">Soort plant</label>
-                            <?php
-                            require 'includes/dbh.inc.php';
-
-                            $plantCategory = $_POST['check_list'];
-                            $sql = "SELECT DISTINCT plantCategory FROM Advertisement";
-                            $statement = mysqli_stmt_init($conn);
-                                if (!mysqli_stmt_prepare($statement, $sql)) {
-                                    echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
-                                }
-                                else {
-                                    mysqli_stmt_execute($statement);
-                                    $result = mysqli_stmt_get_result($statement);
-                                        foreach ($result as $row) 
-                                        {
-                                            ?>
-                                            <div class="checkboxplantsoort">
-                                                <label><input type="checkbox" name="check_list[]" class="soort" value="<?php echo $row['plantCategory']; ?>"> <?php echo $row['plantCategory']; ?></label>
-                                            </div>
-                                    <?php
-                                        }
-                                    }
-                            ?>
+                        <div class="checkboxplantsoort">
+                            <label><input type="checkbox" name="check_list[]" class="soort" value="stekje" onchange="filterThenSortAdvertisement(this.value)">Stekje</label>
+                            <label><input type="checkbox" name="check_list[]" class="soort" value="kiemplant" onchange="filterThenSortAdvertisement(this.value)">Kiemplant</label>
+                            <label><input type="checkbox" name="check_list[]" class="soort" value="zaad" onchange="filterThenSortAdvertisement(this.value)">Zaad</label>
+                            <label><input type="checkbox" name="check_list[]" class="soort" value="bol" onchange="filterThenSortAdvertisement(this.value)">Bol</label>
+                            <label><input type="checkbox" name="check_list[]" class="soort" value="none" onchange="filterThenSortAdvertisement(this.value)">Weet ik niet</label>
+                        </div>
                     </div>
 
                     <div class="filterdatefrom">
                         <label class="filterlabel">Datum vanaf</label><br>
-                        <input type="date" name="date_from" id="from">
+                        <input type="date" name="date_from" id="from" onchange="sortByDate()">
                     </div>
                     
                     <div class="filterdateto">
-                        <label class="filterlabel">Datum tot</label><br>
-                        <input type="date" name="date_to" id="to">
+                        <label class="filterlabel">Datum tot en met</label><br>
+                        <input type="date" name="date_to" id="to" onchange="sortByDate()">
                     </div>
-
-                    <div class="submitfilters">
-                        <input class="verzenden" type="submit" name="submit-filters">
-                    </div>
-            </form>
+            </div>
         </div>
 
     </div> 
 
-    <div class="img-area">
+    <div class="img-area" id="advertisementGallery">
         <?php 
         include 'distance.php';
 
@@ -93,57 +72,8 @@
                 }
             }
         }
-
-        if(isset($_POST['search-submit'])){
-            $searchvalue = $_POST['search-input'];
-            //split search input by every space
-            $searchpieces = explode(" ", $searchvalue);
-            //for loop to create "a.plantName LIKE '%$array[0]%'" for every array item
-            $temp = "a.plantName LIKE ";    
-            for ($i = 0; $i < count($searchpieces); $i++){
-                if($i == count($searchpieces) - 1){
-                    $temp = $temp . "'%".$searchpieces[$i]."%'";
-                } else {
-                    $temp = $temp . "'%".$searchpieces[$i]."%' OR a.plantName LIKE ";
-                }
-            }
-            $sql = "SELECT DISTINCT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE $temp ORDER BY a.idAd DESC";
-        } else {
-            $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert ORDER BY a.idAd DESC";
-        }
-
-        if(isset($_POST['submit-filters'])){
-            $filterAfstand = $_POST['afstand'];
-            $filterDateFrom = $_POST['date_from'];
-            $filterDateTo = $_POST['date_to'];
-                    
-            unset($sql2);
-
-            $plantCategory = $_POST['check_list'];
-            $test = "('" . implode("','", $_POST['check_list']) . "')";
-
-            if ($plantCategory)  {
-                $sql2[] = " plantCategory IN $test ";
-            }
-            if ($filterDateFrom) {
-                $sql2[] = " postDate >= '$filterDateFrom' ";
-            }
-            if ($filterDateTo) {
-                $sql2[] = " postDate < '$filterDateTo' ";
-            }
-
-            $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert";
-
-            if (!empty($sql2)) {
-                $sql .= ' WHERE ' . implode(' AND ', $sql2) . ' ORDER BY a.idAd DESC ' ;
-            }
-
-            if (empty($sql2)) {
-                $sql .= ' ORDER BY a.idAd DESC ' ;
-            }
-
-            $data = mysqli_query($conn, $sql) or die('error');
-        }
+        
+        $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert ORDER BY a.idAd DESC";
         
         $statement = mysqli_stmt_init($conn);
         //array with all advertisement Ids
@@ -188,6 +118,46 @@
         ?>
     </div>
 </body>
+
+<script>
+    var allCheckedFilters = [];
+
+    function sortByDate(){
+        SelectedFromDate = document.getElementById('from').value;
+        SelectedToDate = document.getElementById('to').value;
+        searchValue = document.getElementById('advertisementSearchbar').value;
+
+        $.ajax({
+            url: "searchAndFilterAdvertisements.php",
+            type: 'post',
+            data: {fromDate: SelectedFromDate, toDate: SelectedToDate, filters: allCheckedFilters, searchInput: searchValue},
+            success: function(result)
+            {
+                //display result after clicking on "delete blogpost"
+                document.getElementById("advertisementGallery").innerHTML = result;
+            }
+        })
+    }
+
+    //add selected filter options to array then search for the correct advertisements
+    function filterThenSortAdvertisement(value){
+        filterAdvertisements(value);
+        sortByDate();
+    }
+
+    function filterAdvertisements(value){
+        if(!allCheckedFilters.includes(value)){
+            allCheckedFilters.push(value);
+        } else {
+            for(i = 0; i < allCheckedFilters.length; i++){
+                if(allCheckedFilters[i] == value){
+                    allCheckedFilters.splice(i, 1);
+                    break;
+                }
+            }
+        }
+    }
+</script>
 
 <?php
     include('footer.php');
