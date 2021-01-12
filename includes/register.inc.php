@@ -53,6 +53,23 @@ if (isset($_POST['signup-submit'])) {
                 exit();
             }
             else {
+
+                $sql = "SELECT emailUser FROM User WHERE emailUser=?";
+                $statement = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($statement, $sql)) {
+                    header("Location: ../register.php?error=sqlerror");
+                    exit();
+                }
+                else {
+                    mysqli_stmt_bind_param($statement, "s", $email);
+                    mysqli_stmt_execute($statement);
+                    mysqli_stmt_store_result($statement);
+                    $resultCheck = mysqli_stmt_num_rows($statement);
+                    if ($resultCheck > 0) {
+                        header("Location: ../register.php?error=emailtaken&mail=".$email);
+                        exit();
+                    }
+            else {
                 $sql = "INSERT INTO User (usernameUser, emailUser, passUser, firstName, lastName, streetName, houseNumber, houseNumberExtra, postalCode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 $statement = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($statement, $sql)) {
@@ -69,6 +86,8 @@ if (isset($_POST['signup-submit'])) {
                     header("Location: ../register.php?signup=success");
                     exit();
                 }
+            }
+        }
             }
         }
     }

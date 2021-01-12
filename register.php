@@ -29,6 +29,9 @@
                 else if ($_GET['error'] == "usertaken") {
                     echo '<div class="registererror"><p>Gebruikersnaam is al in gebruik</p></div>';
                 }
+                else if ($_GET['error'] == "emailtaken") {
+                    echo '<div class="registererror"><p>Emailadres is al in gebruik</p></div>';
+                }
             }
             else if ($_GET['signup'] == "success") {
                 include('PHPMailer/sendmail.php');
