@@ -25,12 +25,55 @@
                 </div>
             </div>
         </div>
+        <div class="filters">
+            <form class="search-filters" action="" method="post">
+                <h2 class="filtertitel">Zoek filters</h2>
+                    <div class="plantsoort">
+                        <label class="filterlabel">Soort plant</label>
+                            <?php
+                            require 'includes/dbh.inc.php';
+
+                            $plantCategory = $_POST['check_list'];
+                            $sql = "SELECT DISTINCT plantCategory FROM Advertisement";
+                            $statement = mysqli_stmt_init($conn);
+                                if (!mysqli_stmt_prepare($statement, $sql)) {
+                                    echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
+                                }
+                                else {
+                                    mysqli_stmt_execute($statement);
+                                    $result = mysqli_stmt_get_result($statement);
+                                        foreach ($result as $row) 
+                                        {
+                                            ?>
+                                            <div class="checkboxplantsoort">
+                                                <label><input type="checkbox" name="check_list[]" class="soort" value="<?php echo $row['plantCategory']; ?>"> <?php echo $row['plantCategory']; ?></label>
+                                            </div>
+                                    <?php
+                                        }
+                                    }
+                            ?>
+                    </div>
+
+                    <div class="filterdatefrom">
+                        <label class="filterlabel">Datum vanaf</label><br>
+                        <input type="date" name="date_from" id="from">
+                    </div>
+                    
+                    <div class="filterdateto">
+                        <label class="filterlabel">Datum tot</label><br>
+                        <input type="date" name="date_to" id="to">
+                    </div>
+
+                    <div class="submitfilters">
+                        <input class="verzenden" type="submit" name="submit-filters">
+                    </div>
+            </form>
+        </div>
 
     </div> 
 
     <div class="img-area">
         <?php 
-        require 'includes/dbh.inc.php';
         include 'distance.php';
 
         if (isset($_SESSION['userId'])) {
@@ -67,6 +110,39 @@
             $sql = "SELECT DISTINCT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE $temp ORDER BY a.idAd DESC";
         } else {
             $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert ORDER BY a.idAd DESC";
+        }
+
+        if(isset($_POST['submit-filters'])){
+            $filterAfstand = $_POST['afstand'];
+            $filterDateFrom = $_POST['date_from'];
+            $filterDateTo = $_POST['date_to'];
+                    
+            unset($sql2);
+
+            $plantCategory = $_POST['check_list'];
+            $test = "('" . implode("','", $_POST['check_list']) . "')";
+
+            if ($plantCategory)  {
+                $sql2[] = " plantCategory IN $test ";
+            }
+            if ($filterDateFrom) {
+                $sql2[] = " postDate >= '$filterDateFrom' ";
+            }
+            if ($filterDateTo) {
+                $sql2[] = " postDate < '$filterDateTo' ";
+            }
+
+            $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert";
+
+            if (!empty($sql2)) {
+                $sql .= ' WHERE ' . implode(' AND ', $sql2) . ' ORDER BY a.idAd DESC ' ;
+            }
+
+            if (empty($sql2)) {
+                $sql .= ' ORDER BY a.idAd DESC ' ;
+            }
+
+            $data = mysqli_query($conn, $sql) or die('error');
         }
         
         $statement = mysqli_stmt_init($conn);
@@ -117,4 +193,3 @@
     include('footer.php');
     include('feedback.php');
 ?>
-

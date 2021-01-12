@@ -506,6 +506,24 @@ nav {
 
 }
 
+/* Search filters */
+
+.filtertitel {
+    text-decoration: underline;
+}
+
+.filterlabel {
+    font-weight: bold;
+}
+
+.verzenden {
+    background-color: #4b9600;
+    margin-top: 1em;
+    color: #fff;
+    border: none;
+    padding: 16px 32px;
+}
+
 
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -584,7 +602,13 @@ nav {
 
     }
 
-
+    .filters {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1em;
+    }
 
     .logo h2 {
 
@@ -894,6 +918,12 @@ nav {
 
     }
 
+    .filters {
+        float: left;
+        margin-left: 10px;
+        margin-top: 9em;
+    }
+
 
 
     .welcome-div p{
@@ -1019,12 +1049,13 @@ nav {
 .plant {
 
     margin: 3em;
+    float: right;
 
     position: relative;
 
     border-bottom: 0.25vw solid var(--clr-groen);
 
-    width: 50vh;
+    width: 45vh;
 
     min-width: 20vh;
 
