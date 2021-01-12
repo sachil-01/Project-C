@@ -25,54 +25,52 @@
                 </div>
             </div>
         </div>
+        <div class="filters">
+            <form class="search-filters" action="" method="post">
+                <h2 class="filtertitel">Zoek filters</h2>
+                    <div class="plantsoort">
+                        <label class="filterlabel">Soort plant</label>
+                            <?php
+                            require 'includes/dbh.inc.php';
+
+                            $plantCategory = $_POST['check_list'];
+                            $sql = "SELECT DISTINCT plantCategory FROM Advertisement";
+                            $statement = mysqli_stmt_init($conn);
+                                if (!mysqli_stmt_prepare($statement, $sql)) {
+                                    echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
+                                }
+                                else {
+                                    mysqli_stmt_execute($statement);
+                                    $result = mysqli_stmt_get_result($statement);
+                                        foreach ($result as $row) 
+                                        {
+                                            ?>
+                                            <div class="checkboxplantsoort">
+                                                <label><input type="checkbox" name="check_list[]" class="soort" value="<?php echo $row['plantCategory']; ?>"> <?php echo $row['plantCategory']; ?></label>
+                                            </div>
+                                    <?php
+                                        }
+                                    }
+                            ?>
+                    </div>
+
+                    <div class="filterdatefrom">
+                        <label class="filterlabel">Datum vanaf</label><br>
+                        <input type="date" name="date_from" id="from">
+                    </div>
+                    
+                    <div class="filterdateto">
+                        <label class="filterlabel">Datum tot</label><br>
+                        <input type="date" name="date_to" id="to">
+                    </div>
+
+                    <div class="submitfilters">
+                        <input class="verzenden" type="submit" name="submit-filters">
+                    </div>
+            </form>
+        </div>
 
     </div> 
-
-    
-        <form class="search-filters" action="" method="post">
-            <div class="filters">
-                <label>Soort</label>
-                    <?php
-                    require 'includes/dbh.inc.php';
-
-                    
-                    $sql = "SELECT DISTINCT plantCategory FROM Advertisement";
-                    $statement = mysqli_stmt_init($conn);
-                        if (!mysqli_stmt_prepare($statement, $sql)) {
-                            echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
-                        }
-                        else {
-                            mysqli_stmt_execute($statement);
-                            $result = mysqli_stmt_get_result($statement);
-                                foreach ($result as $row) 
-                                {
-                                    ?>
-                                    <div class="filterplantsoort">
-                                        <label><input type="checkbox" name="check_list[]" class="soort" value="<?php echo $row['plantCategory']; ?>"> <?php echo $row['plantCategory']; ?></label>
-                                    </div>
-                            <?php
-                                }
-                            }
-                    ?>
-                    </div>
-                </div>
-                </div>
-
-                <div class="filterdatefrom">
-                    <label>Van</label>
-                    <input type="date" name="date_from" id="from">
-                </div>
-                
-                <div class="filterdateto">
-                    <label>Tot</label>
-                    <input type="date" name="date_to" id="to">
-                </div>
-
-                <div class="submitfilters">
-                    <input type="submit" name="submit-filters">
-                </div>
-            </div>
-        </form>
 
     <div class="img-area">
         <?php 
@@ -174,7 +172,6 @@
                                     <div class="description">
                                         <h2>'.$row['plantName'].'</h2>
                                         <br>
-                                        <h2>'.$row['plantCategory'].'</h2>
                                         <h3> Afstand: <span>'.$distance.'</span></h3>
                                         <h3> Datum: <span>'.date("d-m-Y", strtotime($row['postDate'])).'</span></h3>
                                     </div>
