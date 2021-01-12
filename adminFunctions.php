@@ -36,7 +36,7 @@
                 if ($conn->query($sql) === TRUE) {
                     //if user clicks on delete button on blogpost page
                     if($blogpostUser == "blogpostDelete"){
-                        echo "blogpost is verwijderd.";
+                        echo "<div class=\"newaderror\"><p>Blogpost is verwijderd.</p></div>";
                     } else {
                         //check if its a registered user or an admin
                         if($blogpostUser == "adminBlogpost"){
@@ -102,7 +102,7 @@
                 //if user clicks on delete button on advertisement page
                 if($advertisementUser == "advertisementDelete"){
 //                    ### Hier code toevoegen voor mooier uiterlijk en link naar aanbod pagina ###
-                    echo "Advertentie is verwijderd.";
+                    echo "<div class=\"newaderror\"><p>Advertentie is verwijderd.</p></div>";
                 } else {
                     //check if its a registered user or an admin
                     if($advertisementUser == "adminAdvertisement"){
