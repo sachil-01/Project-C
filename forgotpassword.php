@@ -65,7 +65,11 @@
                             else {
                                 //update password in database
                                 mysqli_stmt_execute($statement);
-                                echo "<script type='text/javascript'> document.location = 'loginpagina?success=updatesuccess'; </script>";
+                                if(!isset($_SESSION['userId'])){
+                                    echo "<script type='text/javascript'> document.location = 'loginpagina?success=updatesuccess'; </script>";
+                                } else {
+                                    echo "<script type='text/javascript'> document.location = 'profilepage?success=updatesuccess'; </script>";
+                                }
                             }
                         }
                     }

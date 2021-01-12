@@ -162,6 +162,10 @@
     .userprofile-up-right{
         margin-top: 15px;
     }
+
+    .profile-leftpart-down{
+        height: 25vh;
+    }
 }
 
 /* Login form header */
@@ -467,4 +471,20 @@
 
 .emptyAdOrBlogList{
     text-align: center;
+}
+
+/* reset password link */
+.resetpassword-container{
+    margin: 1%;
+    text-align: center;
+}
+
+.resetpassword{
+    color: #228B22;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.resetpassword:hover{
+    text-decoration-line: underline;
 }

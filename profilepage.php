@@ -96,6 +96,10 @@
             }
             else if ($_GET['update'] == "success") {
                 echo '<div class="profileError"><p>Update is gelukt !</p></div>';
+            } else if (isset($_GET['success'])) {
+                if ($_GET['success'] == "updatesuccess") {
+                    echo '<div class="profileError"><p>Uw wachtwoord is gewijzigd!</p></div>';
+                }
             }
 
             ?>
@@ -165,6 +169,15 @@
                     </td>
                 </tr>
             </table>
+                <?php
+                    include('encrypt_decrypt.php');
+                    // Encrypt email with length of email as key
+                    $key = strlen($emailadres);
+                    $encrypted_txt = encrypt_decrypt('encrypt', $emailadres, $key);
+                    
+                    //link to change password
+                    echo "<div class='resetpassword-container'><a class='resetpassword' href='https://www.roy-van-der-lee.nl/fleurtop/forgotpassword?setpassword=$encrypted_txt&key=$key'>Wachtwoord opnieuw instellen</a></div>";
+                ?>
             <!-- put update button under table -->
                     <div class="profilebox">
                         <button type="submit" name="update-submit">Wijzigingen opslaan</button>
