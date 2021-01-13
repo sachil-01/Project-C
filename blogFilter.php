@@ -3,13 +3,15 @@ require 'includes/dbh.inc.php';
 $category_filter = $_POST["filters"];
 
 
-$number_of_posts = $result->num_rows;
+
 //array with all blogpost Ids
 $allIdPosts = array();
 $sql =  "SELECT * FROM Blogpost b JOIN User u ON b.blogUserId = u.idUser LEFT JOIN BlogImage bi ON b.idPost = bi.idBlog ";
-
-$category_filter = implode("','", $_POST["category"]);
-$sql .= "AND b.blogCategory IN('".$category_filter."') ORDER BY b.idPost DESC";
+if(!empty($category_filter)){
+    $category_filter_sql = implode("','", $category_filter);
+    $sql .= "WHERE b.blogCategory IN('".$category_filter_sql."')";
+}
+$sql .= " ORDER BY b.idPost DESC";
 
 $result = $conn->query($sql);
 
