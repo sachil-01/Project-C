@@ -4,7 +4,6 @@
     require 'includes/dbh.inc.php';
     include 'distance.php';
 ?>
-<script src="adpagina.js"></script>
 
 <head>
     <title>Advertisements</title>
