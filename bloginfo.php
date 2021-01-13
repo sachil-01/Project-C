@@ -28,37 +28,49 @@
                       <a href="editAdOrBlog.php?blogpostId='.$row["idPost"].'"><button class="user-edit-blogpost-btn">Wijzig</button></a>
                       </div>';
             }
-
-            echo'<div class="advWrapper">
-                        <div class="slidertns">';
-                        $resultInner = $conn->query($sql);
-                            while ($row2 = mysqli_fetch_array($resultInner)) {
-                                echo ' <img src="uploads/'.$row2["imgName"].'" alt="">';
-                            }
-                   echo' </div>
-                        <div class="plantInfo">
-                            <div class="plantInfoMargin">
-                                <p>'.date_format(date_create($row["blogDate"]),"d-m-Y").'</p>
-                                <h3>Geupload door:</h3>
-                                <p><a class="userPageRedirection" href="userpage?IdUser='.$row["idUser"].'">'.$row["usernameUser"].'</a></p>
+                    echo '<div class="blogInfo">
+                            <!-- Slideshow container -->
+                            <div class="slideshow-container">';
+                                //  Full-width images with number and caption text
+                                
+                                $resultInner = $conn->query($sql);
+                                $currentImage = 1;
+                                $totalImages = $resultInner->num_rows;
+                                while($row2 = mysqli_fetch_array($resultInner)){
+                                    echo '<div class="mySlides fade">
+                                            <div class="numbertext">'.$currentImage.' / '.$totalImages.'</div>
+                                            <img src="uploads/'.$row2["imgName"].'">
+                                            </div>';
+                                            $currentImage++;
+                                }
+                            
+                            if($totalImages > 1){
+                            echo'
+                                <!-- Next and previous buttons -->
+                                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                                <a class="next" onclick="plusSlides(1)">&#10095;</a>
                             </div>
+                            <br>
+                            
+                            <!-- The dots/circles -->
+                            <div style="text-align:center">';
+                                for($i=1; $i <= $totalImages; $i++)
+                                echo '<span class="dot" onclick="currentSlide('.$i.')"></span>';
+                            };
+                            echo '
+                            </div>
+                            <h2>'.$row["blogCategory"].'</h2>
+                            <h3>'.$row["blogTitle"].'</h3>
+                            <p class="blogInfoDesc">'.$row["blogDesc"].'</p>
+                      
+                            <a href="#" class="blogInfoLink">'.$row["blogLink"].'</a>
+                            <br>
+                            <p class="blogInfoBlogger">Geupload door <a class="userPageRedirection" href="userpage?IdUser='.$row["idUser"].'">'.$row["usernameUser"].'</a> op '.date_format(date_create($row["blogDate"]),"d-m-Y").'</p>
+                            <br>
+                            <h3>Comment sectie</h3>
                         </div>
 
-                        <div class="plantDescription">
-                            <h2>'.$row["blogTitle"].'</h2>
-                            <h3>'.$row["blogCategory"].'</h3>
-                            <h3 class="plantDesc">Beschrijving</h3>
-                            <p>'.$row["blogDesc"].'</p>
-                        </div>
-                        <div class="moreAds">
-                            <h3>Meer van '.$row["usernameUser"].'</h3>
-                            <div class="moreAdsImg">
-                                <img src="uploads/'.$row["imgName"].'" alt="">
-                                <img src="uploads/'.$row["imgName"].'" alt="">
-                                <img src="uploads/'.$row["imgName"].'" alt="">
-                            </div>
-                        </div>
-                    </div>
+
                     <!-- pop up message when user clicks on delete button -->
                     <div id="userDeleteBlogpostPopUp">
                         <div class="blurBackground-success"></div>
@@ -156,6 +168,7 @@
             {
                 //display result after clicking on "delete blogpost"
                 document.getElementById("userDisplayBlogpost").innerHTML = result;
+                document.getElementById("userDisplayBlogpost").style.cssText = "height: 75vh;";
             }
         })
     }
@@ -166,6 +179,36 @@
 
     function userPopUpMessage(chosenOption){
         document.getElementById("userDeleteBlogpostPopUp").style.cssText = "display: none;";
+    }
+
+    // image slider
+    var slideIndex = 1;
+        showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += " active";
     }
 </script>
 
