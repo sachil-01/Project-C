@@ -185,19 +185,17 @@
 
 /* image preview */
 .imagePreviewItem{
-    width: 200px;
+    width: 240px;
     height: 150px;
     object-fit: cover;
-    float: left;
     padding: 5px;
+    float: left;
 }
 
 .imagePreviewGallery{
     border: 2px solid #4A7C00;
-    height: 150px;
-    float: left;
-    overflow: scroll;
-    overflow-x: hidden;
+    height: 155px;
+    overflow-y: scroll;
 }
 
 #imageWarning, #maxImageWarning{

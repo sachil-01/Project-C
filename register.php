@@ -29,6 +29,9 @@
                 else if ($_GET['error'] == "usertaken") {
                     echo '<div class="registererror"><p>Gebruikersnaam is al in gebruik</p></div>';
                 }
+                else if ($_GET['error'] == "emailtaken") {
+                    echo '<div class="registererror"><p>Emailadres is al in gebruik</p></div>';
+                }
             }
             else if ($_GET['signup'] == "success") {
                 include('PHPMailer/sendmail.php');
@@ -54,7 +57,7 @@
                     <input type="text" name="mail" placeholder="E-mail" required>
                     <p>Straatnaam</p>
                     <input type="text" name="straatNaam" placeholder="Straatnaam" required>
-                    <p>Nummer</p>
+                    <p>Huisnummer</p>
                     <input type="number" name="huisNummer" placeholder="Huisnummer" required>
                     <p>Toevoeging</p>
                     <input type="text" name="toevoeging" placeholder="Toevoeging">

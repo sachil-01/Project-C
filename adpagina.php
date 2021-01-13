@@ -1,6 +1,8 @@
 <?php
     session_start();
     include('header.php');
+    require 'includes/dbh.inc.php';
+    include 'distance.php';
 ?>
 
 <head>
@@ -18,21 +20,60 @@
         <div class="searchbar-div">
             <div class="searchbar-margin">
                 <div class="searchbar-main">
-                    <form class="searchbar-main-content" action="" method="post">
-                        <input type="text" class="searchbar-input" name="search-input" onfocus="this.value=''" placeholder="Zoeken...">
-                        <button class="searchbar-button" name="search-submit"><i class="fas fa-search"></i></button>
-                    </form>
+                    <input type="text" id="advertisementSearchbar" class="searchbar-input" name="search-input" onkeyup="sortByDate()" onfocus="this.value=''" placeholder="Zoeken...">
                 </div>
+            </div>
+        </div>
+        <div class="filters">
+            <div class="search-filters">
+                <h2 class="filtertitel">Zoek filters</h2>
+                    <div class="plantsoort">
+                        <label class="filterlabel">Soort plant</label>
+                        <div class="checkboxplantsoort">
+                            <label><input type="checkbox" name="check_list[]" class="soort" value="stekje" onchange="filterThenSortAdvertisement(this.value)">Stekje</label><br>
+                            <label><input type="checkbox" name="check_list[]" class="soort" value="kiemplant" onchange="filterThenSortAdvertisement(this.value)">Kiemplant</label><br>
+                            <label><input type="checkbox" name="check_list[]" class="soort" value="zaad" onchange="filterThenSortAdvertisement(this.value)">Zaad</label><br>
+                            <label><input type="checkbox" name="check_list[]" class="soort" value="bol" onchange="filterThenSortAdvertisement(this.value)">Bol</label><br>
+                            <label><input type="checkbox" name="check_list[]" class="soort" value="none" onchange="filterThenSortAdvertisement(this.value)">Weet ik niet</label><br>
+                        </div>
+                    </div>
+
+                    <div class="filterdatefrom">
+                        <label class="filterlabel">Datum vanaf</label><br>
+                        <input type="date" name="date_from" id="from" onchange="sortByDate()">
+                    </div>
+                    
+                    <div class="filterdateto">
+                        <label class="filterlabel">Datum tot en met</label><br>
+                        <input type="date" name="date_to" id="to" onchange="sortByDate()">
+                    </div>
+
+                    <?php
+                        if(isset($_SESSION['userId'])){
+                    ?>
+                        <div class="filterdistance">
+                            <label class="filterlabel">Afstand tot en met</label><br>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <input type="range" min="1" step="0.1" class="distanceSlider" id="selectedDistance" onchange="getDistanceThenSortAdvertisement(this.value)">
+                                    </td>
+                                    <td>
+                                        <p id="distanceInput"></p>
+                                    </td>
+                                </tr>   
+                            </table>
+                        </div>
+                    <?php
+                        }
+                    ?>
             </div>
         </div>
 
     </div> 
 
-    <div class="img-area">
+    <div class="img-area" id="advertisementGallery">
         <?php 
-        require 'includes/dbh.inc.php';
-        include 'distance.php';
-
         if (isset($_SESSION['userId'])) {
             // Retrieve postal code from current user
             $currentUserId = $_SESSION['userId'];
@@ -50,28 +91,13 @@
                 }
             }
         }
-
-        if(isset($_POST['search-submit'])){
-            $searchvalue = $_POST['search-input'];
-            //split search input by every space
-            $searchpieces = explode(" ", $searchvalue);
-            //for loop to create "a.plantName LIKE '%$array[0]%'" for every array item
-            $temp = "a.plantName LIKE ";    
-            for ($i = 0; $i < count($searchpieces); $i++){
-                if($i == count($searchpieces) - 1){
-                    $temp = $temp . "'%".$searchpieces[$i]."%'";
-                } else {
-                    $temp = $temp . "'%".$searchpieces[$i]."%' OR a.plantName LIKE ";
-                }
-            }
-            $sql = "SELECT DISTINCT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE $temp ORDER BY a.idAd DESC";
-        } else {
-            $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert ORDER BY a.idAd DESC";
-        }
+        
+        $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert ORDER BY a.idAd DESC";
         
         $statement = mysqli_stmt_init($conn);
         //array with all advertisement Ids
         $allIdAdvertisements = array();
+        $maxDistance = 0;
         if (!mysqli_stmt_prepare($statement, $sql)) {
             header("Location: adpagina.php?error=sqlerror");
             echo '<div class="newposterror"><p>Er is iets fout gegaan (sql error).</p></div>';
@@ -85,6 +111,10 @@
                     if(!in_array($row['idAd'], $allIdAdvertisements)){
                         if (isset($_SESSION['userId'])) {
                             $distance = getDistance($row['postalCode'], $currentUserPostalCode);
+                            $getNumberFromDistance = explode(" ", $distance);
+                            if($getNumberFromDistance[0] > $maxDistance){
+                                $maxDistance = $getNumberFromDistance[0];
+                            }
                         } else {
                             $distance = "-- km";
                         }
@@ -113,8 +143,63 @@
     </div>
 </body>
 
+<script>
+    var allCheckedFilters = [];
+
+    document.getElementById('distanceInput').innerHTML = <?php echo $maxDistance; ?>;
+    document.getElementById('selectedDistance').value = <?php echo $maxDistance; ?>;
+    document.getElementById('selectedDistance').max = <?php echo $maxDistance; ?>;
+
+    function sortByDate(){
+        selectedFromDate = document.getElementById('from').value;
+        selectedToDate = document.getElementById('to').value;
+        searchValue = document.getElementById('advertisementSearchbar').value;
+        distanceHTML = document.getElementById('distanceInput');
+        //check if user is logged in else no max distance is set
+        if(distanceHTML){
+            maxDistanceValue = document.getElementById('distanceInput').innerHTML;
+        } else {
+            maxDistanceValue = 0;
+        }
+
+        $.ajax({
+            url: "searchAndFilterAdvertisements.php",
+            type: 'post',
+            data: {fromDate: selectedFromDate, toDate: selectedToDate, filters: allCheckedFilters, searchInput: searchValue, selectedDistance: maxDistanceValue},
+            success: function(result)
+            {
+                //display result after clicking on "delete blogpost"
+                document.getElementById("advertisementGallery").innerHTML = result;
+            }
+        })
+    }
+
+    function getDistanceThenSortAdvertisement(selectedDistance){
+        document.getElementById('distanceInput').innerHTML = selectedDistance;
+        sortByDate();
+    }
+
+    //add selected filter options to array then search for the correct advertisements
+    function filterThenSortAdvertisement(value){
+        filterAdvertisements(value);
+        sortByDate();
+    }
+
+    function filterAdvertisements(value){
+        if(!allCheckedFilters.includes(value)){
+            allCheckedFilters.push(value);
+        } else {
+            for(i = 0; i < allCheckedFilters.length; i++){
+                if(allCheckedFilters[i] == value){
+                    allCheckedFilters.splice(i, 1);
+                    break;
+                }
+            }
+        }
+    }
+</script>
+
 <?php
     include('footer.php');
     include('feedback.php');
 ?>
-

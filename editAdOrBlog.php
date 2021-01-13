@@ -394,7 +394,7 @@
                 <?php
                     } else {
                         ?>
-                        <p id="emptyImageGallery" class="uploaddescription" style="color: red;">Uw advertentie heeft 0 afbeeldingen. Om uw advertentie te kunnen updaten moet u minimaal 1 foto selecteren!</p>
+                        <p id="emptyImageGallery" class="uploaddescription" style="color: red;">Uw advertentie heeft 0 afbeeldingen. Zonder afbeeldingen zal uw advertentie niet op de aanbodpagina verschijnen.</p>
                         <?php
                     }
                 ?>

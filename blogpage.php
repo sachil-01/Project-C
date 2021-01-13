@@ -56,7 +56,7 @@
                                     <div class="blogDescription">
                                         <h2>'.$row["blogTitle"].'</h2>
                                         <h3>'.$row["firstName"].'</h3>
-                                        <p>'.$row["blogDesc"].'</p>
+                                        <p class="shortBlogDesc">'.$row["blogDesc"].'</p>
                                         <h4 class="alignleft">'.date_format(date_create($row["blogDate"]),"d-m-Y").'</h4>
                                         <h4 class="alignright">'.$row["blogCategory"].'</h4>
                                     </div>
