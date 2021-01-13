@@ -1,5 +1,6 @@
 <?php
-    include('header.php')
+    include('header.php');
+    require 'includes/dbh.inc.php';
 ?>
 
 <head>
@@ -23,15 +24,14 @@
 
                     // Decrypt username with length of username as key
                     $decrypted_txt = encrypt_decrypt('decrypt', $accountverification, $key);
-                    
-                    //change 2nd and 3rd parameter to 'root' when working local!
-                    $mysqli = mysqli_connect('localhost', 'royvan1q_user_dekas', 'Bossex123!', 'royvan1q_websitedekas');
-                
-                    $resultSet = $mysqli->query("SELECT verified, usernameUser FROM User WHERE verified = 0 AND usernameUser = '$decrypted_txt' LIMIT 1");
+
+                    $sql = "SELECT verified, usernameUser FROM User WHERE verified = 0 AND usernameUser = '$decrypted_txt' LIMIT 1";
+                    $resultSet = mysqli_query($conn, $sql);
 
                     if($resultSet->num_rows == 1){
                         //validate the email
-                        $update = $mysqli->query("UPDATE User SET verified = 1 WHERE usernameUser = '$decrypted_txt' LIMIT 1");
+                        $sql = "UPDATE User SET verified = 1 WHERE usernameUser = '$decrypted_txt'";
+                        $update = mysqli_query($conn, $sql);
 
                         if($update){
                             echo '<div class="oops">
