@@ -196,10 +196,6 @@
         width: 30%;
         margin-left: 1%;
     }
-
-    .comment-section{
-        width: 50%;
-    }
 }
 
 @media screen and (max-width:1100px){
@@ -233,10 +229,6 @@
         margin-bottom: 5%;
     }
 
-    .comment-section{
-        width: 80%;
-    }
-
     /* dropdown select menu for categories */
     .category-select select{
         background: #4b9600;
@@ -266,6 +258,7 @@
 .comment-section{
     margin-left: auto;
     margin-right: auto;
+    width: 60%;
 }
 
 .comment-bubble{
@@ -318,15 +311,10 @@
 .userPageRedirection{
     text-decoration: none;
     color: var(--clr-dark-green);
-    border: 1px solid transparent;
-    padding: 2%;
-    border-radius: 1vw;
 }
 
 .userPageRedirection:hover{
-    border-color: var(--clr-dark-green);
-    background-color: var(--clr-dark-green);
-    color: white;
+    border-bottom: 1px solid var(--clr-dark-green);
 }
 
 /* Blogpost page edit and delete button */
@@ -373,6 +361,136 @@
     display: none;
 }
 
-#userDisplayBlogpost{
-    height: 75vh;
+/* bloginfo layout */
+
+.blogInfo{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
+    border-bottom: 3px solid var(--clr-dark-green);
 }
+
+.blogInfo h2{
+    font-size: var(--fs-h3);
+    color: gray;
+}
+
+.blogInfo h3{
+    font-size: var(--fs-h2);
+}
+
+.blogInfo h2, .blogInfo h3{
+    text-align: center;
+    margin: 2%;
+}
+
+.blogInfoDesc, .blogInfoBlogger{
+    text-align: justify;
+    color: grey;
+    font-weight: bold;
+}
+
+.blogInfoBlogger{
+    font-style: italic;
+}
+
+.blogInfoLink{
+    color: grey;
+    font-weight: bold;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+.blogInfoLink:hover{
+    color: var(--clr-dark-green);
+    border-bottom: 1px solid var(--clr-dark-green);
+}
+/* bloginfo image slider */
+
+/* Slideshow container */
+.slideshow-container {
+    position: relative;
+    margin: auto;
+  }
+
+.slideshow-container img{
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+}
+  
+  /* Hide the images by default */
+  .mySlides {
+    display: none;
+  }
+  
+  /* Next & previous buttons */
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+  }
+  
+  /* Position the "next button" to the right */
+  .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+  
+  /* On hover, add a black background color with a little bit see-through */
+  .prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+  }
+  
+  /* Number text (1/3 etc) */
+  .numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+  }
+  
+  /* The dots/bullets/indicators */
+  .dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+  
+  .active, .dot:hover {
+    background-color: #717171;
+  }
+  
+  /* Fading animation */
+  .fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+  }
+  
+  @-webkit-keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+  }
+  
+  @keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+  }
