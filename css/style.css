@@ -2186,6 +2186,9 @@ button.tns-nav-active {
         align-items: center;
         margin-top: 1em;
     }
+    .grid-3-col {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width:900px){
