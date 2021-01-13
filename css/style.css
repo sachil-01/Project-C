@@ -507,11 +507,6 @@ nav {
 }
 
 /* Search filters */
-
-.filtertitel {
-    text-decoration: underline;
-}
-
 .filterlabel {
     font-weight: bold;
 }
@@ -600,14 +595,6 @@ nav {
 
         overflow-x: hidden;
 
-    }
-
-    .filters {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-top: 1em;
     }
 
     .logo h2 {
@@ -728,6 +715,10 @@ nav {
 
         border-color: #1b701b;
 
+    }
+    
+    .gallery h1{
+        font-size: var(--fs-h2);
     }
 
 
@@ -918,14 +909,6 @@ nav {
 
     }
 
-    .filters {
-        float: left;
-        margin-left: 10px;
-        margin-top: 9em;
-    }
-
-
-
     .welcome-div p{
 
         font-size: 1vw;
@@ -964,6 +947,10 @@ nav {
 
         border: 1vw solid  #1b701b;
 
+    }
+
+    .gallery h1{
+        font-size: 3vw;
     }
 
 
@@ -1028,7 +1015,7 @@ nav {
 
     justify-content: center;
 
-    margin-top: 5%;
+    margin-top: 2%;
 
 }
 
@@ -1160,8 +1147,6 @@ nav {
 
 
 .gallery h1{
-
-    font-size: 3vw;
 
     text-align: center;
 
@@ -2144,4 +2129,86 @@ button.tns-nav-active {
 
     }
 
+}
+
+/* filter layout */
+.filterdatefrom, .filterdateto, .filterdistance, .plantsoort, .filtertitel{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.filterdatefrom input, .filterdateto input{
+    outline: none;
+}
+
+.filterdistance td{
+    margin: 0;
+}
+
+
+@media screen and (min-width:1500px){
+    .filters {
+        float: left;
+        padding-left: 10px;
+    }
+
+    .filterdatefrom, .filterdateto, .filterdistance, .plantsoort, .filtertitel{
+        margin-bottom: 5%;
+    }
+
+    .filtertitel{
+        margin-top: 40%;
+    }
+
+}
+
+
+@media screen and (max-width:1500px){
+    .search-filters{
+        width: 80%;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    .filtertitel{
+        text-align: center;
+    }
+
+    .filterdatefrom, .filterdateto, .filterdistance, .plantsoort{
+        float: left;
+        margin-left: 5%;
+    }
+
+    .filters {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1em;
+    }
+}
+
+@media screen and (max-width:900px){
+    .search-filters{
+        width: 80%;
+        padding-left: 10%;
+        padding-right: 10%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .filtertitel{
+        text-align: center;
+        font-size: 30px;
+    }
+
+    .filters {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1em;
+    }
 }

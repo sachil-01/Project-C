@@ -30,11 +30,11 @@
                     <div class="plantsoort">
                         <label class="filterlabel">Soort plant</label>
                         <div class="checkboxplantsoort">
-                            <label><input type="checkbox" name="check_list[]" class="soort" value="stekje" onchange="filterThenSortAdvertisement(this.value)">Stekje</label>
-                            <label><input type="checkbox" name="check_list[]" class="soort" value="kiemplant" onchange="filterThenSortAdvertisement(this.value)">Kiemplant</label>
-                            <label><input type="checkbox" name="check_list[]" class="soort" value="zaad" onchange="filterThenSortAdvertisement(this.value)">Zaad</label>
-                            <label><input type="checkbox" name="check_list[]" class="soort" value="bol" onchange="filterThenSortAdvertisement(this.value)">Bol</label>
-                            <label><input type="checkbox" name="check_list[]" class="soort" value="none" onchange="filterThenSortAdvertisement(this.value)">Weet ik niet</label>
+                            <label><input type="checkbox" name="check_list[]" class="soort" value="stekje" onchange="filterThenSortAdvertisement(this.value)">Stekje</label><br>
+                            <label><input type="checkbox" name="check_list[]" class="soort" value="kiemplant" onchange="filterThenSortAdvertisement(this.value)">Kiemplant</label><br>
+                            <label><input type="checkbox" name="check_list[]" class="soort" value="zaad" onchange="filterThenSortAdvertisement(this.value)">Zaad</label><br>
+                            <label><input type="checkbox" name="check_list[]" class="soort" value="bol" onchange="filterThenSortAdvertisement(this.value)">Bol</label><br>
+                            <label><input type="checkbox" name="check_list[]" class="soort" value="none" onchange="filterThenSortAdvertisement(this.value)">Weet ik niet</label><br>
                         </div>
                     </div>
 
@@ -52,9 +52,17 @@
                         if(isset($_SESSION['userId'])){
                     ?>
                         <div class="filterdistance">
-                            <label class="filterlabel">Afstand tot en met</label><br><br>
-                            <input type="range" min="1" step="0.1" class="distanceSlider" id="selectedDistance" onchange="getDistanceThenSortAdvertisement(this.value)">
-                            <p id="distanceInput"></p>
+                            <label class="filterlabel">Afstand tot en met</label><br>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <input type="range" min="1" step="0.1" class="distanceSlider" id="selectedDistance" onchange="getDistanceThenSortAdvertisement(this.value)">
+                                    </td>
+                                    <td>
+                                        <p id="distanceInput"></p>
+                                    </td>
+                                </tr>   
+                            </table>
                         </div>
                     <?php
                         }
