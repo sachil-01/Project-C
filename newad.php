@@ -31,10 +31,18 @@ include('header.php');
             if($imageFormats && $imageSize){
                 if($fileCount >= 1 && $fileCount <= 3){
                     $plantname = $_POST["pname"];
+                    str_replace($plantname,'<', '');
+                    str_replace($plantname,'>', '');
                     $plantlatinname = $_POST["plname"];
+                    str_replace($plantlatinname,'<', '');
+                    str_replace($plantlatinname,'<', '');
                     $plantsoort = $_POST["psoort"];
+
                     $plantcategory = $_POST["type"];
                     $desc = $_POST["desc"];
+                    str_replace($desc,'<', '');
+                    str_replace($desc,'<', '');
+
                     $water = $_POST["water"];
                     $light = $_POST["licht"];
                     $userId = $_SESSION['userId'];
@@ -121,7 +129,7 @@ include('header.php');
                 </select><br><br>
 
                 <label>Type <label style="color: red;">*</label></label><br>
-                <input type="radio" id="stekje" name="type" value="stekje">
+                <input type="radio" id="stekje" name="type" value="stekje" required>
                 <label for="stekje">Stekje</label><br>
                 <input type="radio" id="zaad" name="type" value="zaad">
                 <label for="zaad">Zaad</label><br>
@@ -137,7 +145,7 @@ include('header.php');
                 
                 <label>Hoeveelheid water nodig <label style="color: red;">*</label></label><br>
                 <label>
-                    <input style="position: absolute; opacity: 0; width: 0; height: 0; cursor: pointer;" type="radio" id="weinig" name="water" value="1">
+                    <input style="position: absolute; opacity: 0; width: 0; height: 0; cursor: pointer;" type="radio" id="weinig" name="water" value="1" required>
                     <img style="cursor: pointer;" src="images/weinigwater.png">
                 </label>
                 
@@ -159,7 +167,7 @@ include('header.php');
                 
                 <label>Hoeveelheid licht nodig <label style="color: red;">*</label></label><br>
                 <label>
-                    <input style="position: absolute; opacity: 0; width: 0; height: 0; cursor: pointer;" type="radio" id="weinig" name="licht" value="1">
+                    <input style="position: absolute; opacity: 0; width: 0; height: 0; cursor: pointer;" type="radio" id="weinig" name="licht" value="1" required>
                     <img style="cursor: pointer;" src="images/weiniglicht.png">
                 </label>
                 
@@ -187,7 +195,7 @@ include('header.php');
                     <button type="button" id="imagePreviewNext" onclick="previewCurrentImage('next')" class="newAdButtons"><span>Volgende afbeelding</span></button>
                     <br><br><br>
                 </div>
-                <label class="uploaddescription">Selecteer een foto (max 1MB)</label><br>
+                <label class="uploaddescription">Selecteer een foto (max 4MB)</label><br>
                 <input type="file" name="file[]" id="file" accept=".png, .jpg, .jpeg, .gif" onchange="fileFunctions()" multiple><br><br>
                 
                 <label><label style="color: red;">*</label> = verplicht</label><br><br>

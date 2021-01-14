@@ -97,10 +97,19 @@
         }
 
         if($imageFormats && $imageSize){
-            $plantName = $_POST["pname"];
-            $plantLatinName = $_POST["plname"];
-            //nl2br() function saves breaklines of user
+            $plantname = $_POST["pname"];
+            str_replace($plantname,'<', '');
+            str_replace($plantname,'>', '');
+            $plantlatinname = $_POST["plname"];
+            str_replace($plantlatinname,'<', '');
+            str_replace($plantlatinname,'<', '');
+            $plantsoort = $_POST["psoort"];
+
+            $plantcategory = $_POST["type"];
             $plantDesc = nl2br($_POST["desc"]);
+            str_replace($plantDesc,'<', '');
+            str_replace($plantDesc,'<', '');
+
             $plantCategory = $_POST['type'];
             $advertisementId = $_GET['advertisementId'];
             $waterManage = $_POST['water'];
