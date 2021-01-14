@@ -6,6 +6,7 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
     <link rel="stylesheet" type="text/css" href="css\BlogStyle.css">
+    <link rel="stylesheet" type="text/css" href="css\NewAdStyle.css">
 </head>
 
 <body>
@@ -332,7 +333,7 @@
 </body>
 
 <script>
-    //blogpostId is the id of the blogpost stored in the button value
+    //advertisementId is the id of the advertisement stored in the button value
     function userDeleteAdvertisement(advertisementId, advertisementUser){
         $.ajax({
             url: "adminFunctions.php",

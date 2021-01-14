@@ -320,8 +320,6 @@ nav {
 
     text-decoration: none;
 
-    z-index: 99;
-
     content: '';
 
     width: 40px;
@@ -2185,6 +2183,9 @@ button.tns-nav-active {
         justify-content: center;
         align-items: center;
         margin-top: 1em;
+    }
+    .grid-3-col {
+        width: 100%;
     }
 }
 

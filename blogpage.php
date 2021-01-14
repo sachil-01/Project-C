@@ -5,41 +5,44 @@
 <head>
     <title>Blogposts</title>
     <link rel="stylesheet" type="text/css" href="css\BlogStyle.css">
+    <link rel="stylesheet" type="text/css" href="css\style.css">
 </head>
 
 <body>
     <div class="blogwrapper">
         <div class="blogheader">
             <h1>Blogposts</h1>
-            <div class="category-select">
-                <select>
-                    <option>Alle</option>
-                    <option>Verzorging</option>
-                    <option>Speciale evenementen</option>
-                    <option>Vieringen en feestdagen</option>
-                </select>
-            </div>
+<!--            <div class="category-select">-->
+<!--                <select>-->
+<!--                    <option>Alle</option>-->
+<!--                    <option>Verzorging</option>-->
+<!--                    <option>Speciale evenementen</option>-->
+<!--                    <option>Vieringen en feestdagen</option>-->
+<!--                </select>-->
+<!--            </div>-->
             <form action="newpost.php" method="post">
                 <button class="submit" name="add-post"><i class="fas fa-plus"></i> Upload nieuwe blogpost</button>
             </form>  
         </div>
         <div class="blogcontainer">
-            <div class="blogcategories">
-                    <h2>Categorieën</h2>
-                    <li><a href="#">Alle</a></li>
-                    <li><a href="#">Verzorging</a></li>
-                    <li><a href="#">Speciale evenementen</a></li>
-                    <li><a href="#">Vieringen en feestdagen</a></li>
+            <div class="filters" style="margin-bottom: 5%">
+                <h2 style="margin-bottom: 2%">Categorieën</h2>
+                <div class="checkboxplantsoort">
+                    <label><input type="checkbox" name="cate[]" value="verzorging" onchange="filterBlogposts(this.value)">Verzorging</label><br>
+                    <label><input type="checkbox" name="cate[]" value="speciale evenementen" onchange="filterBlogposts(this.value)">Speciale evenementen</label><br>
+                    <label><input type="checkbox" name="cate[]" value="vieringen en feestdagen" onchange="filterBlogposts(this.value)">Vieringen en feestdagen</label><br>
+                </div>
             </div>
-            <div class="grid-3-col">
+            <div class="grid-3-col" id="blogpostGallery">
                 <?php
                 require 'includes/dbh.inc.php';
 
                 $sql = "SELECT * FROM Blogpost b JOIN User u ON b.blogUserId = u.idUser LEFT JOIN BlogImage bi ON b.idPost = bi.idBlog ORDER BY b.idPost DESC";
-                $result = $conn->query($sql);
+
                 $number_of_posts = $result->num_rows;
                 //array with all blogpost Ids
                 $allIdPosts = array();
+                $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
                     // output data of each row
                     while ($row = $result->fetch_assoc()) {
@@ -72,7 +75,30 @@
         </div>
     </div>
 </body>
-
+<script>
+    var allCheckedFilters = [];
+    function filterBlogposts(value) {
+        if(!allCheckedFilters.includes(value)){
+            allCheckedFilters.push(value);
+        } else {
+            for(i = 0; i < allCheckedFilters.length; i++) {
+                if (allCheckedFilters[i] == value) {
+                    allCheckedFilters.splice(i, 1);
+                    break;
+                }
+            }
+        }
+        $.ajax({
+            url: "blogFilter.php",
+            type: 'post',
+            data: { filters: allCheckedFilters},
+            success: function(result)
+            {
+                document.getElementById("blogpostGallery").innerHTML = result;
+            }
+        })
+    }
+</script>
 <?php 
     include('footer.php');
     include('feedback.php');
