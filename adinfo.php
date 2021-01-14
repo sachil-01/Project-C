@@ -15,7 +15,7 @@
             require 'includes/dbh.inc.php';
 
             $id = $_GET['idAd'];
-        
+
             $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser LEFT JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE a.idAd = '$id'";
             $result = mysqli_query($conn, $sql);
 
@@ -42,14 +42,16 @@
                             echo' </div>
                                 <div class="plantInfo">
                                     <div class="plantInfoMargin">';
-                                    if (isset($_SESSION['userId'])) {
-                                    
-                                        echo'
-                                        <a class="plantInner" href="mailto:'.$row["emailUser"].'?subject=Fleurt op '.$row["plantName"].' advertentie">
-                                        <button class="plantMsg">Bericht sturen</button>
-                                        </a>';
-                                    }
-                                    echo'
+                                        if(isset($_SESSION['userId'])){
+                                            if($_SESSION['userId'] != $row['userId']){
+                                                echo'
+                                                    <a class="plantInner" href="mailto:'.$row["emailUser"].'?subject=Fleurt op '.$row["plantName"].' advertentie">
+                                                    <button class="plantMsg">Bericht sturen</button>
+                                                    </a>';
+                                            }
+                                        }
+
+                                    echo '
                                         <h3 class="plantInner">Licht:</h3>';
 
                                         $light = $row["lightPattern"] * 2;
