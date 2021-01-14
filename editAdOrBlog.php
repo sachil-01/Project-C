@@ -24,7 +24,7 @@
             if(!in_array(strtolower(pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION)), $allowed)){
                 $imageFormats = false;
                 break;
-            } else if ($_FILES['file']['size'][$i] > 1*1048576){ //1*1048576 == 1mb
+            } else if ($_FILES['file']['size'][$i] > 4*1048576){ //4*1048576 == 4mb
                 $imageSize = false;
                 break;
             }
@@ -76,7 +76,7 @@
         } else if($imageFormats == false){
             echo '<div class="newposterror"><p>Alleen "jpg", "png", "gif" en "jpeg" bestanden zijn toegestaan!</p></div>';
         } else if($imageSize == false){
-            echo '<div class="newposterror"><p>Uw afbeelding mag maar maximaal 1mb zijn!</p></div>';
+            echo '<div class="newposterror"><p>Uw afbeelding mag maar maximaal 4mb zijn!</p></div>';
         }
     } else if(isset($_POST['ad-update'])){
         require 'includes/dbh.inc.php';
@@ -90,7 +90,7 @@
             if(!in_array(strtolower(pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION)), $allowed)){
                 $imageFormats = false;
                 break;
-            } else if ($_FILES['file']['size'][$i] > 1*1048576){ //1*1048576 == 1mb
+            } else if ($_FILES['file']['size'][$i] > 4*1048576){ //4*1048576 == 4mb
                 $imageSize = false;
                 break;
             }
@@ -145,7 +145,7 @@
         } else if($imageFormats == false){
             echo '<div class="newaderror"><p>Alleen "jpg", "png", "gif" en "jpeg" bestanden zijn toegestaan!</p></div>';
         } else if($imageSize == false){
-            echo '<div class="newaderror"><p>Uw afbeelding mag maar maximaal 1mb zijn!</p></div>';
+            echo '<div class="newaderror"><p>Uw afbeelding mag maar maximaal 4mb zijn!</p></div>';
         } else if($fileCount == 1){
             echo '<div class="newaderror"><p>U moet minimaal 1 foto uploaden! Er is een maximum van 3 foto\'s toegestaan.</p></div>';
         }
@@ -235,7 +235,7 @@
                     <br>
                     <!-- display image after selecting -->
                     <div id="imagePreviewGallery" class="imagePreviewGallery"></div>
-                    <label class="uploaddescription">Selecteer een foto (max 1MB)</label><br>
+                    <label class="uploaddescription">Selecteer een foto (max 4MB)</label><br>
                     <input type="file" name="file[]" id="file" accept=".png, .jpg, .jpeg, .gif" onchange="createImgTag()" multiple><br><br>
 
                     <label>URL toevoegen</label><br>
@@ -401,7 +401,7 @@
                 <br>
                 <!-- display image after selecting -->
                 <div id="imagePreviewGallery" class="imagePreviewGallery"></div>
-                <label class="uploaddescription">Selecteer een foto (max 1MB)</label><br>
+                <label class="uploaddescription">Selecteer een foto (max 4MB)</label><br>
                 <input type="file" name="file[]" id="file" accept=".png, .jpg, .jpeg, .gif" onchange="fileFunctions()" multiple><br><br>
                 
                 <label><label style="color: red;">*</label> = verplicht</label><br><br>

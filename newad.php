@@ -22,7 +22,7 @@ include('header.php');
                 if(!in_array(strtolower(pathinfo($_FILES['file']['name'][$i], PATHINFO_EXTENSION)), $allowed)){
                     $imageFormats = false;
                     break;
-                } else if ($_FILES['file']['size'][$i] > 1*1048576){ //1*1048576 == 1mb
+                } else if ($_FILES['file']['size'][$i] > 4*1048576){ //4*1048576 == 4mb
                     $imageSize = false;
                     break;
                 }
@@ -31,10 +31,20 @@ include('header.php');
             if($imageFormats && $imageSize){
                 if($fileCount >= 1 && $fileCount <= 3){
                     $plantname = $_POST["pname"];
+                    if($plantname != strip_tags($plantname) or strpos($plantname, "<style>") or strpos($plantname, "<script>")) {
+                        $plantname = strip_tags($plantname);
+                    }
                     $plantlatinname = $_POST["plname"];
+                    if($plantlatinname != strip_tags($plantlatinname) or strpos($plantlatinname, "<style>") or strpos($plantlatinname, "<script>")) {
+                        $plantlatinname = strip_tags($plantlatinname);
+                    }
                     $plantsoort = $_POST["psoort"];
+
                     $plantcategory = $_POST["type"];
                     $desc = $_POST["desc"];
+                    if($desc != strip_tags($desc) or strpos($desc, "<style>") or strpos($desc, "<script>")) {
+                        $desc = strip_tags($desc);
+                    }
                     $water = $_POST["water"];
                     $light = $_POST["licht"];
                     $userId = $_SESSION['userId'];
@@ -97,7 +107,7 @@ include('header.php');
             } else if($imageFormats == false){
                 echo '<div class="newaderror"><p>Alleen "jpg", "png", "gif" en "jpeg" bestanden zijn toegestaan!</p></div>';
             } else if($imageSize == false){
-                echo '<div class="newaderror"><p>Uw afbeelding mag maar maximaal 1mb zijn!</p></div>';
+                echo '<div class="newaderror"><p>Uw afbeelding mag maar maximaal 4mb zijn!</p></div>';
             }
         }
         ?>
@@ -121,7 +131,7 @@ include('header.php');
                 </select><br><br>
 
                 <label>Type <label style="color: red;">*</label></label><br>
-                <input type="radio" id="stekje" name="type" value="stekje">
+                <input type="radio" id="stekje" name="type" value="stekje" required>
                 <label for="stekje">Stekje</label><br>
                 <input type="radio" id="zaad" name="type" value="zaad">
                 <label for="zaad">Zaad</label><br>
@@ -137,7 +147,7 @@ include('header.php');
                 
                 <label>Hoeveelheid water nodig <label style="color: red;">*</label></label><br>
                 <label>
-                    <input style="position: absolute; opacity: 0; width: 0; height: 0; cursor: pointer;" type="radio" id="weinig" name="water" value="1">
+                    <input style="position: absolute; opacity: 0; width: 0; height: 0; cursor: pointer;" type="radio" id="weinig" name="water" value="1" required>
                     <img style="cursor: pointer;" src="images/weinigwater.png">
                 </label>
                 
@@ -159,7 +169,7 @@ include('header.php');
                 
                 <label>Hoeveelheid licht nodig <label style="color: red;">*</label></label><br>
                 <label>
-                    <input style="position: absolute; opacity: 0; width: 0; height: 0; cursor: pointer;" type="radio" id="weinig" name="licht" value="1">
+                    <input style="position: absolute; opacity: 0; width: 0; height: 0; cursor: pointer;" type="radio" id="weinig" name="licht" value="1" required>
                     <img style="cursor: pointer;" src="images/weiniglicht.png">
                 </label>
                 
@@ -187,7 +197,7 @@ include('header.php');
                     <button type="button" id="imagePreviewNext" onclick="previewCurrentImage('next')" class="newAdButtons"><span>Volgende afbeelding</span></button>
                     <br><br><br>
                 </div>
-                <label class="uploaddescription">Selecteer een foto (max 1MB)</label><br>
+                <label class="uploaddescription">Selecteer een foto (max 4MB)</label><br>
                 <input type="file" name="file[]" id="file" accept=".png, .jpg, .jpeg, .gif" onchange="fileFunctions()" multiple><br><br>
                 
                 <label><label style="color: red;">*</label> = verplicht</label><br><br>
