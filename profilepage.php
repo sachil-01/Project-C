@@ -154,15 +154,19 @@
                             <p>E-mail</p>
                             <input type="text" name="mail" value="<?php echo $emailadres; ?>" required>
                             <p>Voornaam</p>
-                            <input type="text" name="firstName" value="<?php echo $voornaam; ?>" required>
+                            <input type="text" name="firstName" value="<?php echo $voornaam; ?>" required oninvalid="this.setCustomValidity('Alleen alfabetische letters zijn toegestaan')"
+       oninput="this.setCustomValidity('')" pattern="[A-Za-z]{1,}">
                             <p>Achternaam</p>
-                            <input type="text" name="lastName" value="<?php echo $achternaam; ?>" required>
+                            <input type="text" name="lastName" value="<?php echo $achternaam; ?>" required oninvalid="this.setCustomValidity('Alleen alfabetische letters zijn toegestaan')"
+       oninput="this.setCustomValidity('')" pattern="[A-Za-z]{1,}">
                             <p>Straatnaam</p>
-                            <input type="text" name="straatNaam" value="<?php echo $straat; ?>" required>
+                            <input type="text" name="straatNaam" value="<?php echo $straat; ?>" required oninvalid="this.setCustomValidity('Alleen alfabetische letters zijn toegestaan')"
+       oninput="this.setCustomValidity('')" pattern="[A-Za-z]{1,}">
                             <p>Huisnummer</p>
-                            <input type="number" name="huisNummer" value="<?php echo $huisnummer; ?>" required>
+                            <input type="number" name="huisNummer" value="<?php echo $huisnummer; ?>" required min="1" max="1000">
                             <p>Toevoeging</p>
-                            <input type="text" name="toevoeging" value="<?php echo $toevoeging; ?>">
+                            <input type="text" name="toevoeging" value="<?php echo $toevoeging; ?>" pattern="[A-Za-z]{1,}" oninvalid="this.setCustomValidity('Alleen alfabetische letters zijn toegestaan')"
+       oninput="this.setCustomValidity('')" pattern="[A-Za-z]{1,}">
                             <p>Postcode</p>
                             <input type="text" name="postcode" value="<?php echo $postcode; ?>" required>
                         </div>
