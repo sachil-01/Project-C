@@ -98,17 +98,14 @@
 
         if($imageFormats && $imageSize){
             $plantname = $_POST["pname"];
-            str_replace($plantname,'<', '');
-            str_replace($plantname,'>', '');
+
             $plantlatinname = $_POST["plname"];
-            str_replace($plantlatinname,'<', '');
-            str_replace($plantlatinname,'<', '');
+
             $plantsoort = $_POST["psoort"];
 
             $plantcategory = $_POST["type"];
             $plantDesc = nl2br($_POST["desc"]);
-            str_replace($plantDesc,'<', '');
-            str_replace($plantDesc,'<', '');
+
 
             $plantCategory = $_POST['type'];
             $advertisementId = $_GET['advertisementId'];

@@ -8,6 +8,10 @@ include('header.php');
 </head>
 <body>
     <?php
+    function esc_html($text) {
+        $input_text = $text;
+        $check_characters = "";
+    }
     if (isset($_SESSION['userId'])) {
         if(isset($_POST['ad-submit'])){
             require 'includes/dbh.inc.php';
@@ -31,19 +35,16 @@ include('header.php');
             if($imageFormats && $imageSize){
                 if($fileCount >= 1 && $fileCount <= 3){
                     $plantname = $_POST["pname"];
-                    $plantname = $_POST["pname"];
-                    str_replace($plantname,'<', '');
-                    str_replace($plantname,'>', '');
+
+
                     $plantlatinname = $_POST["plname"];
-                    str_replace($plantlatinname,'<', '');
-                    str_replace($plantlatinname,'<', '');
+
                     $plantsoort = $_POST["psoort"];
 
                     $plantcategory = $_POST["type"];
                     $desc = $_POST["desc"];
-                    str_replace($desc,'<', '');
-                    str_replace($desc,'<', '');
-                    
+
+
                     $water = $_POST["water"];
                     $light = $_POST["licht"];
                     $userId = $_SESSION['userId'];
