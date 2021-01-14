@@ -37,7 +37,7 @@
         //loop through every line in html file (from URL)
         foreach($lines_array as $line){
             //add html line to array
-            if($count == 145){
+            if($count == 146){
                 array_push($lineArr, $line);
             }
             $count++;
@@ -46,7 +46,7 @@
         //explode() splits string by "small" and put every (piece of) string in an array
         $pieces = explode("small", htmlspecialchars($lineArr[0]));
         //grab the 4th string in the array with latitude and longitude (example -> ">51.833/4.994</" )
-        $piece = $pieces[3];                                    
+        $piece = $pieces[3];                                   
         //substr($piece, 4) will cut the ">" from the string                                                                            EXAMPLE -> input: ">51.833/4.994</" -> output: "51.833/4.994</"
         //substr(substr($piece, 4), 0, -5)) will cut the "</" from the string                                                           EXAMPLE -> input: "51.833/4.994</" -> output: "51.833/4.994"
         //explode("/", substr(substr($piece, 4), 0, -5)) will split the string by "/" and put every (piece of) string in an array       EXAMPLE -> input: "51.833/4.994" -> Array(""51.833", "4.994")
