@@ -31,20 +31,19 @@ include('header.php');
             if($imageFormats && $imageSize){
                 if($fileCount >= 1 && $fileCount <= 3){
                     $plantname = $_POST["pname"];
-                    if($plantname != strip_tags($plantname) or strpos($plantname, "<style>") or strpos($plantname, "<script>")) {
-                        $plantname = strip_tags($plantname);
-                    }
+                    $plantname = $_POST["pname"];
+                    str_replace($plantname,'<', '');
+                    str_replace($plantname,'>', '');
                     $plantlatinname = $_POST["plname"];
-                    if($plantlatinname != strip_tags($plantlatinname) or strpos($plantlatinname, "<style>") or strpos($plantlatinname, "<script>")) {
-                        $plantlatinname = strip_tags($plantlatinname);
-                    }
+                    str_replace($plantlatinname,'<', '');
+                    str_replace($plantlatinname,'<', '');
                     $plantsoort = $_POST["psoort"];
 
                     $plantcategory = $_POST["type"];
                     $desc = $_POST["desc"];
-                    if($desc != strip_tags($desc) or strpos($desc, "<style>") or strpos($desc, "<script>")) {
-                        $desc = strip_tags($desc);
-                    }
+                    str_replace($desc,'<', '');
+                    str_replace($desc,'<', '');
+                    
                     $water = $_POST["water"];
                     $light = $_POST["licht"];
                     $userId = $_SESSION['userId'];
