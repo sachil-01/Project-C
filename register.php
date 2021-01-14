@@ -44,21 +44,24 @@
                     <p>Gebruikersnaam</p>
                     <input type="text" name="uid" placeholder="Gebruikersnaam" required>
                     <p>Voornaam</p>
-                    <input type="text" name="firstName" placeholder="Voornaam" required>
+                    <input type="text" name="firstName" placeholder="Voornaam" required oninvalid="this.setCustomValidity('Alleen alfabetische letters zijn toegestaan')"
+       oninput="this.setCustomValidity('')" pattern="[A-Za-z]{1,}">
                     <p>Achternaam</p>
-                    <input type="text" name="lastName" placeholder="Achternaam" required>
+                    <input type="text" name="lastName"  placeholder="Achternaam" required oninvalid="this.setCustomValidity('Alleen alfabetische letters zijn toegestaan')"
+       oninput="this.setCustomValidity('')" pattern="[A-Za-z]{1,}">
                     <p>Wachtwoord</p>
-                    <input type="password" name="pwd" placeholder="Wachtwoord" required>
+                    <input type="password" name="pwd" placeholder="Wachtwoord"  minlength="10" required>
                     <p>Herhaal wachtwoord</p>
-                    <input type="password" name="pwdrepeat" placeholder="Herhaal wachtwoord" required>
+                    <input type="password" name="pwdrepeat" placeholder="Herhaal wachtwoord" minlength="10" required>
                 </div>
                 <div class="registerpart2">
                     <p>E-mail</p>
                     <input type="text" name="mail" placeholder="E-mail" required>
                     <p>Straatnaam</p>
-                    <input type="text" name="straatNaam" placeholder="Straatnaam" required>
+                    <input type="text" name="straatNaam"  placeholder="Straatnaam" required oninvalid="this.setCustomValidity('Alleen alfabetische letters zijn toegestaan')"
+       oninput="this.setCustomValidity('')" pattern="[A-Za-z]{1,}">
                     <p>Huisnummer</p>
-                    <input type="number" name="huisNummer" placeholder="Huisnummer" required>
+                    <input type="number" name="huisNummer" min="1" max="1000"  placeholder="Huisnummer" required>
                     <p>Toevoeging</p>
                     <input type="text" name="toevoeging" placeholder="Toevoeging">
                     <p>Postcode</p>
