@@ -88,7 +88,7 @@
                         for($i = 0; $i < $averageUserRating; $i++){
                             echo '<label class="fa fa-star star-checked"></label>';
                         }
-                        for($i = 5; $i > $averageUserRating; $i--){
+                        for($i = 4; $i >= $averageUserRating; $i--){
                             echo '<label class="fa fa-star"></label>';
                         }
                         echo "<h3 style='display: inline;'>(".count($allUserRatingRates).")</h3>";
