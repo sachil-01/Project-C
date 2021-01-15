@@ -34,15 +34,14 @@ include('header.php');
             
             if($imageFormats && $imageSize){
                 if($fileCount >= 1 && $fileCount <= 3){
-                    $plantname = $_POST["pname"];
+                    $plantname = preg_replace("/[^a-zA-Z0-9\s]/", "", $_POST["pname"]);
 
+                    $plantlatinname = preg_replace("/[^a-zA-Z0-9\s]/", "",$_POST["plname"]);
 
-                    $plantlatinname = $_POST["plname"];
-
-                    $plantsoort = $_POST["psoort"];
+                    $plantsoort = preg_replace("/[^a-zA-Z0-9\s]/", "",$_POST["psoort"]);
 
                     $plantcategory = $_POST["type"];
-                    $desc = $_POST["desc"];
+                    $desc = preg_replace("/[^a-zA-Z0-9\s]/", "",$_POST["desc"]);
 
 
                     $water = $_POST["water"];
