@@ -280,7 +280,7 @@
 
 .comment-bubble h1, .comment-bubble h2, .comment-bubble p{
     font-size: 1rem;
-    margin: 1%;
+    margin: 1% 1% 0 1%;
 }
 
 .comment-bubble h1{
@@ -294,6 +294,8 @@
 
 .comment-bubble p{
     text-align: left;
+    word-break: break-all;
+    margin-bottom: 1%;
 }
 
 .comment-upload textarea{
@@ -397,6 +399,7 @@
     text-align: justify;
     color: grey;
     font-weight: bold;
+    word-break: break-all;
 }
 
 .blogInfoBlogger{
@@ -411,8 +414,8 @@
 }
 
 .blogInfoLink:hover{
-    color: var(--clr-dark-green);
-    border-bottom: 1px solid var(--clr-dark-green);
+    color: darkblue;
+    border-bottom: 1px solid darkblue;
 }
 /* bloginfo image slider */
 

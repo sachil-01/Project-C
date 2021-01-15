@@ -94,7 +94,7 @@
 
         if ($conn->query($sql) === TRUE) {
 
-            $sql = "DELETE FROM Advertisement WHERE idAd = '$advertisementId'";
+            $sql = "UPDATE Advertisement SET AdStatus = '0' WHERE Advertisement.idAd = '$advertisementId';";
             
             if ($conn->query($sql) === TRUE) {
                 //if user clicks on delete button on advertisement page
@@ -104,10 +104,10 @@
                 } else {
                     //check if its a registered user or an admin
                     if($advertisementUser == "adminAdvertisement"){
-                        $sql = "SELECT plantName, idAd, postDate FROM Advertisement";
+                        $sql = "SELECT plantName, idAd, postDate FROM Advertisement WHERE AdStatus = '1'";
                         $adminAdvertisements = '<table class="ads-blogs-list"><tr class="ads-blogs-columnnames"><td><p>Advertentienaam</p></td><td><p>Advertentie-id</p></td><td><p>Geplaatst op</p></td><td><p>Verloopt op</p></td><td><p>Opties</p></td></tr>';
                     } else {
-                        $sql = "SELECT a.plantName, a.idAd, a.postDate FROM Advertisement a WHERE a.userId = '$userId'";
+                        $sql = "SELECT a.plantName, a.idAd, a.postDate FROM Advertisement a WHERE a.userId = '$userId' AND a.AdStatus = '1'";
                         $adminAdvertisements = '<table class="ads-blogs-list"><tr class="ads-blogs-columnnames"><td><p>Advertentienaam</p></td><td><p>Geplaatst op</p></td><td><p>Verloopt op</p></td><td><p>Opties</p></td></tr>';
                     }
                                                 
@@ -137,7 +137,7 @@
         $registeredUser = $_POST['user'];
         
         //ALL ADVERTISEMENT IDS
-        $sql = "SELECT idAd FROM Advertisement JOIN User ON userId = idUser WHERE userId = '$userId'";
+        $sql = "SELECT idAd FROM Advertisement JOIN User ON userId = idUser WHERE userId = '$userId' AND a.AdStatus = '1'";
 
         $allAdvertisementIds = array();
 

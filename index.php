@@ -48,7 +48,7 @@
             }
         }
 
-        $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert ORDER BY postDate DESC";
+        $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE a.AdStatus = '1' ORDER BY postDate DESC";
 
         $statement = mysqli_stmt_init($conn);
         $allIdAdvertisements = array();
