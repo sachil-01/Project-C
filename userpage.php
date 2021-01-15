@@ -37,15 +37,7 @@
 
     /* fetch associative array */
     while ($row = $sql->fetch_assoc()) {
-        $voornaam = $row["firstName"];
-        $achternaam = $row["lastName"];
-        $emailadres = $row["emailUser"];
         $gebruikersnaam = $row["usernameUser"];
-        $straat = $row["streetName"];
-        $huisnummer = $row["houseNumber"];
-        $toevoeging = $row["houseNumberExtra"];
-        $postcode = $row["postalCode"];
-        $admin = $row["admin"];
         $biography = $row["biography"];
         $_SESSION["idUser"] = $row["idUser"];
     }
@@ -101,8 +93,6 @@
                 <div class="userprofile-up-right">
                     <p>Gebruikersnaam</p>
                     <p class="userData"><?php echo $gebruikersnaam; ?></p>
-                    <p>E-mail</p>
-                    <p class="userData"><?php echo $emailadres; ?></p>
                     <p>Biografie</p>
                     <p class="userData"><?php echo $biography != "" ? $biography : "Gebruiker heeft nog geen biografie toegevoegd." ; ?></p>
                 </div>
