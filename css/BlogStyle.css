@@ -271,7 +271,9 @@
     border: 3px solid #1B701B;
     border-radius: 10px;
     margin-bottom: 2%;
-    max-width: 75%;          
+    max-width: 75%;
+    width:50px;
+    word-wrap: break-word;          
     min-width: 60%;
     float: left;             /*DEPENDING ON WHICH USER*/
 }
@@ -402,7 +404,7 @@
 }
 
 .blogInfoLink{
-    color: grey;
+    color: #1e53e8;
     font-weight: bold;
     text-decoration: none;
     word-break: break-all;

@@ -1,0 +1,29 @@
+.wiezijnwij {
+    text-align: center;
+}
+h1 {
+    margin: 50px auto 0 auto;
+    font-family: 'Montserrat', serif;
+    font-size: var(--fs-h1);
+}
+.blok1 p {
+    font-family: "Gill Sans", sans-serif;
+    text-align: justify;
+}
+.blok1 h1 {
+    margin: 20px 0 40px 0;
+}
+.blok1 {
+    color: #1b701b;
+    text-align: center;
+    padding: 5% 30%;
+    background-image: url(../images/woodplankie.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+@media screen and (max-width: 1280px) {
+    .blok1 {
+        padding: 5% 20%;
+    }
+}
