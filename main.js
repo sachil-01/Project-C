@@ -140,9 +140,14 @@ function previewImage() {
 
 		fileReader.readAsDataURL(file[currentImage]);
 
-		//display image gallery and buttons when file length is greater than 0
-		document.getElementById("imagePreviewPrevious").style.cssText = "display: block;";
-		document.getElementById("imagePreviewNext").style.cssText = "display: block;";
+		//display buttons when file length is greater than 1
+		if (file.length > 1) {
+			document.getElementById("imagePreviewPrevious").style.cssText = "display: block;";
+			document.getElementById("imagePreviewNext").style.cssText = "display: block;";
+		} else {
+			document.getElementById("imagePreviewPrevious").style.cssText = "display: none;";
+			document.getElementById("imagePreviewNext").style.cssText = "display: none;";
+		}
 		document.getElementById("imagePreviewGallery").style.cssText = "display: block;";
 	} else {
 		document.getElementById("imagePreviewPrevious").style.cssText = "display: none;";
@@ -184,7 +189,6 @@ function createImgTag() {
 		document.getElementById("imagePreviewGallery").style.cssText = "display: none;";
     }
 }
-
 
 var navSlide = () => {
 	const burger = document.querySelector('.burger');

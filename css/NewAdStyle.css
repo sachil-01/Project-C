@@ -173,10 +173,12 @@ input[type=radio]:checked + img {
 }
 
 #imagePreviewNext{
+    margin-top: 2%;
     float: right;
 }
 
 #imagePreviewPrevious{
+    margin-top: 2%;
     float: left;
 }
 
