@@ -97,21 +97,20 @@
         }
 
         if($imageFormats && $imageSize){
-            $plantname = $_POST["pname"];
+            $plantname = preg_replace("/[^a-zA-Z0-9\s]/", "", $_POST["pname"]);
 
-            $plantlatinname = $_POST["plname"];
+            $plantlatinname = preg_replace("/[^a-zA-Z0-9\s]/", "",$_POST["plname"]);
 
-            $plantsoort = $_POST["psoort"];
+            $plantsoort = preg_replace("/[^a-zA-Z0-9\s]/", "",$_POST["psoort"]);
 
             $plantcategory = $_POST["type"];
-            $plantDesc = nl2br($_POST["desc"]);
+            $plantdesc = nl2br(preg_replace("/[^a-zA-Z0-9\s]/", "",$_POST["desc"]));
+//            $plantDesc = nl2br($_POST["desc"]);
 
 
-            $plantCategory = $_POST['type'];
             $advertisementId = $_GET['advertisementId'];
             $waterManage = $_POST['water'];
             $lightPattern = $_POST['licht'];
-            $plantsoort = $_POST["psoort"];
 
             //update blogpost data
             $sql = "UPDATE Advertisement SET plantName=?, plantLatinName=?, plantType=?, plantCategory=?, plantDesc=?, waterManage=?, lightPattern=? WHERE idAd='$advertisementId'";
