@@ -63,7 +63,7 @@
                             <h3>'.$row["blogTitle"].'</h3>
                             <p class="blogInfoDesc">'.$row["blogDesc"].'</p>
                       
-                            <a href="#" class="blogInfoLink">'.$row["blogLink"].'</a>
+                            <a href="'.$row["blogLink"].'" class="blogInfoLink" target="_blank">'.$row["blogLink"].'</a>
                             <br>
                             <p class="blogInfoBlogger">Geupload door <a class="userPageRedirection" href="userpage?IdUser='.$row["idUser"].'">'.$row["usernameUser"].'</a> op '.date_format(date_create($row["blogDate"]),"d-m-Y").'</p>
                             <br>

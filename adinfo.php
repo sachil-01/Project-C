@@ -16,7 +16,7 @@
 
             $id = $_GET['idAd'];
 
-            $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser LEFT JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE a.idAd = '$id'";
+            $sql = "SELECT * FROM Advertisement a JOIN User u ON a.userId = u.idUser LEFT JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE a.idAd = '$id' AND a.AdStatus = '1'";
             $result = mysqli_query($conn, $sql);
 
             if ($result->num_rows > 0) {
@@ -130,7 +130,7 @@
                                 <h3>Meer van '.$row["usernameUser"].'</h3>
                                 <div class="moreAdsImg">';
                                     $username = $row["usernameUser"];
-                                    $sql = "SELECT ai.imgName, a.idAd, a.plantName, a.postDate FROM Advertisement a JOIN User u ON a.userId = u.idUser LEFT JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE u.usernameUser = '$username' AND a.idAd != '$id' ORDER BY a.postDate DESC";
+                                    $sql = "SELECT ai.imgName, a.idAd, a.plantName, a.postDate FROM Advertisement a JOIN User u ON a.userId = u.idUser LEFT JOIN AdImage ai ON a.idAd = ai.idAdvert WHERE u.usernameUser = '$username' AND a.idAd != '$id' AND a.AdStatus = '1' ORDER BY a.postDate DESC";
                                     $resultInner = $conn->query($sql);
                                     $allAdvertisementIds = array(); //array to avoid printing multiple images of one advertisement
 
