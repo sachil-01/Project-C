@@ -131,7 +131,7 @@
                                         for($i = 0; $i < $averageUserRating; $i++){
                                             echo '<label class="fa fa-star star-checked"></label>';
                                         }
-                                        for($i = 5; $i > $averageUserRating; $i--){
+                                        for($i = 4; $i >= $averageUserRating; $i--){
                                             echo '<label class="fa fa-star"></label>';
                                         }
                                         echo "<h3 style='display: inline;'>(".count($allUserRatingRates).")</h3>";
@@ -168,7 +168,7 @@
                             <input type="text" name="toevoeging" value="<?php echo $toevoeging; ?>" pattern="[A-Za-z]{1,}" oninvalid="this.setCustomValidity('Alleen alfabetische letters zijn toegestaan')"
        oninput="this.setCustomValidity('')" pattern="[A-Za-z]{1,}">
                             <p>Postcode</p>
-                            <input type="text" name="postcode" value="<?php echo $postcode; ?>" required>
+                            <input type="text" name="postcode" value="<?php echo $postcode; ?>" maxlength="6" required>
                         </div>
                     </td>
                 </tr>
