@@ -395,6 +395,7 @@
     text-align: justify;
     color: grey;
     font-weight: bold;
+    word-break: break-all;
 }
 
 .blogInfoBlogger{

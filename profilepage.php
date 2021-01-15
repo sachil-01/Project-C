@@ -36,7 +36,7 @@
             $adArray = array();
             $blogArray = array();
             
-            $sql = "SELECT a.plantName, a.postDate, a.idAd, a.plantCategory FROM User u JOIN Advertisement a ON u.idUser = a.userId WHERE u.idUser='$id'";
+            $sql = "SELECT a.plantName, a.postDate, a.idAd, a.plantCategory FROM User u JOIN Advertisement a ON u.idUser = a.userId WHERE u.idUser='$id' AND a.AdStatus = '1'";
             $userAdvertisements = '<table class="ads-blogs-list"><tr class="ads-blogs-columnnames"><td><p>Advertentienaam</p></td><td><p>Geplaatst op</p></td><td><p>Verloopt op</p></td><td><p>Opties</p></td></tr>';
             array_push($adArray, $sql, $userAdvertisements);
             
