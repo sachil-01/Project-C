@@ -61,7 +61,7 @@
                     <input type="text" name="straatNaam"  placeholder="Straatnaam" required oninvalid="this.setCustomValidity('Alleen alfabetische letters zijn toegestaan')"
        oninput="this.setCustomValidity('')" pattern="[A-Za-z]{1,}">
                     <p>Huisnummer</p>
-                    <input type="number" name="huisNummer" min="1" max="1000"  placeholder="Huisnummer" required>
+                    <input type="number" name="huisNummer" min="1" max="18926"  placeholder="Huisnummer" required>
                     <p>Toevoeging</p>
                     <input type="text" name="toevoeging" placeholder="Toevoeging" pattern="[A-Za-z]{1,}" oninvalid="this.setCustomValidity('Alleen alfabetische letters zijn toegestaan')"
        oninput="this.setCustomValidity('')" pattern="[A-Za-z]{1,}">
