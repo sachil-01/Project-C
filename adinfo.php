@@ -54,11 +54,11 @@
                                     echo '
                                         <h3 class="plantInner">Licht:</h3>';
 
-                                        $light = $row["lightPattern"] * 2;
+                                        $light = $row["lightPattern"];
                                         if ($light == 0) {
                                             echo '<span class="fas fa-question"></span>';
                                         } else {
-                                            for ($i = 0; $i <= 5; $i++) {
+                                            for ($i = 0; $i <= 2; $i++) {
 
                                                 if ($light >= 1) {
                                                     echo '<span class="fas fa-sun sun-checked"></span>';
@@ -71,15 +71,15 @@
                                         echo '
                                         <h3 class="plantInner">Water:</h3>';
 
-                                        $light = $row["waterManage"]*2;
-                                        if ($light == 0) {
+                                        $water = $row["waterManage"];
+                                        if ($water == 0) {
                                             echo '<span class="fas fa-question"></span>';
                                         } else {
-                                            for($i=0; $i<=5; $i++) {
+                                            for($i=0; $i<=2; $i++) {
 
-                                                if ($light >= 1) {
+                                                if ($water >= 1) {
                                                     echo '<span class="fas fa-tint drop-checked">&nbsp;</span>';
-                                                    $light--;
+                                                    $water--;
                                                 } else {
                                                     echo '<span class="fas fa-tint">&nbsp;</span>';
                                                     }
@@ -106,7 +106,7 @@
                                             for($i = 0; $i < $averagePlantQuality; $i++){
                                                 echo '<label class="fa fa-star star-checked"></label>';
                                             }
-                                            for($i = 5; $i > $averagePlantQuality; $i--){
+                                            for($i = 4; $i >= $averagePlantQuality; $i--){
                                                 echo '<label class="fa fa-star"></label>';
                                             }
 
