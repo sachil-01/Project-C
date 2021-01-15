@@ -144,7 +144,7 @@
     <?php
         //Give error when blogpost doesn't exist
         } else {
-            echo "Blogpost bestaat niet meer.";
+            echo "<div class='newaderror'><p>Blogpost bestaat niet meer.</p></div>";
         }
     ?>
     </div>

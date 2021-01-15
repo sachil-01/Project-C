@@ -13,6 +13,7 @@
     <div id="userDisplayAdvertisement">
         <?php
             require 'includes/dbh.inc.php';
+            include 'distance.php';
 
             $id = $_GET['idAd'];
 
@@ -89,7 +90,26 @@
                                         <h3 class="plantInner">Soort:</h3>
                                         <p class="plantInner">'.$row["plantCategory"].'</p>
                                         <h3 class="plantInner">Datum:</h3>
-                                        <p class="plantInner">'.date_format(date_create($row["postDate"]),"d-m-Y").'</p>
+                                        <p class="plantInner">'.date_format(date_create($row["postDate"]),"d-m-Y").'</p>';
+
+                                        if (isset($_SESSION['userId'])) {
+                                            // Retrieve postal code from current user
+                                            $currentUserId = $_SESSION['userId'];
+                                            $sqlForPostalCode = "SELECT postalCode FROM User WHERE idUser = $currentUserId";
+                                            $resultSql = $conn->query($sqlForPostalCode);
+
+                                            if ($resultPostalCode = mysqli_fetch_assoc($resultSql)) {
+                                                $currentUserPostalCode = $resultPostalCode['postalCode'];
+                                            }
+
+                                            $distance = getDistance($row['postalCode'], $currentUserPostalCode);
+                                        } else {
+                                            $distance = "-- km";
+                                        }
+
+                                        echo '
+                                        <h3 class="plantInner">Afstand:</h3>
+                                        <p class="plantInner">'.$distance.'</p>
                                         <h3 class="plantInner">Beoordeling:</h3>';
                                             $sql = "SELECT * FROM Rating WHERE advertisementId = '$id'";
                                             $result = $conn->query($sql);
@@ -135,13 +155,11 @@
                                     $allAdvertisementIds = array(); //array to avoid printing multiple images of one advertisement
 
                                     if ($resultInner->num_rows > 0) {
-                                        include 'distance.php';
-
                                         $moreAdsLimit = 3; //show only 3 other ads of user
                                         while ($row3 = mysqli_fetch_array($resultInner)) {
                                             if($row3['imgName'] != "" && !(in_array($row3['idAd'], $allAdvertisementIds))){
                                                 if (isset($_SESSION['userId'])) {
-                                                    $distance = getDistance($row['postalCode'], $row['postalCode']);
+                                                    $distance = getDistance($row['postalCode'], $currentUserPostalCode);
                                                 } else {
                                                     $distance = "-- km";
                                                 }
@@ -324,7 +342,7 @@
                 $_SESSION["idUser"] = $row["idUser"];
             //Give error when advertisement doesn't exist
             } else {
-                echo "Advertentie bestaat niet meer.";
+                echo "<div class='newaderror'><p>Advertentie bestaat niet meer.</p></div>";
             }
             $conn->close();
 
