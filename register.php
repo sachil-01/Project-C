@@ -66,7 +66,7 @@
                     <input type="text" name="toevoeging" placeholder="Toevoeging" pattern="[A-Za-z]{1,}" oninvalid="this.setCustomValidity('Alleen alfabetische letters zijn toegestaan')"
        oninput="this.setCustomValidity('')" pattern="[A-Za-z]{1,}">
                     <p>Postcode</p>
-                    <input type="text" name="postcode" placeholder="Postcode" required>
+                    <input type="text" name="postcode" placeholder="Postcode" maxlength="6" required>
                 </div>
                 <button type="submit" name="signup-submit">Registreren</button>
                 <br><br>

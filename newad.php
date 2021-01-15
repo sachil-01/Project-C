@@ -114,10 +114,10 @@ include('header.php');
             <h2>Nieuwe advertentie</h2><br>
             <form action="" method="post" enctype="multipart/form-data" target="_self">
                 <label for="pname">Plantnaam <label style="color: red;">*</label></label><br>
-                <input type="text" id="pname" name="pname" required><br><br>
+                <input type="text" id="pname" name="pname" maxlength="30" required><br><br>
 
                 <label for="plname">Latijnse naam</label><br>
-                <input type="text" id="plname" name="plname"><br><br>
+                <input type="text" id="plname" name="plname" maxlength="30"><br><br>
 
                 <label for="psoort">Soort <label style="color: red;">*</label></label><br>
                 <select  id="psoort" name="psoort">
