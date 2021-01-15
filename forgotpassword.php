@@ -80,10 +80,10 @@
                                     <br>
                                     <h1>Wachtwoord wijzigen</h1>
                                     <p style="text-align:left">Nieuwe wachtwoord</p>
-                                    <input type="password" name="newPassword" placeholder="Nieuwe wachtwoord..." required>
+                                    <input type="password" name="newPassword" minlength="10" placeholder="Nieuwe wachtwoord..." required>
                                     <br>
                                     <p style="text-align:left">Herhaal nieuwe wachtwoord</p>
-                                    <input type="password" name="repeatNewPassword" placeholder="Herhaal nieuwe wachtwoord..." required>
+                                    <input type="password" name="repeatNewPassword" placeholder="Herhaal nieuwe wachtwoord..." minlength="10" required>
                                     <br>
                                     <button type="submit" name="password-submit">Wijzig wachtwoord</button>
                                     <br><br>

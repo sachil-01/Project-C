@@ -346,7 +346,7 @@
                 </label>
                 
                 <label>
-                    <input style="position: absolute; opacity: 0; width: 0; height: 0; cursor: pointer;" type="radio" id="none" name="water" value="0" <?php echo ($waterManage == '4') ?  "checked" : "" ;  ?>>
+                    <input style="position: absolute; opacity: 0; width: 0; height: 0; cursor: pointer;" type="radio" id="none" name="water" value="0" <?php echo ($waterManage == '0') ?  "checked" : "" ;  ?>>
                     <img style="cursor: pointer;" src="images/weetniet.png">
                 </label>
                 <br><br>
