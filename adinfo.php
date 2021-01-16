@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div id="userDisplayAdvertisement">
+    <div id="userDisplayAdvertisement" style="height: 75vh">
         <?php
             require 'includes/dbh.inc.php';
             include 'distance.php';
@@ -345,12 +345,14 @@
                 echo "<div class='newaderror'><p>Advertentie bestaat niet meer.</p></div>";
             }
             $conn->close();
-
-        include('footer.php');
-        include('feedback.php');
         ?>
     </div>
 </body>
+
+<?php
+    include('footer.php');
+    include('feedback.php');
+?>
 
 <script>
     //advertisementId is the id of the advertisement stored in the button value
