@@ -1781,6 +1781,11 @@ input#communication-rate-5:checked ~ label{
 
 }
 
+.required:after {
+    content:" *";
+    color: red;
+  }
+
 
 
 /* Advertisement info */
