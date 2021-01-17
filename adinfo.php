@@ -10,10 +10,9 @@
 </head>
 
 <body>
-    <div id="userDisplayAdvertisement" style="height: 75vh">
+    <div id="userDisplayAdvertisement">
         <?php
             require 'includes/dbh.inc.php';
-            include 'distance.php';
 
             $id = $_GET['idAd'];
 
@@ -55,7 +54,7 @@
                                     echo '
                                         <h3 class="plantInner">Licht:</h3>';
 
-                                        $light = $row["lightPattern"];
+                                        $light = $row["lightPattern"] ;
                                         if ($light == 0) {
                                             echo '<span class="fas fa-question"></span>';
                                         } else {
@@ -72,44 +71,27 @@
                                         echo '
                                         <h3 class="plantInner">Water:</h3>';
 
-                                        $water = $row["waterManage"];
-                                        if ($water == 0) {
+                                        $light = $row["waterManage"];
+                                        if ($light == 0) {
                                             echo '<span class="fas fa-question"></span>';
                                         } else {
                                             for($i=0; $i<=2; $i++) {
 
-                                                if ($water >= 1) {
+                                                if ($light >= 1) {
                                                     echo '<span class="fas fa-tint drop-checked">&nbsp;</span>';
-                                                    $water--;
+                                                    $light--;
                                                 } else {
                                                     echo '<span class="fas fa-tint">&nbsp;</span>';
                                                     }
                                             }
                                         }
                                         echo '
-                                        <h3 class="plantInner">Soort:</h3>
+                                        <h3 class="plantInner">Type:</h3>
                                         <p class="plantInner">'.$row["plantCategory"].'</p>
+                                        <h3 class="plantInner">Soort:</h3>
+                                        <p class="plantInner">'.$row["plantType"].'</p>
                                         <h3 class="plantInner">Datum:</h3>
-                                        <p class="plantInner">'.date_format(date_create($row["postDate"]),"d-m-Y").'</p>';
-
-                                        if (isset($_SESSION['userId'])) {
-                                            // Retrieve postal code from current user
-                                            $currentUserId = $_SESSION['userId'];
-                                            $sqlForPostalCode = "SELECT postalCode FROM User WHERE idUser = $currentUserId";
-                                            $resultSql = $conn->query($sqlForPostalCode);
-
-                                            if ($resultPostalCode = mysqli_fetch_assoc($resultSql)) {
-                                                $currentUserPostalCode = $resultPostalCode['postalCode'];
-                                            }
-
-                                            $distance = getDistance($row['postalCode'], $currentUserPostalCode);
-                                        } else {
-                                            $distance = "-- km";
-                                        }
-
-                                        echo '
-                                        <h3 class="plantInner">Afstand:</h3>
-                                        <p class="plantInner">'.$distance.'</p>
+                                        <p class="plantInner">'.date_format(date_create($row["postDate"]),"d-m-Y").'</p>
                                         <h3 class="plantInner">Beoordeling:</h3>';
                                             $sql = "SELECT * FROM Rating WHERE advertisementId = '$id'";
                                             $result = $conn->query($sql);
@@ -126,7 +108,7 @@
                                             for($i = 0; $i < $averagePlantQuality; $i++){
                                                 echo '<label class="fa fa-star star-checked"></label>';
                                             }
-                                            for($i = 4; $i >= $averagePlantQuality; $i--){
+                                            for($i = 5; $i > $averagePlantQuality; $i--){
                                                 echo '<label class="fa fa-star"></label>';
                                             }
 
@@ -155,11 +137,13 @@
                                     $allAdvertisementIds = array(); //array to avoid printing multiple images of one advertisement
 
                                     if ($resultInner->num_rows > 0) {
+                                        include 'distance.php';
+
                                         $moreAdsLimit = 3; //show only 3 other ads of user
                                         while ($row3 = mysqli_fetch_array($resultInner)) {
                                             if($row3['imgName'] != "" && !(in_array($row3['idAd'], $allAdvertisementIds))){
                                                 if (isset($_SESSION['userId'])) {
-                                                    $distance = getDistance($row['postalCode'], $currentUserPostalCode);
+                                                    $distance = getDistance($row['postalCode'], $row['postalCode']);
                                                 } else {
                                                     $distance = "-- km";
                                                 }
@@ -342,17 +326,15 @@
                 $_SESSION["idUser"] = $row["idUser"];
             //Give error when advertisement doesn't exist
             } else {
-                echo "<div class='newaderror'><p>Advertentie bestaat niet meer.</p></div>";
+                echo "Advertentie bestaat niet meer.";
             }
             $conn->close();
+
+        include('footer.php');
+        include('feedback.php');
         ?>
     </div>
 </body>
-
-<?php
-    include('footer.php');
-    include('feedback.php');
-?>
 
 <script>
     //advertisementId is the id of the advertisement stored in the button value
