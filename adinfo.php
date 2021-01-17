@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div id="userDisplayAdvertisement" style="height: 75vh">
+    <div id="userDisplayAdvertisement">
         <?php
             require 'includes/dbh.inc.php';
             include 'distance.php';
@@ -363,8 +363,9 @@
             data: {function: "advertisement", id: advertisementId, user: advertisementUser},
             success: function(result)
             {
-                //display result after clicking on "delete blogpost"
+                //display result after clicking on "delete advertisement"
                 document.getElementById("userDisplayAdvertisement").innerHTML = result;
+                document.getElementById("userDisplayAdvertisement").style.cssText = "height: 75vh;";
             }
         })
     }
