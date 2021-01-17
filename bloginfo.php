@@ -37,9 +37,14 @@
                                 $currentImage = 1;
                                 $totalImages = $resultInner->num_rows;
                                 while($row2 = mysqli_fetch_array($resultInner)){
+                                    if(empty($row2["imgName"])){
+                                        $blogImage = 'images/plantje.png';
+                                    } else {
+                                        $blogImage = 'uploads/'.$row2['imgName'];
+                                    }
                                     echo '<div class="mySlides fade">
                                             <div class="numbertext">'.$currentImage.' / '.$totalImages.'</div>
-                                            <img src="uploads/'.$row2["imgName"].'">
+                                            <img src="'.$blogImage.'">
                                             </div>';
                                             $currentImage++;
                                 }

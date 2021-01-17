@@ -40,10 +40,15 @@
                     while ($row = $result->fetch_assoc()) {
                         //checks if blogpost id already exists in array > if blogpost id exists in array -> skip current blogpost
                         if(!in_array($row['idPost'], $allIdPosts)){
+                            if(empty($row["imgName"])){
+                                $blogImage = 'images/plantje.png';
+                            } else {
+                                $blogImage = 'uploads/'.$row['imgName'];
+                            }
                             echo '<div class="blogpost">
                                     <a class="linkPlant" href="bloginfo?idBlog='.$row["idPost"].'">
                                     <div class="blogImage">
-                                        <img src="uploads/'.$row["imgName"].'" alt="">
+                                        <img src="'.$blogImage.'" alt="">
                                     </div>
                                     <div class="blogDescription">
                                         <h2>'.$row["blogTitle"].'</h2>
