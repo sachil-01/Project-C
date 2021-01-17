@@ -12,9 +12,17 @@
     <div class="blogwrapper">
         <div class="blogheader">
             <h1>Blogposts</h1>
-            <form action="newpost.php" method="post">
-                <button class="submit" name="add-post"><i class="fas fa-plus"></i> Upload nieuwe blogpost</button>
-            </form>  
+<!--            <div class="category-select">-->
+<!--                <select>-->
+<!--                    <option>Alle</option>-->
+<!--                    <option>Verzorging</option>-->
+<!--                    <option>Speciale evenementen</option>-->
+<!--                    <option>Vieringen en feestdagen</option>-->
+<!--                </select>-->
+<!--            </div>-->
+            <div class="newadknop">
+                <a href="newpost"><button href="newad" class="newadbutton"><i class="fas fa-plus"></i> Blogpost plaatsen</button></a>
+            </div>
         </div>
         <div class="blogcontainer">
             <div class="filters" style="margin-bottom: 5%">
