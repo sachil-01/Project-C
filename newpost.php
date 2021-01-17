@@ -98,7 +98,7 @@
         <h2>Nieuwe blogpost</h2><br>
         <form action="" method="post" enctype="multipart/form-data">
             <label>Blogtitel <label style="color: red;">*</label></label><br>
-            <input type="text" id="bname" name="bname" required><br><br>
+            <input type="text" id="bname" name="bname" onkeypress="return isNumberKey(event)" maxlength="100" required><br><br>
             
             <label>Blogcategorie</label><br>
             <select name="bcategory" id="bcategory">
@@ -108,7 +108,7 @@
             </select><br><br>
 
             <label>Beschrijving <label style="color: red;">*</label></label><br>
-            <textarea id="bdesc" name="bdesc" required></textarea><br><br>
+            <textarea id="bdesc" name="bdesc" onkeypress="return isNumberKey(event)" maxlength="4000" required></textarea><br><br>
 
             <label>Afbeeldingen</label><br>
             <!-- display image after selecting -->

@@ -8,6 +8,10 @@ include('header.php');
 </head>
 <body>
     <?php
+    function esc_html($text) {
+        $input_text = $text;
+        $check_characters = "";
+    }
     if (isset($_SESSION['userId'])) {
         if(isset($_POST['ad-submit'])){
             require 'includes/dbh.inc.php';
@@ -233,3 +237,4 @@ include('header.php');
 <?php
     include('footer.php');
     include('feedback.php');
+?>

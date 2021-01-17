@@ -22,7 +22,7 @@
     <div class="gallery">
         <h1 style="margin-bottom: 0;">Nieuwste aanbod</h1>
         <span class="scroll">
-            
+
         </span>
         <div class="img-area">
         <?php 

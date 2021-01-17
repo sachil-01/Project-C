@@ -12,16 +12,8 @@
     <div class="blogwrapper">
         <div class="blogheader">
             <h1>Blogposts</h1>
-<!--            <div class="category-select">-->
-<!--                <select>-->
-<!--                    <option>Alle</option>-->
-<!--                    <option>Verzorging</option>-->
-<!--                    <option>Speciale evenementen</option>-->
-<!--                    <option>Vieringen en feestdagen</option>-->
-<!--                </select>-->
-<!--            </div>-->
             <div class="newadknop">
-                <a href="newpost"><button href="newad" class="newadbutton" style="width: 25%;"><i class="fas fa-plus"></i> Blogpost plaatsen</button></a>
+                <a href="newpost"><button href="newpost" class="newadbutton" style="width: 25%;"><i class="fas fa-plus"></i> Blogpost plaatsen</button></a>
             </div>
         </div>
         <div class="blogcontainer">

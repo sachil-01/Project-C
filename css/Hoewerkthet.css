@@ -23,6 +23,10 @@ ul {
     padding: 0px 0px 0px 40px;
 }
 
+.active{
+    border-bottom: 2px solid var(--clr-dark-green);
+}
+
 @media screen and (max-width:1100px){
     p{
         padding: 0 13%;

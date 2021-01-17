@@ -8,7 +8,9 @@
 
 }
 
-
+.active {
+    border-bottom: 2px solid var(--clr-dark-green);
+}
 
 
 
