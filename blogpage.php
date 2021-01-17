@@ -21,7 +21,7 @@
 <!--                </select>-->
 <!--            </div>-->
             <div class="newadknop">
-                <a href="newpost"><button href="newad" class="newadbutton"><i class="fas fa-plus"></i> Blogpost plaatsen</button></a>
+                <a href="newpost"><button href="newad" class="newadbutton" style="width: 25%;"><i class="fas fa-plus"></i> Blogpost plaatsen</button></a>
             </div>
         </div>
         <div class="blogcontainer">

@@ -54,11 +54,11 @@
                                     echo '
                                         <h3 class="plantInner">Licht:</h3>';
 
-                                        $light = $row["lightPattern"] * 2;
+                                        $light = $row["lightPattern"] ;
                                         if ($light == 0) {
                                             echo '<span class="fas fa-question"></span>';
                                         } else {
-                                            for ($i = 0; $i <= 5; $i++) {
+                                            for ($i = 0; $i <= 2; $i++) {
 
                                                 if ($light >= 1) {
                                                     echo '<span class="fas fa-sun sun-checked"></span>';
@@ -71,11 +71,11 @@
                                         echo '
                                         <h3 class="plantInner">Water:</h3>';
 
-                                        $light = $row["waterManage"]*2;
+                                        $light = $row["waterManage"];
                                         if ($light == 0) {
                                             echo '<span class="fas fa-question"></span>';
                                         } else {
-                                            for($i=0; $i<=5; $i++) {
+                                            for($i=0; $i<=2; $i++) {
 
                                                 if ($light >= 1) {
                                                     echo '<span class="fas fa-tint drop-checked">&nbsp;</span>';
@@ -86,8 +86,10 @@
                                             }
                                         }
                                         echo '
-                                        <h3 class="plantInner">Soort:</h3>
+                                        <h3 class="plantInner">Type:</h3>
                                         <p class="plantInner">'.$row["plantCategory"].'</p>
+                                        <h3 class="plantInner">Soort:</h3>
+                                        <p class="plantInner">'.$row["plantType"].'</p>
                                         <h3 class="plantInner">Datum:</h3>
                                         <p class="plantInner">'.date_format(date_create($row["postDate"]),"d-m-Y").'</p>
                                         <h3 class="plantInner">Beoordeling:</h3>';
