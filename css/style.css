@@ -1967,7 +1967,7 @@ button.tns-nav-active {
 .plantDescription {
 
     grid-area: description;
-
+    word-break: break-all;
 }
 
 
@@ -1983,7 +1983,6 @@ button.tns-nav-active {
 .plantDesc {
 
     margin-top: 20px;
-
 }
 
 
