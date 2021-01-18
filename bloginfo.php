@@ -64,6 +64,7 @@
                             };
                             echo '
                             </div>
+                            <br>
                             <h2>'.$row["blogCategory"].'</h2>
                             <h3>'.$row["blogTitle"].'</h3>
                             <p class="blogInfoDesc">'.$row["blogDesc"].'</p>

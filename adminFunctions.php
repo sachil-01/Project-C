@@ -94,12 +94,11 @@
 
         if ($conn->query($sql) === TRUE) {
 
-            $sql = "UPDATE Advertisement SET AdStatus = '0' WHERE Advertisement.idAd = '$advertisementId';";
+            $sql = "UPDATE Advertisement SET AdStatus = '0' WHERE idAd = '$advertisementId'";
             
             if ($conn->query($sql) === TRUE) {
                 //if user clicks on delete button on advertisement page
                 if($advertisementUser == "advertisementDelete"){
-//                    ### Hier code toevoegen voor mooier uiterlijk en link naar aanbod pagina ###
                     echo "<div class=\"newaderror\"><p>Advertentie is verwijderd.</p></div>";
                 } else {
                     //check if its a registered user or an admin
@@ -137,7 +136,7 @@
         $registeredUser = $_POST['user'];
         
         //ALL ADVERTISEMENT IDS
-        $sql = "SELECT idAd FROM Advertisement JOIN User ON userId = idUser WHERE userId = '$userId' AND a.AdStatus = '1'";
+        $sql = "SELECT idAd FROM Advertisement JOIN User ON userId = idUser WHERE userId = '$userId' AND AdStatus = '1'";
 
         $allAdvertisementIds = array();
 
@@ -178,7 +177,8 @@
                     $path = 'uploads/'.$imgName;
                     unlink($path);
                 }
-
+                $sql = "DELETE FROM Rating WHERE adUser = '$userId'";
+                $conn->query($sql);
                 $sql = "DELETE FROM AdImage WHERE idAdvert = '$idAd'";
                 $conn->query($sql);
                 $sql = "DELETE FROM Advertisement WHERE idAd = '$idAd'";
